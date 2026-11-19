@@ -82,7 +82,7 @@
  .eval-grid { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 10px; }
  .eval-grid.paper-mode { display: flex; flex: 1; width: 100%; justify-content: space-between; gap: 14px; }
  .eval-grid.paper-mode .action-button { flex: 0 1 48%; min-height: 81px; padding: 16px 18px; gap: 12px; font-size: 19.5px; }
- .eval-grid.paper-mode .action-button.wrong { border-color: #991b1b; background: #991b1b; color: white; }
+ .eval-grid.paper-mode .action-button.wrong { border-color: #ef4444; background: #ef4444; color: white; }
  .stats { align-self: center; padding: 8px 14px; border: 1px solid #e2e8f0; border-radius: 999px; background: rgba(255,255,255,.75); color: #64748b; font-size: 11px; font-weight: 700; text-align: center; }
  .storage-note { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 12px 15px; border: 1px solid #fde68a; border-radius: 18px; background: #fffbeb; color: #78350f; font-size: 12px; }
  .storage-note p { margin: 0; line-height: 1.5; }
@@ -915,7 +915,9 @@ const UIController = (() => {
     learningMode: 'paper',
     pendingIsCorrect: false,
     helpUsed: false,
-    pendingImportData: null
+    pendingImportData: null,
+    intensiveRoundReviewedIds: new Set(),
+    lastIntensiveWordId: null
   };
   const collapsedWordGroups = new Set();
   let peekTimeout;
@@ -1022,6 +1024,27 @@ const UIController = (() => {
     intensiveButton.disabled = !word;
   }
 
+  function pickNextWordIndex() {
+    if (state.selectedBoxFilter !== 'intensiv') {
+      return LeitnerModule.pickNextIndex(state.words, state.selectedBoxFilter);
+    }
+
+    const intensiveWords = state.words.filter(word => word.userdaten?.intensiv === true);
+    if (intensiveWords.length === 0) return -1;
+
+    let remainingWords = intensiveWords.filter(word => !state.intensiveRoundReviewedIds.has(word.id));
+    if (remainingWords.length === 0) {
+      if (intensiveWords.length === 1 && intensiveWords[0].id === state.lastIntensiveWordId) return -1;
+      state.intensiveRoundReviewedIds.clear();
+      remainingWords = intensiveWords;
+    }
+
+    const candidates = remainingWords.filter(word => word.id !== state.lastIntensiveWordId);
+    const nextWords = candidates.length > 0 ? candidates : remainingWords;
+    const selectedIndex = LeitnerModule.pickNextIndex(nextWords, 'intensiv');
+    return selectedIndex === -1 ? -1 : state.words.indexOf(nextWords[selectedIndex]);
+  }
+
   function nextWord() {
     state.helpUsed = false;
     clearTimeout(peekTimeout);
@@ -1063,13 +1086,17 @@ const UIController = (() => {
       return;
     }
 
-    state.currentWordIndex = LeitnerModule.pickNextIndex(state.words, state.selectedBoxFilter);
+    state.currentWordIndex = pickNextWordIndex();
 
     if (state.currentWordIndex === -1) {
       document.getElementById('box-info').innerText = state.selectedBoxFilter === 'all'
         ? 'Alles gelernt (keine fällig)'
         : state.selectedBoxFilter === 'intensiv'
-          ? 'Intensiv-Filter ist leer'
+          ? state.words.some(word => word.userdaten?.intensiv === true) &&
+            state.words.filter(word => word.userdaten?.intensiv === true)
+              .every(word => state.intensiveRoundReviewedIds.has(word.id))
+            ? 'Lernrunde abgeschlossen'
+            : 'Intensiv-Filter ist leer'
           : state.selectedBoxFilter === 6
             ? 'Archiv ist leer'
             : `Box ${state.selectedBoxFilter} ist leer`;
@@ -1272,7 +1299,12 @@ function revealWord() {
     }
     const inIntensiveFilter = state.selectedBoxFilter === 'intensiv';
     const skipPromotion = (inIntensiveFilter || state.helpUsed);
-    LeitnerModule.evaluateAnswer(state.words[state.currentWordIndex], isCorrect, skipPromotion, inIntensiveFilter);
+    const answeredWord = state.words[state.currentWordIndex];
+    if (inIntensiveFilter) {
+      state.intensiveRoundReviewedIds.add(answeredWord.id);
+      state.lastIntensiveWordId = answeredWord.id;
+    }
+    LeitnerModule.evaluateAnswer(answeredWord, isCorrect, skipPromotion, inIntensiveFilter);
     await saveAndRefresh();
     nextWord();
   }
