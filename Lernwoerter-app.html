@@ -97,16 +97,18 @@
  #actionBarBefore .action-button { min-height: 74px; gap: 11px; padding: 14px 16px; font-size: 17px; }
  #actionBarBefore .action-button .action-icon { font-size: 19.5px; }
  .action-button:active { transform: scale(.97); }
- .action-button.speak { border-color: #c7d2fe; background: #eef2ff; color: #4338ca; }
- .action-button.peek { border-color: #fde68a; background: #fffbeb; color: #92400e; }
+ .action-button.image-action { flex-direction: column; min-height: 112px; gap: 2px; padding: 6px; border: 0; background: transparent; color: #334155; box-shadow: none; }
+ .action-button.image-action:hover { background: #f8fafc; }
+ .action-button.image-action:focus-visible { outline: 3px solid #a5b4fc; outline-offset: 2px; }
+ .action-image { width: 76px; height: 76px; flex: 0 0 auto; object-fit: contain; }
  .action-button.primary { background: #4f46e5; color: white; box-shadow: 0 4px 12px rgba(79,70,229,.18); }
  .action-button.primary.digital-next { grid-column: 3; }
- .action-button.wrong { border-color: #fecdd3; background: #fff1f2; color: #be123c; }
- .action-button.correct { background: #10b981; color: white; }
+ #actionBarBefore .action-button.image-action { min-height: 112px; gap: 2px; padding: 6px; font-size: 13px; }
+ .action-button.wrong, .action-button.correct { background: transparent; color: #334155; }
  .eval-grid { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 10px; }
  .eval-grid.paper-mode { display: flex; flex: 1; width: 100%; justify-content: space-between; gap: 14px; }
  .eval-grid.paper-mode .action-button { flex: 0 1 48%; min-height: 81px; padding: 16px 18px; gap: 12px; font-size: 19.5px; }
- .eval-grid.paper-mode .action-button.wrong { border-color: #ef4444; background: #ef4444; color: white; }
+ .eval-grid.paper-mode .action-button.image-action { min-height: 112px; padding: 6px; gap: 2px; font-size: 13px; }
  .stats { align-self: center; padding: 8px 14px; border: 1px solid #e2e8f0; border-radius: 999px; background: rgba(255,255,255,.75); color: #64748b; font-size: 11px; font-weight: 700; text-align: center; }
  .storage-note { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 12px 15px; border: 1px solid #fde68a; border-radius: 18px; background: #fffbeb; color: #78350f; font-size: 12px; }
  .storage-note p { margin: 0; line-height: 1.5; }
@@ -194,7 +196,10 @@
   .action-button .action-icon { font-size: 17px; }
   #actionBarBefore .action-button { min-height: 68px; gap: 4px; padding: 8px 5px; font-size: 13px; }
   #actionBarBefore .action-button .action-icon { font-size: 22px; }
+  #actionBarBefore .action-button.image-action { min-height: 96px; gap: 2px; padding: 4px; font-size: 12px; }
+  .action-image { width: 64px; height: 64px; }
   .eval-grid.paper-mode .action-button { min-height: 78px; padding: 12px 8px; gap: 6px; font-size: 15px; }
+  .eval-grid.paper-mode .action-button.image-action { min-height: 96px; padding: 4px; gap: 2px; font-size: 12px; }
   .eval-grid.paper-mode .action-button .action-icon { font-size: 25.5px; }
   .stats { max-width: 100%; border-radius: 15px; line-height: 1.5; }
   .data-grid { grid-template-columns: 1fr; }
@@ -290,14 +295,14 @@
     </div>
 
     <div id="actionBarBefore" class="action-bar before">
-     <button class="action-button speak" id="speak-button" onclick="speakCurrentWord()"><span class="action-icon">🔊</span><span>Vorlesen</span></button>
-     <button class="action-button peek" id="peek-button" onclick="peekWord()"><span class="action-icon">❓</span><span>Tipp</span></button>
+     <button class="action-button speak image-action" id="speak-button" onclick="speakCurrentWord()"><img class="action-image" src="./momo-vorlesen.jpeg" alt=""><span>Vorlesen</span></button>
+     <button class="action-button peek image-action" id="peek-button" onclick="peekWord()"><img class="action-image" src="./momo-tipp_1.png" alt=""><span>Tipp</span></button>
      <button class="action-button primary" id="dock-primary-btn" onclick="UIController.handlePrimaryAction()"><span id="primary-action-icon" class="action-icon">✨</span><span id="primary-action-text">Lösung anzeigen</span></button>
     </div>
     <div id="actionBarAfter" class="action-bar after" style="display: none;">
      <div id="eval-area" class="eval-grid" style="display: none;">
-      <button class="action-button wrong" onclick="answer(false)"><span class="action-icon">🔄</span><span>leider falsch</span></button>
-      <button class="action-button correct" onclick="answer(true)"><span class="action-icon">🎉</span><span>Richtig! Weiter</span></button>
+      <button class="action-button wrong image-action" onclick="answer(false)"><img class="action-image" src="./momo-fehler-1.png" alt=""><span>Leider falsch</span></button>
+      <button class="action-button correct image-action" onclick="answer(true)"><img class="action-image" src="./momo-richtig.png" alt=""><span>Richtig! Weiter</span></button>
      </div>
     </div>
    </section>
