@@ -1,6 +1,10 @@
 # Lernwoerter-App
 A self-hosted "Leitner-box" spelling trainer (Lernwörter-App) . Designed for private, non-commercial educational use
 
+## Versionierung
+Aktuelle Version: `1.0.0`  
+Commit-Name: `Versionierung`
+
 # Betrieb & Datenspeicherung
 Die Anwendung erkennt beim Start automatisch, ob ein Backend-Server erreichbar ist, und passt die Datenspeicherung entsprechend an.
 
