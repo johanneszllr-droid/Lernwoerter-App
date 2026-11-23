@@ -105,6 +105,7 @@
  .action-button.image-action:hover { background: #f8fafc; }
  .action-button.image-action:focus-visible { outline: 3px solid #a5b4fc; outline-offset: 2px; }
  .action-image { width: 76px; height: 76px; flex: 0 0 auto; object-fit: contain; }
+ .primary-action-image { width: 28px; height: 28px; object-fit: contain; }
  .action-button.primary { background: #4f46e5; color: white; box-shadow: 0 4px 12px rgba(79,70,229,.18); }
  .action-button.primary.digital-next { grid-column: 3; }
  #actionBarBefore .action-button.image-action { min-height: 112px; gap: 2px; padding: 6px; font-size: 13px; }
@@ -301,7 +302,7 @@
     <div id="actionBarBefore" class="action-bar before">
      <button class="action-button speak image-action" id="speak-button" onclick="speakCurrentWord()"><img class="action-image" src="./momo-vorlesen.jpeg" alt=""><span>Vorlesen</span></button>
      <button class="action-button peek image-action" id="peek-button" onclick="peekWord()"><img class="action-image" src="./momo-tipp_1.png" alt=""><span>Tipp</span></button>
-     <button class="action-button primary" id="dock-primary-btn" onclick="UIController.handlePrimaryAction()"><span id="primary-action-icon" class="action-icon">✨</span><span id="primary-action-text">Lösung anzeigen</span></button>
+     <button class="action-button primary" id="dock-primary-btn" onclick="UIController.handlePrimaryAction()"><span id="primary-action-icon" class="action-icon"><img class="primary-action-image" src="./momo-vorlesen.jpeg" alt=""></span><span id="primary-action-text">Lösung anzeigen</span></button>
     </div>
     <div id="actionBarAfter" class="action-bar after" style="display: none;">
      <div id="eval-area" class="eval-grid" style="display: none;">
@@ -1202,7 +1203,12 @@ const UIController = (() => {
     document.getElementById('digital-feedback').style.display = 'none';
     document.getElementById('digital-next-area').style.display = 'none';
     document.getElementById('primary-action-text').textContent = state.learningMode === 'paper' ? 'Lösung anzeigen' : 'Prüfen';
-    document.getElementById('primary-action-icon').textContent = state.learningMode === 'paper' ? '👁️' : '✔️';
+    const primaryActionIcon = document.getElementById('primary-action-icon');
+    if (state.learningMode === 'paper') {
+      primaryActionIcon.innerHTML = '<img class="primary-action-image" src="./momo-vorlesen.jpeg" alt="">';
+    } else {
+      primaryActionIcon.textContent = '✔️';
+    }
     updateCardMeta(current);
 
     targetEl.className = 'word-display';
