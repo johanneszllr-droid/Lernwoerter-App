@@ -3,6 +3,10 @@ A self-hosted "Leitner-box" spelling trainer (Lernwörter-App) . Designed for pr
 
 # Betrieb & Datenspeicherung
 Die Anwendung erkennt beim Start automatisch, ob ein Backend-Server erreichbar ist, und passt die Datenspeicherung entsprechend an.
+
+## App-Icon & Startbildschirm
+Das Web-App-Manifest und die Icon-Verweise in `Lernwoerter-app.html` verwenden `Momo_Maus.png`. Bei einer Bereitstellung über HTTPS können Browser das Motiv als Favicon und beim Hinzufügen der App zum Startbildschirm verwenden. Auf iPhone und iPad geht das über „Zum Home-Bildschirm“ in Safari; auf Android über die Browserfunktion zum Installieren oder Hinzufügen. Das Manifest allein erzeugt keine frei konfigurierbaren Smartphone-Widgets. Bei einer Bereitstellung muss `manifest.webmanifest` erreichbar sein und vom Webserver als Manifest-Datei ausgeliefert werden.
+
 ## Server-Modus (z. B. Raspberry Pi im Heimnetz)
 Funktionsweise:
 Beim Laden der Seite fragt die App den Endpunkt GET /api/words ab. Ist dieser erreichbar, wechselt die App in den Server-Modus (grünes Status-Badge).
