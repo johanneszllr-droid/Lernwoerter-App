@@ -4,6 +4,8 @@ on:
   push:
     branches:
       - dev
+    tags:
+      - 'v*'
 
 permissions:
   contents: write
@@ -21,8 +23,9 @@ jobs:
       - name: Checkout dev
         uses: actions/checkout@v4
         with:
-          ref: dev
+          ref: ${{ github.sha }}
           path: dev-repo
+          fetch-depth: 0
 
       - name: Sync dev into main/dev
         run: |
@@ -30,6 +33,24 @@ jobs:
           mkdir -p main-repo/dev
           cp -r dev-repo/. main-repo/dev/
           rm -rf main-repo/dev/.git main-repo/dev/.github
+
+      - name: Generate build metadata
+        run: |
+          commit_hash="$(git -C dev-repo rev-parse --short=12 HEAD)"
+          commit_name="$(git -C dev-repo log -1 --format=%s)"
+          version_tag="$(git -C dev-repo describe --tags --exact-match HEAD 2>/dev/null || true)"
+          if [ -n "$version_tag" ]; then
+            version="${version_tag#v}"
+          else
+            version="0.0.0-dev+${commit_hash}"
+          fi
+          jq -n \
+            --arg version "$version" \
+            --arg commitName "$commit_name" \
+            --arg commitHash "$commit_hash" \
+            --arg builtAt "$(date -u +%Y-%m-%dT%H:%M:%SZ)" \
+            '{version: $version, commitName: $commitName, commitHash: $commitHash, builtAt: $builtAt}' \
+            > main-repo/dev/build-info.json
 
       - name: Commit and push to main
         run: |

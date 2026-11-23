@@ -2,8 +2,18 @@
 A self-hosted "Leitner-box" spelling trainer (Lernwörter-App) . Designed for private, non-commercial educational use
 
 ## Versionierung
-Aktuelle Version: `1.0.0`  
-Commit-Name: `Versionierung`
+Beim Veröffentlichen nach `main/dev` erzeugt der GitHub-Workflow `build-info.json` mit der Version, dem Titel und dem Kurz-Hash des Quell-Commits sowie dem Build-Zeitpunkt. Die App zeigt Version und Commit-Namen aus dieser Datei an. Nicht getaggte Entwicklungsstände erhalten eine `0.0.0-dev+<hash>`-Version.
+
+Für einen Release wird der Quell-Commit mit `vMAJOR.MINOR.PATCH` getaggt, zum Beispiel `v1.1.0`. Der Workflow veröffentlicht den Stand mit dieser Versionsnummer. Übliche Schritte:
+
+1. Änderung auf `dev` committen, mit aussagekräftigem Titel, z. B. `feat: Web-Import ergänzen`.
+2. `dev` pushen. Der Workflow aktualisiert `main/dev` und erzeugt automatisch die Build-Informationen.
+3. Für einen Release den passenden Tag erstellen und pushen:
+   ```sh
+   git tag -a v1.1.0 -m "Release v1.1.0"
+   git push origin v1.1.0
+   ```
+   Fehlerkorrekturen erhöhen üblicherweise die Patch-Version (`v1.0.1`), neue rückwärtskompatible Funktionen die Minor-Version (`v1.1.0`) und inkompatible Änderungen die Major-Version (`v2.0.0`).
 
 # Betrieb & Datenspeicherung
 Die Anwendung erkennt beim Start automatisch, ob ein Backend-Server erreichbar ist, und passt die Datenspeicherung entsprechend an.
@@ -22,6 +32,7 @@ Speicherung: Alle Wörter und Lernstände werden im localStorage des jeweiligen 
 
 # Datensicherung: 
 Über den Tab „Daten & Info“ lässt sich der gesamte Bestand jederzeit als JSON-Datei exportieren und auf anderen Geräten wieder importieren.
+Der Web-Import lädt `lernwoerter-blank.json` aus demselben Verzeichnis wie die App; die Datei muss dort bereitgestellt werden. Lernstände lassen sich separat zurücksetzen. Im Server-Modus wirkt sich das auf alle verbundenen Geräte aus. Das Leeren des Wörterbuchs ist nur im Lokal-Modus möglich und wird mehrfach bestätigt.
 # Lernlogik (Leitner-Karteikasten)
 Das System basiert auf dem Prinzip der verteilten Wiederholung (Spaced Repetition). Jedes Wort durchläuft sechs Stufen:
 Box 1: 0 Tage Wartezeit (sofort wieder fällig)
