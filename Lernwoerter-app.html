@@ -131,6 +131,7 @@
  .btn-secondary { background: #f1f5f9; color: #475569; }
  .btn-success { background: #10b981; color: white; }
  .btn-danger { background: #f43f5e; color: white; }
+ .btn:disabled, .btn-secondary:disabled, .btn-danger:disabled { opacity: .55; cursor: not-allowed; }
  .btn-warning { background: #f59e0b; color: white; }
  .manage-header { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin: 4px 0 0; }
  .manage-header h2 { margin: 0; color: #1e293b; font-size: 17px; font-weight: 800; }
@@ -164,6 +165,7 @@
  .data-warning p { margin: 0; font-size: 12px; line-height: 1.6; }
  .data-grid { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 14px; }
  .data-card { display: flex; flex-direction: column; justify-content: space-between; gap: 16px; padding: 20px; border: 1px solid #e2e8f0; border-radius: 24px; background: white; box-shadow: 0 4px 20px -2px rgba(15,23,42,.05); }
+ .data-card-actions { display: flex; flex-wrap: wrap; gap: 8px; }
  .data-card-icon { width: 42px; height: 42px; display: grid; place-items: center; margin-bottom: 10px; border-radius: 14px; background: #eef2ff; color: #4f46e5; font-size: 20px; }
  .data-card h3 { margin: 0; color: #1e293b; font-size: 15px; font-weight: 800; }
  .data-card p { margin: 5px 0 0; color: #64748b; font-size: 12px; line-height: 1.55; }
@@ -360,17 +362,28 @@
     </article>
     <article class="data-card">
      <div><div class="data-card-icon">📥</div><h3>Daten laden</h3><p>Importiere Wörter aus einem Backup und wähle aus, ob der Lernfortschritt übernommen wird.</p></div>
-     <label class="btn" style="display: inline-flex; align-items: center; justify-content: center; position: relative; overflow: hidden;">
-      JSON-Import öffnen
-      <input type="file" id="import-file" accept=".json,application/json" onchange="importWords(event)" style="position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0; cursor: pointer;">
-     </label>
+     <div class="data-card-actions">
+      <label class="btn" style="display: inline-flex; align-items: center; justify-content: center; position: relative; overflow: hidden;">
+       JSON-Import öffnen
+       <input type="file" id="import-file" accept=".json,application/json" onchange="importWords(event)" style="position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0; cursor: pointer;">
+      </label>
+      <button class="btn-secondary" onclick="UIController.importBlankWordsFromWeb()">Web-Import: lernwoerter-blank.json</button>
+     </div>
+    </article>
+    <article class="data-card">
+     <div><div class="data-card-icon">🔄</div><h3>Lernstände zurücksetzen</h3><p>Setzt Boxen, Prüfungsdaten und Fehlerzähler aller Wörter zurück. Im Server-Modus gilt das für alle Geräte.</p></div>
+     <button class="btn-danger" onclick="UIController.resetLearningProgress()">Lernstände zurücksetzen</button>
+    </article>
+    <article class="data-card">
+     <div><div class="data-card-icon">🗑️</div><h3>Lokales Wörterbuch leeren</h3><p>Löscht das Wörterbuch nur aus dem Speicher dieses Browsers. Im Server-Modus ist diese Funktion deaktiviert.</p></div>
+     <button class="btn-danger" id="clear-local-dictionary-button" disabled onclick="UIController.clearLocalDictionary()">Lokales Wörterbuch leeren</button>
     </article>
    </div>
    <div class="data-status" id="data-stats"></div>
    <article class="data-status legal-notice" id="legal-notice">
     <h3>Urheberrecht &amp; Entwickler:</h3>
     <p>Entwickelt von Johannes Zöllner.</p>
-    <p><strong>Version:</strong> 1.0.0 · <strong>Commit-Name:</strong> Versionierung</p>
+    <p><strong>Version:</strong> <span id="app-version">Lokale Vorschau</span> · <strong>Commit-Name:</strong> <span id="app-commit-name">Noch nicht veröffentlicht</span></p>
     <h3>Nutzungsbedingungen &amp; Lizenz:</h3>
     <p>Die Lernwörter-App ist ein kostenloses, nicht-kommerzielles Lernprojekt. Die Nutzung ist ausschließlich für private und bildungsbezogene Zwecke gestattet. Jegliche kommerzielle Nutzung, der gewerbliche Weiterverkauf oder die ungenehmigte Weiterverbreitung des Codes oder veränderter Versionen sind untersagt.</p>
     <h3>Haftungsausschluss (Disclaimer):</h3>
@@ -502,15 +515,7 @@ const StorageModule = (() => {
       const reader = new FileReader();
       reader.onload = (e) => {
         try {
-          let parsed = JSON.parse(e.target.result);
-          if (!Array.isArray(parsed) && parsed && Array.isArray(parsed.words)) {
-            parsed = parsed.words;
-          }
-          if (!Array.isArray(parsed)) {
-            reject(new Error('Ungültiges Dateiformat: Keine gültige Wortliste gefunden.'));
-            return;
-          }
-          resolve(parsed);
+          resolve(parseJsonText(e.target.result));
         } catch (err) {
           reject(err);
         }
@@ -520,8 +525,19 @@ const StorageModule = (() => {
     });
   }
 
+  function parseJsonText(text) {
+    let parsed = JSON.parse(text);
+    if (!Array.isArray(parsed) && parsed && Array.isArray(parsed.words)) {
+      parsed = parsed.words;
+    }
+    if (!Array.isArray(parsed)) {
+      throw new Error('Ungültiges Dateiformat: Keine gültige Wortliste gefunden.');
+    }
+    return parsed;
+  }
+
   // Öffentliche Schnittstelle des Moduls
-  return { load, save, exportAsJson, parseJsonFile };
+  return { load, save, exportAsJson, parseJsonFile, parseJsonText };
 })();
 
 // ============================================================================
@@ -966,15 +982,40 @@ const UIController = (() => {
     lastIntensiveWordId: null
   };
   const collapsedWordGroups = new Set();
+  let serverMode = false;
   let peekTimeout;
   let menuCloseTimer;
 
+  async function loadBuildInfo() {
+    const versionElement = document.getElementById('app-version');
+    const commitNameElement = document.getElementById('app-commit-name');
+    try {
+      const response = await fetch('./build-info.json', { cache: 'no-store' });
+      if (!response.ok) {
+        throw new Error(`Build-Informationen konnten nicht geladen werden (HTTP ${response.status}).`);
+      }
+      const buildInfo = await response.json();
+      if (typeof buildInfo.version !== 'string' || typeof buildInfo.commitName !== 'string') {
+        throw new Error('Die Build-Informationen haben ein ungültiges Format.');
+      }
+      versionElement.textContent = buildInfo.version;
+      commitNameElement.textContent = buildInfo.commitName;
+    } catch (error) {
+      versionElement.textContent = 'Lokale Vorschau';
+      commitNameElement.textContent = 'Noch nicht veröffentlicht';
+      console.warn('Build-Informationen sind nicht verfügbar:', error);
+    }
+  }
+
   // Initialisierung beim Start
   async function init() {
+    void loadBuildInfo();
     const statusEl = document.getElementById('connection-status');
     const result = await StorageModule.load();
     
     state.words = result.words;
+    serverMode = result.isServer;
+    document.getElementById('clear-local-dictionary-button').disabled = serverMode;
     statusEl.innerText = result.isServer 
       ? '🟢 Server-Modus (Raspberry Pi)' 
       : '🟡 Lokal-Modus (Browser-Speicher)';
@@ -1463,6 +1504,13 @@ function revealWord() {
     StorageModule.exportAsJson(state.words);
   }
 
+  function showImportDialog(parsed, sourceName) {
+    state.pendingImportData = parsed;
+    document.getElementById('import-summary').textContent =
+      `Es wurden ${parsed.length} Einträge in "${sourceName}" gefunden.`;
+    document.getElementById('import-modal').style.display = 'flex';
+  }
+
 async function importWords(event) {
     const input = event.target;
     const file = input.files[0];
@@ -1470,15 +1518,73 @@ async function importWords(event) {
 
     try {
       const parsed = await StorageModule.parseJsonFile(file);
-      state.pendingImportData = parsed;
-      document.getElementById('import-summary').textContent =
-        `Es wurden ${parsed.length} Einträge in "${file.name}" gefunden.`;
-      document.getElementById('import-modal').style.display = 'flex';
+      showImportDialog(parsed, file.name);
     } catch (err) {
       alert('Fehler beim Lesen der JSON-Datei: ' + err.message);
     } finally {
       input.value = '';
     }
+  }
+
+  async function importBlankWordsFromWeb() {
+    try {
+      const response = await fetch('./lernwoerter-blank.json');
+      if (!response.ok) {
+        throw new Error(`Datei konnte nicht geladen werden (HTTP ${response.status}).`);
+      }
+      const parsed = StorageModule.parseJsonText(await response.text());
+      showImportDialog(parsed, 'lernwoerter-blank.json');
+    } catch (err) {
+      alert('Fehler beim Web-Import: ' + err.message);
+    }
+  }
+
+  async function resetLearningProgress() {
+    const scope = serverMode
+      ? 'Im Server-Modus wird der Fortschritt auf dem gemeinsamen Server für alle Geräte zurückgesetzt.'
+      : 'Der Fortschritt wird in diesem Browser zurückgesetzt.';
+    if (!confirm(`${scope} Boxen, Prüfungsdaten und Fehlerzähler werden auf den Anfang gesetzt. Bist du sicher?`)) return;
+    if (!confirm('Möchtest du wirklich alle Lernstände zurücksetzen?')) return;
+
+    const resetWords = state.words.map(word => ({
+      ...word,
+      userdaten: {
+        ...word.userdaten,
+        box: 1,
+        letztePruefung: null,
+        fehlerZaehler: 0
+      }
+    }));
+    const saved = await StorageModule.save(resetWords);
+    if (!saved) {
+      if (!serverMode) alert('Die Lernstände konnten nicht im Browser gespeichert werden.');
+      return;
+    }
+
+    state.words = resetWords;
+    updateStats();
+    renderWordList();
+    nextWord();
+  }
+
+  async function clearLocalDictionary() {
+    if (serverMode) {
+      alert('Das lokale Wörterbuch kann nur im Lokal-Modus geleert werden.');
+      return;
+    }
+    if (!confirm('Das gesamte Wörterbuch dieses Browsers wird gelöscht. Möchtest du fortfahren?')) return;
+    if (!confirm('Bist du sicher? Diese Aktion kann nicht rückgängig gemacht werden.')) return;
+
+    const saved = await StorageModule.save([]);
+    if (!saved) {
+      alert('Das Wörterbuch konnte nicht im Browser gespeichert werden.');
+      return;
+    }
+
+    state.words = [];
+    updateStats();
+    renderWordList();
+    nextWord();
   }
 
   function closeImportModal() {
@@ -1715,6 +1821,9 @@ async function importWords(event) {
     setWordGroupsCollapsed,
     exportWords,
     importWords,
+    importBlankWordsFromWeb,
+    resetLearningProgress,
+    clearLocalDictionary,
     closeImportModal,
     executeImport,
     renderWordList
