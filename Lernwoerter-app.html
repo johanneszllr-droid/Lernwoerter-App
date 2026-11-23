@@ -106,6 +106,8 @@
  .action-button.image-action:focus-visible { outline: 3px solid #a5b4fc; outline-offset: 2px; }
  .action-image { width: 76px; height: 76px; flex: 0 0 auto; object-fit: contain; }
  .action-button.primary { background: #4f46e5; color: white; box-shadow: 0 4px 12px rgba(79,70,229,.18); }
+ .action-button.primary.image-action { background: transparent; color: #334155; box-shadow: none; }
+ .action-button.primary.image-action:hover { background: #f8fafc; }
  .action-button.primary.digital-next { grid-column: 3; }
  #actionBarBefore .action-button.image-action { min-height: 112px; gap: 2px; padding: 6px; font-size: 13px; }
  .action-button.wrong, .action-button.correct { background: transparent; color: #334155; }
@@ -301,7 +303,7 @@
     <div id="actionBarBefore" class="action-bar before">
      <button class="action-button speak image-action" id="speak-button" onclick="speakCurrentWord()"><img class="action-image" src="./momo-vorlesen.jpeg" alt=""><span>Vorlesen</span></button>
      <button class="action-button peek image-action" id="peek-button" onclick="peekWord()"><img class="action-image" src="./momo-tipp_1.png" alt=""><span>Tipp</span></button>
-     <button class="action-button primary" id="dock-primary-btn" onclick="UIController.handlePrimaryAction()"><span id="primary-action-icon" class="action-icon">✨</span><span id="primary-action-text">Lösung anzeigen</span></button>
+     <button class="action-button primary image-action" id="dock-primary-btn" onclick="UIController.handlePrimaryAction()"><span id="primary-action-icon" class="action-icon"><img class="action-image" src="./momo-ergebnis.png" alt=""></span><span id="primary-action-text">Lösung anzeigen</span></button>
     </div>
     <div id="actionBarAfter" class="action-bar after" style="display: none;">
      <div id="eval-area" class="eval-grid" style="display: none;">
@@ -368,6 +370,7 @@
    <article class="data-status legal-notice" id="legal-notice">
     <h3>Urheberrecht &amp; Entwickler:</h3>
     <p>Entwickelt von Johannes Zöllner.</p>
+    <p><strong>Version:</strong> 1.0.0 · <strong>Commit-Name:</strong> Versionierung</p>
     <h3>Nutzungsbedingungen &amp; Lizenz:</h3>
     <p>Die Lernwörter-App ist ein kostenloses, nicht-kommerzielles Lernprojekt. Die Nutzung ist ausschließlich für private und bildungsbezogene Zwecke gestattet. Jegliche kommerzielle Nutzung, der gewerbliche Weiterverkauf oder die ungenehmigte Weiterverbreitung des Codes oder veränderter Versionen sind untersagt.</p>
     <h3>Haftungsausschluss (Disclaimer):</h3>
@@ -1145,7 +1148,9 @@ const UIController = (() => {
     cardEl.classList.add('animate-card');
     statusIcon.textContent = '';
     beforeBar.style.display = 'grid';
-    document.getElementById('dock-primary-btn').classList.remove('digital-next');
+    const primaryButton = document.getElementById('dock-primary-btn');
+    primaryButton.classList.remove('digital-next');
+    primaryButton.classList.add('image-action');
     afterBar.style.display = 'none';
     evalArea.style.display = 'none';
     document.getElementById('speak-button').style.display = 'flex';
@@ -1202,7 +1207,8 @@ const UIController = (() => {
     document.getElementById('digital-feedback').style.display = 'none';
     document.getElementById('digital-next-area').style.display = 'none';
     document.getElementById('primary-action-text').textContent = state.learningMode === 'paper' ? 'Lösung anzeigen' : 'Prüfen';
-    document.getElementById('primary-action-icon').textContent = state.learningMode === 'paper' ? '👁️' : '✔️';
+    const primaryActionIcon = document.getElementById('primary-action-icon');
+    primaryActionIcon.innerHTML = '<img class="action-image" src="./momo-ergebnis.png" alt="">';
     updateCardMeta(current);
 
     targetEl.className = 'word-display';
@@ -1349,6 +1355,7 @@ function revealWord() {
     document.getElementById('primary-action-icon').textContent = '➡️';
     document.getElementById('primary-action-text').textContent = 'Weiter';
     const primaryButton = document.getElementById('dock-primary-btn');
+    primaryButton.classList.remove('image-action');
     primaryButton.classList.add('digital-next');
     primaryButton.style.display = 'flex';
     primaryButton.focus();
