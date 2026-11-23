@@ -2,18 +2,9 @@
 A self-hosted "Leitner-box" spelling trainer (Lernwörter-App) . Designed for private, non-commercial educational use
 
 ## Versionierung
-Beim Veröffentlichen nach `main/dev` erzeugt der GitHub-Workflow `build-info.json` mit der Version, dem Titel und dem Kurz-Hash des Quell-Commits sowie dem Build-Zeitpunkt. Die App zeigt Version und Commit-Namen aus dieser Datei an. Nicht getaggte Entwicklungsstände erhalten eine `0.0.0-dev+<hash>`-Version.
+Die Versionsnummer wird manuell am Anfang von `Lernwoerter-app.html` im Meta-Feld `app-version` gepflegt. Ändere dort zum Beispiel `1.1.0` auf `1.1.1`, wenn du die Patch-Version erhöhen möchtest. Fehlerkorrekturen erhöhen üblicherweise die letzte Zahl, neue rückwärtskompatible Funktionen die mittlere Zahl und inkompatible Änderungen die erste Zahl.
 
-Für einen Release wird der Quell-Commit mit `vMAJOR.MINOR.PATCH` getaggt, zum Beispiel `v1.1.0`. Der Workflow veröffentlicht den Stand mit dieser Versionsnummer. Übliche Schritte:
-
-1. Änderung auf `dev` committen, mit aussagekräftigem Titel, z. B. `feat: Web-Import ergänzen`.
-2. `dev` pushen. Der Workflow aktualisiert `main/dev` und erzeugt automatisch die Build-Informationen.
-3. Für einen Release den passenden Tag erstellen und pushen:
-   ```sh
-   git tag -a v1.1.0 -m "Release v1.1.0"
-   git push origin v1.1.0
-   ```
-   Fehlerkorrekturen erhöhen üblicherweise die Patch-Version (`v1.0.1`), neue rückwärtskompatible Funktionen die Minor-Version (`v1.1.0`) und inkompatible Änderungen die Major-Version (`v2.0.0`).
+Der GitHub-Workflow erzeugt beim Push auf `dev` automatisch `build-info.json` mit Commit-Titel, Kurz-Hash und Build-Zeitpunkt. Die App zeigt den Commit-Titel zusätzlich zur manuell gesetzten Version an. GitHub-Releases und Tags sind für die Versionsanzeige oder die Synchronisierung nach `main/dev` nicht erforderlich.
 
 # Betrieb & Datenspeicherung
 Die Anwendung erkennt beim Start automatisch, ob ein Backend-Server erreichbar ist, und passt die Datenspeicherung entsprechend an.
