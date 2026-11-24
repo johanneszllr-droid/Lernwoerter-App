@@ -25,18 +25,21 @@ Speicherung: Alle Wörter und Lernstände werden im localStorage des jeweiligen 
 Über den Tab „Daten & Info“ lässt sich der gesamte Bestand jederzeit als JSON-Datei exportieren und auf anderen Geräten wieder importieren.
 Der Web-Import lädt `lernwoerter-blank.json` aus demselben Verzeichnis wie die App; die Datei muss dort bereitgestellt werden. Lernstände lassen sich separat zurücksetzen. Im Server-Modus wirkt sich das auf alle verbundenen Geräte aus. Das Leeren des Wörterbuchs ist nur im Lokal-Modus möglich und wird mehrfach bestätigt.
 # Lernlogik (Leitner-Karteikasten)
-Das System basiert auf dem Prinzip der verteilten Wiederholung (Spaced Repetition). Jedes Wort durchläuft sechs Stufen:
+Das System basiert auf dem Prinzip der verteilten Wiederholung (Spaced Repetition). Neue Wörter liegen zunächst im Wörterspeicher (Box 0). Die Lernboxen funktionieren so:
+Wörterspeicher (Box 0): Warteschlange für neue Wörter; richtige Antworten verschieben ein Wort noch nicht in Box 1.
+Der Wörterspeicher ist über einen eigenen Navigationspunkt erreichbar. Pfeile neben den Wörtern ändern dauerhaft ihre Reihenfolge; das oberste wartende Wort rückt zuerst nach.
 Box 1: 0 Tage Wartezeit (sofort wieder fällig)
 Box 2: 2 Tage Wartezeit
 Box 3: 7 Tage Wartezeit
 Box 4: 14 Tage Wartezeit
 Box 5: 30 Tage Wartezeit
-Box 6 (Archiv): Dauerhaft gemeistert (wird im Standard-Filter nicht mehr abgefragt)
+Schatztruhe (Box 6): Dauerhaft gemeistert (wird im Standard-Filter nicht mehr abgefragt)
 # Auswahl & Bewertung
-Filter „Alle (Aktiv)“: Es werden ausschließlich Wörter aus den Boxen 1 bis 5 abgefragt, deren Wartezeit abgelaufen ist. Niedrigere Boxen sind im Zufallspool höher gewichtet (Box 1 fünffach bis Box 5 einfach), sodass unsichere Wörter häufiger geübt werden.
-Direkter Box-Filter (Box 1–5 oder Archiv): Die Zeitregel wird ausgesetzt. Alle Wörter der gewählten Box können jederzeit gezielt wiederholt werden.
-Richtige Antwort: Das Wort rückt eine Box weiter nach vorn (Ausnahme: Wurde zuvor die „1s Hilfe“ genutzt, bleibt das Wort in seiner aktuellen Box).
-Falsche Antwort: Das Wort fällt zurück in Box 
+Filter „Alle (Aktiv)“: Wörter aus dem Wörterspeicher und den Boxen 1 bis 5 werden abgefragt, sofern sie fällig sind. Niedrigere Boxen sind im Zufallspool höher gewichtet, sodass unsichere Wörter häufiger geübt werden.
+Direkter Box-Filter (Box 1–5 oder Schatztruhe): Die Zeitregel wird ausgesetzt. Alle Wörter der gewählten Box können jederzeit gezielt wiederholt werden.
+Box 1: Aus dem Wörterspeicher werden Wörter nachgerückt, solange weniger als 15 Wörter in Box 1 liegen. Ein korrektes Wort rückt von Box 1 nach Box 2; danach wird der Speicher bei Bedarf bis auf 15 Wörter aufgefüllt. Rückläufer aus höheren Boxen können Box 1 über 15 Wörter anwachsen lassen; dann wird nichts aus dem Speicher nachgezogen.
+Richtige Antwort: Das Wort rückt ab Box 1 eine Box weiter (Ausnahme: Wurde zuvor die „1s Hilfe“ genutzt, bleibt es in seiner aktuellen Box). Wörter im Wörterspeicher bleiben dort, bis ein Platz in Box 1 frei wird.
+Falsche Antwort: Wörter aus Box 2 oder höher fallen zurück in Box 1. Wörter in Box 1 beziehungsweise im Wörterspeicher bleiben in ihrer aktuellen Box.
 
 # Intensivmodus (🔥)
 Der Intensivmodus dient zur gezielten Vorbereitung auf Diktate oder zum Üben besonders schwieriger Lernwörter, ohne den regulären Langzeit-Lernstand zu verfälschen.

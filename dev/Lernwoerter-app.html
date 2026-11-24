@@ -140,6 +140,11 @@
  .word-group-actions { display: flex; justify-content: flex-end; gap: 8px; margin-top: 8px; }
  .word-group-actions .btn { min-height: 38px; padding: 7px 11px; border-radius: 11px; font-size: 12px; }
  #sort-select { min-height: 38px; padding: 7px 10px; border: 1px solid #e2e8f0; border-radius: 11px; background: white; color: #475569; font-size: 12px; }
+ #storage-word-list { display: grid; gap: 8px; margin: 0; padding: 0; list-style: none; }
+ #storage-word-list .word-list-entry { display: flex; align-items: center; gap: 10px; min-width: 0; padding: 8px 10px; border: 1px solid #e2e8f0; border-radius: 12px; background: white; }
+ .storage-word-text { flex: 1; min-width: 0; color: #1e293b; font-size: 14px; font-weight: 700; overflow-wrap: anywhere; }
+ .storage-order-actions { display: flex; gap: 5px; }
+ .storage-order-actions .btn { min-width: 38px; min-height: 36px; padding: 5px 9px; border-radius: 9px; font-size: 17px; }
  #word-list { display: grid; grid-template-columns: minmax(0, 1fr); gap: 8px; min-width: 0; margin: 0; padding: 0; list-style: none; }
  #word-list > .word-group { min-width: 0; width: 100%; margin: 0; padding: 0; overflow: hidden; border: 1px solid #e2e8f0; border-radius: 17px; background: white; box-shadow: 0 2px 8px rgba(15,23,42,.03); }
  .word-group-toggle { width: 100%; min-height: 48px; display: flex; align-items: center; gap: 10px; padding: 8px 12px; border: 0; background: #f8fafc; color: #334155; text-align: left; cursor: pointer; }
@@ -216,6 +221,8 @@
   .data-grid { grid-template-columns: 1fr; }
   .bento-panel { padding: 15px; border-radius: 22px; }
   #word-list .word-list-entry { gap: 6px; padding: 7px 8px; }
+  #storage-word-list .word-list-entry { gap: 7px; padding: 7px 8px; }
+  .storage-order-actions .btn { min-width: 34px; min-height: 32px; padding: 4px 7px; }
   .word-list-emoji { flex-basis: 32px; width: 32px; font-size: 1.1rem; }
   .word-list-actions { gap: 3px; }
   .word-list-actions .btn { min-height: 30px; padding: 5px 6px; font-size: 10px; }
@@ -258,6 +265,7 @@
    </div>
    <button class="nav-tab active" id="nav-learn" data-tab="learn" aria-current="page" onclick="showTab('learn')">🎯 <span>Lernen</span></button>
    <button class="nav-tab" id="nav-manage" data-tab="manage" onclick="showTab('manage')">📖 <span>Wörterbuch</span></button>
+   <button class="nav-tab" id="nav-storage" data-tab="storage" onclick="showTab('storage')">📦 <span>Wörterspeicher</span></button>
    <button class="nav-tab" id="nav-data" data-tab="data" onclick="showTab('data')">⚙️ <span>Daten &amp; Info</span></button>
    <button class="audio-toggle" data-sound-button aria-pressed="true" title="Soundeffekte umschalten" onclick="UIController.toggleSound()">
     <span class="sound-control-label"><span data-sound-icon aria-hidden="true">🔊</span><span data-sound-label>Ton an</span></span>
@@ -274,7 +282,7 @@
     <div class="filter-bar" id="filter-bar" aria-label="Wortfilter">
      <button class="btn-filter active" onclick="toggleBoxFilter('all', event)">Alle</button>
      <button class="btn-filter" onclick="toggleBoxFilter('intensiv', event)">🔥 Intensiv</button>
-     <button class="btn-filter" onclick="toggleBoxFilter(6, event)">Archiv</button>
+     <button class="btn-filter" onclick="toggleBoxFilter(6, event)">Schatztruhe</button>
     </div>
    </div>
 
@@ -284,7 +292,7 @@
      <div class="box-info-group">
       <div>
        <span class="box-label">Lernbox</span>
-       <div id="box-info">Box 1</div>
+       <div id="box-info">Wörterspeicher</div>
       </div>
      </div>
      <button class="card-intensiv-btn" id="card-intensiv-btn" aria-pressed="false" onclick="UIController.toggleCurrentWordIntensiv()">
@@ -351,6 +359,15 @@
     <button class="btn btn-secondary" type="button" onclick="UIController.setWordGroupsCollapsed(false)">Alle aufklappen</button>
    </div>
    <ul id="word-list"></ul>
+  </section>
+
+  <section id="storage-tab" class="app-view" style="display: none;">
+   <div class="bento-panel">
+    <div class="panel-heading">
+     <div><h2>Wörterspeicher</h2><p>Hier warten neue Wörter auf einen freien Platz in Box 1. Mit den Pfeilen kannst du die Reihenfolge fürs Nachrücken festlegen.</p></div>
+    </div>
+    <ul id="storage-word-list" aria-label="Reihenfolge der Wörter im Wörterspeicher"></ul>
+   </div>
   </section>
 
   <section id="data-tab" class="app-view" style="display: none;">
@@ -445,7 +462,7 @@ const StorageModule = (() => {
     return list.map(w => ({
       ...w,
       userdaten: {
-        box: 1,
+        box: 0,
         letztePruefung: null,
         fehlerZaehler: 0,
         intensiv: false,
@@ -842,10 +859,16 @@ const FreschModule = (() => {
 // MODUL 4: LEITNER-LERNMODUL (Isolierte Spaced-Repetition-Logik)
 // ============================================================================
 const LeitnerModule = (() => {
-  const INTERVALS = { 1: 0, 2: 2, 3: 7, 4: 14, 5: 30 };
+  const MAX_BOX_ONE_WORDS = 15;
+  const INTERVALS = { 0: 0, 1: 0, 2: 2, 3: 7, 4: 14, 5: 30 };
+
+  function getBoxLabel(box) {
+    if (box === 0) return 'Wörterspeicher';
+    return box === 6 ? 'Schatztruhe' : `Box ${box}`;
+  }
 
   function isDue(wordObj) {
-    const box = wordObj.userdaten?.box || 1;
+    const box = wordObj.userdaten?.box ?? 0;
     if (box === 6) return false;
     if (!wordObj.userdaten?.letztePruefung) return true;
 
@@ -863,7 +886,7 @@ const LeitnerModule = (() => {
       if (boxFilter === 'intensiv') {
           return w.userdaten?.intensiv === true;
         }
-        const box = w.userdaten?.box || 1;
+        const box = w.userdaten?.box ?? 0;
         return boxFilter === 'all' ? (box !== 6 && isDue(w)) : (box === boxFilter);
       });
 
@@ -871,7 +894,7 @@ const LeitnerModule = (() => {
 
     const weightedPool = [];
     eligible.forEach(({ w, idx }) => {
-      const weight = 6 - (w.userdaten?.box || 1);
+      const weight = 6 - (w.userdaten?.box ?? 0);
       for (let i = 0; i < weight; i++) weightedPool.push(idx);
     });
 
@@ -879,33 +902,41 @@ const LeitnerModule = (() => {
   }
 
   // Aktualisiert Box und Zeitstempel eines Wort-Objekts nach einer Antwort
-  function evaluateAnswer(wordObj, isCorrect, skipPromotion = false, preserveBox = false) {
+  function evaluateAnswer(wordObj, isCorrect, wordList, skipPromotion = false, preserveBox = false) {
     if (!wordObj.userdaten) {
-      wordObj.userdaten = { box: 1, letztePruefung: null, fehlerZaehler: 0, intensiv: false };
+      wordObj.userdaten = { box: 0, letztePruefung: null, fehlerZaehler: 0, intensiv: false };
     }
     wordObj.userdaten.letztePruefung = new Date().toISOString();
 
-    const currentBox = wordObj.userdaten.box || 1;
+    const currentBox = wordObj.userdaten.box ?? 0;
     if (isCorrect) {
-      if (!skipPromotion) {
-        wordObj.userdaten.box = currentBox === 5 ? 6 : Math.min(6, currentBox + 1);
+      if (skipPromotion || currentBox === 0) return false;
+      wordObj.userdaten.box = currentBox === 5 ? 6 : Math.min(6, currentBox + 1);
+      if (currentBox === 1) {
+        let boxOneCount = wordList.filter(word => word.userdaten?.box === 1).length;
+        while (boxOneCount < MAX_BOX_ONE_WORDS) {
+          const waitingWord = wordList.find(word => word.userdaten?.box === 0);
+          if (!waitingWord) break;
+          waitingWord.userdaten.box = 1;
+          boxOneCount++;
+        }
       }
     } else if (!preserveBox) {
-      wordObj.userdaten.box = 1;
+      wordObj.userdaten.box = currentBox > 1 ? 1 : currentBox;
     }
   }
 
-  // Berechnet die Verteilung über die 6 Boxen
+  // Berechnet die Verteilung über Wörterspeicher, Lernboxen und Schatztruhe
   function getStats(wordList) {
-    const counts = [0, 0, 0, 0, 0, 0];
+    const counts = [0, 0, 0, 0, 0, 0, 0];
     wordList.forEach(w => {
-      const box = w.userdaten?.box || 1;
-      counts[box - 1]++;
+      const box = w.userdaten?.box ?? 0;
+      counts[box]++;
     });
     return { total: wordList.length, counts };
   }
 
-  return { isDue, pickNextIndex, evaluateAnswer, getStats };
+  return { isDue, pickNextIndex, evaluateAnswer, getBoxLabel, getStats, MAX_BOX_ONE_WORDS };
 })();
 
 // ============================================================================
@@ -1037,13 +1068,14 @@ const UIController = (() => {
   }
 
   async function saveAndRefresh() {
-    await StorageModule.save(state.words);
+    const saved = await StorageModule.save(state.words);
     updateStats();
+    return saved;
   }
 
   function updateStats() {
     const { total, counts } = LeitnerModule.getStats(state.words);
-    const statsText = `Gesamt: ${total} | B1: ${counts[0]} | B2: ${counts[1]} | B3: ${counts[2]} | B4: ${counts[3]} | B5: ${counts[4]} | Archiv: ${counts[5]}`;
+    const statsText = `Gesamt: ${total} | Wörterspeicher: ${counts[0]} | B1: ${counts[1]} | B2: ${counts[2]} | B3: ${counts[3]} | B4: ${counts[4]} | B5: ${counts[5]} | Schatztruhe: ${counts[6]}`;
     document.getElementById('stats').innerText = statsText;
     document.getElementById('data-stats').innerText = `${statsText} | Intensiv: ${state.words.filter(w => w.userdaten?.intensiv).length}`;
   }
@@ -1088,6 +1120,7 @@ const UIController = (() => {
     const views = {
       learn: { id: 'learn-tab', title: 'Lernen' },
       manage: { id: 'manage-tab', title: 'Wörterbuch' },
+      storage: { id: 'storage-tab', title: 'Wörterspeicher' },
       data: { id: 'data-tab', title: 'Daten & Info' }
     };
     Object.entries(views).forEach(([name, view]) => {
@@ -1101,6 +1134,7 @@ const UIController = (() => {
       else button.removeAttribute('aria-current');
     });
     if (tab === 'manage') renderWordList();
+    if (tab === 'storage') renderStorageWordList();
   }
 
   function toggleSound() {
@@ -1147,7 +1181,7 @@ const UIController = (() => {
   }
 
   function updateCardMeta(word) {
-    const currentBox = word ? (word.userdaten?.box || 1) : 0;
+    const currentBox = word ? (word.userdaten?.box ?? 0) : 0;
     const intensiveButton = document.getElementById('card-intensiv-btn');
     const isIntensive = word?.userdaten?.intensiv === true;
     intensiveButton.classList.toggle('active', isIntensive);
@@ -1232,7 +1266,7 @@ const UIController = (() => {
             ? 'Lernrunde abgeschlossen'
             : 'Intensiv-Filter ist leer'
           : state.selectedBoxFilter === 6
-            ? 'Archiv ist leer'
+            ? 'Schatztruhe ist leer'
             : `Box ${state.selectedBoxFilter} ist leer`;
       document.getElementById('word-emoji').innerText = '✅';
       targetEl.className = 'word-display';
@@ -1248,8 +1282,8 @@ const UIController = (() => {
     }
 
     const current = state.words[state.currentWordIndex];
-    const currentBox = current.userdaten?.box || 1;
-    document.getElementById('box-info').innerText = currentBox === 6 ? 'Archiv (Box 6)' : `Box ${currentBox}`;
+    const currentBox = current.userdaten?.box ?? 0;
+    document.getElementById('box-info').innerText = LeitnerModule.getBoxLabel(currentBox);
     document.getElementById('word-emoji').innerText = current.stammdaten?.emoji || EmojiModule.getForWord(current.stammdaten.wort);
     document.getElementById('digital-feedback').style.display = 'none';
     document.getElementById('digital-next-area').style.display = 'none';
@@ -1440,7 +1474,7 @@ function revealWord() {
       state.intensiveRoundReviewedIds.add(answeredWord.id);
       state.lastIntensiveWordId = answeredWord.id;
     }
-    LeitnerModule.evaluateAnswer(answeredWord, isCorrect, skipPromotion, inIntensiveFilter);
+    LeitnerModule.evaluateAnswer(answeredWord, isCorrect, state.words, skipPromotion, inIntensiveFilter);
     await saveAndRefresh();
     nextWord();
   }
@@ -1453,15 +1487,15 @@ function revealWord() {
     const existingWord = state.words.find(w => w.stammdaten.wort.toLowerCase() === val.toLowerCase());
 
     if (existingWord) {
-      const boxNum = existingWord.userdaten?.box || 1;
-      const overwrite = confirm(`Das Wort "${existingWord.stammdaten.wort}" existiert bereits in ${boxNum === 6 ? 'Archiv' : 'Box ' + boxNum}.\nMöchtest du es überschreiben?`);
+      const boxNum = existingWord.userdaten?.box ?? 0;
+      const overwrite = confirm(`Das Wort "${existingWord.stammdaten.wort}" existiert bereits in ${LeitnerModule.getBoxLabel(boxNum)}.\nMöchtest du es überschreiben?`);
       if (!overwrite) return;
       existingWord.stammdaten.wort = val;
     } else {
       state.words.push({
         id: Date.now(),
         stammdaten: { wort: val, artikel: '', wortart: '', plural: '', emoji: EmojiModule.getForWord(val), besonderheiten: [] },
-        userdaten: { box: 1, letztePruefung: null, fehlerZaehler: 0 }
+        userdaten: { box: 0, letztePruefung: null, fehlerZaehler: 0 }
       });
     }
 
@@ -1552,11 +1586,11 @@ async function importWords(event) {
     if (!confirm(`${scope} Boxen, Prüfungsdaten und Fehlerzähler werden auf den Anfang gesetzt. Bist du sicher?`)) return;
     if (!confirm('Möchtest du wirklich alle Lernstände zurücksetzen?')) return;
 
-    const resetWords = state.words.map(word => ({
+    const resetWords = state.words.map((word, index) => ({
       ...word,
       userdaten: {
         ...word.userdaten,
-        box: 1,
+        box: index < LeitnerModule.MAX_BOX_ONE_WORDS ? 1 : 0,
         letztePruefung: null,
         fehlerZaehler: 0
       }
@@ -1612,7 +1646,7 @@ async function importWords(event) {
             return {
               id: Date.now() + idx,
               stammdaten: { wort: item.trim(), artikel: '', wortart: '', plural: '', emoji: EmojiModule.getForWord(item), besonderheiten: [] },
-              userdaten: { box: 1, letztePruefung: null, fehlerZaehler: 0, intensiv: false }
+              userdaten: { box: 0, letztePruefung: null, fehlerZaehler: 0, intensiv: false }
             };
           }
           if (!item || typeof item !== 'object') return null;
@@ -1627,11 +1661,11 @@ async function importWords(event) {
               besonderheiten: item.stammdaten?.besonderheiten || []
             },
             userdaten: importUserdata ? {
-              box: Number(item.userdaten?.box || item.box) || 1,
+              box: Number(item.userdaten?.box ?? item.box ?? 0) || 0,
               letztePruefung: item.userdaten?.letztePruefung || item.last_reviewed || null,
               fehlerZaehler: Number(item.userdaten?.fehlerZaehler) || 0,
               intensiv: Boolean(item.userdaten?.intensiv ?? item.intensiv ?? false)
-            } : { box: 1, letztePruefung: null, fehlerZaehler: 0, intensiv: false }
+            } : { box: 0, letztePruefung: null, fehlerZaehler: 0, intensiv: false }
           };
         }).filter(w => w && w.stammdaten.wort.length > 0);
       } else {
@@ -1646,7 +1680,7 @@ async function importWords(event) {
             }
             if (importUserdata && item && typeof item === 'object' && item.userdaten) {
               existingWord.userdaten = {
-                box: 1,
+                box: 0,
                 letztePruefung: null,
                 fehlerZaehler: 0,
                 intensiv: false,
@@ -1661,14 +1695,14 @@ async function importWords(event) {
                 ? {
                     ...item,
                     userdaten: importUserdata
-                      ? { box: 1, letztePruefung: null, fehlerZaehler: 0, intensiv: false, ...item.userdaten }
-                      : { box: 1, letztePruefung: null, fehlerZaehler: 0, intensiv: false }
+                      ? { box: 0, letztePruefung: null, fehlerZaehler: 0, intensiv: false, ...item.userdaten }
+                      : { box: 0, letztePruefung: null, fehlerZaehler: 0, intensiv: false }
                   }
                 : {
                     id: Date.now() + idx + Math.floor(Math.random() * 1000),
                     stammdaten: { wort: wordText, artikel: '', wortart: '', plural: '', emoji: EmojiModule.getForWord(wordText), besonderheiten: [] },
                     userdaten: {
-                      box: Number(item?.userdaten?.box || item?.box) || 1,
+                      box: Number(item?.userdaten?.box ?? item?.box ?? 0) || 0,
                       letztePruefung: item?.userdaten?.letztePruefung || item?.last_reviewed || null,
                       fehlerZaehler: Number(item?.userdaten?.fehlerZaehler) || 0,
                       intensiv: Boolean(item?.userdaten?.intensiv ?? item?.intensiv ?? false)
@@ -1692,7 +1726,7 @@ async function importWords(event) {
     const word = state.words.find(w => w.id === id);
     if (!word) return;
 
-    word.userdaten ??= { box: 1, letztePruefung: null, fehlerZaehler: 0, intensiv: false };
+    word.userdaten ??= { box: 0, letztePruefung: null, fehlerZaehler: 0, intensiv: false };
     word.userdaten.intensiv = !word.userdaten.intensiv;
     await saveAndRefresh();
     renderWordList();
@@ -1725,6 +1759,57 @@ async function importWords(event) {
       ?.focus();
   }
 
+  function renderStorageWordList() {
+    const ul = document.getElementById('storage-word-list');
+    const storageWords = state.words.filter(word => word.userdaten?.box === 0);
+    if (storageWords.length === 0) {
+      ul.innerHTML = '<li class="data-status">Der Wörterspeicher ist leer.</li>';
+      return;
+    }
+
+    const escapeHtml = value => String(value).replace(/[&<>"']/g, character => ({
+      '&': '&amp;',
+      '<': '&lt;',
+      '>': '&gt;',
+      '"': '&quot;',
+      "'": '&#39;'
+    })[character]);
+
+    ul.innerHTML = storageWords.map((word, index) => {
+      const wordText = escapeHtml(word.stammdaten.wort);
+      const emoji = escapeHtml(word.stammdaten?.emoji || EmojiModule.getForWord(word.stammdaten.wort));
+      return `
+      <li class="word-list-entry">
+       <span class="word-list-emoji" aria-hidden="true">${emoji}</span>
+       <span class="storage-word-text">${wordText}</span>
+       <div class="storage-order-actions">
+        <button class="btn btn-secondary" id="storage-move-up-${index}" type="button" aria-label="${escapeHtml(`„${word.stammdaten.wort}“ nach oben verschieben`)}" title="Nach oben" onclick="UIController.moveStorageWord(${index}, -1)" ${index === 0 ? 'disabled' : ''}>↑</button>
+        <button class="btn btn-secondary" id="storage-move-down-${index}" type="button" aria-label="${escapeHtml(`„${word.stammdaten.wort}“ nach unten verschieben`)}" title="Nach unten" onclick="UIController.moveStorageWord(${index}, 1)" ${index === storageWords.length - 1 ? 'disabled' : ''}>↓</button>
+       </div>
+      </li>`;
+    }).join('');
+  }
+
+  async function moveStorageWord(storageIndex, direction) {
+    const storageWords = state.words.filter(word => word.userdaten?.box === 0);
+    const nextIndex = storageIndex + direction;
+    if (!Number.isInteger(storageIndex) || ![-1, 1].includes(direction) || storageIndex < 0 || nextIndex < 0 || nextIndex >= storageWords.length) return;
+
+    const currentArrayIndex = state.words.indexOf(storageWords[storageIndex]);
+    const nextArrayIndex = state.words.indexOf(storageWords[nextIndex]);
+    [state.words[currentArrayIndex], state.words[nextArrayIndex]] = [state.words[nextArrayIndex], state.words[currentArrayIndex]];
+
+    if (!await saveAndRefresh()) {
+      [state.words[currentArrayIndex], state.words[nextArrayIndex]] = [state.words[nextArrayIndex], state.words[currentArrayIndex]];
+      if (!serverMode) alert('Die neue Reihenfolge konnte nicht gespeichert werden.');
+      renderStorageWordList();
+      document.getElementById(`storage-move-${direction < 0 ? 'up' : 'down'}-${storageIndex}`)?.focus();
+      return;
+    }
+    renderStorageWordList();
+    document.getElementById(`storage-move-${direction < 0 ? 'up' : 'down'}-${nextIndex}`)?.focus();
+  }
+
   function renderWordList() {
     const ul = document.getElementById('word-list');
     const sortBy = document.getElementById('sort-select').value;
@@ -1734,7 +1819,7 @@ async function importWords(event) {
     if (sortBy === 'alpha') {
       sortedWords.sort((a, b) => cleanForSort(a.stammdaten.wort).localeCompare(cleanForSort(b.stammdaten.wort), 'de'));
     } else if (sortBy === 'box') {
-      sortedWords.sort((a, b) => (a.userdaten?.box || 1) - (b.userdaten?.box || 1));
+      sortedWords.sort((a, b) => (a.userdaten?.box ?? 0) - (b.userdaten?.box ?? 0));
     }
 
     const escapeHtml = value => String(value).replace(/[&<>"']/g, character => ({
@@ -1747,11 +1832,11 @@ async function importWords(event) {
     const groupedWords = new Map();
 
     sortedWords.forEach(word => {
-      const boxNum = Number(word.userdaten?.box) || 1;
+      const boxNum = Number(word.userdaten?.box ?? 0);
       const letters = [...cleanForSort(word.stammdaten.wort).trim()];
       const letter = letters[0]?.toLocaleUpperCase('de') || '#';
       const groupKey = sortBy === 'box' ? `box:${boxNum}` : `letter:${letter}`;
-      const label = sortBy === 'box' ? (boxNum === 6 ? 'Archiv (Box 6)' : `Box ${boxNum}`) : letter;
+      const label = sortBy === 'box' ? LeitnerModule.getBoxLabel(boxNum) : letter;
       if (!groupedWords.has(groupKey)) {
         groupedWords.set(groupKey, { key: groupKey, label, order: boxNum, words: [] });
       }
@@ -1768,10 +1853,10 @@ async function importWords(event) {
       const groupId = `word-group-${index}`;
       const countLabel = words.length === 1 ? '1 Wort' : `${words.length} Wörter`;
       const entries = words.map(word => {
-        const boxNum = word.userdaten?.box || 1;
+        const boxNum = word.userdaten?.box ?? 0;
         const emoji = escapeHtml(word.stammdaten?.emoji || EmojiModule.getForWord(word.stammdaten.wort));
         const wordText = escapeHtml(word.stammdaten.wort);
-        const boxLabel = boxNum === 6 ? 'Archiv' : `Box ${boxNum}`;
+        const boxLabel = boxNum === 0 ? 'Wörterspeicher' : boxNum === 6 ? 'Schatztruhe' : `Box ${boxNum}`;
         return `
         <li class="word-list-entry">
          <input type="text" id="edit-emoji-${word.id}" value="${emoji}" readonly autocomplete="off" autocorrect="off" autocapitalize="none" spellcheck="false" maxlength="8" aria-label="Emoji" class="word-list-emoji" />
@@ -1824,6 +1909,7 @@ async function importWords(event) {
     toggleIntensiv,
     toggleEdit,
     toggleWordGroup,
+    moveStorageWord,
     setWordGroupsCollapsed,
     exportWords,
     importWords,
@@ -1832,7 +1918,8 @@ async function importWords(event) {
     clearLocalDictionary,
     closeImportModal,
     executeImport,
-    renderWordList
+    renderWordList,
+    renderStorageWordList
   };
 })();
 // Einmalig globale Shortcuts für die HTML-Buttons bereitstellen
