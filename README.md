@@ -24,6 +24,7 @@ Speicherung: Alle Wörter und Lernstände werden im localStorage des jeweiligen 
 # Datensicherung: 
 Über den Tab „Daten & Info“ lässt sich der gesamte Bestand jederzeit als JSON-Datei exportieren und auf anderen Geräten wieder importieren.
 Der Web-Import lädt `lernwoerter-blank.json` aus demselben Verzeichnis wie die App; die Datei muss dort bereitgestellt werden. Lernstände lassen sich separat zurücksetzen. Im Server-Modus wirkt sich das auf alle verbundenen Geräte aus. Das Leeren des Wörterbuchs ist nur im Lokal-Modus möglich und wird mehrfach bestätigt.
+Im Tab „Wörterbuch“ filtert das Suchfeld live nach Wort, Artikel und Plural; Sortierung und Gruppierung bleiben dabei erhalten.
 # Lernlogik (Leitner-Karteikasten)
 Das System basiert auf dem Prinzip der verteilten Wiederholung (Spaced Repetition). Neue Wörter liegen zunächst im Wörterspeicher (Box 0). Die Lernboxen funktionieren so:
 Wörterspeicher (Box 0): Warteschlange für neue Wörter; richtige Antworten verschieben ein Wort noch nicht in Box 1.
@@ -35,7 +36,7 @@ Box 4: 14 Tage Wartezeit
 Box 5: 30 Tage Wartezeit
 Schatztruhe (Box 6): Dauerhaft gemeistert (wird im Standard-Filter nicht mehr abgefragt)
 # Auswahl & Bewertung
-Filter „Alle (Aktiv)“: Wörter aus dem Wörterspeicher und den Boxen 1 bis 5 werden abgefragt, sofern sie fällig sind. Niedrigere Boxen sind im Zufallspool höher gewichtet, sodass unsichere Wörter häufiger geübt werden.
+Filter „Alle (Aktiv)“: Es werden nur fällige Wörter aus Box 1 bis 5 abgefragt. Wörter aus dem Wörterspeicher werden erst gelernt, wenn sie bei freiem Platz nach Box 1 nachrücken. Niedrigere Lernboxen sind im Zufallspool höher gewichtet, sodass unsichere Wörter häufiger geübt werden.
 Direkter Box-Filter (Box 1–5 oder Schatztruhe): Die Zeitregel wird ausgesetzt. Alle Wörter der gewählten Box können jederzeit gezielt wiederholt werden.
 Box 1: Aus dem Wörterspeicher werden Wörter nachgerückt, solange weniger als 15 Wörter in Box 1 liegen. Ein korrektes Wort rückt von Box 1 nach Box 2; danach wird der Speicher bei Bedarf bis auf 15 Wörter aufgefüllt. Rückläufer aus höheren Boxen können Box 1 über 15 Wörter anwachsen lassen; dann wird nichts aus dem Speicher nachgezogen.
 Richtige Antwort: Das Wort rückt ab Box 1 eine Box weiter (Ausnahme: Wurde zuvor die „1s Hilfe“ genutzt, bleibt es in seiner aktuellen Box). Wörter im Wörterspeicher bleiben dort, bis ein Platz in Box 1 frei wird.
