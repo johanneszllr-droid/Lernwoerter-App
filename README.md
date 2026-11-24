@@ -2,18 +2,9 @@
 A self-hosted "Leitner-box" spelling trainer (Lernwörter-App) . Designed for private, non-commercial educational use
 
 ## Versionierung
-Beim Veröffentlichen nach `main/dev` erzeugt der GitHub-Workflow `build-info.json` mit der Version, dem Titel und dem Kurz-Hash des Quell-Commits sowie dem Build-Zeitpunkt. Die App zeigt Version und Commit-Namen aus dieser Datei an. Nicht getaggte Entwicklungsstände erhalten eine `0.0.0-dev+<hash>`-Version.
+Die Versionsnummer wird manuell am Anfang von `Lernwoerter-app.html` im Meta-Feld `app-version` gepflegt. Ändere dort zum Beispiel `1.1.0` auf `1.1.1`, wenn du die Patch-Version erhöhen möchtest. Fehlerkorrekturen erhöhen üblicherweise die letzte Zahl, neue rückwärtskompatible Funktionen die mittlere Zahl und inkompatible Änderungen die erste Zahl.
 
-Für einen Release wird der Quell-Commit mit `vMAJOR.MINOR.PATCH` getaggt, zum Beispiel `v1.1.0`. Der Workflow veröffentlicht den Stand mit dieser Versionsnummer. Übliche Schritte:
-
-1. Änderung auf `dev` committen, mit aussagekräftigem Titel, z. B. `feat: Web-Import ergänzen`.
-2. `dev` pushen. Der Workflow aktualisiert `main/dev` und erzeugt automatisch die Build-Informationen.
-3. Für einen Release den passenden Tag erstellen und pushen:
-   ```sh
-   git tag -a v1.1.0 -m "Release v1.1.0"
-   git push origin v1.1.0
-   ```
-   Fehlerkorrekturen erhöhen üblicherweise die Patch-Version (`v1.0.1`), neue rückwärtskompatible Funktionen die Minor-Version (`v1.1.0`) und inkompatible Änderungen die Major-Version (`v2.0.0`).
+Der GitHub-Workflow erzeugt beim Push auf `dev` automatisch `build-info.json` mit Commit-Titel, Kurz-Hash und Build-Zeitpunkt. Die App zeigt den Commit-Titel zusätzlich zur manuell gesetzten Version an. GitHub-Releases und Tags sind für die Versionsanzeige oder die Synchronisierung nach `main/dev` nicht erforderlich.
 
 # Betrieb & Datenspeicherung
 Die Anwendung erkennt beim Start automatisch, ob ein Backend-Server erreichbar ist, und passt die Datenspeicherung entsprechend an.
@@ -33,19 +24,23 @@ Speicherung: Alle Wörter und Lernstände werden im localStorage des jeweiligen 
 # Datensicherung: 
 Über den Tab „Daten & Info“ lässt sich der gesamte Bestand jederzeit als JSON-Datei exportieren und auf anderen Geräten wieder importieren.
 Der Web-Import lädt `lernwoerter-blank.json` aus demselben Verzeichnis wie die App; die Datei muss dort bereitgestellt werden. Lernstände lassen sich separat zurücksetzen. Im Server-Modus wirkt sich das auf alle verbundenen Geräte aus. Das Leeren des Wörterbuchs ist nur im Lokal-Modus möglich und wird mehrfach bestätigt.
+Im Tab „Wörterbuch“ filtert das Suchfeld live nach Wort, Artikel und Plural; Sortierung und Gruppierung bleiben dabei erhalten.
 # Lernlogik (Leitner-Karteikasten)
-Das System basiert auf dem Prinzip der verteilten Wiederholung (Spaced Repetition). Jedes Wort durchläuft sechs Stufen:
+Das System basiert auf dem Prinzip der verteilten Wiederholung (Spaced Repetition). Neue Wörter liegen zunächst im Wörterspeicher (Box 0). Die Lernboxen funktionieren so:
+Wörterspeicher (Box 0): Warteschlange für neue Wörter; richtige Antworten verschieben ein Wort noch nicht in Box 1.
+Der Wörterspeicher ist über einen eigenen Navigationspunkt erreichbar. Pfeile neben den Wörtern ändern dauerhaft ihre Reihenfolge; das oberste wartende Wort rückt zuerst nach.
 Box 1: 0 Tage Wartezeit (sofort wieder fällig)
 Box 2: 2 Tage Wartezeit
 Box 3: 7 Tage Wartezeit
 Box 4: 14 Tage Wartezeit
 Box 5: 30 Tage Wartezeit
-Box 6 (Archiv): Dauerhaft gemeistert (wird im Standard-Filter nicht mehr abgefragt)
+Schatztruhe (Box 6): Dauerhaft gemeistert (wird im Standard-Filter nicht mehr abgefragt)
 # Auswahl & Bewertung
-Filter „Alle (Aktiv)“: Es werden ausschließlich Wörter aus den Boxen 1 bis 5 abgefragt, deren Wartezeit abgelaufen ist. Niedrigere Boxen sind im Zufallspool höher gewichtet (Box 1 fünffach bis Box 5 einfach), sodass unsichere Wörter häufiger geübt werden.
-Direkter Box-Filter (Box 1–5 oder Archiv): Die Zeitregel wird ausgesetzt. Alle Wörter der gewählten Box können jederzeit gezielt wiederholt werden.
-Richtige Antwort: Das Wort rückt eine Box weiter nach vorn (Ausnahme: Wurde zuvor die „1s Hilfe“ genutzt, bleibt das Wort in seiner aktuellen Box).
-Falsche Antwort: Das Wort fällt zurück in Box 
+Filter „Alle (Aktiv)“: Es werden nur fällige Wörter aus Box 1 bis 5 abgefragt. Wörter aus dem Wörterspeicher werden erst gelernt, wenn sie bei freiem Platz nach Box 1 nachrücken. Niedrigere Lernboxen sind im Zufallspool höher gewichtet, sodass unsichere Wörter häufiger geübt werden.
+Direkter Box-Filter (Box 1–5 oder Schatztruhe): Die Zeitregel wird ausgesetzt. Alle Wörter der gewählten Box können jederzeit gezielt wiederholt werden.
+Box 1: Aus dem Wörterspeicher werden Wörter nachgerückt, solange weniger als 15 Wörter in Box 1 liegen. Ein korrektes Wort rückt von Box 1 nach Box 2; danach wird der Speicher bei Bedarf bis auf 15 Wörter aufgefüllt. Rückläufer aus höheren Boxen können Box 1 über 15 Wörter anwachsen lassen; dann wird nichts aus dem Speicher nachgezogen.
+Richtige Antwort: Das Wort rückt ab Box 1 eine Box weiter (Ausnahme: Wurde zuvor die „1s Hilfe“ genutzt, bleibt es in seiner aktuellen Box). Wörter im Wörterspeicher bleiben dort, bis ein Platz in Box 1 frei wird.
+Falsche Antwort: Wörter aus Box 2 oder höher fallen zurück in Box 1. Wörter in Box 1 beziehungsweise im Wörterspeicher bleiben in ihrer aktuellen Box.
 
 # Intensivmodus (🔥)
 Der Intensivmodus dient zur gezielten Vorbereitung auf Diktate oder zum Üben besonders schwieriger Lernwörter, ohne den regulären Langzeit-Lernstand zu verfälschen.
