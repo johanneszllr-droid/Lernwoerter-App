@@ -28,7 +28,8 @@ Im Tab „Wörterbuch“ filtert das Suchfeld live nach Wort, Artikel und Plural
 # Lernlogik (Leitner-Karteikasten)
 Das System basiert auf dem Prinzip der verteilten Wiederholung (Spaced Repetition). Neue Wörter liegen zunächst im Wörterspeicher (Box 0). Die Lernboxen funktionieren so:
 Wörterspeicher (Box 0): Warteschlange für neue Wörter; richtige Antworten verschieben ein Wort noch nicht in Box 1.
-Der Wörterspeicher ist über einen eigenen Navigationspunkt erreichbar. Pfeile neben den Wörtern ändern dauerhaft ihre Reihenfolge; das oberste wartende Wort rückt zuerst nach.
+Der Wörterspeicher ist über einen eigenen Navigationspunkt erreichbar. Die Suche filtert nach Wort, Artikel und Plural. Pfeile neben den Wörtern ändern dauerhaft ihre Reihenfolge; „↑1“ setzt ein Wort direkt an die erste Stelle. Das oberste wartende Wort rückt zuerst nach.
+Im mitgelieferten Anfangsbestand sind die ersten 15 Wörter in Box 1; neu hinzugefügte Wörter landen im Wörterspeicher.
 Box 1: 0 Tage Wartezeit (sofort wieder fällig)
 Box 2: 2 Tage Wartezeit
 Box 3: 7 Tage Wartezeit
@@ -41,6 +42,9 @@ Direkter Box-Filter (Box 1–5 oder Schatztruhe): Die Zeitregel wird ausgesetzt.
 Box 1: Aus dem Wörterspeicher werden Wörter nachgerückt, solange weniger als 15 Wörter in Box 1 liegen. Ein korrektes Wort rückt von Box 1 nach Box 2; danach wird der Speicher bei Bedarf bis auf 15 Wörter aufgefüllt. Rückläufer aus höheren Boxen können Box 1 über 15 Wörter anwachsen lassen; dann wird nichts aus dem Speicher nachgezogen.
 Richtige Antwort: Das Wort rückt ab Box 1 eine Box weiter (Ausnahme: Wurde zuvor die „1s Hilfe“ genutzt, bleibt es in seiner aktuellen Box). Wörter im Wörterspeicher bleiben dort, bis ein Platz in Box 1 frei wird.
 Falsche Antwort: Wörter aus Box 2 oder höher fallen zurück in Box 1. Wörter in Box 1 beziehungsweise im Wörterspeicher bleiben in ihrer aktuellen Box.
+Bei der digitalen Eingabe wird ein fehlender führender Artikel (der, die, das, ein, eine) akzeptiert; ein falscher Artikel oder eine falsche Schreibweise bleibt ein Fehler.
+
+Korrekte Antworten aus Box 5 werden in der Schatztruhe (Box 6) abgelegt.
 
 # Intensivmodus (🔥)
 Der Intensivmodus dient zur gezielten Vorbereitung auf Diktate oder zum Üben besonders schwieriger Lernwörter, ohne den regulären Langzeit-Lernstand zu verfälschen.

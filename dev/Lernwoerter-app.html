@@ -5,7 +5,7 @@
  <meta name="viewport" content="width=device-width, initial-scale=1.0">
  <title>Lernwörter-App</title>
  <!-- Manuelle Versionsnummer, wird unter „Daten & Info“ angezeigt. -->
- <meta name="app-version" content="1.1.1">
+ <meta name="app-version" content="1.2.1">
  <meta name="theme-color" content="#f8fafc">
  <link rel="icon" type="image/png" href="./Momo_Maus.png">
  <link rel="apple-touch-icon" href="./Momo_Maus.png">
@@ -373,6 +373,10 @@
    <div class="bento-panel">
     <div class="panel-heading">
      <div><h2>Wörterspeicher</h2><p>Hier warten neue Wörter auf einen freien Platz in Box 1. Mit den Pfeilen kannst du die Reihenfolge fürs Nachrücken festlegen.</p></div>
+    </div>
+    <div class="word-search">
+     <label for="storage-search">Wörterspeicher durchsuchen</label>
+     <input type="search" id="storage-search" placeholder="Wort, Artikel oder Plural eingeben..." autocomplete="off" oninput="UIController.renderStorageWordList()">
     </div>
     <ul id="storage-word-list" aria-label="Reihenfolge der Wörter im Wörterspeicher"></ul>
    </div>
@@ -1395,7 +1399,8 @@ function revealWord() {
     document.getElementById('peek-button').style.display = 'none';
 
     const targetWord = state.words[state.currentWordIndex].stammdaten.wort;
-    const isCorrect = (userInput === targetWord);
+    const wordWithoutArticle = targetWord.replace(/^(der|die|das|ein|eine)\s+/i, '');
+    const isCorrect = userInput === targetWord || userInput === wordWithoutArticle;
     state.pendingIsCorrect = isCorrect;
 
     const cardEl = document.getElementById('learning-card');
@@ -1767,23 +1772,29 @@ async function importWords(event) {
       ?.focus();
   }
 
-  function renderStorageWordList() {
-    const ul = document.getElementById('storage-word-list');
-    const storageWords = state.words.filter(word => word.userdaten?.box === 0);
-    if (storageWords.length === 0) {
-      ul.innerHTML = '<li class="data-status">Der Wörterspeicher ist leer.</li>';
-      return;
-    }
-
-    const escapeHtml = value => String(value).replace(/[&<>"']/g, character => ({
+  function escapeHtml(value) {
+    return String(value).replace(/[&<>"']/g, character => ({
       '&': '&amp;',
       '<': '&lt;',
       '>': '&gt;',
       '"': '&quot;',
       "'": '&#39;'
     })[character]);
+  }
 
-    ul.innerHTML = storageWords.map((word, index) => {
+  function renderStorageWordList() {
+    const ul = document.getElementById('storage-word-list');
+    const storageWords = state.words.filter(word => word.userdaten?.box === 0);
+    const searchTerm = document.getElementById('storage-search').value.trim().toLocaleLowerCase('de');
+    const visibleWords = storageWords
+      .map((word, index) => ({ word, index }))
+      .filter(({ word }) => matchesWordSearch(word, searchTerm));
+    if (visibleWords.length === 0) {
+      ul.innerHTML = `<li class="data-status">${searchTerm ? 'Keine passenden Wörter gefunden.' : 'Der Wörterspeicher ist leer.'}</li>`;
+      return;
+    }
+
+    ul.innerHTML = visibleWords.map(({ word, index }) => {
       const wordText = escapeHtml(word.stammdaten.wort);
       const emoji = escapeHtml(word.stammdaten?.emoji || EmojiModule.getForWord(word.stammdaten.wort));
       return `
@@ -1793,29 +1804,61 @@ async function importWords(event) {
        <div class="storage-order-actions">
         <button class="btn btn-secondary" id="storage-move-up-${index}" type="button" aria-label="${escapeHtml(`„${word.stammdaten.wort}“ nach oben verschieben`)}" title="Nach oben" onclick="UIController.moveStorageWord(${index}, -1)" ${index === 0 ? 'disabled' : ''}>↑</button>
         <button class="btn btn-secondary" id="storage-move-down-${index}" type="button" aria-label="${escapeHtml(`„${word.stammdaten.wort}“ nach unten verschieben`)}" title="Nach unten" onclick="UIController.moveStorageWord(${index}, 1)" ${index === storageWords.length - 1 ? 'disabled' : ''}>↓</button>
+        <button class="btn btn-secondary" id="storage-move-first-${index}" type="button" aria-label="${escapeHtml(`„${word.stammdaten.wort}“ an die erste Stelle verschieben`)}" title="An die erste Stelle" onclick="UIController.moveStorageWordToFirst(${index})" ${index === 0 ? 'disabled' : ''}>↑1</button>
        </div>
       </li>`;
     }).join('');
   }
 
-  async function moveStorageWord(storageIndex, direction) {
-    const storageWords = state.words.filter(word => word.userdaten?.box === 0);
-    const nextIndex = storageIndex + direction;
-    if (!Number.isInteger(storageIndex) || ![-1, 1].includes(direction) || storageIndex < 0 || nextIndex < 0 || nextIndex >= storageWords.length) return;
+  function setStorageWordOrder(storageWords) {
+    let storageIndex = 0;
+    state.words = state.words.map(word => word.userdaten?.box === 0 ? storageWords[storageIndex++] : word);
+  }
 
-    const currentArrayIndex = state.words.indexOf(storageWords[storageIndex]);
-    const nextArrayIndex = state.words.indexOf(storageWords[nextIndex]);
-    [state.words[currentArrayIndex], state.words[nextArrayIndex]] = [state.words[nextArrayIndex], state.words[currentArrayIndex]];
+  async function reorderStorageWord(storageIndex, targetIndex, focusControl) {
+    const storageWords = state.words.filter(word => word.userdaten?.box === 0);
+    if (!Number.isInteger(storageIndex) || !Number.isInteger(targetIndex) ||
+      storageIndex < 0 || storageIndex >= storageWords.length ||
+      targetIndex < 0 || targetIndex >= storageWords.length ||
+      storageIndex === targetIndex) return;
+
+    const previousOrder = [...storageWords];
+    const [word] = storageWords.splice(storageIndex, 1);
+    storageWords.splice(targetIndex, 0, word);
+    setStorageWordOrder(storageWords);
 
     if (!await saveAndRefresh()) {
-      [state.words[currentArrayIndex], state.words[nextArrayIndex]] = [state.words[nextArrayIndex], state.words[currentArrayIndex]];
+      setStorageWordOrder(previousOrder);
       if (!serverMode) alert('Die neue Reihenfolge konnte nicht gespeichert werden.');
       renderStorageWordList();
-      document.getElementById(`storage-move-${direction < 0 ? 'up' : 'down'}-${storageIndex}`)?.focus();
+      document.getElementById(`storage-move-${focusControl}-${storageIndex}`)?.focus();
       return;
     }
     renderStorageWordList();
-    document.getElementById(`storage-move-${direction < 0 ? 'up' : 'down'}-${nextIndex}`)?.focus();
+    const nextFocusControl = focusControl === 'first' || (focusControl === 'up' && targetIndex === 0)
+      ? 'down'
+      : focusControl === 'down' && targetIndex === storageWords.length - 1
+        ? 'up'
+        : focusControl;
+    document.getElementById(`storage-move-${nextFocusControl}-${targetIndex}`)?.focus();
+  }
+
+  function moveStorageWord(storageIndex, direction) {
+    const targetIndex = storageIndex + direction;
+    return reorderStorageWord(storageIndex, targetIndex, direction < 0 ? 'up' : 'down');
+  }
+
+  function moveStorageWordToFirst(storageIndex) {
+    return reorderStorageWord(storageIndex, 0, 'first');
+  }
+
+  function matchesWordSearch(word, searchTerm) {
+    const searchableText = [
+      word.stammdaten?.wort,
+      word.stammdaten?.artikel,
+      word.stammdaten?.plural
+    ].filter(Boolean).join(' ').toLocaleLowerCase('de');
+    return searchableText.includes(searchTerm);
   }
 
   function renderWordList() {
@@ -1824,14 +1867,7 @@ async function importWords(event) {
     const searchTerm = document.getElementById('word-search').value.trim().toLocaleLowerCase('de');
     const cleanForSort = str => (str || '').toLowerCase().replace(/^(der|die|das|ein|eine)\s+/i, '');
 
-    let sortedWords = state.words.filter(word => {
-      const searchableText = [
-        word.stammdaten?.wort,
-        word.stammdaten?.artikel,
-        word.stammdaten?.plural
-      ].filter(Boolean).join(' ').toLocaleLowerCase('de');
-      return searchableText.includes(searchTerm);
-    });
+    let sortedWords = state.words.filter(word => matchesWordSearch(word, searchTerm));
     if (sortBy === 'alpha') {
       sortedWords.sort((a, b) => cleanForSort(a.stammdaten.wort).localeCompare(cleanForSort(b.stammdaten.wort), 'de'));
     } else if (sortBy === 'box') {
@@ -1843,13 +1879,6 @@ async function importWords(event) {
       return;
     }
 
-    const escapeHtml = value => String(value).replace(/[&<>"']/g, character => ({
-      '&': '&amp;',
-      '<': '&lt;',
-      '>': '&gt;',
-      '"': '&quot;',
-      "'": '&#39;'
-    })[character]);
     const groupedWords = new Map();
 
     sortedWords.forEach(word => {
@@ -1931,6 +1960,7 @@ async function importWords(event) {
     toggleEdit,
     toggleWordGroup,
     moveStorageWord,
+    moveStorageWordToFirst,
     setWordGroupsCollapsed,
     exportWords,
     importWords,
