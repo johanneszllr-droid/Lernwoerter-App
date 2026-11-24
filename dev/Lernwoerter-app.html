@@ -137,6 +137,10 @@
  .btn-warning { background: #f59e0b; color: white; }
  .manage-header { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin: 4px 0 0; }
  .manage-header h2 { margin: 0; color: #1e293b; font-size: 17px; font-weight: 800; }
+ .word-search { display: flex; flex-direction: column; gap: 5px; margin-top: 12px; }
+ .word-search label { color: #64748b; font-size: 12px; font-weight: 700; }
+ .word-search input { width: 100%; min-height: 44px; padding: 10px 12px; border: 1px solid #cbd5e1; border-radius: 12px; background: white; color: #1e293b; outline: none; }
+ .word-search input:focus { border-color: #6366f1; }
  .word-group-actions { display: flex; justify-content: flex-end; gap: 8px; margin-top: 8px; }
  .word-group-actions .btn { min-height: 38px; padding: 7px 11px; border-radius: 11px; font-size: 12px; }
  #sort-select { min-height: 38px; padding: 7px 10px; border: 1px solid #e2e8f0; border-radius: 11px; background: white; color: #475569; font-size: 12px; }
@@ -353,6 +357,10 @@
       <option value="box">Nach Box</option>
      </select>
     </div>
+   </div>
+   <div class="word-search">
+    <label for="word-search">Wörter suchen</label>
+    <input type="search" id="word-search" placeholder="Wort, Artikel oder Plural eingeben..." autocomplete="off" oninput="renderWordList()">
    </div>
    <div class="word-group-actions" aria-label="Gruppensteuerung">
     <button class="btn btn-secondary" type="button" onclick="UIController.setWordGroupsCollapsed(true)">Alle zuklappen</button>
@@ -887,7 +895,7 @@ const LeitnerModule = (() => {
           return w.userdaten?.intensiv === true;
         }
         const box = w.userdaten?.box ?? 0;
-        return boxFilter === 'all' ? (box !== 6 && isDue(w)) : (box === boxFilter);
+        return boxFilter === 'all' ? (box > 0 && box < 6 && isDue(w)) : (box === boxFilter);
       });
 
     if (eligible.length === 0) return -1;
@@ -1813,13 +1821,26 @@ async function importWords(event) {
   function renderWordList() {
     const ul = document.getElementById('word-list');
     const sortBy = document.getElementById('sort-select').value;
+    const searchTerm = document.getElementById('word-search').value.trim().toLocaleLowerCase('de');
     const cleanForSort = str => (str || '').toLowerCase().replace(/^(der|die|das|ein|eine)\s+/i, '');
 
-    let sortedWords = [...state.words];
+    let sortedWords = state.words.filter(word => {
+      const searchableText = [
+        word.stammdaten?.wort,
+        word.stammdaten?.artikel,
+        word.stammdaten?.plural
+      ].filter(Boolean).join(' ').toLocaleLowerCase('de');
+      return searchableText.includes(searchTerm);
+    });
     if (sortBy === 'alpha') {
       sortedWords.sort((a, b) => cleanForSort(a.stammdaten.wort).localeCompare(cleanForSort(b.stammdaten.wort), 'de'));
     } else if (sortBy === 'box') {
       sortedWords.sort((a, b) => (a.userdaten?.box ?? 0) - (b.userdaten?.box ?? 0));
+    }
+
+    if (sortedWords.length === 0) {
+      ul.innerHTML = `<li class="data-status">${searchTerm ? 'Keine passenden Wörter gefunden.' : 'Noch keine Wörter vorhanden.'}</li>`;
+      return;
     }
 
     const escapeHtml = value => String(value).replace(/[&<>"']/g, character => ({
