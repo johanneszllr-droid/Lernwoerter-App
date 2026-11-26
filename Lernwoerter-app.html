@@ -1308,6 +1308,39 @@ const UIController = (() => {
     }
   }
 
+  // Sorgt dafür, dass jedes Wort eine eindeutige Zahl als ID hat und die Box eine gültige Zahl (0–6) ist.
+  // Fehlende, doppelte oder ungültige IDs (z. B. aus importierten Dateien) werden durch neue ersetzt.
+  // Gibt true zurück, wenn etwas repariert wurde.
+  function normalizeWords(words) {
+    let changed = false;
+    const usedIds = new Set();
+    const numericIds = words.map(word => Number(word?.id)).filter(Number.isSafeInteger);
+    let nextId = Math.max(Date.now(), ...numericIds) + 1;
+
+    words.forEach(word => {
+      let id = word.id;
+      if (typeof id === 'string' && /^\d+$/.test(id.trim())) id = Number(id.trim());
+      if (!Number.isSafeInteger(id) || usedIds.has(id)) id = nextId++;
+      if (id !== word.id) {
+        word.id = id;
+        changed = true;
+      }
+      usedIds.add(id);
+
+      if (!word.userdaten || typeof word.userdaten !== 'object') {
+        word.userdaten = { box: 0, letztePruefung: null, fehlerZaehler: 0, intensiv: false };
+        changed = true;
+      }
+      const box = Number(word.userdaten.box);
+      const validBox = Number.isInteger(box) && box >= 0 && box <= 6 ? box : 0;
+      if (validBox !== word.userdaten.box) {
+        word.userdaten.box = validBox;
+        changed = true;
+      }
+    });
+    return changed;
+  }
+
   // Initialisierung beim Start
   async function init() {
     void loadBuildInfo();
@@ -1318,6 +1351,8 @@ const UIController = (() => {
     state.words.forEach(word => {
       if (word.stammdaten) word.stammdaten.beispielsatz ??= '';
     });
+    // Bereits gespeicherte, fehlerhafte Daten (z. B. doppelte IDs aus früheren Importen) einmalig reparieren
+    if (normalizeWords(state.words)) await StorageModule.save(state.words);
     serverMode = result.isServer;
     document.getElementById('clear-local-dictionary-button').disabled = serverMode;
     statusEl.innerText = result.isServer 
@@ -2345,6 +2380,7 @@ async function importWords(event) {
         });
       }
 
+      normalizeWords(state.words);
       closeImportModal();
       await saveAndRefresh();
       renderWordList();
