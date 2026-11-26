@@ -566,6 +566,25 @@ const StorageModule = (() => {
       }
     }));
   }
+  // Erst die Liste neben der App suchen; fehlt sie (z. B. auf einem eigenen Server),
+  // die veröffentlichte Liste von GitHub Pages (Branch main) verwenden.
+  const ONLINE_WORDLIST_URL = 'https://johanneszllr-droid.github.io/Lernwoerter-App/lernwoerter-blank.json';
+
+  async function fetchBlankWordList() {
+    const sources = ['./lernwoerter-blank.json', ONLINE_WORDLIST_URL];
+    const errors = [];
+    for (const url of sources) {
+      try {
+        const response = await fetch(url, { cache: 'no-cache' });
+        if (response.ok) return await response.text();
+        errors.push(`${url}: HTTP ${response.status}`);
+      } catch (err) {
+        errors.push(`${url}: ${err.message}`);
+      }
+    }
+    throw new Error('Wörterliste konnte weder lokal noch online geladen werden.\n' + errors.join('\n'));
+  }
+
   // Lädt Daten und gibt { words, isServer } zurück
   async function load() {
     try {
@@ -584,6 +603,23 @@ const StorageModule = (() => {
         return { words: JSON.parse(stored), isServer: false };
       }
     } catch (e) {}
+
+    // Erster Start: einmalig die aktuelle Wörterliste laden (Lernstand beginnt bei null)
+    try {
+      const words = parseJsonText(await fetchBlankWordList())
+        .filter(item => item && typeof item === 'object' && item.stammdaten?.wort)
+        .map(item => ({
+          id: item.id,
+          stammdaten: { ...item.stammdaten },
+          userdaten: { box: 0, letztePruefung: null, fehlerZaehler: 0, intensiv: false }
+        }));
+      if (words.length > 0) {
+        await save(words);
+        return { words, isServer: false };
+      }
+    } catch (e) {
+      console.warn('Start-Wörterliste konnte nicht geladen werden:', e);
+    }
 
     // Fallback: Standardwörter initial speichern und zurückgeben
     await save(DEFAULT_WORDS);
@@ -657,7 +693,7 @@ const StorageModule = (() => {
   }
 
   // Öffentliche Schnittstelle des Moduls
-  return { load, save, exportAsJson, parseJsonFile, parseJsonText };
+  return { load, save, exportAsJson, parseJsonFile, parseJsonText, fetchBlankWordList };
 })();
 
 // ============================================================================
@@ -1391,6 +1427,11 @@ const UIController = (() => {
     document.getElementById('storage-description').textContent = result.isServer
       ? 'Deine Wörter und Lernfortschritte werden auf dem Server gespeichert.'
       : 'Deine Wörter und Lernfortschritte werden lokal in diesem Browser gespeichert.';
+
+    // Box 1 aus dem Wörterspeicher auffüllen, z. B. beim ersten Start mit frisch geladener Liste
+    if (LeitnerModule.refillBoxOneFromStorage(state.words).length > 0) {
+      await StorageModule.save(state.words);
+    }
 
     updateSoundControls(AudioModule.isEnabled());
     updateStats();
@@ -2298,28 +2339,9 @@ async function importWords(event) {
     }
   }
 
-  // Erst die Liste neben der App suchen; fehlt sie (z. B. auf einem eigenen Server),
-  // die veröffentlichte Liste von GitHub Pages (Branch main) verwenden.
-  const ONLINE_WORDLIST_URL = 'https://johanneszllr-droid.github.io/Lernwoerter-App/lernwoerter-blank.json';
-
-  async function fetchBlankWordList() {
-    const sources = ['./lernwoerter-blank.json', ONLINE_WORDLIST_URL];
-    const errors = [];
-    for (const url of sources) {
-      try {
-        const response = await fetch(url, { cache: 'no-cache' });
-        if (response.ok) return await response.text();
-        errors.push(`${url}: HTTP ${response.status}`);
-      } catch (err) {
-        errors.push(`${url}: ${err.message}`);
-      }
-    }
-    throw new Error('Wörterliste konnte weder lokal noch online geladen werden.\n' + errors.join('\n'));
-  }
-
   async function importBlankWordsFromWeb() {
     try {
-      const parsed = StorageModule.parseJsonText(await fetchBlankWordList());
+      const parsed = StorageModule.parseJsonText(await StorageModule.fetchBlankWordList());
       showImportDialog(parsed, 'lernwoerter-blank.json');
     } catch (err) {
       alert('Fehler beim Web-Import: ' + err.message);
