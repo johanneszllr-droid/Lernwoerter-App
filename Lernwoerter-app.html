@@ -502,7 +502,8 @@
    <article class="data-status legal-notice" id="legal-notice">
     <h3>Urheberrecht &amp; Entwickler:</h3>
     <p>Entwickelt von Johannes Zöllner.</p>
-    <p><strong>Version:</strong> <span id="app-version">Wird geladen</span> · <strong>Commit-Name:</strong> <span id="app-commit-name">Noch nicht veröffentlicht</span></p>
+    <p><strong>Umgebung:</strong> <span id="app-environment">Wird ermittelt</span></p>
+    <p><strong>Version:</strong> <span id="app-version">Wird geladen</span> · <strong>Commit-Name:</strong> <span id="app-commit-name">Noch nicht veröffentlicht</span><span id="app-built-at-wrap" hidden> · <strong>Stand:</strong> <span id="app-built-at"></span></span></p>
     <h3>Nutzungsbedingungen &amp; Lizenz:</h3>
     <p>Die Lernwörter-App ist ein kostenloses, nicht-kommerzielles Lernprojekt. Die Nutzung ist ausschließlich für private und bildungsbezogene Zwecke gestattet. Jegliche kommerzielle Nutzung, der gewerbliche Weiterverkauf oder die ungenehmigte Weiterverbreitung des Codes oder veränderter Versionen sind untersagt.</p>
     <h3>Haftungsausschluss (Disclaimer):</h3>
@@ -1294,9 +1295,24 @@ const UIController = (() => {
   let menuCloseTimer;
   let celebrationTimeout;
 
+  // Erkennt an der eigenen Adresse, welche Fassung der App gerade läuft.
+  function detectEnvironment() {
+    const { protocol, hostname, pathname } = window.location;
+    if (protocol === 'file:' || hostname === 'localhost' || hostname === '127.0.0.1' || hostname === '') {
+      return '💻 Lokal auf diesem Rechner';
+    }
+    if (hostname.endsWith('github.io')) {
+      return /\/Lernwoerter-App\/dev\//.test(pathname)
+        ? '🧪 Testversion (dev)'
+        : '✅ Veröffentlichte Version (main)';
+    }
+    return '🏠 Eigener Server';
+  }
+
   async function loadBuildInfo() {
     const versionElement = document.getElementById('app-version');
     const commitNameElement = document.getElementById('app-commit-name');
+    document.getElementById('app-environment').textContent = detectEnvironment();
     versionElement.textContent = document.querySelector('meta[name="app-version"]')?.content || 'Nicht festgelegt';
     try {
       const response = await fetch('./build-info.json', { cache: 'no-store' });
@@ -1308,6 +1324,11 @@ const UIController = (() => {
         throw new Error('Die Build-Informationen haben ein ungültiges Format.');
       }
       commitNameElement.textContent = buildInfo.commitName;
+      const builtAt = new Date(buildInfo.builtAt);
+      if (!Number.isNaN(builtAt.getTime())) {
+        document.getElementById('app-built-at').textContent = builtAt.toLocaleString('de-DE', { dateStyle: 'medium', timeStyle: 'short' });
+        document.getElementById('app-built-at-wrap').hidden = false;
+      }
     } catch (error) {
       commitNameElement.textContent = 'Noch nicht veröffentlicht';
       console.warn('Build-Informationen sind nicht verfügbar:', error);
