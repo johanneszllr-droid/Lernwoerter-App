@@ -1,0 +1,17 @@
+{
+  "name": "Lernwörter-App",
+  "short_name": "Lernwörter",
+  "start_url": "./Lernwoerter-app.html",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#f8fafc",
+  "theme_color": "#f8fafc",
+  "icons": [
+    {
+      "src": "./Momo_Maus.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
