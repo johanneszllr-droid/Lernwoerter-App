@@ -5,7 +5,7 @@
  <meta name="viewport" content="width=device-width, initial-scale=1.0">
  <title>Lernwörter-App</title>
  <!-- Manuelle Versionsnummer, wird unter „Settings“ angezeigt. -->
- <meta name="app-version" content="1.4.9">
+ <meta name="app-version" content="1.4.10">
  <meta name="theme-color" content="#f8fafc">
  <link rel="icon" type="image/png" href="./Momo_Maus.png">
  <link rel="apple-touch-icon" href="./Momo_Maus.png">
@@ -88,7 +88,11 @@
  .word-display.digital-result { font-size: clamp(2rem,7vw,3.4rem); color: #334155; letter-spacing: .04em; }
  .word-display.digital-result.richtig { color: #059669; }
  .digital-correct-message { color: #059669; font-size: 19px; font-weight: 800; text-align: center; }
- .example-sentence { width: 100%; padding: 12px 15px; border: 1px solid #c7d2fe; border-radius: 15px; background: #eef2ff; color: #334155; text-align: left; }
+ .example-sentence { position: relative; width: 100%; padding: 12px 42px 12px 15px; border: 1px solid #c7d2fe; border-radius: 15px; background: #eef2ff; color: #334155; text-align: left; }
+ .example-sentence[role="button"] { cursor: pointer; }
+ .example-sentence[role="button"]::after { content: "🔊"; position: absolute; top: 12px; right: 14px; }
+ .example-sentence[role="button"]:hover { border-color: #a5b4fc; background: #e0e7ff; }
+ .example-sentence[role="button"]:focus-visible { outline: 3px solid #a5b4fc; outline-offset: 2px; }
  .example-sentence[hidden] { display: none; }
  .example-sentence-text { margin: 0; font-size: 15px; line-height: 1.5; }
  .example-word-highlight { border-radius: 4px; background: #dcfce7; color: #047857; font-weight: 800; }
@@ -351,7 +355,7 @@
      <div class="emoji-badge"><span id="word-emoji" class="word-icon">📝</span></div>
      <div class="learning-content">
       <div id="word-target" class="word-display" style="display: none;"></div>
-      <div id="example-sentence" class="example-sentence" hidden>
+      <div id="example-sentence" class="example-sentence" hidden onclick="speakExampleSentence()" onkeydown="handleExampleSentenceKey(event)">
        <p id="example-sentence-text" class="example-sentence-text"></p>
       </div>
       <div id="digital-input-area" style="display: none;">
@@ -1562,6 +1566,9 @@ const UIController = (() => {
   function updateExampleSentence(word, revealed = false) {
     const container = document.getElementById('example-sentence');
     const text = document.getElementById('example-sentence-text');
+    container.removeAttribute('role');
+    container.removeAttribute('tabindex');
+    container.removeAttribute('aria-label');
     if (!word) {
       container.hidden = true;
       text.textContent = '';
@@ -1575,10 +1582,34 @@ const UIController = (() => {
     const sentence = String(word.stammdaten.beispielsatz).trim();
     if (revealed) {
       renderRevealedExampleSentence(text, word, sentence);
+      container.setAttribute('role', 'button');
+      container.tabIndex = 0;
+      container.setAttribute('aria-label', 'Beispielsatz vorlesen');
       return;
     }
-    text.textContent = maskExampleSentence(word) ||
-      'Dieser Satz wird ausgeblendet, weil das Lernwort darin nicht sicher erkannt wurde.';
+    const maskedSentence = maskExampleSentence(word);
+    if (!maskedSentence) {
+      text.textContent = 'Dieser Satz wird ausgeblendet, weil das Lernwort darin nicht sicher erkannt wurde.';
+      return;
+    }
+    text.textContent = maskedSentence;
+    container.setAttribute('role', 'button');
+    container.tabIndex = 0;
+    container.setAttribute('aria-label', 'Beispielsatz vorlesen');
+  }
+
+  function speakExampleSentence() {
+    const container = document.getElementById('example-sentence');
+    if (container.getAttribute('role') !== 'button') return;
+    const visibleSentence = document.getElementById('example-sentence-text').textContent.trim();
+    if (!visibleSentence) return;
+    speakWord(visibleSentence.replace(/_+/g, '…'));
+  }
+
+  function handleExampleSentenceKey(event) {
+    if (event.key !== 'Enter' && event.key !== ' ') return;
+    event.preventDefault();
+    speakExampleSentence();
   }
 
   function nextWord(autoSpeak = true) {
@@ -2452,6 +2483,8 @@ async function importWords(event) {
     toggleBoxFilter,
     setDailyGoal,
     speakCurrentWord,
+    speakExampleSentence,
+    handleExampleSentenceKey,
     peekWord,
     revealWord,
     handleInputKey,
@@ -2490,6 +2523,8 @@ window.showTab = (t) => UIController.showTab(t);
 window.setMode = (m) => UIController.setMode(m);
 window.toggleBoxFilter = (b, e) => UIController.toggleBoxFilter(b, e);
 window.speakCurrentWord = () => UIController.speakCurrentWord();
+window.speakExampleSentence = () => UIController.speakExampleSentence();
+window.handleExampleSentenceKey = (e) => UIController.handleExampleSentenceKey(e);
 window.peekWord = () => UIController.peekWord();
 window.revealWord = () => UIController.revealWord();
 window.handleInputKey = (e) => UIController.handleInputKey(e);
