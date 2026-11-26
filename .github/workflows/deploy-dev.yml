@@ -30,7 +30,7 @@ jobs:
           rm -rf main-repo/dev
           mkdir -p main-repo/dev
           cp -r dev-repo/. main-repo/dev/
-          rm -rf main-repo/dev/.git main-repo/dev/.github
+          rm -rf main-repo/dev/.git main-repo/dev/.github main-repo/dev/dev
 
       - name: Generate build metadata
         run: |
