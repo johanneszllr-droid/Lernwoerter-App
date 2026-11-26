@@ -5,7 +5,7 @@
  <meta name="viewport" content="width=device-width, initial-scale=1.0">
  <title>Lernwörter-App</title>
  <!-- Manuelle Versionsnummer, wird unter „Settings“ angezeigt. -->
- <meta name="app-version" content="1.4.8">
+ <meta name="app-version" content="1.4.9">
  <meta name="theme-color" content="#f8fafc">
  <link rel="icon" type="image/png" href="./Momo_Maus.png">
  <link rel="apple-touch-icon" href="./Momo_Maus.png">
@@ -614,7 +614,7 @@ const StorageModule = (() => {
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
-    a.download = `Lernwörter-Export-${new Date().toISOString().slice(0, 10)}.json`;
+    a.download = `Lernwoerter-Export-${new Date().toISOString().slice(0, 10)}.json`;
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
@@ -2051,7 +2051,7 @@ async function importWords(event) {
     state.words = resetWords;
     updateStats();
     renderWordList();
-    nextWord();
+    nextWord(false);
   }
 
   async function clearLocalDictionary() {
