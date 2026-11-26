@@ -1460,13 +1460,19 @@ const UIController = (() => {
     nextWord();
   }
 
-  function speakWord(text) {
+  // Liest einen oder mehrere Texte nacheinander vor (z. B. erst das Wort, dann den Beispielsatz)
+  function speakWord(...texts) {
     if ('speechSynthesis' in window) {
       window.speechSynthesis.cancel();
-      const utterance = new SpeechSynthesisUtterance(text);
-      utterance.lang = 'de-DE';
-      utterance.rate = 0.85;
-      window.speechSynthesis.speak(utterance);
+      texts
+        .map(text => String(text || '').trim())
+        .filter(Boolean)
+        .forEach(text => {
+          const utterance = new SpeechSynthesisUtterance(text);
+          utterance.lang = 'de-DE';
+          utterance.rate = 0.85;
+          window.speechSynthesis.speak(utterance);
+        });
     }
   }
 
@@ -1474,6 +1480,13 @@ const UIController = (() => {
     if (state.currentWordIndex !== -1 && state.words[state.currentWordIndex]) {
       speakWord(state.words[state.currentWordIndex].stammdaten.wort);
     }
+  }
+
+  // Beim ersten Anzeigen einer Karte: erst das Wort, danach den vollständigen Beispielsatz vorlesen
+  function speakCurrentWordWithSentence() {
+    const current = state.words[state.currentWordIndex];
+    if (state.currentWordIndex === -1 || !current) return;
+    speakWord(current.stammdaten.wort, current.stammdaten.beispielsatz);
   }
 
   function updateCardMeta(word) {
@@ -1604,9 +1617,11 @@ const UIController = (() => {
   function speakExampleSentence() {
     const container = document.getElementById('example-sentence');
     if (container.getAttribute('role') !== 'button') return;
-    const visibleSentence = document.getElementById('example-sentence-text').textContent.trim();
-    if (!visibleSentence) return;
-    speakWord(visibleSentence.replace(/_+/g, '…'));
+    // Immer den vollständigen Satz vorlesen, auch wenn das Lernwort im Text ausgeblendet ist
+    const current = state.words[state.currentWordIndex];
+    const fullSentence = String(current?.stammdaten?.beispielsatz || '').trim();
+    if (!fullSentence) return;
+    speakWord(fullSentence);
   }
 
   function handleExampleSentenceKey(event) {
@@ -1715,7 +1730,7 @@ const UIController = (() => {
       inputField.focus();
     }
 
-    if (autoSpeak) speakTimeout = setTimeout(speakCurrentWord, 300);
+    if (autoSpeak) speakTimeout = setTimeout(speakCurrentWordWithSentence, 300);
   }
 
 function peekWord() {
