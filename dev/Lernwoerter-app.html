@@ -78,8 +78,6 @@
  .box-info-group { display: flex; align-items: center; gap: 12px; min-width: 0; }
  .box-label { display: block; margin-bottom: 5px; color: #94a3b8; font-size: 10px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; }
  #box-info { color: #334155 !important; font-size: 13px; font-weight: 800; white-space: nowrap; }
- .card-intensiv-btn { display: inline-flex; align-items: center; gap: 6px; min-height: 36px; padding: 7px 11px; border: 1px solid #e2e8f0; border-radius: 12px; background: #f8fafc; color: #64748b; font-size: 12px; font-weight: 800; cursor: pointer; }
- .card-intensiv-btn.active { border-color: #fcd34d; background: #fef3c7; color: #92400e; }
  .learning-card-main { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 16px; padding: 28px 0; text-align: center; }
  .emoji-badge { width: 160px; height: 160px; display: grid; place-items: center; border: 1px solid #e2e8f0; border-radius: 28px; background: linear-gradient(180deg,#f8fafc,#f1f5f9); box-shadow: inset 0 2px 8px rgba(15,23,42,.03); }
  .word-icon { font-size: 121px; line-height: 1; user-select: none; }
@@ -218,7 +216,7 @@
  .data-card { display: flex; flex-direction: column; justify-content: space-between; gap: 16px; padding: 20px; border: 1px solid #e2e8f0; border-radius: 24px; background: white; box-shadow: 0 4px 20px -2px rgba(15,23,42,.05); }
  .settings-card { margin-bottom: 14px; }
  .settings-controls { --setting-control-width: 64px; display: grid; width: 100%; gap: 0; }
- .setting-row { display: grid; grid-template-columns: minmax(0,1fr) minmax(120px,220px); align-items: center; gap: 12px; width: 100%; }
+ .setting-row { display: grid; grid-template-columns: minmax(0,1fr) auto; align-items: center; gap: 12px; width: 100%; }
  .setting-copy { display: flex; grid-column: 1; flex-direction: column; gap: 4px; }
  .setting-label { color: #334155; font-size: 14px; font-weight: 800; }
  .setting-description { margin: 0; color: #64748b; font-size: 12px; line-height: 1.45; }
@@ -256,7 +254,6 @@
   .learning-card { min-height: 420px; padding: 16px 14px; border-radius: 23px; }
   .learning-card-header { padding-bottom: 12px; }
   .box-info-group { gap: 7px; }
-  .card-intensiv-btn { padding: 6px 8px; font-size: 11px; }
   .learning-card-main { padding: 22px 0; }
   .emoji-badge { width: 136px; height: 136px; border-radius: 23px; }
   .word-icon { font-size: 106px; }
@@ -350,9 +347,6 @@
      </div>
      <div class="learning-card-controls">
       <span class="status-icon" id="status-icon" aria-hidden="true"></span>
-      <button class="card-intensiv-btn" id="card-intensiv-btn" aria-pressed="false" onclick="UIController.toggleCurrentWordIntensiv()">
-       <span id="cardStarIcon">☆</span><span>Intensiv</span>
-      </button>
      </div>
     </header>
 
@@ -1632,16 +1626,6 @@ const UIController = (() => {
     speakWord(current.stammdaten.wort, current.stammdaten.beispielsatz);
   }
 
-  function updateCardMeta(word) {
-    const currentBox = word ? (word.userdaten?.box ?? 0) : 0;
-    const intensiveButton = document.getElementById('card-intensiv-btn');
-    const isIntensive = word?.userdaten?.intensiv === true;
-    intensiveButton.classList.toggle('active', isIntensive);
-    intensiveButton.setAttribute('aria-pressed', String(isIntensive));
-    document.getElementById('cardStarIcon').textContent = isIntensive ? '⭐' : '☆';
-    intensiveButton.disabled = !word;
-  }
-
   function pickNextWordIndex() {
     if (state.selectedBoxFilter !== 'intensiv') {
       return LeitnerModule.pickNextIndex(state.words, state.selectedBoxFilter);
@@ -1817,7 +1801,6 @@ const UIController = (() => {
       document.getElementById('action-area').style.display = 'none';
       document.getElementById('digital-feedback').style.display = 'none';
       beforeBar.style.display = 'none';
-      updateCardMeta(null);
       return;
     }
 
@@ -1844,7 +1827,6 @@ const UIController = (() => {
       document.getElementById('action-area').style.display = 'none';
       document.getElementById('digital-feedback').style.display = 'none';
       beforeBar.style.display = 'none';
-      updateCardMeta(null);
       return;
     }
 
@@ -1858,7 +1840,6 @@ const UIController = (() => {
     document.getElementById('primary-action-text').textContent = state.learningMode === 'paper' ? 'Lösung anzeigen' : 'Prüfen';
     const primaryActionIcon = document.getElementById('primary-action-icon');
     primaryActionIcon.innerHTML = '<img class="action-image" src="./momo-ergebnis.png" alt="">';
-    updateCardMeta(current);
 
     targetEl.className = 'word-display';
     targetEl.style.display = 'none';
@@ -2296,13 +2277,28 @@ async function importWords(event) {
     }
   }
 
+  // Erst die Liste neben der App suchen; fehlt sie (z. B. auf einem eigenen Server),
+  // die veröffentlichte Liste von GitHub Pages (Branch main) verwenden.
+  const ONLINE_WORDLIST_URL = 'https://johanneszllr-droid.github.io/Lernwoerter-App/lernwoerter-blank.json';
+
+  async function fetchBlankWordList() {
+    const sources = ['./lernwoerter-blank.json', ONLINE_WORDLIST_URL];
+    const errors = [];
+    for (const url of sources) {
+      try {
+        const response = await fetch(url, { cache: 'no-cache' });
+        if (response.ok) return await response.text();
+        errors.push(`${url}: HTTP ${response.status}`);
+      } catch (err) {
+        errors.push(`${url}: ${err.message}`);
+      }
+    }
+    throw new Error('Wörterliste konnte weder lokal noch online geladen werden.\n' + errors.join('\n'));
+  }
+
   async function importBlankWordsFromWeb() {
     try {
-      const response = await fetch('./lernwoerter-blank.json');
-      if (!response.ok) {
-        throw new Error(`Datei konnte nicht geladen werden (HTTP ${response.status}).`);
-      }
-      const parsed = StorageModule.parseJsonText(await response.text());
+      const parsed = StorageModule.parseJsonText(await fetchBlankWordList());
       showImportDialog(parsed, 'lernwoerter-blank.json');
     } catch (err) {
       alert('Fehler beim Web-Import: ' + err.message);
@@ -2463,13 +2459,6 @@ async function importWords(event) {
     word.userdaten.intensiv = !word.userdaten.intensiv;
     await saveAndRefresh();
     renderWordList();
-    if (state.words[state.currentWordIndex]?.id === id) updateCardMeta(word);
-  }
-
-  async function toggleCurrentWordIntensiv() {
-    const current = state.words[state.currentWordIndex];
-    if (!current) return;
-    await toggleIntensiv(current.id);
   }
 
   function setWordGroupsCollapsed(collapsed) {
@@ -2746,7 +2735,6 @@ async function importWords(event) {
     handlePrimaryAction,
     toggleNavigationMenu,
     closeNavigationMenu,
-    toggleCurrentWordIntensiv,
     continueLearning,
     finishForToday,
     openGuide,
