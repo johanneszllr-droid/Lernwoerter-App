@@ -1004,10 +1004,13 @@ const LeitnerModule = (() => {
 
     const weightedPool = [];
     eligible.forEach(({ w, idx }) => {
-      const weight = 6 - (w.userdaten?.box ?? 0);
+      // Gewichtung: Wörter aus niedrigen Boxen kommen häufiger dran (Box 1 = 5x, Box 5 = 1x).
+      // Jedes Wort zählt mindestens 1x, damit auch Schatztruhen-Wörter (Box 6) ausgewählt werden können.
+      const weight = Math.max(1, 6 - (Number(w.userdaten?.box) || 0));
       for (let i = 0; i < weight; i++) weightedPool.push(idx);
     });
 
+    if (weightedPool.length === 0) return -1;
     return weightedPool[Math.floor(Math.random() * weightedPool.length)];
   }
 
