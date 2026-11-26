@@ -25,6 +25,7 @@ Speicherung: Alle Wörter und Lernstände werden im localStorage des jeweiligen 
 Über den Tab „Daten & Info“ lässt sich der gesamte Bestand jederzeit als JSON-Datei exportieren und auf anderen Geräten wieder importieren.
 Der Web-Import lädt `lernwoerter-blank.json` aus demselben Verzeichnis wie die App; die Datei muss dort bereitgestellt werden. Lernstände lassen sich separat zurücksetzen. Im Server-Modus wirkt sich das auf alle verbundenen Geräte aus. Das Leeren des Wörterbuchs ist nur im Lokal-Modus möglich und wird mehrfach bestätigt.
 Im Tab „Wörterbuch“ filtert das Suchfeld live nach Wort, Artikel und Plural; Sortierung und Gruppierung bleiben dabei erhalten.
+Im Wörterbuch können Wörter aus Box 1 zurück in den Wörterspeicher verschoben werden. Wörter aus Box 0 lassen sich dort direkt an die Spitze der Speicherreihenfolge setzen. Der Edit-Modus bietet unter „＋ Mehr“ zusätzliche Stammdatenfelder einschließlich Beispielsatz und Besonderheiten.
 # Lernlogik (Leitner-Karteikasten)
 Das System basiert auf dem Prinzip der verteilten Wiederholung (Spaced Repetition). Neue Wörter liegen zunächst im Wörterspeicher (Box 0). Die Lernboxen funktionieren so:
 Wörterspeicher (Box 0): Warteschlange für neue Wörter; richtige Antworten verschieben ein Wort noch nicht in Box 1.
@@ -43,6 +44,7 @@ Box 1: Aus dem Wörterspeicher werden Wörter nachgerückt, solange weniger als 
 Richtige Antwort: Das Wort rückt ab Box 1 eine Box weiter (Ausnahme: Wurde zuvor die „1s Hilfe“ genutzt, bleibt es in seiner aktuellen Box). Wörter im Wörterspeicher bleiben dort, bis ein Platz in Box 1 frei wird.
 Falsche Antwort: Wörter aus Box 2 oder höher fallen zurück in Box 1. Wörter in Box 1 beziehungsweise im Wörterspeicher bleiben in ihrer aktuellen Box.
 Bei der digitalen Eingabe wird ein fehlender führender Artikel (der, die, das, ein, eine) akzeptiert; ein falscher Artikel oder eine falsche Schreibweise bleibt ein Fehler.
+Ein hinterlegter Beispielsatz wird beim Lernen angezeigt; erkannte Formen des Lernworts (einschließlich Artikel und Plural) werden durch „_____“ ersetzt. Wenn kein Beispielsatz eingetragen ist oder sich das Wort darin nicht sicher finden lässt, wird der Satz nicht unmaskiert angezeigt.
 
 Korrekte Antworten aus Box 5 werden in der Schatztruhe (Box 6) abgelegt.
 
