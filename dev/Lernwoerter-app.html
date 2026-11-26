@@ -5,7 +5,7 @@
  <meta name="viewport" content="width=device-width, initial-scale=1.0">
  <title>Lernwörter-App</title>
  <!-- Manuelle Versionsnummer, wird unter „Settings“ angezeigt. -->
- <meta name="app-version" content="1.4.7">
+ <meta name="app-version" content="1.4.8">
  <meta name="theme-color" content="#f8fafc">
  <link rel="icon" type="image/png" href="./Momo_Maus.png">
  <link rel="apple-touch-icon" href="./Momo_Maus.png">
@@ -91,6 +91,7 @@
  .example-sentence { width: 100%; padding: 12px 15px; border: 1px solid #c7d2fe; border-radius: 15px; background: #eef2ff; color: #334155; text-align: left; }
  .example-sentence[hidden] { display: none; }
  .example-sentence-text { margin: 0; font-size: 15px; line-height: 1.5; }
+ .example-word-highlight { border-radius: 4px; background: #dcfce7; color: #047857; font-weight: 800; }
  .fehler { color: #ea580c; border-bottom: 4px solid #fb923c; }
  #digital-input-area { width: 100%; margin: 0 !important; }
  #user-input { width: 100%; min-height: 56px; padding: 13px 16px; border: 2px solid #e2e8f0; border-radius: 16px; outline: none; background: #f8fafc; color: #1e293b; font-size: 19px; font-weight: 700; text-align: center; }
@@ -1503,10 +1504,9 @@ const UIController = (() => {
     return value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
   }
 
-  function maskExampleSentence(word) {
-    const sentence = String(word.stammdaten?.beispielsatz || '').trim();
+  function getExampleWordPattern(word) {
     const wordText = String(word.stammdaten?.wort || '').trim();
-    if (!sentence || !wordText) return null;
+    if (!wordText) return null;
 
     const lemma = wordText.replace(/^(der|die|das|ein|eine)\s+/i, '');
     const forms = [...new Set([
@@ -1515,10 +1515,19 @@ const UIController = (() => {
     ].map(form => String(form || '').trim()).filter(Boolean))]
       .sort((a, b) => b.length - a.length)
       .map(escapeRegExp);
-    const wordPattern = new RegExp(
+    if (forms.length === 0) return null;
+
+    return new RegExp(
       `(^|[^\\p{L}\\p{N}])(?:${forms.join('|')})(?=$|[^\\p{L}\\p{N}])`,
       'giu'
     );
+  }
+
+  function maskExampleSentence(word) {
+    const sentence = String(word.stammdaten?.beispielsatz || '').trim();
+    const wordPattern = getExampleWordPattern(word);
+    if (!sentence || !wordPattern) return null;
+
     let wasMasked = false;
     const maskedSentence = sentence.replace(wordPattern, (_match, prefix) => {
       wasMasked = true;
@@ -1527,7 +1536,30 @@ const UIController = (() => {
     return wasMasked ? maskedSentence : null;
   }
 
-  function updateExampleSentence(word) {
+  function renderRevealedExampleSentence(text, word, sentence) {
+    const wordPattern = getExampleWordPattern(word);
+    if (!wordPattern) {
+      text.textContent = sentence;
+      return;
+    }
+
+    text.replaceChildren();
+    let lastIndex = 0;
+    for (const match of sentence.matchAll(wordPattern)) {
+      const prefixLength = match[1].length;
+      const wordStart = match.index + prefixLength;
+      const wordEnd = match.index + match[0].length;
+      text.appendChild(document.createTextNode(sentence.slice(lastIndex, wordStart)));
+      const highlightedWord = document.createElement('span');
+      highlightedWord.className = 'example-word-highlight';
+      highlightedWord.textContent = sentence.slice(wordStart, wordEnd);
+      text.appendChild(highlightedWord);
+      lastIndex = wordEnd;
+    }
+    text.appendChild(document.createTextNode(sentence.slice(lastIndex)));
+  }
+
+  function updateExampleSentence(word, revealed = false) {
     const container = document.getElementById('example-sentence');
     const text = document.getElementById('example-sentence-text');
     if (!word) {
@@ -1538,6 +1570,11 @@ const UIController = (() => {
     container.hidden = false;
     if (!String(word.stammdaten?.beispielsatz || '').trim()) {
       text.textContent = 'Für dieses Wort ist noch kein Beispielsatz hinterlegt.';
+      return;
+    }
+    const sentence = String(word.stammdaten.beispielsatz).trim();
+    if (revealed) {
+      renderRevealedExampleSentence(text, word, sentence);
       return;
     }
     text.textContent = maskExampleSentence(word) ||
@@ -1676,6 +1713,7 @@ function revealWord() {
     const current = state.words[state.currentWordIndex];
     const targetWord = current.stammdaten.wort;
 
+    updateExampleSentence(current, true);
     targetEl.style.display = 'block';
     document.getElementById('action-area').style.display = 'none';
     const evalArea = document.getElementById('eval-area');
@@ -1736,6 +1774,7 @@ function revealWord() {
     document.getElementById('peek-button').style.display = 'none';
 
     const targetWord = state.words[state.currentWordIndex].stammdaten.wort;
+    updateExampleSentence(state.words[state.currentWordIndex], true);
     const wordWithoutArticle = targetWord.replace(/^(der|die|das|ein|eine)\s+/i, '');
     const isCorrect = userInput === targetWord || userInput === wordWithoutArticle;
     state.pendingIsCorrect = isCorrect;
