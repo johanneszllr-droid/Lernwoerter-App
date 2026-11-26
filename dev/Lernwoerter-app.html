@@ -867,6 +867,8 @@ const FreschModule = (() => {
         if (eingabe[i] !== ziel[i] && eingabe[i].toLowerCase() === ziel[i].toLowerCase()) {
           marks.add(i);
           if (i === 0) add(ziel[0] === ziel[0].toUpperCase() ? "<b>Großschreiben</b> (Nomen)" : "<b>Kleinschreiben</b>");
+          // Großbuchstabe am Wortanfang (z. B. nach einem Leerzeichen) ist derselbe Nomen-Hinweis – nicht doppelt melden
+          else if (ziel[i - 1] === " " && ziel[i] !== ziel[i].toLowerCase()) add("<b>Großschreiben</b> (Nomen)");
           else add(ziel[i] === ziel[i].toLowerCase() ? "Mitten im Wort <b>klein</b>" : "Hier <b>groß</b>");
         }
       }
@@ -1287,7 +1289,9 @@ const UIController = (() => {
     helpUsed: false,
     pendingImportData: null,
     intensiveRoundReviewedIds: new Set(),
-    lastIntensiveWordId: null
+    lastIntensiveWordId: null,
+    checkInProgress: false, // true, solange eine digitale Eingabe geprüft wird
+    cardToken: 0            // zählt bei jeder neuen Karte hoch, um verspätete Ergebnisse zu erkennen
   };
   const collapsedWordGroups = new Set();
   let serverMode = false;
@@ -1770,6 +1774,8 @@ const UIController = (() => {
   }
 
   function nextWord(autoSpeak = true) {
+    state.cardToken++;
+    state.checkInProgress = false;
     state.helpUsed = false;
     clearTimeout(peekTimeout);
     peekTimeout = null;
@@ -1995,14 +2001,32 @@ function revealWord() {
     const userInput = document.getElementById('user-input').value.trim();
     if (!userInput) return;
 
+    // Doppeltes Enter/Klicken verhindern, solange die Prüfung noch läuft
+    if (state.checkInProgress) return;
+    state.checkInProgress = true;
+    const cardToken = state.cardToken;
+
     clearTimeout(peekTimeout);
     peekTimeout = null;
     document.getElementById('peek-button').style.display = 'none';
 
     const targetWord = state.words[state.currentWordIndex].stammdaten.wort;
     updateExampleSentence(state.words[state.currentWordIndex], true);
-    const wordWithoutArticle = targetWord.replace(/^(der|die|das|ein|eine)\s+/i, '');
-    const isCorrect = userInput === targetWord || userInput === wordWithoutArticle;
+    // Artikel und Wort werden getrennt geprüft:
+    // - Der Artikel darf weggelassen werden. Wird er geschrieben, muss er stimmen.
+    // - Am Anfang großgeschrieben ("Das Geld") zählt er als richtig, wie am Satzanfang.
+    const articlePattern = /^(der|die|das|ein|eine)\s+/i;
+    const targetArticleMatch = targetWord.match(articlePattern);
+    const inputArticleMatch = userInput.match(articlePattern);
+    const targetArticle = targetArticleMatch ? targetArticleMatch[1] : '';
+    const inputArticle = inputArticleMatch ? inputArticleMatch[1] : '';
+    const wordWithoutArticle = targetArticleMatch ? targetWord.slice(targetArticleMatch[0].length) : targetWord;
+    const inputWithoutArticle = inputArticleMatch ? userInput.slice(inputArticleMatch[0].length) : userInput;
+    const capitalizedTargetArticle = targetArticle ? targetArticle[0].toUpperCase() + targetArticle.slice(1) : '';
+    const articleWrong = inputArticle !== '' &&
+      inputArticle !== targetArticle && inputArticle !== capitalizedTargetArticle;
+    const wordWrong = inputWithoutArticle !== wordWithoutArticle;
+    const isCorrect = !articleWrong && !wordWrong;
     state.pendingIsCorrect = isCorrect;
 
     const cardEl = document.getElementById('learning-card');
@@ -2029,28 +2053,51 @@ function revealWord() {
       cardEl.classList.add('wrong-bg');
       statusIcon.textContent = '❌';
 
-      // Hat das Kind ohne Artikel getippt, wird nur gegen das Wort ohne Artikel verglichen,
-      // damit der fehlende Artikel nicht als Fehler gewertet wird.
-      const articlePattern = /^(der|die|das|ein|eine)\s+/i;
-      const compareTarget = articlePattern.test(userInput) ? targetWord : wordWithoutArticle;
-      const articleOffset = targetWord.length - compareTarget.length;
+      const targetOffset = targetWord.length - wordWithoutArticle.length; // Länge von "das " in der Lösung
+      const inputOffset = userInput.length - inputWithoutArticle.length;  // Länge des getippten Artikels
+      const targetMarks = new Set();
+      const inputMarks = new Set();
+      const texte = [];
 
-      // 1. Das Hauptdisplay zeigt wie gewohnt die korrekte Lösung mit den Highlight-Markierungen
-      const { marks: analysisMarks, texte } = await FreschModule.analyze(compareTarget, userInput);
-      const targetMarks = new Set([...analysisMarks].map(index => index + articleOffset));
+      // a) Falscher Artikel: als Ganzes markieren und den richtigen Artikel nennen
+      if (articleWrong) {
+        for (let i = 0; i < targetArticle.length; i++) targetMarks.add(i);
+        for (let i = 0; i < inputArticle.length; i++) inputMarks.add(i);
+        texte.push(targetArticle
+          ? `Der Artikel heißt: <b>${escapeHtml(targetArticle)}</b> ${escapeHtml(wordWithoutArticle)}`
+          : 'Hier gehört <b>kein Artikel</b> davor');
+      }
+
+      // b) Das Wort selbst prüfen (ohne Artikel).
+      // Die Analyse kann auf Wiktionary warten; schlägt sie fehl, wird die Lösung ohne Hinweise gezeigt.
+      if (wordWrong) {
+        let analysis;
+        try {
+          analysis = await FreschModule.analyze(wordWithoutArticle, inputWithoutArticle);
+        } catch (error) {
+          console.warn('Fehleranalyse fehlgeschlagen:', error);
+          analysis = { marks: new Set(), texte: [] };
+        }
+        // Inzwischen eine andere Karte angezeigt (z. B. Modus oder Filter gewechselt)? Dann Ergebnis verwerfen.
+        if (cardToken !== state.cardToken) return;
+        analysis.marks.forEach(index => targetMarks.add(index + targetOffset));
+        getInputErrorMarks(inputWithoutArticle, wordWithoutArticle).forEach(index => inputMarks.add(index + inputOffset));
+        analysis.texte.slice(0, 2).forEach(text => texte.push(text));
+      }
+
+      // 1. Das Hauptdisplay zeigt die korrekte Lösung mit den Highlight-Markierungen
       FreschModule.getDoubleConsonantMarks(targetWord).forEach(index => targetMarks.add(index));
       targetEl.className = 'word-display digital-result';
       renderMarkedWord(targetEl, targetWord, targetMarks);
 
-      // 2. Der Schüler-Tipp wird zusätzlich darunter dezent mit unterstrichenen Fehlern eingeblendet
-      const inputMarks = getInputErrorMarks(userInput, compareTarget);
+      // 2. Die Eingabe des Kindes wird darunter mit unterstrichenen Fehlern eingeblendet
       const highlightedInput = [...userInput].map((c, i) =>
         inputMarks.has(i) ? `<span style="border-bottom: 2px solid #ff3b30; color: #ff3b30;">${escapeHtml(c)}</span>` : escapeHtml(c)
       ).join('');
 
       feedback.innerHTML = `
         <div style="font-size: 0.95rem; color: #86868b; margin-bottom: 8px;">deine Eingabe: <span style="font-family: monospace; letter-spacing: 1px;">${highlightedInput}</span></div>
-        ${texte.slice(0, 2).map(t => `<div>${t}</div>`).join('')}
+        ${texte.map(t => `<div>${t}</div>`).join('')}
       `;
     }
 
@@ -2062,9 +2109,11 @@ function revealWord() {
     primaryButton.classList.add('digital-next');
     primaryButton.style.display = 'flex';
     primaryButton.focus();
+    state.checkInProgress = false; // Prüfung abgeschlossen, jetzt darf "Weiter" gedrückt werden
   }
 
   async function proceedFromDigital() {
+    if (state.checkInProgress) return; // Ergebnis wird noch berechnet
     document.getElementById('digital-next-area').style.display = 'none';
     await answer(state.pendingIsCorrect);
   }
