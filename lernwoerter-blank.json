@@ -4824,5 +4824,347 @@
       "fehlerZaehler": 0,
       "intensiv": false
     }
+  },
+  {
+    "id": 1795460510791,
+    "stammdaten": {
+      "wort": "der Igel",
+      "beispielsatz": "Im Herbst sucht der Igel unter dem bunten Laub nach Futter.",
+      "artikel": "der",
+      "wortart": "Substantiv",
+      "plural": "Igel",
+      "emoji": "🦔",
+      "besonderheiten": []
+    },
+    "userdaten": {
+      "box": 0,
+      "letztePruefung": null,
+      "fehlerZaehler": 0,
+      "intensiv": false
+    }
+  },
+  {
+    "id": 1795460510792,
+    "stammdaten": {
+      "wort": "die Wolke",
+      "beispielsatz": "Momo sieht am Himmel eine weiße Wolke, die wie ein Schaf aussieht.",
+      "artikel": "die",
+      "wortart": "Substantiv",
+      "plural": "Wolken",
+      "emoji": "☁️",
+      "besonderheiten": []
+    },
+    "userdaten": {
+      "box": 0,
+      "letztePruefung": null,
+      "fehlerZaehler": 0,
+      "intensiv": false
+    }
+  },
+  {
+    "id": 1795460510793,
+    "stammdaten": {
+      "wort": "springen",
+      "beispielsatz": "Im Sommer springen die Frösche fröhlich in den kühlen Teich.",
+      "artikel": "",
+      "wortart": "Verb",
+      "plural": "",
+      "emoji": "🐸",
+      "besonderheiten": []
+    },
+    "userdaten": {
+      "box": 0,
+      "letztePruefung": null,
+      "fehlerZaehler": 0,
+      "intensiv": false
+    }
+  },
+  {
+    "id": 1795460510794,
+    "stammdaten": {
+      "wort": "die Katastrophe",
+      "beispielsatz": "Momo verschüttet seinen Kakao, doch das ist zum Glück keine Katastrophe.",
+      "artikel": "die",
+      "wortart": "Substantiv",
+      "plural": "Katastrophen",
+      "emoji": "☕",
+      "besonderheiten": []
+    },
+    "userdaten": {
+      "box": 0,
+      "letztePruefung": null,
+      "fehlerZaehler": 0,
+      "intensiv": false
+    }
+  },
+  {
+    "id": 1795460510795,
+    "stammdaten": {
+      "wort": "deswegen",
+      "beispielsatz": "Es regnet heute stark, deswegen nimmt Momo seinen bunten Regenschirm mit.",
+      "artikel": "",
+      "wortart": "Adverb",
+      "plural": "",
+      "emoji": "☔",
+      "besonderheiten": []
+    },
+    "userdaten": {
+      "box": 0,
+      "letztePruefung": null,
+      "fehlerZaehler": 0,
+      "intensiv": false
+    }
+  },
+  {
+    "id": 1795460510796,
+    "stammdaten": {
+      "wort": "der Sportwagen",
+      "beispielsatz": "Ein roter Sportwagen fährt ganz schnell an Momos Haus vorbei.",
+      "artikel": "der",
+      "wortart": "Substantiv",
+      "plural": "Sportwagen",
+      "emoji": "🏎️",
+      "besonderheiten": []
+    },
+    "userdaten": {
+      "box": 0,
+      "letztePruefung": null,
+      "fehlerZaehler": 0,
+      "intensiv": false
+    }
+  },
+  {
+    "id": 1795460510797,
+    "stammdaten": {
+      "wort": "die Schulter",
+      "beispielsatz": "Ein kleiner Vogel setzt sich frech auf Momos Schulter und singt.",
+      "artikel": "die",
+      "wortart": "Substantiv",
+      "plural": "Schultern",
+      "emoji": "🐦",
+      "besonderheiten": []
+    },
+    "userdaten": {
+      "box": 0,
+      "letztePruefung": null,
+      "fehlerZaehler": 0,
+      "intensiv": false
+    }
+  },
+  {
+    "id": 1795460510798,
+    "stammdaten": {
+      "wort": "machst",
+      "beispielsatz": "Du machst deine Hausaufgaben heute aber besonders ordentlich und schön.",
+      "artikel": "",
+      "wortart": "Verb",
+      "plural": "",
+      "emoji": "✏️",
+      "besonderheiten": []
+    },
+    "userdaten": {
+      "box": 0,
+      "letztePruefung": null,
+      "fehlerZaehler": 0,
+      "intensiv": false
+    }
+  },
+  {
+    "id": 1795460510799,
+    "stammdaten": {
+      "wort": "hier",
+      "beispielsatz": "Momo findet, dass hier im Garten die schönsten Blumen wachsen.",
+      "artikel": "",
+      "wortart": "Adverb",
+      "plural": "",
+      "emoji": "🌷",
+      "besonderheiten": []
+    },
+    "userdaten": {
+      "box": 0,
+      "letztePruefung": null,
+      "fehlerZaehler": 0,
+      "intensiv": false
+    }
+  },
+  {
+    "id": 1795460510800,
+    "stammdaten": {
+      "wort": "spazieren",
+      "beispielsatz": "Am Sonntag gehen Momo und seine Oma gemütlich im Park spazieren.",
+      "artikel": "",
+      "wortart": "Verb",
+      "plural": "",
+      "emoji": "🌳",
+      "besonderheiten": []
+    },
+    "userdaten": {
+      "box": 0,
+      "letztePruefung": null,
+      "fehlerZaehler": 0,
+      "intensiv": false
+    }
+  },
+  {
+    "id": 1795460510801,
+    "stammdaten": {
+      "wort": "okay",
+      "beispielsatz": "Momo fragt seine Mama, ob es okay ist, länger draußen zu spielen.",
+      "artikel": "",
+      "wortart": "Adjektiv",
+      "plural": "",
+      "emoji": "👍",
+      "besonderheiten": []
+    },
+    "userdaten": {
+      "box": 0,
+      "letztePruefung": null,
+      "fehlerZaehler": 0,
+      "intensiv": false
+    }
+  },
+  {
+    "id": 1795460510802,
+    "stammdaten": {
+      "wort": "schrie",
+      "beispielsatz": "Vor Freude schrie Momo ganz laut, als er das große Geschenk sah.",
+      "artikel": "",
+      "wortart": "Verb",
+      "plural": "",
+      "emoji": "🎁",
+      "besonderheiten": []
+    },
+    "userdaten": {
+      "box": 0,
+      "letztePruefung": null,
+      "fehlerZaehler": 0,
+      "intensiv": false
+    }
+  },
+  {
+    "id": 1795460510803,
+    "stammdaten": {
+      "wort": "kriegt",
+      "beispielsatz": "Momo kriegt von Oma zum Geburtstag ein großes Stück Käsekuchen.",
+      "artikel": "",
+      "wortart": "Verb",
+      "plural": "",
+      "emoji": "🍰",
+      "besonderheiten": []
+    },
+    "userdaten": {
+      "box": 0,
+      "letztePruefung": null,
+      "fehlerZaehler": 0,
+      "intensiv": false
+    }
+  },
+  {
+    "id": 1795460510804,
+    "stammdaten": {
+      "wort": "der Adventskalender",
+      "beispielsatz": "Jeden Morgen öffnet Momo ein Türchen an seinem Adventskalender.",
+      "artikel": "der",
+      "wortart": "Substantiv",
+      "plural": "Adventskalender",
+      "emoji": "🎄",
+      "besonderheiten": []
+    },
+    "userdaten": {
+      "box": 0,
+      "letztePruefung": null,
+      "fehlerZaehler": 0,
+      "intensiv": false
+    }
+  },
+  {
+    "id": 1795460510805,
+    "stammdaten": {
+      "wort": "größer",
+      "beispielsatz": "Der Bruder von Momo ist schon viel größer als er.",
+      "artikel": "",
+      "wortart": "Adjektiv",
+      "plural": "",
+      "emoji": "📏",
+      "besonderheiten": []
+    },
+    "userdaten": {
+      "box": 0,
+      "letztePruefung": null,
+      "fehlerZaehler": 0,
+      "intensiv": false
+    }
+  },
+  {
+    "id": 1795460510806,
+    "stammdaten": {
+      "wort": "der Kalender",
+      "beispielsatz": "Mama schreibt den Ausflug in den Kalender an der Küchenwand.",
+      "artikel": "der",
+      "wortart": "Substantiv",
+      "plural": "Kalender",
+      "emoji": "📅",
+      "besonderheiten": []
+    },
+    "userdaten": {
+      "box": 0,
+      "letztePruefung": null,
+      "fehlerZaehler": 0,
+      "intensiv": false
+    }
+  },
+  {
+    "id": 1795460510807,
+    "stammdaten": {
+      "wort": "voll",
+      "beispielsatz": "Nach dem Sammeln ist Momos Korb mit roten Äpfeln ganz voll.",
+      "artikel": "",
+      "wortart": "Adjektiv",
+      "plural": "",
+      "emoji": "🧺",
+      "besonderheiten": []
+    },
+    "userdaten": {
+      "box": 0,
+      "letztePruefung": null,
+      "fehlerZaehler": 0,
+      "intensiv": false
+    }
+  },
+  {
+    "id": 1795460510808,
+    "stammdaten": {
+      "wort": "der Glitzer",
+      "beispielsatz": "Momo streut bunten Glitzer auf seine selbst gebastelte Weihnachtskarte.",
+      "artikel": "der",
+      "wortart": "Substantiv",
+      "plural": "",
+      "emoji": "✨",
+      "besonderheiten": []
+    },
+    "userdaten": {
+      "box": 0,
+      "letztePruefung": null,
+      "fehlerZaehler": 0,
+      "intensiv": false
+    }
+  },
+  {
+    "id": 1795460510809,
+    "stammdaten": {
+      "wort": "voller",
+      "beispielsatz": "Momos Adventskalender ist voller Glitzer und kleiner Sterne.",
+      "artikel": "",
+      "wortart": "Adjektiv",
+      "plural": "",
+      "emoji": "✨",
+      "besonderheiten": []
+    },
+    "userdaten": {
+      "box": 0,
+      "letztePruefung": null,
+      "fehlerZaehler": 0,
+      "intensiv": false
+    }
   }
 ]
