@@ -4,8 +4,8 @@
  <meta charset="UTF-8">
  <meta name="viewport" content="width=device-width, initial-scale=1.0">
  <title>Lernwörter-App</title>
- <!-- Manuelle Versionsnummer, wird unter „Daten & Info“ angezeigt. -->
- <meta name="app-version" content="1.4.1">
+ <!-- Manuelle Versionsnummer, wird unter „Settings“ angezeigt. -->
+ <meta name="app-version" content="1.4.2">
  <meta name="theme-color" content="#f8fafc">
  <link rel="icon" type="image/png" href="./Momo_Maus.png">
  <link rel="apple-touch-icon" href="./Momo_Maus.png">
@@ -118,6 +118,8 @@
  .action-button.wrong.image-action { border-color: #fecaca; background: linear-gradient(180deg,#fff,#fff1f2); color: #9f1239; }
  .action-button.wrong.image-action:hover { background: #ffe4e6; }
  .action-button.correct.image-action { border-color: #a7f3d0; background: linear-gradient(180deg,#fff,#ecfdf5); color: #065f46; }
+ .daily-goal-complete { padding: 12px 16px; border: 1px solid #86efac; border-radius: 16px; background: #f0fdf4; color: #166534; font-size: 14px; font-weight: 800; text-align: center; }
+ .daily-goal-complete[hidden] { display: none; }
  .action-button.correct.image-action:hover { background: #d1fae5; }
  .eval-grid { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 10px; }
  .eval-grid.paper-mode { display: flex; flex: 1; width: 100%; justify-content: space-between; gap: 14px; }
@@ -190,6 +192,14 @@
  .data-warning p { margin: 0; font-size: 12px; line-height: 1.6; }
  .data-grid { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 14px; }
  .data-card { display: flex; flex-direction: column; justify-content: space-between; gap: 16px; padding: 20px; border: 1px solid #e2e8f0; border-radius: 24px; background: white; box-shadow: 0 4px 20px -2px rgba(15,23,42,.05); }
+ .settings-card { margin-bottom: 14px; }
+ .settings-controls { display: flex; align-items: flex-end; justify-content: space-between; gap: 18px; flex-wrap: wrap; }
+ .setting-row { display: flex; flex: 1 1 250px; align-items: center; justify-content: space-between; gap: 12px; }
+ .setting-copy { display: flex; flex-direction: column; gap: 4px; }
+ .setting-label { color: #334155; font-size: 14px; font-weight: 800; }
+ .setting-description { margin: 0; color: #64748b; font-size: 12px; line-height: 1.45; }
+ .setting-field { display: flex; flex: 0 1 220px; flex-direction: column; gap: 6px; color: #334155; font-size: 13px; font-weight: 800; }
+ .setting-field input { width: 100%; min-height: 44px; padding: 9px 12px; border: 1px solid #cbd5e1; border-radius: 12px; background: #f8fafc; color: #1e293b; font-size: 16px; font-weight: 700; }
  .data-card-actions { display: flex; flex-wrap: wrap; gap: 8px; }
  .data-card-actions > * { width: 100%; }
  .data-card-icon { width: 42px; height: 42px; display: grid; place-items: center; margin-bottom: 10px; border-radius: 14px; background: #eef2ff; color: #4f46e5; font-size: 20px; }
@@ -287,7 +297,7 @@
    <button class="nav-tab active" id="nav-learn" data-tab="learn" aria-current="page" onclick="showTab('learn')">🎯 <span>Lernen</span></button>
    <button class="nav-tab" id="nav-manage" data-tab="manage" onclick="showTab('manage')">📖 <span>Wörterbuch</span></button>
    <button class="nav-tab" id="nav-storage" data-tab="storage" onclick="showTab('storage')">📦 <span>Wörterspeicher</span></button>
-   <button class="nav-tab" id="nav-data" data-tab="data" onclick="showTab('data')">⚙️ <span>Daten &amp; Info</span></button>
+   <button class="nav-tab" id="nav-data" data-tab="data" onclick="showTab('data')">⚙️ <span>Settings</span></button>
    <button class="audio-toggle" data-sound-button aria-pressed="true" title="Soundeffekte umschalten" onclick="UIController.toggleSound()">
     <span class="sound-control-label"><span data-sound-icon aria-hidden="true">🔊</span><span data-sound-label>Ton an</span></span>
     <span class="sound-switch-indicator" aria-hidden="true"></span>
@@ -351,6 +361,7 @@
    </section>
 
    <div id="stats" class="stats"></div>
+   <div id="daily-goal-complete" class="daily-goal-complete" role="status" aria-live="polite" hidden>Herzlichen Glückwunsch, du hast deine tägliche Lerneinheit absolviert</div>
    <aside class="storage-note">
     <p><strong>💾 Lernstand:</strong> <span id="storage-note-text">Deine Lernstände können beim Leeren des Browsercaches verloren gehen.</span></p>
     <button onclick="showTab('data')">Sichern</button>
@@ -407,6 +418,25 @@
     <div class="data-warning-icon">🛡️</div>
     <div><h2>Dein Lernstand ist wichtig</h2><p id="storage-description">Die App speichert deine Wörter und Lernfortschritte in dem aktuell verwendeten Speicher.</p></div>
    </div>
+   <article class="data-card settings-card">
+    <div><div class="data-card-icon">⚙️</div><h3>Settings</h3><p>Lege fest, wie du lernen möchtest.</p></div>
+    <div class="settings-controls">
+     <div class="setting-row">
+      <div class="setting-copy">
+       <span class="setting-label">Ton an/aus</span>
+       <span class="setting-description">Schaltet alle Audio-Rückmeldungen um.</span>
+      </div>
+      <button class="audio-toggle settings-sound-toggle" data-sound-button aria-pressed="true" title="Soundeffekte umschalten" onclick="UIController.toggleSound()">
+       <span class="sound-control-label"><span data-sound-icon aria-hidden="true">🔊</span><span data-sound-label>Ton an</span></span>
+       <span class="sound-switch-indicator" aria-hidden="true"></span>
+      </button>
+     </div>
+     <label class="setting-field" for="daily-goal-input">Tägliche Lerneinheit (Karten)
+      <input id="daily-goal-input" type="number" min="1" step="1" value="5" onchange="UIController.setDailyGoal(this.value)">
+     </label>
+     <p id="daily-goal-progress" class="setting-description" aria-live="polite"></p>
+    </div>
+   </article>
    <div class="data-grid">
     <article class="data-card">
      <div><div class="data-card-icon">📤</div><h3>Backup erstellen</h3><p>Exportiert dein Wörterbuch mit Lernboxen und Intensiv-Markierungen als JSON-Datei.</p></div>
@@ -985,8 +1015,18 @@ const LeitnerModule = (() => {
 // MODUL 6: AUDIO-FEEDBACK-MODUL (Web Audio API ohne externe Dateien)
 // ============================================================================
 const AudioModule = (() => {
+  const STORAGE_KEY = 'leitner_sound_enabled';
   let ctx = null;
-  let enabled = true;
+  let enabled = readEnabled();
+
+  function readEnabled() {
+    try {
+      return localStorage.getItem(STORAGE_KEY) !== 'false';
+    } catch (error) {
+      console.warn('Die Ton-Einstellung konnte nicht geladen werden:', error);
+      return true;
+    }
+  }
 
   function getContext() {
     if (!ctx) {
@@ -1028,6 +1068,17 @@ const AudioModule = (() => {
     playTone(783.99, 'sine', now + 0.16, 0.35, 0.09);
   }
 
+  function playDailyGoalSuccess() {
+    if (!enabled) return;
+    const audioCtx = getContext();
+    if (!audioCtx) return;
+    const now = audioCtx.currentTime;
+    playTone(523.25, 'sine', now, 0.18, 0.08);
+    playTone(659.25, 'sine', now + 0.12, 0.18, 0.08);
+    playTone(783.99, 'sine', now + 0.24, 0.18, 0.08);
+    playTone(1046.5, 'sine', now + 0.36, 0.4, 0.09);
+  }
+
   function playError() {
     if (!enabled) return;
     const audioCtx = getContext();
@@ -1038,11 +1089,99 @@ const AudioModule = (() => {
   }
 
   function toggle() {
-    enabled = !enabled;
-    return enabled;
+    const nextEnabled = !enabled;
+    try {
+      localStorage.setItem(STORAGE_KEY, String(nextEnabled));
+      enabled = nextEnabled;
+      return { enabled, saved: true };
+    } catch (error) {
+      console.warn('Die Ton-Einstellung konnte nicht gespeichert werden:', error);
+      return { enabled, saved: false };
+    }
   }
 
-  return { playSuccess, playError, toggle };
+  return { playSuccess, playDailyGoalSuccess, playError, toggle, isEnabled: () => enabled };
+})();
+
+const DailyLearningModule = (() => {
+  const STORAGE_KEY = 'leitner_daily_learning';
+  const DEFAULT_GOAL = 5;
+
+  function getLocalDate() {
+    const now = new Date();
+    const month = String(now.getMonth() + 1).padStart(2, '0');
+    const day = String(now.getDate()).padStart(2, '0');
+    return `${now.getFullYear()}-${month}-${day}`;
+  }
+
+  let goal = DEFAULT_GOAL;
+  let progress = { date: getLocalDate(), count: 0, celebrated: false };
+
+  function persist() {
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify({ goal, ...progress }));
+      return true;
+    } catch (error) {
+      console.warn('Der tägliche Lernfortschritt konnte nicht gespeichert werden:', error);
+      return false;
+    }
+  }
+
+  function load() {
+    try {
+      const saved = localStorage.getItem(STORAGE_KEY);
+      if (!saved) return;
+      const data = JSON.parse(saved);
+      if (!data || typeof data !== 'object') throw new Error('Ungültige Settings-Daten.');
+      if (Number.isSafeInteger(data.goal) && data.goal > 0) goal = data.goal;
+      if (typeof data.date === 'string' && Number.isSafeInteger(data.count) && data.count >= 0) {
+        progress = {
+          date: data.date,
+          count: data.count,
+          celebrated: typeof data.celebrated === 'boolean'
+            ? data.celebrated
+            : Number.isSafeInteger(data.celebratedGoal) && data.count >= data.celebratedGoal
+        };
+      }
+    } catch (error) {
+      console.warn('Die täglichen Lern-Settings konnten nicht geladen werden:', error);
+    }
+  }
+
+  function ensureToday() {
+    if (progress.date === getLocalDate()) return false;
+    progress = { date: getLocalDate(), count: 0, celebrated: false };
+    return true;
+  }
+
+  function getStatus() {
+    if (ensureToday()) persist();
+    return {
+      goal,
+      count: progress.count,
+      completed: progress.celebrated
+    };
+  }
+
+  function setGoal(value) {
+    if (!Number.isSafeInteger(value) || value < 1) return { valid: false, saved: false, completedNow: false };
+    ensureToday();
+    goal = value;
+    const completedNow = progress.count >= goal && !progress.celebrated;
+    if (completedNow) progress.celebrated = true;
+    return { valid: true, saved: persist(), completedNow };
+  }
+
+  function recordCard() {
+    ensureToday();
+    progress.count++;
+    const completedNow = progress.count >= goal && !progress.celebrated;
+    if (completedNow) progress.celebrated = true;
+    return { saved: persist(), completedNow };
+  }
+
+  load();
+  return { getStatus, setGoal, recordCard };
 })();
 
 const UIController = (() => {
@@ -1050,6 +1189,7 @@ const UIController = (() => {
   const state = {
     words: [],
     currentWordIndex: -1,
+    answerInProgress: false,
     selectedBoxFilter: 'all',
     learningMode: 'paper',
     pendingIsCorrect: false,
@@ -1105,6 +1245,7 @@ const UIController = (() => {
       ? 'Deine Wörter und Lernfortschritte werden auf dem Server gespeichert.'
       : 'Deine Wörter und Lernfortschritte werden lokal in diesem Browser gespeichert.';
 
+    updateSoundControls(AudioModule.isEnabled());
     updateStats();
     nextWord();
   }
@@ -1120,6 +1261,17 @@ const UIController = (() => {
     const statsText = `Gesamt: ${total} | Wörterspeicher: ${counts[0]} | B1: ${counts[1]} | B2: ${counts[2]} | B3: ${counts[3]} | B4: ${counts[4]} | B5: ${counts[5]} | Schatztruhe: ${counts[6]}`;
     document.getElementById('stats').innerText = statsText;
     document.getElementById('data-stats').innerText = `${statsText} | Intensiv: ${state.words.filter(w => w.userdaten?.intensiv).length}`;
+    updateDailyGoalUI();
+  }
+
+  function updateDailyGoalUI() {
+    const status = DailyLearningModule.getStatus();
+    const goalInput = document.getElementById('daily-goal-input');
+    if (goalInput && document.activeElement !== goalInput) goalInput.value = String(status.goal);
+    const progressText = document.getElementById('daily-goal-progress');
+    if (progressText) progressText.textContent = `Heute: ${status.count} von ${status.goal} beantworteten Karten`;
+    const completionMessage = document.getElementById('daily-goal-complete');
+    if (completionMessage) completionMessage.hidden = !status.completed;
   }
 
   function toggleNavigationMenu() {
@@ -1163,7 +1315,7 @@ const UIController = (() => {
       learn: { id: 'learn-tab', title: 'Lernen' },
       manage: { id: 'manage-tab', title: 'Wörterbuch' },
       storage: { id: 'storage-tab', title: 'Wörterspeicher' },
-      data: { id: 'data-tab', title: 'Daten & Info' }
+      data: { id: 'data-tab', title: 'Settings' }
     };
     Object.entries(views).forEach(([name, view]) => {
       document.getElementById(view.id).style.display = name === tab ? 'flex' : 'none';
@@ -1177,6 +1329,7 @@ const UIController = (() => {
     });
     if (tab === 'manage') renderWordList();
     if (tab === 'storage') renderStorageWordList();
+    if (tab === 'data') updateDailyGoalUI();
     if (tab === 'learn') {
       const promotedWords = LeitnerModule.refillBoxOneFromStorage(state.words);
       if (promotedWords.length > 0) {
@@ -1191,8 +1344,7 @@ const UIController = (() => {
     }
   }
 
-  function toggleSound() {
-    const enabled = AudioModule.toggle();
+  function updateSoundControls(enabled) {
     document.querySelectorAll('[data-sound-button]').forEach(button => {
       button.setAttribute('aria-pressed', String(enabled));
     });
@@ -1202,6 +1354,24 @@ const UIController = (() => {
     document.querySelectorAll('[data-sound-label]').forEach(label => {
       label.textContent = enabled ? 'Ton an' : 'Ton aus';
     });
+  }
+
+  function toggleSound() {
+    const result = AudioModule.toggle();
+    updateSoundControls(result.enabled);
+    if (!result.saved) alert('Die Ton-Einstellung konnte nicht gespeichert werden.');
+  }
+
+  function setDailyGoal(value) {
+    const result = DailyLearningModule.setGoal(Number(value));
+    if (!result.valid) {
+      alert('Bitte gib eine positive ganze Zahl als Tagesziel ein.');
+      updateDailyGoalUI();
+      return;
+    }
+    updateDailyGoalUI();
+    if (!result.saved) alert('Das Tagesziel konnte nicht gespeichert werden.');
+    if (result.completedNow) AudioModule.playDailyGoalSuccess();
   }
 
   function setMode(mode) {
@@ -1568,20 +1738,29 @@ function revealWord() {
   }
 
   async function answer(isCorrect) {
-    if (state.currentWordIndex === -1) return;
-    if (state.learningMode === 'paper') {
-      isCorrect ? AudioModule.playSuccess() : AudioModule.playError();
+    if (state.currentWordIndex === -1 || state.answerInProgress) return;
+    state.answerInProgress = true;
+    try {
+      const dailyProgress = DailyLearningModule.recordCard();
+      updateDailyGoalUI();
+      if (!dailyProgress.saved) alert('Der tägliche Lernfortschritt konnte nicht gespeichert werden.');
+      if (state.learningMode === 'paper') {
+        isCorrect ? AudioModule.playSuccess() : AudioModule.playError();
+      }
+      if (dailyProgress.completedNow) AudioModule.playDailyGoalSuccess();
+      const inIntensiveFilter = state.selectedBoxFilter === 'intensiv';
+      const skipPromotion = (inIntensiveFilter || state.helpUsed);
+      const answeredWord = state.words[state.currentWordIndex];
+      if (inIntensiveFilter) {
+        state.intensiveRoundReviewedIds.add(answeredWord.id);
+        state.lastIntensiveWordId = answeredWord.id;
+      }
+      LeitnerModule.evaluateAnswer(answeredWord, isCorrect, state.words, skipPromotion, inIntensiveFilter);
+      await saveAndRefresh();
+      nextWord();
+    } finally {
+      state.answerInProgress = false;
     }
-    const inIntensiveFilter = state.selectedBoxFilter === 'intensiv';
-    const skipPromotion = (inIntensiveFilter || state.helpUsed);
-    const answeredWord = state.words[state.currentWordIndex];
-    if (inIntensiveFilter) {
-      state.intensiveRoundReviewedIds.add(answeredWord.id);
-      state.lastIntensiveWordId = answeredWord.id;
-    }
-    LeitnerModule.evaluateAnswer(answeredWord, isCorrect, state.words, skipPromotion, inIntensiveFilter);
-    await saveAndRefresh();
-    nextWord();
   }
 
   async function addWord() {
@@ -1636,6 +1815,12 @@ function revealWord() {
       moreBtn.hidden = false;
       intensivBtn.hidden = true;
       deleteBtn.hidden = true;
+      const currentEntry = input.closest('.word-list-entry');
+      document.querySelectorAll('#word-list .word-list-entry').forEach(entry => {
+        if (entry !== currentEntry) {
+          entry.querySelectorAll('button').forEach(otherButton => { otherButton.disabled = true; });
+        }
+      });
       input.focus();
       input.setSelectionRange(input.value.length, input.value.length);
       btn.textContent = 'Speichern';
@@ -2148,6 +2333,7 @@ async function importWords(event) {
     showTab,
     setMode,
     toggleBoxFilter,
+    setDailyGoal,
     speakCurrentWord,
     peekWord,
     revealWord,
