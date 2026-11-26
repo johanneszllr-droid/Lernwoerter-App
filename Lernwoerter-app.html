@@ -324,6 +324,7 @@
    <button class="nav-tab" id="nav-manage" data-tab="manage" onclick="showTab('manage')">📖 <span>Wörterbuch</span></button>
    <button class="nav-tab" id="nav-storage" data-tab="storage" onclick="showTab('storage')">📦 <span>Wörterspeicher</span></button>
    <button class="nav-tab" id="nav-data" data-tab="data" onclick="showTab('data')">⚙️ <span>Settings</span></button>
+   <button class="nav-tab" id="nav-guide" type="button" onclick="UIController.openGuide()">📘 <span>Anleitung</span></button>
   </nav>
   <button class="menu-backdrop" id="menu-backdrop" type="button" aria-label="Navigation schließen" onclick="UIController.closeNavigationMenu()" hidden></button>
   <main id="learn-tab" class="app-view">
@@ -1546,6 +1547,14 @@ const UIController = (() => {
     }
   }
 
+  // Öffnet die Anleitung (README auf GitHub) in einem neuen Tab.
+  // Die Testversion unter /dev/ zeigt die README aus dem dev-Branch, die veröffentlichte Version die aus main.
+  function openGuide() {
+    closeNavigationMenu();
+    const branch = window.location.pathname.includes('/dev/') ? 'dev' : 'main';
+    window.open(`https://github.com/johanneszllr-droid/Lernwoerter-App/blob/${branch}/README.md`, '_blank', 'noopener');
+  }
+
   function updateSoundControls(enabled) {
     document.querySelectorAll('[data-sound-button]').forEach(button => {
       button.setAttribute('aria-pressed', String(enabled));
@@ -2691,6 +2700,7 @@ async function importWords(event) {
     toggleCurrentWordIntensiv,
     continueLearning,
     finishForToday,
+    openGuide,
     toggleSound,
     answer,
     addWord,
