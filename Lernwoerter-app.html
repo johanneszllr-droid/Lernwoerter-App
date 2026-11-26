@@ -5,7 +5,7 @@
  <meta name="viewport" content="width=device-width, initial-scale=1.0">
  <title>Lernwörter-App</title>
  <!-- Manuelle Versionsnummer, wird unter „Settings“ angezeigt. -->
- <meta name="app-version" content="1.4.6">
+ <meta name="app-version" content="1.4.7">
  <meta name="theme-color" content="#f8fafc">
  <link rel="icon" type="image/png" href="./Momo_Maus.png">
  <link rel="apple-touch-icon" href="./Momo_Maus.png">
@@ -72,7 +72,8 @@
  .learning-card { display: flex; flex-direction: column; min-height: 470px; overflow: hidden; padding: 22px 24px 20px; }
  .learning-card.wrong-bg { background: #fff7f7; border-color: #fecaca; }
  .learning-card.correct-bg { background: #f0fdf4; border-color: #86efac; }
- .status-icon { position: absolute; top: 15px; right: 18px; font-size: 19px; }
+ .learning-card-controls { display: flex; flex: 0 0 auto; align-items: center; gap: 8px; }
+ .status-icon { flex: 0 0 auto; font-size: 19px; line-height: 1; }
  .learning-card-header { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding-bottom: 16px; border-bottom: 1px solid #f1f5f9; }
  .box-info-group { display: flex; align-items: center; gap: 12px; min-width: 0; }
  .box-label { display: block; margin-bottom: 5px; color: #94a3b8; font-size: 10px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; }
@@ -86,6 +87,7 @@
  .word-display { min-height: 50px; margin: 8px 0; color: #334155; font-size: clamp(2rem,6vw,3rem); font-weight: 800; letter-spacing: .02em; }
  .word-display.digital-result { font-size: clamp(2rem,7vw,3.4rem); color: #334155; letter-spacing: .04em; }
  .word-display.digital-result.richtig { color: #059669; }
+ .digital-correct-message { color: #059669; font-size: 19px; font-weight: 800; text-align: center; }
  .example-sentence { width: 100%; padding: 12px 15px; border: 1px solid #c7d2fe; border-radius: 15px; background: #eef2ff; color: #334155; text-align: left; }
  .example-sentence[hidden] { display: none; }
  .example-sentence-text { margin: 0; font-size: 15px; line-height: 1.5; }
@@ -109,7 +111,9 @@
  .action-button.primary { background: #4f46e5; color: white; box-shadow: 0 4px 12px rgba(79,70,229,.18); }
  .action-button.primary.image-action { background: linear-gradient(180deg,#fff,#f8fafc); color: #334155; box-shadow: 0 3px 10px rgba(15,23,42,.08); }
  .action-button.primary.image-action:hover { background: #eef2ff; }
- .action-button.primary.digital-next { grid-column: 3; }
+ .action-button.primary.digital-next { grid-column: 3; border-color: #bfdbfe; background: #dbeafe; color: #1e3a8a; box-shadow: 0 3px 10px rgba(30,58,138,.12); }
+ .action-button.primary.digital-next:hover { border-color: #93c5fd; background: #bfdbfe; }
+ .action-button.primary.digital-next:focus-visible { outline: 3px solid #93c5fd; outline-offset: 2px; }
  #actionBarBefore .action-button.digital-next .action-image { width: 52px; height: 52px; }
  #actionBarBefore .action-button.image-action { min-height: 126px; gap: 3px; padding: 8px; font-size: 13px; }
  .action-button.wrong.image-action { border-color: #fecaca; background: linear-gradient(180deg,#fff,#fff1f2); color: #9f1239; }
@@ -327,7 +331,6 @@
    </div>
 
    <section class="card learning-card animate-card" id="learning-card">
-    <span class="status-icon" id="status-icon"></span>
     <header class="learning-card-header">
      <div class="box-info-group">
       <div>
@@ -335,9 +338,12 @@
        <div id="box-info">Wörterspeicher</div>
       </div>
      </div>
-     <button class="card-intensiv-btn" id="card-intensiv-btn" aria-pressed="false" onclick="UIController.toggleCurrentWordIntensiv()">
-      <span id="cardStarIcon">☆</span><span>Intensiv</span>
-     </button>
+     <div class="learning-card-controls">
+      <span class="status-icon" id="status-icon" aria-hidden="true"></span>
+      <button class="card-intensiv-btn" id="card-intensiv-btn" aria-pressed="false" onclick="UIController.toggleCurrentWordIntensiv()">
+       <span id="cardStarIcon">☆</span><span>Intensiv</span>
+      </button>
+     </div>
     </header>
 
     <div class="learning-card-main">
@@ -1751,7 +1757,7 @@ function revealWord() {
       statusIcon.textContent = '✅';
       targetEl.className = 'word-display digital-result richtig';
       renderMarkedWord(targetEl, targetWord, FreschModule.getDoubleConsonantMarks(targetWord));
-      feedback.innerHTML = '';
+      feedback.innerHTML = '<div class="digital-correct-message">Richtig!</div>';
     } else {
       AudioModule.playError();
       cardEl.classList.remove('wrong-bg', 'correct-bg');
@@ -2356,7 +2362,7 @@ async function importWords(event) {
           </div>
           <div class="word-list-actions">
            <button class="btn word-list-intensiv-button ${word.userdaten?.intensiv ? 'btn-warning' : 'btn-secondary'}" type="button" id="intensiv-btn-${word.id}" aria-pressed="${word.userdaten?.intensiv === true}" title="${word.userdaten?.intensiv ? 'Intensivmodus ausschalten' : 'Intensivmodus einschalten'}" aria-label="${word.userdaten?.intensiv ? 'Intensivmodus ausschalten' : 'Intensivmodus einschalten'}" onclick="UIController.toggleIntensiv(${word.id})">🔥</button>
-           ${boxNum === 1 ? `<button class="btn btn-secondary" type="button" id="dictionary-storage-${word.id}" title="In den Wörterspeicher verschieben" aria-label="„${wordText}“ in den Wörterspeicher verschieben" onclick="UIController.moveWordToStorage(${word.id})">📦→0</button>` : ''}
+           ${boxNum === 1 ? `<button class="btn btn-secondary" type="button" id="dictionary-storage-${word.id}" title="In den Wörterspeicher verschieben" aria-label="„${wordText}“ in den Wörterspeicher verschieben" onclick="UIController.moveWordToStorage(${word.id})">📥</button>` : ''}
            ${boxNum === 0 ? `<button class="btn btn-secondary" type="button" id="dictionary-storage-top-${word.id}" title="An die Spitze des Wörterspeichers verschieben" aria-label="„${wordText}“ an die Spitze des Wörterspeichers verschieben" onclick="UIController.moveWordToStorageTop(${word.id})" ${storageIndex === 0 ? 'disabled' : ''}>↑1</button>` : ''}
            <button class="btn btn-warning" type="button" id="edit-btn-${word.id}" onclick="UIController.toggleEdit(${word.id})">Edit</button>
            <button class="btn btn-secondary" type="button" id="more-btn-${word.id}" aria-expanded="false" aria-controls="word-details-${word.id}" hidden onclick="UIController.toggleWordDetails(${word.id})">＋ Mehr</button>
