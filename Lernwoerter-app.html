@@ -2277,13 +2277,28 @@ async function importWords(event) {
     }
   }
 
+  // Erst die Liste neben der App suchen; fehlt sie (z. B. auf einem eigenen Server),
+  // die veröffentlichte Liste von GitHub Pages (Branch main) verwenden.
+  const ONLINE_WORDLIST_URL = 'https://johanneszllr-droid.github.io/Lernwoerter-App/lernwoerter-blank.json';
+
+  async function fetchBlankWordList() {
+    const sources = ['./lernwoerter-blank.json', ONLINE_WORDLIST_URL];
+    const errors = [];
+    for (const url of sources) {
+      try {
+        const response = await fetch(url, { cache: 'no-cache' });
+        if (response.ok) return await response.text();
+        errors.push(`${url}: HTTP ${response.status}`);
+      } catch (err) {
+        errors.push(`${url}: ${err.message}`);
+      }
+    }
+    throw new Error('Wörterliste konnte weder lokal noch online geladen werden.\n' + errors.join('\n'));
+  }
+
   async function importBlankWordsFromWeb() {
     try {
-      const response = await fetch('./lernwoerter-blank.json');
-      if (!response.ok) {
-        throw new Error(`Datei konnte nicht geladen werden (HTTP ${response.status}).`);
-      }
-      const parsed = StorageModule.parseJsonText(await response.text());
+      const parsed = StorageModule.parseJsonText(await fetchBlankWordList());
       showImportDialog(parsed, 'lernwoerter-blank.json');
     } catch (err) {
       alert('Fehler beim Web-Import: ' + err.message);
