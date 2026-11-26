@@ -1,5 +1,5 @@
 {
-  "commitName": "Tagesziel: Meldung wartet auf Entscheidung, kein Vorlesen im Hintergrund",
-  "commitHash": "6e76990674bf",
-  "builtAt": "2026-11-26T19:19:04Z"
+  "commitName": "Fix: Wiktionary-Cache verkleinern, Speicherfehler anzeigen",
+  "commitHash": "d118453b20a3",
+  "builtAt": "2026-11-26T19:22:07Z"
 }

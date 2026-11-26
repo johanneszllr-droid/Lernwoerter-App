@@ -150,6 +150,8 @@
  .stats { align-self: center; padding: 8px 14px; border: 1px solid #e2e8f0; border-radius: 999px; background: rgba(255,255,255,.75); color: #64748b; font-size: 11px; font-weight: 700; text-align: center; }
  .storage-note { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 12px 15px; border: 1px solid #fde68a; border-radius: 18px; background: #fffbeb; color: #78350f; font-size: 12px; }
  .storage-note p { margin: 0; line-height: 1.5; }
+ .storage-note.storage-note-error { border-color: #fca5a5; background: #fef2f2; color: #991b1b; }
+ .storage-note.storage-note-error button { color: #b91c1c; }
  .storage-note button { flex: 0 0 auto; border: 0; background: transparent; color: #92400e; font-size: 12px; font-weight: 800; text-decoration: underline; cursor: pointer; }
  .bento-panel { padding: 20px; }
  .panel-heading { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 16px; padding-bottom: 14px; border-bottom: 1px solid #f1f5f9; }
@@ -396,8 +398,8 @@
      </div>
     </div>
    </div>
-   <aside class="storage-note">
-    <p><strong>💾 Lernstand:</strong> <span id="storage-note-text">Deine Lernstände können beim Leeren des Browsercaches verloren gehen.</span></p>
+   <aside class="storage-note" id="storage-note">
+    <p><strong>💾 Lernstand:</strong> <span id="storage-note-text" aria-live="polite">Deine Lernstände können beim Leeren des Browsercaches verloren gehen.</span></p>
     <button onclick="showTab('data')">Sichern</button>
    </aside>
   </main>
@@ -754,17 +756,40 @@ const FreschModule = (() => {
     return ops.reverse();
   }
 
+  // Zwischenspeicher für Wiktionary-Abfragen. Es werden nur die wenigen benötigten Zeilen gespeichert,
+  // nicht die ganze Seite – sonst läuft der Browser-Speicher (ca. 5 MB) voll und der Lernstand kann nicht mehr gespeichert werden.
+  const WIKT_CACHE_PREFIX = "wikt_v2_";
+  try {
+    // Alte Einträge (komplette Wiktionary-Seiten) einmalig entfernen, um Platz freizugeben
+    Object.keys(localStorage)
+      .filter(key => key.startsWith("wikt_raw_"))
+      .forEach(key => localStorage.removeItem(key));
+  } catch (e) {}
+
+  // Behält nur die Zeilen, die verlaengerung() auswertet (Grundform-Verweis und Plural)
+  function compactWikitext(text) {
+    const relevantLines = String(text || "")
+      .split("\n")
+      .filter(line => line.includes("Grundformverweis Dt") || line.includes("Nominativ Plural"));
+    return relevantLines.join("\n") || "EXISTS"; // "EXISTS" = Seite gibt es, aber ohne passende Angaben
+  }
+
   async function wikitext(seite) {
-    const cacheKey = "wikt_raw_" + seite.toLowerCase();
-    const cached = localStorage.getItem(cacheKey);
-    if (cached !== null) return cached === "NONE" ? null : cached;
+    const cacheKey = WIKT_CACHE_PREFIX + seite;
+    try {
+      const cached = localStorage.getItem(cacheKey);
+      if (cached !== null) return cached === "NONE" ? null : cached;
+    } catch (e) {}
 
     try {
       const url = "https://de.wiktionary.org/w/api.php?action=parse&prop=wikitext&format=json&origin=*&page=" + encodeURIComponent(seite);
       const r = await fetch(url);
+      if (!r.ok) return null; // Netzwerk-/Serverfehler nicht zwischenspeichern
       const j = await r.json();
-      const res = j.parse ? j.parse.wikitext["*"] : null;
-      localStorage.setItem(cacheKey, res || "NONE");
+      const res = j.parse ? compactWikitext(j.parse.wikitext["*"]) : null;
+      try {
+        localStorage.setItem(cacheKey, res || "NONE");
+      } catch (e) {} // Zwischenspeicher ist optional; Ergebnis trotzdem verwenden
       return res;
     } catch (e) {
       return null;
@@ -1313,7 +1338,28 @@ const UIController = (() => {
   async function saveAndRefresh() {
     const saved = await StorageModule.save(state.words);
     updateStats();
+    updateSaveWarning(saved);
     return saved;
+  }
+
+  // Zeigt dauerhaft sichtbar an, wenn der Lernstand nicht gespeichert werden konnte
+  // (im Server-Modus meldet das StorageModule den Fehler bereits selbst)
+  const DEFAULT_STORAGE_NOTE = 'Deine Lernstände können beim Leeren des Browsercaches verloren gehen.';
+  let saveWarningAlertShown = false;
+  function updateSaveWarning(saved) {
+    const note = document.getElementById('storage-note');
+    const noteText = document.getElementById('storage-note-text');
+    if (saved || serverMode) {
+      note.classList.remove('storage-note-error');
+      noteText.textContent = DEFAULT_STORAGE_NOTE;
+      return;
+    }
+    note.classList.add('storage-note-error');
+    noteText.textContent = 'Achtung: Dein Lernstand konnte nicht gespeichert werden! Bitte jetzt ein Backup erstellen.';
+    if (!saveWarningAlertShown) {
+      saveWarningAlertShown = true;
+      alert('Achtung: Dein Lernstand konnte nicht im Browser gespeichert werden.\n\nBitte unter „Settings“ → „JSON herunterladen“ ein Backup erstellen, damit nichts verloren geht.');
+    }
   }
 
   function updateStats() {
