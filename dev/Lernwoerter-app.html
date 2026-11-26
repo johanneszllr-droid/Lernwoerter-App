@@ -5,7 +5,7 @@
  <meta name="viewport" content="width=device-width, initial-scale=1.0">
  <title>Lernwörter-App</title>
  <!-- Manuelle Versionsnummer, wird unter „Daten & Info“ angezeigt. -->
- <meta name="app-version" content="1.3.0">
+ <meta name="app-version" content="1.4.1">
  <meta name="theme-color" content="#f8fafc">
  <link rel="icon" type="image/png" href="./Momo_Maus.png">
  <link rel="apple-touch-icon" href="./Momo_Maus.png">
@@ -92,7 +92,6 @@
  .word-display.digital-result.richtig { color: #059669; }
  .example-sentence { width: 100%; padding: 12px 15px; border: 1px solid #c7d2fe; border-radius: 15px; background: #eef2ff; color: #334155; text-align: left; }
  .example-sentence[hidden] { display: none; }
- .example-sentence-label { display: block; margin-bottom: 4px; color: #4f46e5; font-size: 11px; font-weight: 800; letter-spacing: .04em; text-transform: uppercase; }
  .example-sentence-text { margin: 0; font-size: 15px; line-height: 1.5; }
  .fehler { color: #ea580c; border-bottom: 4px solid #fb923c; }
  #digital-input-area { width: 100%; margin: 0 !important; }
@@ -171,7 +170,7 @@
  .word-list-details .word-list-input { width: 100%; flex: none; padding: 2px 4px; line-height: 1.2; text-overflow: ellipsis; }
  .word-list-box { padding-left: 4px; color: #64748b; font-size: 10px; line-height: 1.2; white-space: nowrap; }
  .word-list-actions { display: flex; flex: 0 0 auto; align-items: center; justify-content: flex-end; gap: 6px; flex-wrap: wrap; max-width: 340px; }
- .word-list-actions .btn { min-width: 38px; min-height: 38px; padding: 7px 9px; border-radius: 10px; font-size: 12px; white-space: nowrap; }
+ .word-list-actions .btn { min-width: 44px; min-height: 44px; padding: 9px 12px; border-radius: 11px; font-size: 14px; white-space: nowrap; }
  .word-list-actions .word-list-intensiv-button { margin-right: 14px; }
  .word-list-input { width: auto; min-width: 0; flex: 1; padding: 6px; border: 1px solid transparent; border-radius: 8px; background: transparent; color: #1e293b; font-size: 16px; font-weight: 700; text-align: left; outline: none; }
  .word-list-input:not([readonly]) { border-color: #a5b4fc; background: #f8fafc; }
@@ -246,7 +245,7 @@
   .storage-order-actions .btn { min-width: 34px; min-height: 32px; padding: 4px 7px; }
   .word-list-emoji { flex-basis: 32px; width: 32px; font-size: 1.1rem; }
   .word-list-actions { gap: 3px; }
-  .word-list-actions .btn { min-height: 36px; padding: 7px 8px; font-size: 11px; }
+  .word-list-actions .btn { min-height: 44px; padding: 8px 10px; font-size: 12px; }
   .word-list-actions .word-list-intensiv-button { margin-right: 14px; }
   .word-group-actions { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .word-details-grid { grid-template-columns: 1fr; }
@@ -327,7 +326,6 @@
      <div class="learning-content">
       <div id="word-target" class="word-display" style="display: none;"></div>
       <div id="example-sentence" class="example-sentence" hidden>
-       <span class="example-sentence-label">Beispielsatz</span>
        <p id="example-sentence-text" class="example-sentence-text"></p>
       </div>
       <div id="digital-input-area" style="display: none;">
@@ -1593,6 +1591,10 @@ function revealWord() {
   }
 
   async function deleteWord(id) {
+    const word = state.words.find(w => w.id === id);
+    if (!word) return;
+    if (!confirm(`Möchtest du das Wort „${word.stammdaten.wort}“ wirklich löschen?`)) return;
+
     state.words = state.words.filter(w => w.id !== id);
     await saveAndRefresh();
     renderWordList();
@@ -1604,6 +1606,8 @@ function revealWord() {
     const emojiInput = document.getElementById(`edit-emoji-${id}`);
     const btn = document.getElementById(`edit-btn-${id}`);
     const moreBtn = document.getElementById(`more-btn-${id}`);
+    const intensivBtn = document.getElementById(`intensiv-btn-${id}`);
+    const deleteBtn = document.getElementById(`delete-btn-${id}`);
     const detailFields = document.querySelectorAll(`#word-details-${id} input, #word-details-${id} textarea`);
 
     if (input.hasAttribute('readonly')) {
@@ -1611,6 +1615,8 @@ function revealWord() {
       emojiInput.removeAttribute('readonly');
       detailFields.forEach(field => { field.disabled = false; });
       moreBtn.hidden = false;
+      intensivBtn.hidden = true;
+      deleteBtn.hidden = true;
       input.focus();
       input.setSelectionRange(input.value.length, input.value.length);
       btn.textContent = 'Speichern';
@@ -2073,12 +2079,12 @@ async function importWords(event) {
            <span class="word-list-box">${escapeHtml(boxLabel)}</span>
           </div>
           <div class="word-list-actions">
-           <button class="btn word-list-intensiv-button ${word.userdaten?.intensiv ? 'btn-warning' : 'btn-secondary'}" type="button" aria-pressed="${word.userdaten?.intensiv === true}" title="${word.userdaten?.intensiv ? 'Intensivmodus ausschalten' : 'Intensivmodus einschalten'}" aria-label="${word.userdaten?.intensiv ? 'Intensivmodus ausschalten' : 'Intensivmodus einschalten'}" onclick="UIController.toggleIntensiv(${word.id})">🔥</button>
+           <button class="btn word-list-intensiv-button ${word.userdaten?.intensiv ? 'btn-warning' : 'btn-secondary'}" type="button" id="intensiv-btn-${word.id}" aria-pressed="${word.userdaten?.intensiv === true}" title="${word.userdaten?.intensiv ? 'Intensivmodus ausschalten' : 'Intensivmodus einschalten'}" aria-label="${word.userdaten?.intensiv ? 'Intensivmodus ausschalten' : 'Intensivmodus einschalten'}" onclick="UIController.toggleIntensiv(${word.id})">🔥</button>
            ${boxNum === 1 ? `<button class="btn btn-secondary" type="button" id="dictionary-storage-${word.id}" title="In den Wörterspeicher verschieben" aria-label="„${wordText}“ in den Wörterspeicher verschieben" onclick="UIController.moveWordToStorage(${word.id})">📦→0</button>` : ''}
            ${boxNum === 0 ? `<button class="btn btn-secondary" type="button" id="dictionary-storage-top-${word.id}" title="An die Spitze des Wörterspeichers verschieben" aria-label="„${wordText}“ an die Spitze des Wörterspeichers verschieben" onclick="UIController.moveWordToStorageTop(${word.id})" ${storageIndex === 0 ? 'disabled' : ''}>↑1</button>` : ''}
            <button class="btn btn-warning" type="button" id="edit-btn-${word.id}" onclick="UIController.toggleEdit(${word.id})">Edit</button>
            <button class="btn btn-secondary" type="button" id="more-btn-${word.id}" aria-expanded="false" aria-controls="word-details-${word.id}" hidden onclick="UIController.toggleWordDetails(${word.id})">＋ Mehr</button>
-           <button class="btn btn-danger" type="button" onclick="UIController.deleteWord(${word.id})">Löschen</button>
+           <button class="btn btn-danger" type="button" id="delete-btn-${word.id}" onclick="UIController.deleteWord(${word.id})">Löschen</button>
           </div>
          </div>
          <div class="word-details-editor" id="word-details-${word.id}" hidden>
