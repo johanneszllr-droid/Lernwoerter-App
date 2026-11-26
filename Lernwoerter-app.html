@@ -110,6 +110,7 @@
  .action-button.primary.image-action { background: linear-gradient(180deg,#fff,#f8fafc); color: #334155; box-shadow: 0 3px 10px rgba(15,23,42,.08); }
  .action-button.primary.image-action:hover { background: #eef2ff; }
  .action-button.primary.digital-next { grid-column: 3; }
+ #actionBarBefore .action-button.digital-next .action-image { width: 52px; height: 52px; }
  #actionBarBefore .action-button.image-action { min-height: 126px; gap: 3px; padding: 8px; font-size: 13px; }
  .action-button.wrong.image-action { border-color: #fecaca; background: linear-gradient(180deg,#fff,#fff1f2); color: #9f1239; }
  .action-button.wrong.image-action:hover { background: #ffe4e6; }
@@ -203,14 +204,15 @@
  .data-grid { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 14px; }
  .data-card { display: flex; flex-direction: column; justify-content: space-between; gap: 16px; padding: 20px; border: 1px solid #e2e8f0; border-radius: 24px; background: white; box-shadow: 0 4px 20px -2px rgba(15,23,42,.05); }
  .settings-card { margin-bottom: 14px; }
- .settings-controls { display: grid; width: 100%; gap: 0; }
+ .settings-controls { --setting-control-width: 64px; display: grid; width: 100%; gap: 0; }
  .setting-row { display: grid; grid-template-columns: minmax(0,1fr) minmax(120px,220px); align-items: center; gap: 12px; width: 100%; }
  .setting-copy { display: flex; grid-column: 1; flex-direction: column; gap: 4px; }
  .setting-label { color: #334155; font-size: 14px; font-weight: 800; }
  .setting-description { margin: 0; color: #64748b; font-size: 12px; line-height: 1.45; }
  .setting-row + .setting-row { padding-top: 14px; border-top: 1px solid #e2e8f0; }
- .settings-sound-toggle, .setting-number-input { grid-column: 2; justify-self: end; }
- .setting-number-input { width: 100%; min-height: 44px; padding: 9px 12px; border: 1px solid #cbd5e1; border-radius: 12px; background: #f8fafc; color: #1e293b; font-size: 16px; font-weight: 700; text-align: right; }
+ .settings-sound-toggle, .setting-number-input { grid-column: 2; justify-self: end; width: var(--setting-control-width); }
+ .settings-sound-toggle { justify-content: center; }
+ .setting-number-input { min-height: 44px; padding: 9px 8px; border: 1px solid #cbd5e1; border-radius: 12px; background: #f8fafc; color: #1e293b; font-size: 16px; font-weight: 700; text-align: center; }
  .data-card-actions { display: flex; flex-wrap: wrap; gap: 8px; }
  .data-card-actions > * { width: 100%; }
  .data-card-icon { width: 42px; height: 42px; display: grid; place-items: center; margin-bottom: 10px; border-radius: 14px; background: #eef2ff; color: #4f46e5; font-size: 20px; }
@@ -355,7 +357,7 @@
     </div>
 
     <div id="actionBarBefore" class="action-bar before">
-     <button class="action-button speak image-action" id="speak-button" onclick="speakCurrentWord()"><img class="action-image" src="./momo-vorlesen.jpeg" alt=""><span>Vorlesen</span></button>
+     <button class="action-button speak image-action" id="speak-button" onclick="speakCurrentWord()"><img class="action-image" src="./momo-vorlesen.webp" alt=""><span>Vorlesen</span></button>
      <button class="action-button peek image-action" id="peek-button" onclick="peekWord()"><img class="action-image" src="./momo-tipp_1.png" alt=""><span>Tipp</span></button>
      <button class="action-button primary image-action" id="dock-primary-btn" onclick="UIController.handlePrimaryAction()"><span id="primary-action-icon" class="action-icon"><img class="action-image" src="./momo-ergebnis.png" alt=""></span><span id="primary-action-text">Lösung anzeigen</span></button>
     </div>
@@ -891,6 +893,21 @@ const FreschModule = (() => {
     }
     return { marks, texte };
   }
+  function getDoubleConsonantMarks(ziel) {
+    const l = ziel.toLowerCase();
+    const marks = new Set();
+    const artikelMatch = l.match(/^(der|die|das|ein|eine)\s+/);
+    const offset = artikelMatch ? artikelMatch[0].length : 0;
+
+    for (let i = offset; i < l.length - 1; i++) {
+      if (l[i] === l[i + 1] && !istVokal(l[i]) && istVokal(l[i - 1])) {
+        marks.add(i);
+        marks.add(i + 1);
+      }
+    }
+    return marks;
+  }
+
 // Neu: Findet inhärente Merkstellen im Zielwort (für den Papier-Modus)
   function getInherentMarks(ziel) {
     const l = ziel.toLowerCase();
@@ -899,6 +916,9 @@ const FreschModule = (() => {
     const artikelMatch = l.match(/^(der|die|das|ein|eine)\s+/);
     const offset = artikelMatch ? artikelMatch[0].length : 0;
     const text = l.slice(offset);
+    const doubleConsonantMarks = getDoubleConsonantMarks(ziel);
+    doubleConsonantMarks.forEach(index => marks.add(index));
+    if (doubleConsonantMarks.size > 0) texte.push("<b>Doppelt</b>, weil der Vokal kurz ist");
 
     for (let i = offset; i < l.length; i++) {
       const c = l[i];
@@ -930,7 +950,7 @@ const FreschModule = (() => {
     }
     return { marks, texte };
   }
-  return { analyze, getInherentMarks };
+  return { analyze, getInherentMarks, getDoubleConsonantMarks };
 })();
 
 
@@ -1659,9 +1679,7 @@ function revealWord() {
     // Im Papier-Modus Merkstellen im Zielwort markieren
     if (state.learningMode === 'paper') {
       const { marks, texte } = FreschModule.getInherentMarks(targetWord);
-      targetEl.innerHTML = [...targetWord].map((c, i) =>
-        marks.has(i) ? `<span class="fehler">${c}</span>` : c
-      ).join('');
+      renderMarkedWord(targetEl, targetWord, marks);
       
       const feedback = document.getElementById('digital-feedback');
       if (texte.length > 0) {
@@ -1671,6 +1689,20 @@ function revealWord() {
     } else {
       targetEl.innerText = targetWord;
     }
+  }
+
+  function renderMarkedWord(targetEl, word, marks) {
+    targetEl.replaceChildren();
+    [...word].forEach((character, index) => {
+      if (marks.has(index)) {
+        const markedCharacter = document.createElement('span');
+        markedCharacter.className = 'fehler';
+        markedCharacter.textContent = character;
+        targetEl.appendChild(markedCharacter);
+      } else {
+        targetEl.appendChild(document.createTextNode(character));
+      }
+    });
   }
 
   function handleInputKey(event) {
@@ -1718,7 +1750,7 @@ function revealWord() {
       cardEl.classList.add('correct-bg');
       statusIcon.textContent = '✅';
       targetEl.className = 'word-display digital-result richtig';
-      targetEl.textContent = targetWord;
+      renderMarkedWord(targetEl, targetWord, FreschModule.getDoubleConsonantMarks(targetWord));
       feedback.innerHTML = '';
     } else {
       AudioModule.playError();
@@ -1728,14 +1760,14 @@ function revealWord() {
 
       // 1. Das Hauptdisplay zeigt wie gewohnt die korrekte Lösung mit den Highlight-Markierungen
       const { marks: targetMarks, texte } = await FreschModule.analyze(targetWord, userInput);
+      const inputMarks = new Set(targetMarks);
+      FreschModule.getDoubleConsonantMarks(targetWord).forEach(index => targetMarks.add(index));
       targetEl.className = 'word-display digital-result';
-      targetEl.innerHTML = [...targetWord].map((c, i) =>
-        targetMarks.has(i) ? `<span class="fehler">${c}</span>` : c
-      ).join('');
+      renderMarkedWord(targetEl, targetWord, targetMarks);
 
       // 2. Der Schüler-Tipp wird zusätzlich darunter dezent mit unterstrichenen Fehlern eingeblendet
       const highlightedInput = [...userInput].map((c, i) =>
-        targetMarks.has(i) ? `<span style="border-bottom: 2px solid #ff3b30; color: #ff3b30;">${c}</span>` : c
+        inputMarks.has(i) ? `<span style="border-bottom: 2px solid #ff3b30; color: #ff3b30;">${c}</span>` : c
       ).join('');
 
       feedback.innerHTML = `
@@ -1745,7 +1777,7 @@ function revealWord() {
     }
 
     document.getElementById('speak-button').style.display = 'none';
-    document.getElementById('primary-action-icon').textContent = '➡️';
+    document.getElementById('primary-action-icon').innerHTML = '<img class="action-image" src="./maus_weiter_512-1.webp" alt="">';
     document.getElementById('primary-action-text').textContent = 'Weiter';
     const primaryButton = document.getElementById('dock-primary-btn');
     primaryButton.classList.remove('image-action');
