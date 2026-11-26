@@ -124,7 +124,9 @@
  .action-button.wrong.image-action { border-color: #fecaca; background: linear-gradient(180deg,#fff,#fff1f2); color: #9f1239; }
  .action-button.wrong.image-action:hover { background: #ffe4e6; }
  .action-button.correct.image-action { border-color: #a7f3d0; background: linear-gradient(180deg,#fff,#ecfdf5); color: #065f46; }
- .celebration-overlay { position: fixed; inset: 0; z-index: 1200; display: grid; place-items: center; padding: 20px; overflow: hidden; background: rgba(224,231,255,.58); backdrop-filter: blur(3px); pointer-events: none; }
+ .celebration-overlay { position: fixed; inset: 0; z-index: 1200; display: grid; place-items: center; padding: 20px; overflow: hidden; background: rgba(224,231,255,.58); backdrop-filter: blur(3px); }
+ .celebration-actions { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-top: 18px; }
+ .celebration-actions .btn { min-width: 150px; }
  .celebration-overlay[hidden] { display: none; }
  .celebration-confetti { position: absolute; inset: 0; overflow: hidden; }
  .celebration-confetti-piece { position: absolute; top: -18px; width: 10px; height: 15px; border-radius: 2px; opacity: 0; animation: confetti-fall 3.8s ease-in forwards; }
@@ -381,13 +383,17 @@
    </section>
 
    <div id="stats" class="stats"></div>
-   <div id="daily-goal-celebration" class="celebration-overlay" role="status" aria-live="polite" hidden>
+   <div id="daily-goal-celebration" class="celebration-overlay" role="dialog" aria-modal="true" aria-labelledby="celebration-title" hidden>
     <div id="celebration-confetti" class="celebration-confetti" aria-hidden="true"></div>
     <div class="celebration-message">
      <div class="celebration-balloons" aria-hidden="true"><span>🎈</span><span>🎈</span><span>🎈</span></div>
-     <h2>Geschafft!</h2>
-     <p>Herzlichen Glückwunsch, du hast deine tägliche Lerneinheit absolviert</p>
+     <h2 id="celebration-title">Geschafft!</h2>
+     <p id="celebration-text">Herzlichen Glückwunsch, du hast deine tägliche Lerneinheit absolviert</p>
      <div class="celebration-sparkles" aria-hidden="true">🎉 ⭐ 🎉</div>
+     <div class="celebration-actions">
+      <button class="btn btn-secondary" type="button" id="celebration-finish-btn" onclick="UIController.finishForToday()">Für heute fertig</button>
+      <button class="btn btn-success" type="button" id="celebration-continue-btn" onclick="UIController.continueLearning()">Weiterlernen</button>
+     </div>
     </div>
    </div>
    <aside class="storage-note">
@@ -718,6 +724,8 @@ const FreschModule = (() => {
   const VERLAENGERUNG = { "Sand": "sandig", "Mehl": "mehlig", "Gold": "golden" };
   const istVokal = c => !!c && "aeiouäöüy".includes(c);
   const AUSLAUT = { g: "k", d: "t", b: "p" };
+  // Macht Sonderzeichen (< > & " ') unschädlich, bevor fremder Text (z. B. von Wiktionary) als HTML angezeigt wird
+  const esc = value => String(value).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]);
   const ex = (w, n) => ["Zahl", "Fahrt", "Bohne"].filter(x => x.toLowerCase() !== w.toLowerCase()).slice(0, n).join(", ");
 
   function diff(eingabe, ziel) {
@@ -886,7 +894,7 @@ const FreschModule = (() => {
         try { v = await verlaengerung(ziel); } catch (e) { v = null; }
         if (v && v.toLowerCase().includes(want)) {
           const k = v.toLowerCase().indexOf(want);
-          add(`<b>Verlängern:</b> ${v.slice(0, k)}<b>${v[k]}</b>${v.slice(k + 1)}`);
+          add(`<b>Verlängern:</b> ${esc(v.slice(0, k))}<b>${esc(v[k])}</b>${esc(v.slice(k + 1))}`);
         } else {
           add("<b>Verlängern</b>, dann hörst du den Buchstaben");
         }
@@ -895,7 +903,7 @@ const FreschModule = (() => {
         marks.add(i);
         let b = null;
         try { b = await ableitung(ziel); } catch (e) { b = null; }
-        add(b ? `<b>Ableiten:</b> ${b} → ${ziel.slice(offset)}` : "<b>ä</b> kommt oft von <b>a</b>");
+        add(b ? `<b>Ableiten:</b> ${esc(b)} → ${esc(ziel.slice(offset))}` : "<b>ä</b> kommt oft von <b>a</b>");
       }
       else {
         marks.add(i);
@@ -1338,12 +1346,46 @@ const UIController = (() => {
       piece.style.animationDuration = `${3 + Math.random() * 1.2}s`;
       confetti.appendChild(piece);
     }
+    // Meldung auf den Ausgangszustand setzen (falls vorher "Für heute fertig" gewählt wurde)
+    document.getElementById('celebration-title').textContent = 'Geschafft!';
+    document.getElementById('celebration-text').textContent = 'Herzlichen Glückwunsch, du hast deine tägliche Lerneinheit absolviert';
+    document.getElementById('celebration-finish-btn').hidden = false;
+    const continueButton = document.getElementById('celebration-continue-btn');
+    continueButton.textContent = 'Weiterlernen';
+
+    // Nichts im Hintergrund vorlesen, solange die Meldung offen ist
+    clearTimeout(speakTimeout);
+    speakTimeout = null;
+    if ('speechSynthesis' in window) window.speechSynthesis.cancel();
+
     celebration.hidden = false;
+    continueButton.focus();
+    // Die Meldung bleibt offen, bis das Kind sich entscheidet; nur das Konfetti verschwindet
     clearTimeout(celebrationTimeout);
-    celebrationTimeout = setTimeout(() => {
-      celebration.hidden = true;
-      confetti.replaceChildren();
-    }, 5000);
+    celebrationTimeout = setTimeout(() => confetti.replaceChildren(), 5000);
+  }
+
+  // "Weiterlernen": Meldung schließen und das aktuelle Wort (mit Beispielsatz) vorlesen
+  function continueLearning() {
+    clearTimeout(celebrationTimeout);
+    document.getElementById('daily-goal-celebration').hidden = true;
+    document.getElementById('celebration-confetti').replaceChildren();
+    const learnTabVisible = document.getElementById('learn-tab').style.display !== 'none';
+    if (learnTabVisible && state.currentWordIndex !== -1) {
+      if (state.learningMode === 'digital') document.getElementById('user-input').focus();
+      speakTimeout = setTimeout(speakCurrentWordWithSentence, 300);
+    }
+  }
+
+  // "Für heute fertig": Abschiedsmeldung zeigen; über "Doch weiterlernen" geht es jederzeit weiter
+  function finishForToday() {
+    if ('speechSynthesis' in window) window.speechSynthesis.cancel();
+    document.getElementById('celebration-title').textContent = 'Bis morgen! 👋';
+    document.getElementById('celebration-text').textContent = 'Super gemacht! Du kannst die App jetzt schließen.';
+    document.getElementById('celebration-finish-btn').hidden = true;
+    const continueButton = document.getElementById('celebration-continue-btn');
+    continueButton.textContent = 'Doch weiterlernen';
+    continueButton.focus();
   }
 
   function toggleNavigationMenu() {
@@ -1460,13 +1502,19 @@ const UIController = (() => {
     nextWord();
   }
 
-  function speakWord(text) {
+  // Liest einen oder mehrere Texte nacheinander vor (z. B. erst das Wort, dann den Beispielsatz)
+  function speakWord(...texts) {
     if ('speechSynthesis' in window) {
       window.speechSynthesis.cancel();
-      const utterance = new SpeechSynthesisUtterance(text);
-      utterance.lang = 'de-DE';
-      utterance.rate = 0.85;
-      window.speechSynthesis.speak(utterance);
+      texts
+        .map(text => String(text || '').trim())
+        .filter(Boolean)
+        .forEach(text => {
+          const utterance = new SpeechSynthesisUtterance(text);
+          utterance.lang = 'de-DE';
+          utterance.rate = 0.85;
+          window.speechSynthesis.speak(utterance);
+        });
     }
   }
 
@@ -1474,6 +1522,13 @@ const UIController = (() => {
     if (state.currentWordIndex !== -1 && state.words[state.currentWordIndex]) {
       speakWord(state.words[state.currentWordIndex].stammdaten.wort);
     }
+  }
+
+  // Beim ersten Anzeigen einer Karte: erst das Wort, danach den vollständigen Beispielsatz vorlesen
+  function speakCurrentWordWithSentence() {
+    const current = state.words[state.currentWordIndex];
+    if (state.currentWordIndex === -1 || !current) return;
+    speakWord(current.stammdaten.wort, current.stammdaten.beispielsatz);
   }
 
   function updateCardMeta(word) {
@@ -1604,9 +1659,11 @@ const UIController = (() => {
   function speakExampleSentence() {
     const container = document.getElementById('example-sentence');
     if (container.getAttribute('role') !== 'button') return;
-    const visibleSentence = document.getElementById('example-sentence-text').textContent.trim();
-    if (!visibleSentence) return;
-    speakWord(visibleSentence.replace(/_+/g, '…'));
+    // Immer den vollständigen Satz vorlesen, auch wenn das Lernwort im Text ausgeblendet ist
+    const current = state.words[state.currentWordIndex];
+    const fullSentence = String(current?.stammdaten?.beispielsatz || '').trim();
+    if (!fullSentence) return;
+    speakWord(fullSentence);
   }
 
   function handleExampleSentenceKey(event) {
@@ -1715,7 +1772,7 @@ const UIController = (() => {
       inputField.focus();
     }
 
-    if (autoSpeak) speakTimeout = setTimeout(speakCurrentWord, 300);
+    if (autoSpeak) speakTimeout = setTimeout(speakCurrentWordWithSentence, 300);
   }
 
 function peekWord() {
@@ -1797,6 +1854,44 @@ function revealWord() {
     }
   }
 
+  // Vergleicht Eingabe und Zielwort Buchstabe für Buchstabe (mit Groß-/Kleinschreibung)
+  // und liefert die Positionen in der EINGABE, die falsch, überflüssig oder an einer Lücke sind.
+  function getInputErrorMarks(eingabe, ziel) {
+    const a = [...eingabe];
+    const b = [...ziel];
+    const n = a.length;
+    const m = b.length;
+    const d = Array.from({ length: n + 1 }, () => new Array(m + 1).fill(0));
+    for (let i = 0; i <= n; i++) d[i][0] = i;
+    for (let j = 0; j <= m; j++) d[0][j] = j;
+    for (let i = 1; i <= n; i++) {
+      for (let j = 1; j <= m; j++) {
+        d[i][j] = Math.min(
+          d[i - 1][j - 1] + (a[i - 1] === b[j - 1] ? 0 : 1),
+          d[i - 1][j] + 1,
+          d[i][j - 1] + 1
+        );
+      }
+    }
+
+    const marks = new Set();
+    let i = n;
+    let j = m;
+    while (i > 0 || j > 0) {
+      if (i > 0 && j > 0 && a[i - 1] === b[j - 1] && d[i][j] === d[i - 1][j - 1]) {
+        i--; j--; // Buchstabe stimmt
+      } else if (i > 0 && j > 0 && d[i][j] === d[i - 1][j - 1] + 1) {
+        marks.add(i - 1); i--; j--; // falscher Buchstabe
+      } else if (i > 0 && d[i][j] === d[i - 1][j] + 1) {
+        marks.add(i - 1); i--; // Buchstabe zu viel
+      } else {
+        if (n > 0) marks.add(Math.min(i, n - 1)); // Buchstabe fehlt: Nachbarn markieren
+        j--;
+      }
+    }
+    return marks;
+  }
+
   async function checkDigitalAnswer() {
     if (state.currentWordIndex === -1) return;
     
@@ -1837,16 +1932,23 @@ function revealWord() {
       cardEl.classList.add('wrong-bg');
       statusIcon.textContent = '❌';
 
+      // Hat das Kind ohne Artikel getippt, wird nur gegen das Wort ohne Artikel verglichen,
+      // damit der fehlende Artikel nicht als Fehler gewertet wird.
+      const articlePattern = /^(der|die|das|ein|eine)\s+/i;
+      const compareTarget = articlePattern.test(userInput) ? targetWord : wordWithoutArticle;
+      const articleOffset = targetWord.length - compareTarget.length;
+
       // 1. Das Hauptdisplay zeigt wie gewohnt die korrekte Lösung mit den Highlight-Markierungen
-      const { marks: targetMarks, texte } = await FreschModule.analyze(targetWord, userInput);
-      const inputMarks = new Set(targetMarks);
+      const { marks: analysisMarks, texte } = await FreschModule.analyze(compareTarget, userInput);
+      const targetMarks = new Set([...analysisMarks].map(index => index + articleOffset));
       FreschModule.getDoubleConsonantMarks(targetWord).forEach(index => targetMarks.add(index));
       targetEl.className = 'word-display digital-result';
       renderMarkedWord(targetEl, targetWord, targetMarks);
 
       // 2. Der Schüler-Tipp wird zusätzlich darunter dezent mit unterstrichenen Fehlern eingeblendet
+      const inputMarks = getInputErrorMarks(userInput, compareTarget);
       const highlightedInput = [...userInput].map((c, i) =>
-        inputMarks.has(i) ? `<span style="border-bottom: 2px solid #ff3b30; color: #ff3b30;">${c}</span>` : c
+        inputMarks.has(i) ? `<span style="border-bottom: 2px solid #ff3b30; color: #ff3b30;">${escapeHtml(c)}</span>` : escapeHtml(c)
       ).join('');
 
       feedback.innerHTML = `
@@ -1895,10 +1997,6 @@ function revealWord() {
       if (state.learningMode === 'paper') {
         isCorrect ? AudioModule.playSuccess() : AudioModule.playError();
       }
-      if (dailyProgress.completedNow) {
-        AudioModule.playDailyGoalSuccess();
-        showDailyGoalCelebration();
-      }
       const inIntensiveFilter = state.selectedBoxFilter === 'intensiv';
       const skipPromotion = (inIntensiveFilter || state.helpUsed);
       const answeredWord = state.words[state.currentWordIndex];
@@ -1908,7 +2006,12 @@ function revealWord() {
       }
       LeitnerModule.evaluateAnswer(answeredWord, isCorrect, state.words, skipPromotion, inIntensiveFilter);
       await saveAndRefresh();
-      nextWord();
+      // Tagesziel erreicht: nächste Karte still vorbereiten, Erfolgsmeldung zeigen und auf die Entscheidung warten
+      nextWord(!dailyProgress.completedNow);
+      if (dailyProgress.completedNow) {
+        AudioModule.playDailyGoalSuccess();
+        showDailyGoalCelebration();
+      }
     } finally {
       state.answerInProgress = false;
     }
@@ -2497,6 +2600,8 @@ async function importWords(event) {
     toggleNavigationMenu,
     closeNavigationMenu,
     toggleCurrentWordIntensiv,
+    continueLearning,
+    finishForToday,
     toggleSound,
     answer,
     addWord,
