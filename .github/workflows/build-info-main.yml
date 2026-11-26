@@ -1,0 +1,47 @@
+name: Build-Info für main
+
+# Erzeugt build-info.json für die veröffentlichte Version, sobald etwas
+# (z. B. ein Pull Request aus dev) nach main übernommen wird.
+on:
+  push:
+    branches:
+      - main
+    paths-ignore:
+      - 'dev/**'
+      - 'build-info.json'
+
+permissions:
+  contents: write
+
+# Gleiche Gruppe wie deploy-dev.yml, damit nie zwei Läufe gleichzeitig auf main schreiben.
+concurrency:
+  group: main-branch-writes
+  cancel-in-progress: false
+
+jobs:
+  build-info:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout main
+        uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - name: Generate build metadata
+        run: |
+          commit_hash="$(git rev-parse --short=12 "${{ github.sha }}")"
+          commit_name="$(git log -1 --format=%s "${{ github.sha }}")"
+          jq -n \
+            --arg commitName "$commit_name" \
+            --arg commitHash "$commit_hash" \
+            --arg builtAt "$(date -u +%Y-%m-%dT%H:%M:%SZ)" \
+            '{commitName: $commitName, commitHash: $commitHash, builtAt: $builtAt}' \
+            > build-info.json
+
+      - name: Commit and push
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add build-info.json
+          git diff --staged --quiet || git commit -m "Build-Info für main aktualisiert"
+          git push origin main

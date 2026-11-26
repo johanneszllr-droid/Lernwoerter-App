@@ -8,6 +8,11 @@ on:
 permissions:
   contents: write
 
+# Gleiche Gruppe wie build-info-main.yml, damit nie zwei Läufe gleichzeitig auf main schreiben.
+concurrency:
+  group: main-branch-writes
+  cancel-in-progress: false
+
 jobs:
   publish-dev:
     runs-on: ubuntu-latest
