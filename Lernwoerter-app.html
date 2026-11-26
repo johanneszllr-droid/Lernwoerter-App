@@ -5,7 +5,7 @@
  <meta name="viewport" content="width=device-width, initial-scale=1.0">
  <title>Lernwörter-App</title>
  <!-- Manuelle Versionsnummer, wird unter „Daten & Info“ angezeigt. -->
- <meta name="app-version" content="1.1.1">
+ <meta name="app-version" content="1.3.0">
  <meta name="theme-color" content="#f8fafc">
  <link rel="icon" type="image/png" href="./Momo_Maus.png">
  <link rel="apple-touch-icon" href="./Momo_Maus.png">
@@ -90,6 +90,10 @@
  .word-display { min-height: 50px; margin: 8px 0; color: #334155; font-size: clamp(2rem,6vw,3rem); font-weight: 800; letter-spacing: .02em; }
  .word-display.digital-result { font-size: clamp(2rem,7vw,3.4rem); color: #334155; letter-spacing: .04em; }
  .word-display.digital-result.richtig { color: #059669; }
+ .example-sentence { width: 100%; padding: 12px 15px; border: 1px solid #c7d2fe; border-radius: 15px; background: #eef2ff; color: #334155; text-align: left; }
+ .example-sentence[hidden] { display: none; }
+ .example-sentence-label { display: block; margin-bottom: 4px; color: #4f46e5; font-size: 11px; font-weight: 800; letter-spacing: .04em; text-transform: uppercase; }
+ .example-sentence-text { margin: 0; font-size: 15px; line-height: 1.5; }
  .fehler { color: #ea580c; border-bottom: 4px solid #fb923c; }
  #digital-input-area { width: 100%; margin: 0 !important; }
  #user-input { width: 100%; min-height: 56px; padding: 13px 16px; border: 2px solid #e2e8f0; border-radius: 16px; outline: none; background: #f8fafc; color: #1e293b; font-size: 19px; font-weight: 700; text-align: center; }
@@ -103,20 +107,23 @@
  #actionBarBefore .action-button { min-height: 74px; gap: 11px; padding: 14px 16px; font-size: 17px; }
  #actionBarBefore .action-button .action-icon { font-size: 19.5px; }
  .action-button:active { transform: scale(.97); }
- .action-button.image-action { flex-direction: column; min-height: 112px; gap: 2px; padding: 6px; border: 0; background: transparent; color: #334155; box-shadow: none; }
- .action-button.image-action:hover { background: #f8fafc; }
+ .action-button.image-action { flex-direction: column; min-height: 126px; gap: 3px; padding: 8px; border: 1px solid #dbe3ee; border-radius: 18px; background: linear-gradient(180deg,#fff,#f8fafc); color: #334155; box-shadow: 0 3px 10px rgba(15,23,42,.08); }
+ .action-button.image-action:hover { border-color: #a5b4fc; background: #eef2ff; box-shadow: 0 5px 14px rgba(79,70,229,.15); }
  .action-button.image-action:focus-visible { outline: 3px solid #a5b4fc; outline-offset: 2px; }
- .action-image { width: 76px; height: 76px; flex: 0 0 auto; object-fit: contain; }
+ .action-image { width: 82px; height: 82px; flex: 0 0 auto; object-fit: contain; object-position: center; filter: drop-shadow(0 2px 3px rgba(15,23,42,.16)); }
  .action-button.primary { background: #4f46e5; color: white; box-shadow: 0 4px 12px rgba(79,70,229,.18); }
- .action-button.primary.image-action { background: transparent; color: #334155; box-shadow: none; }
- .action-button.primary.image-action:hover { background: #f8fafc; }
+ .action-button.primary.image-action { background: linear-gradient(180deg,#fff,#f8fafc); color: #334155; box-shadow: 0 3px 10px rgba(15,23,42,.08); }
+ .action-button.primary.image-action:hover { background: #eef2ff; }
  .action-button.primary.digital-next { grid-column: 3; }
- #actionBarBefore .action-button.image-action { min-height: 112px; gap: 2px; padding: 6px; font-size: 13px; }
- .action-button.wrong, .action-button.correct { background: transparent; color: #334155; }
+ #actionBarBefore .action-button.image-action { min-height: 126px; gap: 3px; padding: 8px; font-size: 13px; }
+ .action-button.wrong.image-action { border-color: #fecaca; background: linear-gradient(180deg,#fff,#fff1f2); color: #9f1239; }
+ .action-button.wrong.image-action:hover { background: #ffe4e6; }
+ .action-button.correct.image-action { border-color: #a7f3d0; background: linear-gradient(180deg,#fff,#ecfdf5); color: #065f46; }
+ .action-button.correct.image-action:hover { background: #d1fae5; }
  .eval-grid { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 10px; }
  .eval-grid.paper-mode { display: flex; flex: 1; width: 100%; justify-content: space-between; gap: 14px; }
  .eval-grid.paper-mode .action-button { flex: 0 1 48%; min-height: 81px; padding: 16px 18px; gap: 12px; font-size: 19.5px; }
- .eval-grid.paper-mode .action-button.image-action { min-height: 112px; padding: 6px; gap: 2px; font-size: 13px; }
+ .eval-grid.paper-mode .action-button.image-action { min-height: 126px; padding: 8px; gap: 3px; font-size: 13px; }
  .stats { align-self: center; padding: 8px 14px; border: 1px solid #e2e8f0; border-radius: 999px; background: rgba(255,255,255,.75); color: #64748b; font-size: 11px; font-weight: 700; text-align: center; }
  .storage-note { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 12px 15px; border: 1px solid #fde68a; border-radius: 18px; background: #fffbeb; color: #78350f; font-size: 12px; }
  .storage-note p { margin: 0; line-height: 1.5; }
@@ -158,17 +165,25 @@
  .word-group-indicator { margin-left: auto; color: #64748b; font-size: 18px; font-weight: 700; }
  .word-group-content { display: grid; gap: 8px; min-width: 0; margin: 0; padding: 8px; list-style: none; }
  .word-group-content[hidden] { display: none; }
- #word-list .word-list-entry { display: flex; align-items: center; gap: 8px; min-width: 0; width: 100%; margin: 0; padding: 8px 10px; border: 1px solid #e2e8f0; border-radius: 12px; background: white; }
+ #word-list .word-entry-wrapper { display: grid; gap: 8px; min-width: 0; }
+ #word-list .word-list-entry { display: flex; align-items: center; gap: 10px; min-width: 0; width: 100%; margin: 0; padding: 10px 12px; border: 1px solid #e2e8f0; border-radius: 14px; background: white; }
  .word-list-details { display: flex; flex: 1; flex-direction: column; gap: 1px; min-width: 0; }
  .word-list-details .word-list-input { width: 100%; flex: none; padding: 2px 4px; line-height: 1.2; text-overflow: ellipsis; }
  .word-list-box { padding-left: 4px; color: #64748b; font-size: 10px; line-height: 1.2; white-space: nowrap; }
- .word-list-actions { display: flex; flex: 0 0 auto; align-items: center; gap: 4px; }
- .word-list-actions .btn { min-height: 32px; padding: 5px 7px; border-radius: 9px; font-size: 11px; white-space: nowrap; }
+ .word-list-actions { display: flex; flex: 0 0 auto; align-items: center; justify-content: flex-end; gap: 6px; flex-wrap: wrap; max-width: 340px; }
+ .word-list-actions .btn { min-width: 38px; min-height: 38px; padding: 7px 9px; border-radius: 10px; font-size: 12px; white-space: nowrap; }
  .word-list-actions .word-list-intensiv-button { margin-right: 14px; }
- .word-list-input { width: auto; min-width: 0; flex: 1; padding: 6px; border: 1px solid transparent; border-radius: 8px; background: transparent; color: #1e293b; font-size: 14px; font-weight: 700; text-align: left; outline: none; }
+ .word-list-input { width: auto; min-width: 0; flex: 1; padding: 6px; border: 1px solid transparent; border-radius: 8px; background: transparent; color: #1e293b; font-size: 16px; font-weight: 700; text-align: left; outline: none; }
  .word-list-input:not([readonly]) { border-color: #a5b4fc; background: #f8fafc; }
  .word-list-emoji { flex: 0 0 34px; width: 34px; padding: 3px; border: 1px solid transparent; border-radius: 8px; background: transparent; color: #1e293b; font-size: 1.15rem; text-align: center; outline: none; }
  .word-list-emoji:not([readonly]) { border-color: #a5b4fc; background: #f8fafc; }
+ .word-details-editor { display: grid; gap: 10px; padding: 14px; border: 1px solid #c7d2fe; border-radius: 14px; background: #f8faff; }
+ .word-details-editor[hidden] { display: none; }
+ .word-details-grid { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 10px; }
+ .word-details-field { display: flex; flex-direction: column; gap: 5px; min-width: 0; color: #475569; font-size: 12px; font-weight: 700; }
+ .word-details-field input, .word-details-field textarea { width: 100%; min-height: 40px; padding: 9px 10px; border: 1px solid #cbd5e1; border-radius: 10px; background: white; color: #1e293b; font-size: 14px; font-weight: 500; }
+ .word-details-field textarea { min-height: 64px; resize: vertical; }
+ .word-details-editor :disabled { background: #f1f5f9; color: #64748b; }
  .backup-row { display: flex; justify-content: center; gap: 10px; margin-top: 14px; padding-top: 14px; border-top: 1px solid #e2e8f0; flex-wrap: wrap; }
  .data-warning { display: flex; align-items: flex-start; gap: 14px; padding: 18px; border: 1px solid #fde68a; border-radius: 24px; background: linear-gradient(110deg,#fffbeb,#fff7ed); color: #78350f; }
  .data-warning-icon { width: 44px; height: 44px; flex: 0 0 auto; display: grid; place-items: center; border-radius: 16px; background: #fef3c7; font-size: 22px; }
@@ -216,22 +231,25 @@
   .action-button .action-icon { font-size: 17px; }
   #actionBarBefore .action-button { min-height: 68px; gap: 4px; padding: 8px 5px; font-size: 13px; }
   #actionBarBefore .action-button .action-icon { font-size: 22px; }
-  #actionBarBefore .action-button.image-action { min-height: 96px; gap: 2px; padding: 4px; font-size: 12px; }
-  .action-image { width: 64px; height: 64px; }
+  #actionBarBefore .action-button.image-action { min-height: 110px; gap: 2px; padding: 5px; font-size: 12px; }
+  .action-image { width: 70px; height: 70px; }
   .eval-grid.paper-mode .action-button { min-height: 78px; padding: 12px 8px; gap: 6px; font-size: 15px; }
-  .eval-grid.paper-mode .action-button.image-action { min-height: 96px; padding: 4px; gap: 2px; font-size: 12px; }
+  .eval-grid.paper-mode .action-button.image-action { min-height: 110px; padding: 5px; gap: 2px; font-size: 12px; }
   .eval-grid.paper-mode .action-button .action-icon { font-size: 25.5px; }
   .stats { max-width: 100%; border-radius: 15px; line-height: 1.5; }
   .data-grid { grid-template-columns: 1fr; }
   .bento-panel { padding: 15px; border-radius: 22px; }
-  #word-list .word-list-entry { gap: 6px; padding: 7px 8px; }
+  #word-list .word-list-entry { gap: 6px; padding: 9px 8px; flex-wrap: wrap; }
+  #word-list .word-list-details { flex: 1 1 0; }
+  #word-list .word-list-actions { flex: 1 1 100%; max-width: none; justify-content: flex-end; }
   #storage-word-list .word-list-entry { gap: 7px; padding: 7px 8px; }
   .storage-order-actions .btn { min-width: 34px; min-height: 32px; padding: 4px 7px; }
   .word-list-emoji { flex-basis: 32px; width: 32px; font-size: 1.1rem; }
   .word-list-actions { gap: 3px; }
-  .word-list-actions .btn { min-height: 30px; padding: 5px 6px; font-size: 10px; }
+  .word-list-actions .btn { min-height: 36px; padding: 7px 8px; font-size: 11px; }
   .word-list-actions .word-list-intensiv-button { margin-right: 14px; }
   .word-group-actions { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .word-details-grid { grid-template-columns: 1fr; }
  }
  @media (max-width: 420px) {
   .brand-icon { width: 37px; height: 37px; }
@@ -308,6 +326,10 @@
      <div class="emoji-badge"><span id="word-emoji" class="word-icon">📝</span></div>
      <div class="learning-content">
       <div id="word-target" class="word-display" style="display: none;"></div>
+      <div id="example-sentence" class="example-sentence" hidden>
+       <span class="example-sentence-label">Beispielsatz</span>
+       <p id="example-sentence-text" class="example-sentence-text"></p>
+      </div>
       <div id="digital-input-area" style="display: none;">
        <input type="email" id="user-input" placeholder="Wort hier eintippen..." autocomplete="off" autocorrect="off" autocapitalize="none" spellcheck="false" onkeydown="handleInputKey(event)">
       </div>
@@ -373,6 +395,10 @@
    <div class="bento-panel">
     <div class="panel-heading">
      <div><h2>Wörterspeicher</h2><p>Hier warten neue Wörter auf einen freien Platz in Box 1. Mit den Pfeilen kannst du die Reihenfolge fürs Nachrücken festlegen.</p></div>
+    </div>
+    <div class="word-search">
+     <label for="storage-search">Wörterspeicher durchsuchen</label>
+     <input type="search" id="storage-search" placeholder="Wort, Artikel oder Plural eingeben..." autocomplete="off" oninput="UIController.renderStorageWordList()">
     </div>
     <ul id="storage-word-list" aria-label="Reihenfolge der Wörter im Wörterspeicher"></ul>
    </div>
@@ -1059,6 +1085,9 @@ const UIController = (() => {
     const result = await StorageModule.load();
     
     state.words = result.words;
+    state.words.forEach(word => {
+      if (word.stammdaten) word.stammdaten.beispielsatz ??= '';
+    });
     serverMode = result.isServer;
     document.getElementById('clear-local-dictionary-button').disabled = serverMode;
     statusEl.innerText = result.isServer 
@@ -1219,10 +1248,59 @@ const UIController = (() => {
     return selectedIndex === -1 ? -1 : state.words.indexOf(nextWords[selectedIndex]);
   }
 
+  function escapeRegExp(value) {
+    return value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  }
+
+  function maskExampleSentence(word) {
+    const sentence = String(word.stammdaten?.beispielsatz || '').trim();
+    const wordText = String(word.stammdaten?.wort || '').trim();
+    if (!sentence || !wordText) return null;
+
+    const lemma = wordText.replace(/^(der|die|das|ein|eine)\s+/i, '');
+    const article = String(word.stammdaten?.artikel || '').trim();
+    const forms = [...new Set([
+      article && lemma ? `${article} ${lemma}` : '',
+      wordText,
+      lemma,
+      word.stammdaten?.plural
+    ].map(form => String(form || '').trim()).filter(Boolean))]
+      .sort((a, b) => b.length - a.length)
+      .map(escapeRegExp);
+    const wordPattern = new RegExp(
+      `(^|[^\\p{L}\\p{N}])(?:${forms.join('|')})(?=$|[^\\p{L}\\p{N}])`,
+      'giu'
+    );
+    let wasMasked = false;
+    const maskedSentence = sentence.replace(wordPattern, (_match, prefix) => {
+      wasMasked = true;
+      return `${prefix}_____`;
+    });
+    return wasMasked ? maskedSentence : null;
+  }
+
+  function updateExampleSentence(word) {
+    const container = document.getElementById('example-sentence');
+    const text = document.getElementById('example-sentence-text');
+    if (!word) {
+      container.hidden = true;
+      text.textContent = '';
+      return;
+    }
+    container.hidden = false;
+    if (!String(word.stammdaten?.beispielsatz || '').trim()) {
+      text.textContent = 'Für dieses Wort ist noch kein Beispielsatz hinterlegt.';
+      return;
+    }
+    text.textContent = maskExampleSentence(word) ||
+      'Dieser Satz wird ausgeblendet, weil das Lernwort darin nicht sicher erkannt wurde.';
+  }
+
   function nextWord() {
     state.helpUsed = false;
     clearTimeout(peekTimeout);
     peekTimeout = null;
+    updateExampleSentence(null);
 
     const cardEl = document.getElementById('learning-card');
     const beforeBar = document.getElementById('actionBarBefore');
@@ -1291,6 +1369,7 @@ const UIController = (() => {
 
     const current = state.words[state.currentWordIndex];
     const currentBox = current.userdaten?.box ?? 0;
+    updateExampleSentence(current);
     document.getElementById('box-info').innerText = LeitnerModule.getBoxLabel(currentBox);
     document.getElementById('word-emoji').innerText = current.stammdaten?.emoji || EmojiModule.getForWord(current.stammdaten.wort);
     document.getElementById('digital-feedback').style.display = 'none';
@@ -1395,7 +1474,8 @@ function revealWord() {
     document.getElementById('peek-button').style.display = 'none';
 
     const targetWord = state.words[state.currentWordIndex].stammdaten.wort;
-    const isCorrect = (userInput === targetWord);
+    const wordWithoutArticle = targetWord.replace(/^(der|die|das|ein|eine)\s+/i, '');
+    const isCorrect = userInput === targetWord || userInput === wordWithoutArticle;
     state.pendingIsCorrect = isCorrect;
 
     const cardEl = document.getElementById('learning-card');
@@ -1502,7 +1582,7 @@ function revealWord() {
     } else {
       state.words.push({
         id: Date.now(),
-        stammdaten: { wort: val, artikel: '', wortart: '', plural: '', emoji: EmojiModule.getForWord(val), besonderheiten: [] },
+        stammdaten: { wort: val, artikel: '', wortart: '', plural: '', emoji: EmojiModule.getForWord(val), beispielsatz: '', besonderheiten: [] },
         userdaten: { box: 0, letztePruefung: null, fehlerZaehler: 0 }
       });
     }
@@ -1523,10 +1603,14 @@ function revealWord() {
     const input = document.getElementById(`edit-input-${id}`);
     const emojiInput = document.getElementById(`edit-emoji-${id}`);
     const btn = document.getElementById(`edit-btn-${id}`);
+    const moreBtn = document.getElementById(`more-btn-${id}`);
+    const detailFields = document.querySelectorAll(`#word-details-${id} input, #word-details-${id} textarea`);
 
     if (input.hasAttribute('readonly')) {
       input.removeAttribute('readonly');
       emojiInput.removeAttribute('readonly');
+      detailFields.forEach(field => { field.disabled = false; });
+      moreBtn.hidden = false;
       input.focus();
       input.setSelectionRange(input.value.length, input.value.length);
       btn.textContent = 'Speichern';
@@ -1537,15 +1621,43 @@ function revealWord() {
 
       const w = state.words.find(item => item.id === id);
       if (w) {
+        const previousStammdaten = { ...w.stammdaten };
         w.stammdaten.wort = newVal;
         w.stammdaten.emoji = emojiInput.value.trim() || EmojiModule.getForWord(newVal);
+        w.stammdaten.artikel = document.getElementById(`edit-artikel-${id}`).value.trim();
+        w.stammdaten.wortart = document.getElementById(`edit-wortart-${id}`).value.trim();
+        w.stammdaten.plural = document.getElementById(`edit-plural-${id}`).value.trim();
+        w.stammdaten.beispielsatz = document.getElementById(`edit-beispielsatz-${id}`).value.trim();
+        w.stammdaten.besonderheiten = document.getElementById(`edit-besonderheiten-${id}`).value
+          .split('\n')
+          .map(value => value.trim())
+          .filter(Boolean);
         if (state.words[state.currentWordIndex] === w) {
           document.getElementById('word-emoji').textContent = w.stammdaten.emoji;
+          updateExampleSentence(w);
         }
-        await saveAndRefresh();
+        if (!await saveAndRefresh()) {
+          w.stammdaten = previousStammdaten;
+          if (state.words[state.currentWordIndex] === w) {
+            document.getElementById('word-emoji').textContent = w.stammdaten.emoji;
+            updateExampleSentence(w);
+          }
+          alert('Die Wortdaten konnten nicht gespeichert werden.');
+          renderWordList();
+          return;
+        }
         renderWordList();
       }
     }
+  }
+
+  function toggleWordDetails(id) {
+    const panel = document.getElementById(`word-details-${id}`);
+    const button = document.getElementById(`more-btn-${id}`);
+    panel.hidden = !panel.hidden;
+    button.setAttribute('aria-expanded', String(!panel.hidden));
+    button.textContent = panel.hidden ? '＋ Mehr' : '− Weniger';
+    if (!panel.hidden) panel.querySelector('input, textarea')?.focus();
   }
 
   function exportWords() {
@@ -1653,7 +1765,7 @@ async function importWords(event) {
           if (typeof item === 'string') {
             return {
               id: Date.now() + idx,
-              stammdaten: { wort: item.trim(), artikel: '', wortart: '', plural: '', emoji: EmojiModule.getForWord(item), besonderheiten: [] },
+              stammdaten: { wort: item.trim(), artikel: '', wortart: '', plural: '', emoji: EmojiModule.getForWord(item), beispielsatz: '', besonderheiten: [] },
               userdaten: { box: 0, letztePruefung: null, fehlerZaehler: 0, intensiv: false }
             };
           }
@@ -1666,6 +1778,7 @@ async function importWords(event) {
               wortart: item.stammdaten?.wortart || '',
               plural: item.stammdaten?.plural || '',
               emoji: item.stammdaten?.emoji || EmojiModule.getForWord(item.stammdaten?.wort || item.word || ''),
+              beispielsatz: item.stammdaten?.beispielsatz || '',
               besonderheiten: item.stammdaten?.besonderheiten || []
             },
             userdaten: importUserdata ? {
@@ -1702,13 +1815,14 @@ async function importWords(event) {
               item && typeof item === 'object' && item.stammdaten
                 ? {
                     ...item,
+                  stammdaten: { ...item.stammdaten, beispielsatz: item.stammdaten.beispielsatz || '' },
                     userdaten: importUserdata
                       ? { box: 0, letztePruefung: null, fehlerZaehler: 0, intensiv: false, ...item.userdaten }
                       : { box: 0, letztePruefung: null, fehlerZaehler: 0, intensiv: false }
                   }
                 : {
                     id: Date.now() + idx + Math.floor(Math.random() * 1000),
-                    stammdaten: { wort: wordText, artikel: '', wortart: '', plural: '', emoji: EmojiModule.getForWord(wordText), besonderheiten: [] },
+                    stammdaten: { wort: wordText, artikel: '', wortart: '', plural: '', emoji: EmojiModule.getForWord(wordText), beispielsatz: '', besonderheiten: [] },
                     userdaten: {
                       box: Number(item?.userdaten?.box ?? item?.box ?? 0) || 0,
                       letztePruefung: item?.userdaten?.letztePruefung || item?.last_reviewed || null,
@@ -1767,23 +1881,29 @@ async function importWords(event) {
       ?.focus();
   }
 
-  function renderStorageWordList() {
-    const ul = document.getElementById('storage-word-list');
-    const storageWords = state.words.filter(word => word.userdaten?.box === 0);
-    if (storageWords.length === 0) {
-      ul.innerHTML = '<li class="data-status">Der Wörterspeicher ist leer.</li>';
-      return;
-    }
-
-    const escapeHtml = value => String(value).replace(/[&<>"']/g, character => ({
+  function escapeHtml(value) {
+    return String(value).replace(/[&<>"']/g, character => ({
       '&': '&amp;',
       '<': '&lt;',
       '>': '&gt;',
       '"': '&quot;',
       "'": '&#39;'
     })[character]);
+  }
 
-    ul.innerHTML = storageWords.map((word, index) => {
+  function renderStorageWordList() {
+    const ul = document.getElementById('storage-word-list');
+    const storageWords = state.words.filter(word => word.userdaten?.box === 0);
+    const searchTerm = document.getElementById('storage-search').value.trim().toLocaleLowerCase('de');
+    const visibleWords = storageWords
+      .map((word, index) => ({ word, index }))
+      .filter(({ word }) => matchesWordSearch(word, searchTerm));
+    if (visibleWords.length === 0) {
+      ul.innerHTML = `<li class="data-status">${searchTerm ? 'Keine passenden Wörter gefunden.' : 'Der Wörterspeicher ist leer.'}</li>`;
+      return;
+    }
+
+    ul.innerHTML = visibleWords.map(({ word, index }) => {
       const wordText = escapeHtml(word.stammdaten.wort);
       const emoji = escapeHtml(word.stammdaten?.emoji || EmojiModule.getForWord(word.stammdaten.wort));
       return `
@@ -1793,29 +1913,103 @@ async function importWords(event) {
        <div class="storage-order-actions">
         <button class="btn btn-secondary" id="storage-move-up-${index}" type="button" aria-label="${escapeHtml(`„${word.stammdaten.wort}“ nach oben verschieben`)}" title="Nach oben" onclick="UIController.moveStorageWord(${index}, -1)" ${index === 0 ? 'disabled' : ''}>↑</button>
         <button class="btn btn-secondary" id="storage-move-down-${index}" type="button" aria-label="${escapeHtml(`„${word.stammdaten.wort}“ nach unten verschieben`)}" title="Nach unten" onclick="UIController.moveStorageWord(${index}, 1)" ${index === storageWords.length - 1 ? 'disabled' : ''}>↓</button>
+        <button class="btn btn-secondary" id="storage-move-first-${index}" type="button" aria-label="${escapeHtml(`„${word.stammdaten.wort}“ an die erste Stelle verschieben`)}" title="An die erste Stelle" onclick="UIController.moveStorageWordToFirst(${index})" ${index === 0 ? 'disabled' : ''}>↑1</button>
        </div>
       </li>`;
     }).join('');
   }
 
-  async function moveStorageWord(storageIndex, direction) {
-    const storageWords = state.words.filter(word => word.userdaten?.box === 0);
-    const nextIndex = storageIndex + direction;
-    if (!Number.isInteger(storageIndex) || ![-1, 1].includes(direction) || storageIndex < 0 || nextIndex < 0 || nextIndex >= storageWords.length) return;
+  function setStorageWordOrder(storageWords) {
+    let storageIndex = 0;
+    state.words = state.words.map(word => word.userdaten?.box === 0 ? storageWords[storageIndex++] : word);
+  }
 
-    const currentArrayIndex = state.words.indexOf(storageWords[storageIndex]);
-    const nextArrayIndex = state.words.indexOf(storageWords[nextIndex]);
-    [state.words[currentArrayIndex], state.words[nextArrayIndex]] = [state.words[nextArrayIndex], state.words[currentArrayIndex]];
+  async function reorderStorageWord(storageIndex, targetIndex, focusControl) {
+    const storageWords = state.words.filter(word => word.userdaten?.box === 0);
+    if (!Number.isInteger(storageIndex) || !Number.isInteger(targetIndex) ||
+      storageIndex < 0 || storageIndex >= storageWords.length ||
+      targetIndex < 0 || targetIndex >= storageWords.length ||
+      storageIndex === targetIndex) return;
+
+    const previousOrder = [...storageWords];
+    const [word] = storageWords.splice(storageIndex, 1);
+    storageWords.splice(targetIndex, 0, word);
+    setStorageWordOrder(storageWords);
 
     if (!await saveAndRefresh()) {
-      [state.words[currentArrayIndex], state.words[nextArrayIndex]] = [state.words[nextArrayIndex], state.words[currentArrayIndex]];
+      setStorageWordOrder(previousOrder);
       if (!serverMode) alert('Die neue Reihenfolge konnte nicht gespeichert werden.');
       renderStorageWordList();
-      document.getElementById(`storage-move-${direction < 0 ? 'up' : 'down'}-${storageIndex}`)?.focus();
+      document.getElementById(`storage-move-${focusControl}-${storageIndex}`)?.focus();
       return;
     }
     renderStorageWordList();
-    document.getElementById(`storage-move-${direction < 0 ? 'up' : 'down'}-${nextIndex}`)?.focus();
+    const nextFocusControl = focusControl === 'first' || (focusControl === 'up' && targetIndex === 0)
+      ? 'down'
+      : focusControl === 'down' && targetIndex === storageWords.length - 1
+        ? 'up'
+        : focusControl;
+    document.getElementById(`storage-move-${nextFocusControl}-${targetIndex}`)?.focus();
+  }
+
+  function moveStorageWord(storageIndex, direction) {
+    const targetIndex = storageIndex + direction;
+    return reorderStorageWord(storageIndex, targetIndex, direction < 0 ? 'up' : 'down');
+  }
+
+  function moveStorageWordToFirst(storageIndex) {
+    return reorderStorageWord(storageIndex, 0, 'first');
+  }
+
+  async function moveWordToStorage(id) {
+    const word = state.words.find(item => item.id === id);
+    if (!word || (word.userdaten?.box ?? 0) !== 1) return;
+
+    const wasCurrentWord = state.words[state.currentWordIndex] === word;
+    const previousOrder = state.words.filter(item => item.userdaten?.box === 0);
+    const previousUserdata = { ...word.userdaten };
+    word.userdaten ??= { box: 0, letztePruefung: null, fehlerZaehler: 0, intensiv: false };
+    word.userdaten.box = 0;
+    word.userdaten.letztePruefung = null;
+    setStorageWordOrder([...previousOrder, word]);
+
+    const saved = await saveAndRefresh();
+    if (!saved) {
+      word.userdaten = previousUserdata;
+      setStorageWordOrder(previousOrder);
+      updateStats();
+      alert('Das Wort konnte nicht in den Wörterspeicher verschoben werden.');
+    }
+    renderWordList();
+    if (saved && wasCurrentWord) nextWord();
+    document.getElementById(saved ? `dictionary-storage-top-${id}` : `dictionary-storage-${id}`)?.focus();
+  }
+
+  async function moveWordToStorageTop(id) {
+    const storageWords = state.words.filter(word => word.userdaten?.box === 0);
+    const storageIndex = storageWords.findIndex(word => word.id === id);
+    if (storageIndex <= 0) return;
+
+    const previousOrder = [...storageWords];
+    const [word] = storageWords.splice(storageIndex, 1);
+    storageWords.unshift(word);
+    setStorageWordOrder(storageWords);
+
+    if (!await saveAndRefresh()) {
+      setStorageWordOrder(previousOrder);
+      alert('Das Wort konnte nicht an die Spitze des Wörterspeichers verschoben werden.');
+    }
+    renderWordList();
+    document.getElementById(`dictionary-storage-top-${id}`)?.focus();
+  }
+
+  function matchesWordSearch(word, searchTerm) {
+    const searchableText = [
+      word.stammdaten?.wort,
+      word.stammdaten?.artikel,
+      word.stammdaten?.plural
+    ].filter(Boolean).join(' ').toLocaleLowerCase('de');
+    return searchableText.includes(searchTerm);
   }
 
   function renderWordList() {
@@ -1823,15 +2017,9 @@ async function importWords(event) {
     const sortBy = document.getElementById('sort-select').value;
     const searchTerm = document.getElementById('word-search').value.trim().toLocaleLowerCase('de');
     const cleanForSort = str => (str || '').toLowerCase().replace(/^(der|die|das|ein|eine)\s+/i, '');
+    const storageWords = state.words.filter(word => word.userdaten?.box === 0);
 
-    let sortedWords = state.words.filter(word => {
-      const searchableText = [
-        word.stammdaten?.wort,
-        word.stammdaten?.artikel,
-        word.stammdaten?.plural
-      ].filter(Boolean).join(' ').toLocaleLowerCase('de');
-      return searchableText.includes(searchTerm);
-    });
+    let sortedWords = state.words.filter(word => matchesWordSearch(word, searchTerm));
     if (sortBy === 'alpha') {
       sortedWords.sort((a, b) => cleanForSort(a.stammdaten.wort).localeCompare(cleanForSort(b.stammdaten.wort), 'de'));
     } else if (sortBy === 'box') {
@@ -1843,13 +2031,6 @@ async function importWords(event) {
       return;
     }
 
-    const escapeHtml = value => String(value).replace(/[&<>"']/g, character => ({
-      '&': '&amp;',
-      '<': '&lt;',
-      '>': '&gt;',
-      '"': '&quot;',
-      "'": '&#39;'
-    })[character]);
     const groupedWords = new Map();
 
     sortedWords.forEach(word => {
@@ -1875,20 +2056,49 @@ async function importWords(event) {
       const countLabel = words.length === 1 ? '1 Wort' : `${words.length} Wörter`;
       const entries = words.map(word => {
         const boxNum = word.userdaten?.box ?? 0;
-        const emoji = escapeHtml(word.stammdaten?.emoji || EmojiModule.getForWord(word.stammdaten.wort));
+        const stammdaten = word.stammdaten || {};
+        const emoji = escapeHtml(stammdaten.emoji || EmojiModule.getForWord(stammdaten.wort));
         const wordText = escapeHtml(word.stammdaten.wort);
         const boxLabel = boxNum === 0 ? 'Wörterspeicher' : boxNum === 6 ? 'Schatztruhe' : `Box ${boxNum}`;
+        const storageIndex = storageWords.indexOf(word);
+        const specialFeatures = Array.isArray(stammdaten.besonderheiten)
+          ? stammdaten.besonderheiten.join('\n')
+          : String(stammdaten.besonderheiten || '');
         return `
-        <li class="word-list-entry">
-         <input type="text" id="edit-emoji-${word.id}" value="${emoji}" readonly autocomplete="off" autocorrect="off" autocapitalize="none" spellcheck="false" maxlength="8" aria-label="Emoji" class="word-list-emoji" />
-         <div class="word-list-details">
-          <input type="search" id="edit-input-${word.id}" value="${wordText}" readonly autocomplete="off" autocorrect="off" autocapitalize="none" spellcheck="false" class="word-list-input" />
-          <span class="word-list-box">${escapeHtml(boxLabel)}</span>
+        <li class="word-entry-wrapper">
+         <div class="word-list-entry">
+          <input type="text" id="edit-emoji-${word.id}" value="${emoji}" readonly autocomplete="off" autocorrect="off" autocapitalize="none" spellcheck="false" maxlength="8" aria-label="Emoji" class="word-list-emoji" />
+          <div class="word-list-details">
+           <input type="search" id="edit-input-${word.id}" value="${wordText}" readonly autocomplete="off" autocorrect="off" autocapitalize="none" spellcheck="false" class="word-list-input" />
+           <span class="word-list-box">${escapeHtml(boxLabel)}</span>
+          </div>
+          <div class="word-list-actions">
+           <button class="btn word-list-intensiv-button ${word.userdaten?.intensiv ? 'btn-warning' : 'btn-secondary'}" type="button" aria-pressed="${word.userdaten?.intensiv === true}" title="${word.userdaten?.intensiv ? 'Intensivmodus ausschalten' : 'Intensivmodus einschalten'}" aria-label="${word.userdaten?.intensiv ? 'Intensivmodus ausschalten' : 'Intensivmodus einschalten'}" onclick="UIController.toggleIntensiv(${word.id})">🔥</button>
+           ${boxNum === 1 ? `<button class="btn btn-secondary" type="button" id="dictionary-storage-${word.id}" title="In den Wörterspeicher verschieben" aria-label="„${wordText}“ in den Wörterspeicher verschieben" onclick="UIController.moveWordToStorage(${word.id})">📦→0</button>` : ''}
+           ${boxNum === 0 ? `<button class="btn btn-secondary" type="button" id="dictionary-storage-top-${word.id}" title="An die Spitze des Wörterspeichers verschieben" aria-label="„${wordText}“ an die Spitze des Wörterspeichers verschieben" onclick="UIController.moveWordToStorageTop(${word.id})" ${storageIndex === 0 ? 'disabled' : ''}>↑1</button>` : ''}
+           <button class="btn btn-warning" type="button" id="edit-btn-${word.id}" onclick="UIController.toggleEdit(${word.id})">Edit</button>
+           <button class="btn btn-secondary" type="button" id="more-btn-${word.id}" aria-expanded="false" aria-controls="word-details-${word.id}" hidden onclick="UIController.toggleWordDetails(${word.id})">＋ Mehr</button>
+           <button class="btn btn-danger" type="button" onclick="UIController.deleteWord(${word.id})">Löschen</button>
+          </div>
          </div>
-         <div class="word-list-actions">
-          <button class="btn word-list-intensiv-button ${word.userdaten?.intensiv ? 'btn-warning' : 'btn-secondary'}" aria-pressed="${word.userdaten?.intensiv === true}" title="${word.userdaten?.intensiv ? 'Intensivmodus ausschalten' : 'Intensivmodus einschalten'}" aria-label="${word.userdaten?.intensiv ? 'Intensivmodus ausschalten' : 'Intensivmodus einschalten'}" onclick="UIController.toggleIntensiv(${word.id})">🔥</button>
-          <button class="btn btn-warning" id="edit-btn-${word.id}" onclick="UIController.toggleEdit(${word.id})">Edit</button>
-          <button class="btn btn-danger" onclick="UIController.deleteWord(${word.id})">Löschen</button>
+         <div class="word-details-editor" id="word-details-${word.id}" hidden>
+          <div class="word-details-grid">
+           <label class="word-details-field">Artikel
+            <input id="edit-artikel-${word.id}" type="text" value="${escapeHtml(stammdaten.artikel || '')}" disabled>
+           </label>
+           <label class="word-details-field">Wortart
+            <input id="edit-wortart-${word.id}" type="text" value="${escapeHtml(stammdaten.wortart || '')}" disabled>
+           </label>
+           <label class="word-details-field">Plural
+            <input id="edit-plural-${word.id}" type="text" value="${escapeHtml(stammdaten.plural || '')}" disabled>
+           </label>
+          </div>
+          <label class="word-details-field">Beispielsatz
+           <textarea id="edit-beispielsatz-${word.id}" rows="2" disabled>${escapeHtml(stammdaten.beispielsatz || '')}</textarea>
+          </label>
+          <label class="word-details-field">Besonderheiten (eine pro Zeile)
+           <textarea id="edit-besonderheiten-${word.id}" rows="2" disabled>${escapeHtml(specialFeatures)}</textarea>
+          </label>
          </div>
         </li>`;
       }).join('');
@@ -1929,8 +2139,12 @@ async function importWords(event) {
     deleteWord,
     toggleIntensiv,
     toggleEdit,
+    toggleWordDetails,
     toggleWordGroup,
     moveStorageWord,
+    moveStorageWordToFirst,
+    moveWordToStorage,
+    moveWordToStorageTop,
     setWordGroupsCollapsed,
     exportWords,
     importWords,

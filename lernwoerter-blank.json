@@ -3,6 +3,7 @@
     "id": 3,
     "stammdaten": {
       "wort": "Fahrrad",
+      "beispielsatz": "Nach der Schule fährt Momo mit seinem Fahrrad schnell über den Hof.",
       "artikel": "das",
       "wortart": "Substantiv",
       "plural": "Fahrräder",
@@ -20,6 +21,7 @@
     "id": 1794428351829,
     "stammdaten": {
       "wort": "für",
+      "beispielsatz": "Momo bastelt eine bunte Karte für seine Oma zum Geburtstag.",
       "artikel": "",
       "wortart": "Präposition",
       "plural": "",
@@ -37,6 +39,7 @@
     "id": 1794428357303,
     "stammdaten": {
       "wort": "von",
+      "beispielsatz": "Der Brief von seinem besten Freund liegt schon auf dem Tisch.",
       "artikel": "",
       "wortart": "Präposition",
       "plural": "",
@@ -54,6 +57,7 @@
     "id": 1794428417225,
     "stammdaten": {
       "wort": "Tisch",
+      "beispielsatz": "Zum Frühstück stellt Momo seinen Becher vorsichtig auf den Tisch.",
       "artikel": "der",
       "wortart": "Substantiv",
       "plural": "Tische",
@@ -71,6 +75,7 @@
     "id": 1794428424024,
     "stammdaten": {
       "wort": "Straße",
+      "beispielsatz": "Vor dem Überqueren schaut Momo links und rechts auf die Straße.",
       "artikel": "die",
       "wortart": "Substantiv",
       "plural": "Straßen",
@@ -90,6 +95,7 @@
     "id": 1794428427939,
     "stammdaten": {
       "wort": "und",
+      "beispielsatz": "Momo packt sein Heft und seinen bunten Stift in den Ranzen.",
       "artikel": "",
       "wortart": "Konjunktion",
       "plural": "",
@@ -107,6 +113,7 @@
     "id": 1794428457099,
     "stammdaten": {
       "wort": "viel",
+      "beispielsatz": "Im Sommer scheinen die Sonne und das Licht besonders viel.",
       "artikel": "",
       "wortart": "Pronomen",
       "plural": "",
@@ -124,6 +131,7 @@
     "id": 1794428463714,
     "stammdaten": {
       "wort": "sehr",
+      "beispielsatz": "Der kleine Hund freut sich sehr über seinen neuen Ball.",
       "artikel": "",
       "wortart": "Adverb",
       "plural": "",
@@ -141,6 +149,7 @@
     "id": 1794429922672,
     "stammdaten": {
       "wort": "fahren",
+      "beispielsatz": "Am Wochenende fahren wir mit dem Zug zu den hohen Bergen.",
       "artikel": "",
       "wortart": "Verb",
       "plural": "",
@@ -158,6 +167,7 @@
     "id": 1794429929680,
     "stammdaten": {
       "wort": "Ecke",
+      "beispielsatz": "Der rote Ball rollt bis in die hinterste Ecke des Zimmers.",
       "artikel": "die",
       "wortart": "Substantiv",
       "plural": "Ecken",
@@ -175,6 +185,7 @@
     "id": 1794429940395,
     "stammdaten": {
       "wort": "wachsen",
+      "beispielsatz": "Im Garten wachsen die bunten Blumen nach dem Regen besonders schnell.",
       "artikel": "",
       "wortart": "Verb",
       "plural": "",
@@ -192,6 +203,7 @@
     "id": 1794429948310,
     "stammdaten": {
       "wort": "stechen",
+      "beispielsatz": "Wenn man Bienen nicht ärgert, stechen sie auch nicht zu.",
       "artikel": "",
       "wortart": "Verb",
       "plural": "",
@@ -209,6 +221,7 @@
     "id": 1794429960720,
     "stammdaten": {
       "wort": "Brett",
+      "beispielsatz": "Momo legt ein stabiles Brett über den kleinen Bach im Wald.",
       "artikel": "das",
       "wortart": "Substantiv",
       "plural": "Bretter",
@@ -226,6 +239,7 @@
     "id": 1794429965005,
     "stammdaten": {
       "wort": "Sand",
+      "beispielsatz": "Am Strand baut Momo eine große Burg aus feuchtem Sand.",
       "artikel": "der",
       "wortart": "Substantiv",
       "plural": "Sande",
@@ -243,6 +257,7 @@
     "id": 1794429971570,
     "stammdaten": {
       "wort": "fangen",
+      "beispielsatz": "Im Sportunterricht fangen die Kinder den weichen Ball aus der Luft.",
       "artikel": "",
       "wortart": "Verb",
       "plural": "",
@@ -260,6 +275,7 @@
     "id": 1794429976847,
     "stammdaten": {
       "wort": "Schrank",
+      "beispielsatz": "Momo hängt seine dicke Winterjacke ordentlich in den Schrank.",
       "artikel": "der",
       "wortart": "Substantiv",
       "plural": "Schränke",
@@ -277,6 +293,7 @@
     "id": 1794429985938,
     "stammdaten": {
       "wort": "Liebe",
+      "beispielsatz": "Mit viel Liebe backt Papa einen großen Kuchen für die Familie.",
       "artikel": "die",
       "wortart": "Substantiv",
       "plural": "Lieben",
@@ -294,6 +311,7 @@
     "id": 1794430006203,
     "stammdaten": {
       "wort": "Schritte",
+      "beispielsatz": "Im frischen Schnee hört man unsere leisen Schritte kaum.",
       "artikel": "die",
       "wortart": "Substantiv",
       "plural": "Schritte",
@@ -311,6 +329,7 @@
     "id": 1794430012187,
     "stammdaten": {
       "wort": "Treppe",
+      "beispielsatz": "Momo steigt vorsichtig die steile Treppe bis ganz nach oben.",
       "artikel": "die",
       "wortart": "Substantiv",
       "plural": "Treppen",
@@ -328,6 +347,7 @@
     "id": 1794430019781,
     "stammdaten": {
       "wort": "Klasse",
+      "beispielsatz": "Heute macht unsere ganze Klasse einen Ausflug in den Zoo.",
       "artikel": "die",
       "wortart": "Substantiv",
       "plural": "Klassen",
@@ -345,6 +365,7 @@
     "id": 1794430023508,
     "stammdaten": {
       "wort": "Schule",
+      "beispielsatz": "Morgens geht Momo fröhlich zusammen mit seinen Freunden zur Schule.",
       "artikel": "die",
       "wortart": "Substantiv",
       "plural": "Schulen",
@@ -362,6 +383,7 @@
     "id": 1794430033147,
     "stammdaten": {
       "wort": "Wille",
+      "beispielsatz": "Mit einem starken Willen schafft man auch schwierige Aufgaben.",
       "artikel": "der",
       "wortart": "Substantiv",
       "plural": "Willen",
@@ -379,6 +401,7 @@
     "id": 1794430037408,
     "stammdaten": {
       "wort": "Wunsch",
+      "beispielsatz": "Vor dem Auspusten der Kerzen hat Momo einen geheimen Wunsch.",
       "artikel": "der",
       "wortart": "Substantiv",
       "plural": "Wünsche",
@@ -396,6 +419,7 @@
     "id": 1794430049461,
     "stammdaten": {
       "wort": "verlieren",
+      "beispielsatz": "Momo passt gut auf, damit er seinen Schlüssel nicht verlieren kann.",
       "artikel": "",
       "wortart": "Verb",
       "plural": "",
@@ -413,6 +437,7 @@
     "id": 1794430056570,
     "stammdaten": {
       "wort": "versuchen",
+      "beispielsatz": "Wir versuchen gemeinsam, das knifflige Rätsel bis zur Pause zu lösen.",
       "artikel": "",
       "wortart": "Verb",
       "plural": "",
@@ -430,6 +455,7 @@
     "id": 1794430060261,
     "stammdaten": {
       "wort": "Ball",
+      "beispielsatz": "Momo schießt den runden Ball mit voller Kraft ins Tor.",
       "artikel": "der",
       "wortart": "Substantiv",
       "plural": "Bälle",
@@ -447,6 +473,7 @@
     "id": 1794430063208,
     "stammdaten": {
       "wort": "Herbst",
+      "beispielsatz": "Im bunten Herbst fallen viele Blätter von den Bäumen.",
       "artikel": "der",
       "wortart": "Substantiv",
       "plural": "Herbste",
@@ -464,6 +491,7 @@
     "id": 1794430067506,
     "stammdaten": {
       "wort": "Blatt",
+      "beispielsatz": "Ein gelbes Blatt segelt langsam vom Baum auf die Wiese.",
       "artikel": "das",
       "wortart": "Substantiv",
       "plural": "Blätter",
@@ -481,6 +509,7 @@
     "id": 1794430078404,
     "stammdaten": {
       "wort": "wir sind",
+      "beispielsatz": "Nach dem langen Spaziergang sind wir alle ganz schön müde.",
       "artikel": "",
       "wortart": "Phrase",
       "plural": "",
@@ -498,6 +527,7 @@
     "id": 1794430083433,
     "stammdaten": {
       "wort": "seit gestern",
+      "beispielsatz": "Seit gestern scheint die Sonne wieder warm vom blauen Himmel.",
       "artikel": "",
       "wortart": "Phrase",
       "plural": "",
@@ -515,6 +545,7 @@
     "id": 1794430092173,
     "stammdaten": {
       "wort": "ihr seid nett",
+      "beispielsatz": "Ihr seid nett, weil ihr beim Aufräumen sofort mitgeholfen habt.",
       "artikel": "",
       "wortart": "Phrase",
       "plural": "",
@@ -532,6 +563,7 @@
     "id": 1794430097489,
     "stammdaten": {
       "wort": "gucken",
+      "beispielsatz": "Abends gucken Momo und seine Schwester gerne gemeinsam in ein Bilderbuch.",
       "artikel": "",
       "wortart": "Verb",
       "plural": "",
@@ -549,6 +581,7 @@
     "id": 1794430101055,
     "stammdaten": {
       "wort": "groß",
+      "beispielsatz": "Der Elefant im Tierpark ist beeindruckend groß und schwer.",
       "artikel": "",
       "wortart": "Adjektiv",
       "plural": "",
@@ -566,6 +599,7 @@
     "id": 1794430104906,
     "stammdaten": {
       "wort": "Keller",
+      "beispielsatz": "Im kühlen Keller stehen die Winterreifen und alte Spielsachen.",
       "artikel": "der",
       "wortart": "Substantiv",
       "plural": "Keller",
@@ -583,6 +617,7 @@
     "id": 1794430108980,
     "stammdaten": {
       "wort": "klein",
+      "beispielsatz": "Die kleine Maus huscht blitzschnell in ihr verstecktes Loch.",
       "artikel": "",
       "wortart": "Adjektiv",
       "plural": "",
@@ -600,6 +635,7 @@
     "id": 1794430116088,
     "stammdaten": {
       "wort": "Gestank",
+      "beispielsatz": "Aus der offenen Biotonne steigt an heißen Tagen ein starker Gestank.",
       "artikel": "der",
       "wortart": "Substantiv",
       "plural": "Gestate",
@@ -617,6 +653,7 @@
     "id": 1794430123680,
     "stammdaten": {
       "wort": "Mann",
+      "beispielsatz": "Der freundliche Mann hilft der alten Dame über die Straße.",
       "artikel": "der",
       "wortart": "Substantiv",
       "plural": "Männer",
@@ -634,6 +671,7 @@
     "id": 1794430126839,
     "stammdaten": {
       "wort": "Frau",
+      "beispielsatz": "Die Frau an der Kasse lächelt Momo freundlich an.",
       "artikel": "die",
       "wortart": "Substantiv",
       "plural": "Frauen",
@@ -651,6 +689,7 @@
     "id": 1794430130678,
     "stammdaten": {
       "wort": "Herr",
+      "beispielsatz": "Ein netter Herr fragt am Bahnhof nach dem richtigen Gleis.",
       "artikel": "der",
       "wortart": "Substantiv",
       "plural": "Herren",
@@ -668,6 +707,7 @@
     "id": 1794430141082,
     "stammdaten": {
       "wort": "wir müssen",
+      "beispielsatz": "Vor dem Essen müssen wir uns alle gründlich die Hände waschen.",
       "artikel": "",
       "wortart": "Phrase",
       "plural": "",
@@ -685,6 +725,7 @@
     "id": 1794430145231,
     "stammdaten": {
       "wort": "er sagte",
+      "beispielsatz": "Momo nickte und sagte, dass er die Geschichte schon kennt.",
       "artikel": "",
       "wortart": "Phrase",
       "plural": "",
@@ -702,6 +743,7 @@
     "id": 1794430151683,
     "stammdaten": {
       "wort": "ich will",
+      "beispielsatz": "Nach dem Training will ich sofort ein großes Glas Wasser trinken.",
       "artikel": "",
       "wortart": "Phrase",
       "plural": "",
@@ -719,6 +761,7 @@
     "id": 1794430157232,
     "stammdaten": {
       "wort": "sie wollen",
+      "beispielsatz": "In den Ferien wollen sie zusammen ans Meer fahren.",
       "artikel": "",
       "wortart": "Phrase",
       "plural": "",
@@ -736,6 +779,7 @@
     "id": 1794430212485,
     "stammdaten": {
       "wort": "vielleicht",
+      "beispielsatz": "Morgen scheint vielleicht schon wieder den ganzen Tag die Sonne.",
       "artikel": "",
       "wortart": "Adverb",
       "plural": "",
@@ -753,6 +797,7 @@
     "id": 1794430234257,
     "stammdaten": {
       "wort": "Zimmer",
+      "beispielsatz": "Momo räumt am Nachmittag sein buntes Zimmer ordentlich auf.",
       "artikel": "das",
       "wortart": "Substantiv",
       "plural": "Zimmer",
@@ -770,6 +815,7 @@
     "id": 1794430240858,
     "stammdaten": {
       "wort": "Lampe",
+      "beispielsatz": "Abends macht Momo die helle Lampe auf seinem Schreibtisch an.",
       "artikel": "die",
       "wortart": "Substantiv",
       "plural": "Lampen",
@@ -787,6 +833,7 @@
     "id": 1794430246393,
     "stammdaten": {
       "wort": "Stuhl",
+      "beispielsatz": "Zum Lesen setzt sich Momo bequem auf den hölzernen Stuhl.",
       "artikel": "der",
       "wortart": "Substantiv",
       "plural": "Stühle",
@@ -804,6 +851,7 @@
     "id": 1794430279645,
     "stammdaten": {
       "wort": "doof",
+      "beispielsatz": "Momo findet es doof, wenn es ausgerechnet am Wochenende regnet.",
       "artikel": "",
       "wortart": "Adjektiv",
       "plural": "",
@@ -821,6 +869,7 @@
     "id": 1794430282977,
     "stammdaten": {
       "wort": "Hand",
+      "beispielsatz": "Momo hebt im Unterricht leise die Hand, weil er die Antwort weiß.",
       "artikel": "die",
       "wortart": "Substantiv",
       "plural": "Hände",
@@ -838,6 +887,7 @@
     "id": 1794430286470,
     "stammdaten": {
       "wort": "Fuß",
+      "beispielsatz": "Beim Fußballspielen tritt Momo den Ball mit dem rechten Fuß.",
       "artikel": "der",
       "wortart": "Substantiv",
       "plural": "Füße",
@@ -855,6 +905,7 @@
     "id": 1794430332403,
     "stammdaten": {
       "wort": "Schnecke",
+      "beispielsatz": "Nach dem Regen kriecht eine kleine Schnecke langsam über den Weg.",
       "artikel": "die",
       "wortart": "Substantiv",
       "plural": "Schnecken",
@@ -872,6 +923,7 @@
     "id": 1794430335425,
     "stammdaten": {
       "wort": "Tiger",
+      "beispielsatz": "Der gestreifte Tiger schleicht lautlos durch das hohe Gras.",
       "artikel": "der",
       "wortart": "Substantiv",
       "plural": "Tiger",
@@ -889,6 +941,7 @@
     "id": 1794430340777,
     "stammdaten": {
       "wort": "bringen",
+      "beispielsatz": "Kannst du mir bitte kurz das rote Heft aus der Küche bringen?",
       "artikel": "",
       "wortart": "Verb",
       "plural": "",
@@ -906,6 +959,7 @@
     "id": 1794430394579,
     "stammdaten": {
       "wort": "Biene",
+      "beispielsatz": "Eine fleißige Biene summt von einer gelben Blüte zur nächsten.",
       "artikel": "die",
       "wortart": "Substantiv",
       "plural": "Bienen",
@@ -923,6 +977,7 @@
     "id": 1794430398234,
     "stammdaten": {
       "wort": "wieder",
+      "beispielsatz": "Morgen treffen wir uns wieder zum Spielen auf dem Bolzplatz.",
       "artikel": "",
       "wortart": "Adverb",
       "plural": "",
@@ -940,6 +995,7 @@
     "id": 1794430419152,
     "stammdaten": {
       "wort": "sehen",
+      "beispielsatz": "Vom hohen Aussichtsturm aus kann man bis zu den Bergen sehen.",
       "artikel": "",
       "wortart": "Verb",
       "plural": "",
@@ -957,6 +1013,7 @@
     "id": 1794430423351,
     "stammdaten": {
       "wort": "wählen",
+      "beispielsatz": "In der Klasse wählen die Kinder heute ihren neuen Klassensprecher.",
       "artikel": "",
       "wortart": "Verb",
       "plural": "",
@@ -974,6 +1031,7 @@
     "id": 1794430478924,
     "stammdaten": {
       "wort": "das Wasser",
+      "beispielsatz": "Nach dem Rennen trinkt Momo ein kühles Glas Wasser.",
       "artikel": "das",
       "wortart": "Substantiv",
       "plural": "Wässer",
@@ -991,6 +1049,7 @@
     "id": 1794430484077,
     "stammdaten": {
       "wort": "die Sonne",
+      "beispielsatz": "Morgens kitzelt die warme Sonne Momo sanft an der Nase.",
       "artikel": "die",
       "wortart": "Substantiv",
       "plural": "Sonnen",
@@ -1008,6 +1067,7 @@
     "id": 1794430488734,
     "stammdaten": {
       "wort": "der Teller",
+      "beispielsatz": "Nach dem Mittagessen stellt Momo seinen leeren Teller in die Küche.",
       "artikel": "der",
       "wortart": "Substantiv",
       "plural": "Teller",
@@ -1025,6 +1085,7 @@
     "id": 1794430494060,
     "stammdaten": {
       "wort": "rennen",
+      "beispielsatz": "Auf dem Sportplatz rennen die Kinder um die Wette.",
       "artikel": "",
       "wortart": "Verb",
       "plural": "",
@@ -1042,6 +1103,7 @@
     "id": 1794430499682,
     "stammdaten": {
       "wort": "schwimmen",
+      "beispielsatz": "Im Sommer gehen Momo und seine Freunde gerne im Freibad schwimmen.",
       "artikel": "",
       "wortart": "Verb",
       "plural": "",
@@ -1059,6 +1121,7 @@
     "id": 1794430506792,
     "stammdaten": {
       "wort": "fallen",
+      "beispielsatz": "Im Herbst fallen die bunten Blätter leise auf den Waldboden.",
       "artikel": "",
       "wortart": "Verb",
       "plural": "",
@@ -1076,6 +1139,7 @@
     "id": 1794430511238,
     "stammdaten": {
       "wort": "können",
+      "beispielsatz": "Nach viel Übung können alle Kinder schon prima schwimmen.",
       "artikel": "",
       "wortart": "Verb",
       "plural": "",
@@ -1093,6 +1157,7 @@
     "id": 1794430526906,
     "stammdaten": {
       "wort": "ich kam nach Hause",
+      "beispielsatz": "Gestern kam ich nach dem Fußballtraining müde nach Hause.",
       "artikel": "",
       "wortart": "Phrase",
       "plural": "",
@@ -1110,6 +1175,7 @@
     "id": 1794430531254,
     "stammdaten": {
       "wort": "früh",
+      "beispielsatz": "Am Sonntagmorgen steht Momo schon ganz früh auf.",
       "artikel": "",
       "wortart": "Adjektiv",
       "plural": "",
@@ -1127,6 +1193,7 @@
     "id": 1794430535390,
     "stammdaten": {
       "wort": "spät",
+      "beispielsatz": "Abends wird es im Winter schon sehr spät hell und früh dunkel.",
       "artikel": "",
       "wortart": "Adjektiv",
       "plural": "",
@@ -1144,6 +1211,7 @@
     "id": 1794430556704,
     "stammdaten": {
       "wort": "Brücke",
+      "beispielsatz": "Über den breiten Fluss führt eine alte steinerne Brücke.",
       "artikel": "die",
       "wortart": "Substantiv",
       "plural": "Brücken",
@@ -1161,6 +1229,7 @@
     "id": 1794430560170,
     "stammdaten": {
       "wort": "Rucksack",
+      "beispielsatz": "Für den Wandertag packt Momo sein Pausenbrot in den Rucksack.",
       "artikel": "der",
       "wortart": "Substantiv",
       "plural": "Rucksäcke",
@@ -1178,6 +1247,7 @@
     "id": 1794430565001,
     "stammdaten": {
       "wort": "die Jacke",
+      "beispielsatz": "Draußen weht ein kalter Wind, deshalb zieht Momo die Jacke an.",
       "artikel": "die",
       "wortart": "Substantiv",
       "plural": "Jacken",
@@ -1195,6 +1265,7 @@
     "id": 1794430571244,
     "stammdaten": {
       "wort": "schmecken",
+      "beispielsatz": "Die frisch gebackenen Pfannkuchen schmecken mit Apfelmus besonders gut.",
       "artikel": "",
       "wortart": "Verb",
       "plural": "",
@@ -1212,6 +1283,7 @@
     "id": 1794430582230,
     "stammdaten": {
       "wort": "erschrecken",
+      "beispielsatz": "Wenn man leise schleicht, erschrecken die scheuen Rehe im Wald nicht.",
       "artikel": "",
       "wortart": "Verb",
       "plural": "",
@@ -1229,6 +1301,7 @@
     "id": 1794430588546,
     "stammdaten": {
       "wort": "Katze",
+      "beispielsatz": "Unsere kleine Katze schnurrt leise und schläft auf dem Sofa.",
       "artikel": "die",
       "wortart": "Substantiv",
       "plural": "Katzen",
@@ -1246,6 +1319,7 @@
     "id": 1794430602739,
     "stammdaten": {
       "wort": "jetzt",
+      "beispielsatz": "Wir haben alle Hausaufgaben fertig und können jetzt spielen gehen.",
       "artikel": "",
       "wortart": "Adverb",
       "plural": "",
@@ -1263,6 +1337,7 @@
     "id": 1794430614653,
     "stammdaten": {
       "wort": "der Brief",
+      "beispielsatz": "Im Briefkasten liegt heute ein spannender Brief für Momo.",
       "artikel": "der",
       "wortart": "Substantiv",
       "plural": "Briefe",
@@ -1280,6 +1355,7 @@
     "id": 1794430629117,
     "stammdaten": {
       "wort": "fliegen",
+      "beispielsatz": "Im Herbst fliegen viele Zugvögel gemeinsam in den warmen Süden.",
       "artikel": "",
       "wortart": "Verb",
       "plural": "",
@@ -1297,6 +1373,7 @@
     "id": 1794430633491,
     "stammdaten": {
       "wort": "riechen",
+      "beispielsatz": "In der Bäckerei riechen die frischen Brötchen herrlich lecker.",
       "artikel": "",
       "wortart": "Verb",
       "plural": "",
@@ -1314,6 +1391,7 @@
     "id": 1794430638891,
     "stammdaten": {
       "wort": "lügen",
+      "beispielsatz": "Ehrliche Freunde halten zusammen und lügen sich niemals an.",
       "artikel": "",
       "wortart": "Verb",
       "plural": "",
@@ -1331,6 +1409,7 @@
     "id": 1794430649233,
     "stammdaten": {
       "wort": "nie",
+      "beispielsatz": "Momo vergisst nie, vor dem Schlafengehen seine Zähne zu putzen.",
       "artikel": "",
       "wortart": "Adverb",
       "plural": "",
@@ -1348,6 +1427,7 @@
     "id": 1794430653988,
     "stammdaten": {
       "wort": "nicht",
+      "beispielsatz": "Ohne seinen Fahrradhelm fährt Momo nicht auf die Straße.",
       "artikel": "",
       "wortart": "Adverb",
       "plural": "",
@@ -1365,6 +1445,7 @@
     "id": 1794430663289,
     "stammdaten": {
       "wort": "der Zahn",
+      "beispielsatz": "Bei Momo wackelt vorne schon der nächste kleine Zahn.",
       "artikel": "der",
       "wortart": "Substantiv",
       "plural": "Zähne",
@@ -1382,6 +1463,7 @@
     "id": 1794430668886,
     "stammdaten": {
       "wort": "der Lehrer",
+      "beispielsatz": "Unser Lehrer erklärt die schwierige Rechenaufgabe noch einmal an der Tafel.",
       "artikel": "der",
       "wortart": "Substantiv",
       "plural": "Lehrer",
@@ -1399,6 +1481,7 @@
     "id": 1794430674620,
     "stammdaten": {
       "wort": "gehen",
+      "beispielsatz": "Am Nachmittag gehen Momo und seine Schwester auf den Spielplatz.",
       "artikel": "",
       "wortart": "Verb",
       "plural": "",
@@ -1416,6 +1499,7 @@
     "id": 1794430689989,
     "stammdaten": {
       "wort": "sie geht heute früher",
+      "beispielsatz": "Heute hat sie keinen Sportunterricht, deshalb geht sie heute früher heim.",
       "artikel": "",
       "wortart": "Phrase",
       "plural": "",
@@ -1433,6 +1517,7 @@
     "id": 1794430697853,
     "stammdaten": {
       "wort": "fröhlich",
+      "beispielsatz": "An seinem Geburtstag hüpft Momo fröhlich durch das ganze Haus.",
       "artikel": "",
       "wortart": "Adjektiv",
       "plural": "",
@@ -1450,6 +1535,7 @@
     "id": 1794430702497,
     "stammdaten": {
       "wort": "zählen",
+      "beispielsatz": "Vor dem Versteckspiel zählen alle Kinder gemeinsam laut bis zwanzig.",
       "artikel": "",
       "wortart": "Verb",
       "plural": "",
@@ -1467,6 +1553,7 @@
     "id": 1794430712454,
     "stammdaten": {
       "wort": "der Hund",
+      "beispielsatz": "Der verspielte Hund wedelt freudig mit seinem langen Schwanz.",
       "artikel": "der",
       "wortart": "Substantiv",
       "plural": "Hunde",
@@ -1484,6 +1571,7 @@
     "id": 1794430717482,
     "stammdaten": {
       "wort": "das Pferd",
+      "beispielsatz": "Auf der grünen Koppel galoppiert das braune Pferd über die Wiese.",
       "artikel": "das",
       "wortart": "Substantiv",
       "plural": "Pferde",
@@ -1501,6 +1589,7 @@
     "id": 1794430724232,
     "stammdaten": {
       "wort": "der Berg",
+      "beispielsatz": "Ganz oben auf dem hohen Berg hat man eine tolle Aussicht.",
       "artikel": "der",
       "wortart": "Substantiv",
       "plural": "Berge",
@@ -1518,6 +1607,7 @@
     "id": 1794430734671,
     "stammdaten": {
       "wort": "das Geld",
+      "beispielsatz": "Momo spart sein Taschengeld in einer bunten Spardose.",
       "artikel": "das",
       "wortart": "Substantiv",
       "plural": "Gelder",
@@ -1535,6 +1625,7 @@
     "id": 1794430873219,
     "stammdaten": {
       "wort": "wir lassen das",
+      "beispielsatz": "Das ist viel zu gefährlich, wir lassen das lieber bleiben.",
       "artikel": "",
       "wortart": "Phrase",
       "plural": "",
@@ -1552,6 +1643,7 @@
     "id": 1794430878445,
     "stammdaten": {
       "wort": "plötzlich",
+      "beispielsatz": "Am Himmel zogen dunkle Wolken auf und plötzlich fing es an zu regnen.",
       "artikel": "",
       "wortart": "Adjektiv",
       "plural": "",
@@ -1569,6 +1661,7 @@
     "id": 1794430888824,
     "stammdaten": {
       "wort": "wie heißt du?",
+      "beispielsatz": "Momo geht auf den neuen Mitschüler zu und fragt freundlich: Wie heißt du?",
       "artikel": "",
       "wortart": "Phrase",
       "plural": "",
@@ -1586,6 +1679,7 @@
     "id": 1794430904379,
     "stammdaten": {
       "wort": "ich heiße Otto",
+      "beispielsatz": "Der Junge lächelt zurück und antwortet: Hallo, ich heiße Otto!",
       "artikel": "",
       "wortart": "Phrase",
       "plural": "",
@@ -1603,6 +1697,7 @@
     "id": 1794430910533,
     "stammdaten": {
       "wort": "draußen",
+      "beispielsatz": "Bei dem schönen Wetter spielen alle Kinder am liebsten draußen.",
       "artikel": "",
       "wortart": "Adverb",
       "plural": "",
@@ -1620,6 +1715,7 @@
     "id": 1794430916379,
     "stammdaten": {
       "wort": "Angst",
+      "beispielsatz": "Im dunklen Flur raschelt es, aber vor dem kleinen Gespenst hat niemand Angst.",
       "artikel": "die",
       "wortart": "Substantiv",
       "plural": "Ängste",
@@ -1637,6 +1733,7 @@
     "id": 1794430924452,
     "stammdaten": {
       "wort": "Heft",
+      "beispielsatz": "Momo schreibt die neuen Lernwörter ordentlich in sein blaues Heft.",
       "artikel": "das",
       "wortart": "Substantiv",
       "plural": "Hefte",
@@ -1654,6 +1751,7 @@
     "id": 1794430942311,
     "stammdaten": {
       "wort": "die Familie",
+      "beispielsatz": "Am Sonntag macht die ganze Familie einen Ausflug an den See.",
       "artikel": "die",
       "wortart": "Substantiv",
       "plural": "Familien",
@@ -1671,6 +1769,7 @@
     "id": 1794430951438,
     "stammdaten": {
       "wort": "glücklich",
+      "beispielsatz": "Über das unerwartete Geschenk ist Momo den ganzen Tag glücklich.",
       "artikel": "",
       "wortart": "Adjektiv",
       "plural": "",
@@ -1688,6 +1787,7 @@
     "id": 1794430959934,
     "stammdaten": {
       "wort": "der Tod",
+      "beispielsatz": "Im Märchen überlistet der schlaue Schneider sogar den Tod.",
       "artikel": "der",
       "wortart": "Substantiv",
       "plural": "Tode",
@@ -1705,6 +1805,7 @@
     "id": 1794430967687,
     "stammdaten": {
       "wort": "der Vogel ist tot",
+      "beispielsatz": "Momo findet am Wegesrand eine Feder, aber der kleine Vogel ist tot.",
       "artikel": "",
       "wortart": "Phrase",
       "plural": "",
@@ -1722,6 +1823,7 @@
     "id": 1794430984108,
     "stammdaten": {
       "wort": "Weihnachten",
+      "beispielsatz": "Im Dezember freuen sich alle Kinder schon riesig auf Weihnachten.",
       "artikel": "das",
       "wortart": "Substantiv",
       "plural": "Weihnachten",
@@ -1739,6 +1841,7 @@
     "id": 1794430988245,
     "stammdaten": {
       "wort": "Kerze",
+      "beispielsatz": "Auf dem Tisch brennt am Abend eine gemütliche rote Kerze.",
       "artikel": "die",
       "wortart": "Substantiv",
       "plural": "Kerzen",
@@ -1756,6 +1859,7 @@
     "id": 1794430992146,
     "stammdaten": {
       "wort": "Advent",
+      "beispielsatz": "Im Advent backt Momo zusammen mit seiner Mutter leckere Plätzchen.",
       "artikel": "der",
       "wortart": "Substantiv",
       "plural": "Advente",
@@ -1773,6 +1877,7 @@
     "id": 1794431012160,
     "stammdaten": {
       "wort": "das Ding",
+      "beispielsatz": "Im Sandkasten buddelt Momo ein seltsames rundes Ding aus.",
       "artikel": "das",
       "wortart": "Substantiv",
       "plural": "Dinge",
@@ -1790,6 +1895,7 @@
     "id": 1794431018687,
     "stammdaten": {
       "wort": "das Dach",
+      "beispielsatz": "Bei Regen prasseln die Tropfen laut auf das rote Dach.",
       "artikel": "das",
       "wortart": "Substantiv",
       "plural": "Dächer",
@@ -1807,6 +1913,7 @@
     "id": 1794431028953,
     "stammdaten": {
       "wort": "das Loch",
+      "beispielsatz": "Der kleine Maulwurf gräbt ein tiefes Loch mitten in den Rasen.",
       "artikel": "das",
       "wortart": "Substantiv",
       "plural": "Löcher",
@@ -1824,6 +1931,7 @@
     "id": 1794431035010,
     "stammdaten": {
       "wort": "der Hunger",
+      "beispielsatz": "Nach der langen Wanderung hat Momo einen riesigen Hunger.",
       "artikel": "der",
       "wortart": "Substantiv",
       "plural": "Hunger",
@@ -1841,6 +1949,7 @@
     "id": 1794431043631,
     "stammdaten": {
       "wort": "lecker",
+      "beispielsatz": "Die frisch gebackene Pizza schmeckt heute besonders lecker.",
       "artikel": "",
       "wortart": "Adjektiv",
       "plural": "",
@@ -1858,6 +1967,7 @@
     "id": 1794431047767,
     "stammdaten": {
       "wort": "Kuchen",
+      "beispielsatz": "Zum Kindergeburtstag gibt es einen schokoladigen Kuchen mit Kerzen.",
       "artikel": "der",
       "wortart": "Substantiv",
       "plural": "Kuchen",
@@ -1875,6 +1985,7 @@
     "id": 1794431055296,
     "stammdaten": {
       "wort": "der Schuh",
+      "beispielsatz": "Momo bindet sich vor dem Rausgehen fest den rechten Schuh zu.",
       "artikel": "der",
       "wortart": "Substantiv",
       "plural": "Schuhe",
@@ -1892,6 +2003,7 @@
     "id": 1794431078146,
     "stammdaten": {
       "wort": "rechtzeitig",
+      "beispielsatz": "Wir gehen fünf Minuten früher los, damit wir rechtzeitig am Bahnhof sind.",
       "artikel": "",
       "wortart": "Adjektiv",
       "plural": "",
@@ -1909,6 +2021,7 @@
     "id": 1794431087645,
     "stammdaten": {
       "wort": "gleich",
+      "beispielsatz": "Zieh dir schnell deine Schuhe an, es geht nämlich gleich los!",
       "artikel": "",
       "wortart": "Adverb",
       "plural": "",
@@ -1926,6 +2039,7 @@
     "id": 1794431151121,
     "stammdaten": {
       "wort": "dringend",
+      "beispielsatz": "Momo muss vor dem Training noch dringend seine Trinkflasche auffüllen.",
       "artikel": "",
       "wortart": "Adjektiv",
       "plural": "",
@@ -1943,6 +2057,7 @@
     "id": 1794431253810,
     "stammdaten": {
       "wort": "das Buch",
+      "beispielsatz": "Abends im Bett liest Momo noch ein Kapitel in seinem spannenden Buch.",
       "artikel": "das",
       "wortart": "Substantiv",
       "plural": "Bücher",
@@ -1960,6 +2075,7 @@
     "id": 1794431310195,
     "stammdaten": {
       "wort": "Pfütze",
+      "beispielsatz": "Momo springt mit seinen Gummistiefeln mitten in die große Pfütze.",
       "artikel": "die",
       "wortart": "Substantiv",
       "plural": "Pfützen",
@@ -1977,6 +2093,7 @@
     "id": 1794431315822,
     "stammdaten": {
       "wort": "spritzen",
+      "beispielsatz": "Beim Planschen im Wasser spritzen die Kinder fröhlich herum.",
       "artikel": "",
       "wortart": "Verb",
       "plural": "",
@@ -1994,6 +2111,7 @@
     "id": 1794431321976,
     "stammdaten": {
       "wort": "Mütze",
+      "beispielsatz": "Im Winter setzt Momo seine warme gestrickte Mütze auf.",
       "artikel": "die",
       "wortart": "Substantiv",
       "plural": "Mützen",
@@ -2011,6 +2129,7 @@
     "id": 1794431329284,
     "stammdaten": {
       "wort": "Platz",
+      "beispielsatz": "Im Bus bietet Momo einer älteren Frau freundlich seinen Platz an.",
       "artikel": "der",
       "wortart": "Substantiv",
       "plural": "Plätze",
@@ -2028,6 +2147,7 @@
     "id": 1794431336751,
     "stammdaten": {
       "wort": "der Satz",
+      "beispielsatz": "Am Ende steht immer ein Punkt, damit der Satz fertig ist.",
       "artikel": "der",
       "wortart": "Substantiv",
       "plural": "Sätze",
@@ -2045,6 +2165,7 @@
     "id": 1794431395481,
     "stammdaten": {
       "wort": "witzig",
+      "beispielsatz": "Momo erzählt beim Abendessen eine besonders witzige Geschichte.",
       "artikel": "",
       "wortart": "Adjektiv",
       "plural": "",
@@ -2062,6 +2183,7 @@
     "id": 1794431403555,
     "stammdaten": {
       "wort": "der Witz",
+      "beispielsatz": "Über den lustigen Witz muss die ganze Klasse herzlich lachen.",
       "artikel": "der",
       "wortart": "Substantiv",
       "plural": "Witze",
@@ -2079,6 +2201,7 @@
     "id": 1794431446172,
     "stammdaten": {
       "wort": "die Bänder",
+      "beispielsatz": "An dem großen Geschenk hängen viele bunte Bänder.",
       "artikel": "die",
       "wortart": "Substantiv",
       "plural": "Bänder",
@@ -2096,6 +2219,7 @@
     "id": 1794431454225,
     "stammdaten": {
       "wort": "der Zwerg",
+      "beispielsatz": "Im Märchenbuch trägt der kleine Zwerg eine rote Zipfelmütze.",
       "artikel": "der",
       "wortart": "Substantiv",
       "plural": "Zwerge",
@@ -2113,6 +2237,7 @@
     "id": 1794431460355,
     "stammdaten": {
       "wort": "blind",
+      "beispielsatz": "Beim Topfschlagen verbindet man dem Sucher mit einem Tuch die Augen, bis er blind ist.",
       "artikel": "",
       "wortart": "Adjektiv",
       "plural": "",
@@ -2130,6 +2255,7 @@
     "id": 1794431466363,
     "stammdaten": {
       "wort": "gesund",
+      "beispielsatz": "Viel frisches Obst und Bewegung halten uns fit und gesund.",
       "artikel": "",
       "wortart": "Adjektiv",
       "plural": "",
@@ -2147,6 +2273,7 @@
     "id": 1794431470498,
     "stammdaten": {
       "wort": "klug",
+      "beispielsatz": "Die Eule gilt in vielen Tiergeschichten als besonders klug.",
       "artikel": "",
       "wortart": "Adjektiv",
       "plural": "",
@@ -2164,6 +2291,7 @@
     "id": 1794431474536,
     "stammdaten": {
       "wort": "wild",
+      "beispielsatz": "Auf der Wiese toben die Kinder wie eine wilde Räuberbande.",
       "artikel": "",
       "wortart": "Adjektiv",
       "plural": "",
@@ -2181,6 +2309,7 @@
     "id": 1794431478598,
     "stammdaten": {
       "wort": "der Tag",
+      "beispielsatz": "Ein sonniger Tag am See geht immer viel zu schnell vorbei.",
       "artikel": "der",
       "wortart": "Substantiv",
       "plural": "Tage",
@@ -2198,6 +2327,7 @@
     "id": 1794431493608,
     "stammdaten": {
       "wort": "aufräumen",
+      "beispielsatz": "Vor dem Abendessen hilft Momo beim Aufräumen der Bausteine.",
       "artikel": "",
       "wortart": "Verb",
       "plural": "",
@@ -2215,6 +2345,7 @@
     "id": 1794431500755,
     "stammdaten": {
       "wort": "träumen",
+      "beispielsatz": "Nachts schlafen wir tief und träumen von tollen Abenteuern.",
       "artikel": "",
       "wortart": "Verb",
       "plural": "",
@@ -2232,6 +2363,7 @@
     "id": 1794431513303,
     "stammdaten": {
       "wort": "die Gefahr",
+      "beispielsatz": "Bei Rot an der Ampel droht Gefahr, deshalb bleiben alle stehen.",
       "artikel": "die",
       "wortart": "Substantiv",
       "plural": "Gefahren",
@@ -2249,6 +2381,7 @@
     "id": 1794431522072,
     "stammdaten": {
       "wort": "der Blitz",
+      "beispielsatz": "Beim Sommergewitter zuckt ein heller Blitz über die dunklen Wolken.",
       "artikel": "der",
       "wortart": "Substantiv",
       "plural": "Blitze",
@@ -2266,6 +2399,7 @@
     "id": 1794431526902,
     "stammdaten": {
       "wort": "es blitzt",
+      "beispielsatz": "Schau mal aus dem Fenster, es blitzt schon wieder am Horizont!",
       "artikel": "",
       "wortart": "Phrase",
       "plural": "",
@@ -2283,6 +2417,7 @@
     "id": 1794431540726,
     "stammdaten": {
       "wort": "er putzt die Zähne",
+      "beispielsatz": "Nach dem Frühstück geht Momo ins Bad und putzt die Zähne.",
       "artikel": "",
       "wortart": "Phrase",
       "plural": "",
@@ -2300,6 +2435,7 @@
     "id": 1794431550857,
     "stammdaten": {
       "wort": "ein Fehler",
+      "beispielsatz": "Beim Üben ist ein kleiner Fehler überhaupt nicht schlimm.",
       "artikel": "der",
       "wortart": "Substantiv",
       "plural": "Fehler",
@@ -2317,6 +2453,7 @@
     "id": 1794431556864,
     "stammdaten": {
       "wort": "das Boot",
+      "beispielsatz": "Auf dem ruhigen See paddelt Momo mit seinem Vater in einem kleinen Boot.",
       "artikel": "das",
       "wortart": "Substantiv",
       "plural": "Boote",
@@ -2334,6 +2471,7 @@
     "id": 1794431560506,
     "stammdaten": {
       "wort": "der See",
+      "beispielsatz": "Im Sommer glitzert das klare Wasser im See unter der Sonne.",
       "artikel": "der",
       "wortart": "Substantiv",
       "plural": "Seen",
@@ -2351,6 +2489,7 @@
     "id": 1794431568903,
     "stammdaten": {
       "wort": "der Tee",
+      "beispielsatz": "Wenn es draußen kalt ist, wärmt eine Tasse heißer Tee.",
       "artikel": "der",
       "wortart": "Substantiv",
       "plural": "Tees",
@@ -2368,6 +2507,7 @@
     "id": 1794431577560,
     "stammdaten": {
       "wort": "Pfefferminz",
+      "beispielsatz": "Im Kräuterbeet duftet der frische Pfefferminz besonders kräftig.",
       "artikel": "der",
       "wortart": "Substantiv",
       "plural": "Pfefferminze",
@@ -2385,6 +2525,7 @@
     "id": 1794431587158,
     "stammdaten": {
       "wort": "die Beere",
+      "beispielsatz": "Im Wald entdeckt Momo am Strauch eine reife rote Beere.",
       "artikel": "die",
       "wortart": "Substantiv",
       "plural": "Beeren",
@@ -2402,6 +2543,7 @@
     "id": 1794431596855,
     "stammdaten": {
       "wort": "verstehen",
+      "beispielsatz": "Wenn alle leise sind, kann man die Lehrerin gut verstehen.",
       "artikel": "",
       "wortart": "Verb",
       "plural": "",
@@ -2419,6 +2561,7 @@
     "id": 1794431604373,
     "stammdaten": {
       "wort": "vorher",
+      "beispielsatz": "Wir gehen erst auf den Spielplatz, aber vorher machen wir Hausaufgaben.",
       "artikel": "",
       "wortart": "Adverb",
       "plural": "",
@@ -2436,6 +2579,7 @@
     "id": 1794431610578,
     "stammdaten": {
       "wort": "die Qualle",
+      "beispielsatz": "Im Meer schwebt eine durchsichtige Qualle sanft durch das Wasser.",
       "artikel": "die",
       "wortart": "Substantiv",
       "plural": "Quallen",
@@ -2453,6 +2597,7 @@
     "id": 1794431616423,
     "stammdaten": {
       "wort": "quaken",
+      "beispielsatz": "Am Abend quaken die grünen Frösche laut am Gartenteich.",
       "artikel": "",
       "wortart": "Verb",
       "plural": "",
@@ -2470,6 +2615,7 @@
     "id": 1794431620473,
     "stammdaten": {
       "wort": "die Quelle",
+      "beispielsatz": "Im Wald sprudelt klares kaltes Wasser aus einer kleinen Quelle.",
       "artikel": "die",
       "wortart": "Substantiv",
       "plural": "Quellen",
@@ -2487,6 +2633,7 @@
     "id": 1794431624176,
     "stammdaten": {
       "wort": "quer",
+      "beispielsatz": "Momo legt den langen Ast quer über den schmalen Waldweg.",
       "artikel": "",
       "wortart": "Adjektiv",
       "plural": "",
@@ -2504,6 +2651,7 @@
     "id": 1794431629353,
     "stammdaten": {
       "wort": "die Hexe",
+      "beispielsatz": "Im Theaterstück fliegt eine freundliche Hexe auf ihrem Besen.",
       "artikel": "die",
       "wortart": "Substantiv",
       "plural": "Hexen",
@@ -2521,6 +2669,7 @@
     "id": 1794431637600,
     "stammdaten": {
       "wort": "das Quadrat",
+      "beispielsatz": "Ein Quadrat hat vier genau gleich lange Seiten und vier Ecken.",
       "artikel": "das",
       "wortart": "Substantiv",
       "plural": "Quadrate",
@@ -2538,6 +2687,7 @@
     "id": 1794431659496,
     "stammdaten": {
       "wort": "das Land",
+      "beispielsatz": "In den Ferien reisen wir mit dem Zug durch das ganze Land.",
       "artikel": "das",
       "wortart": "Substantiv",
       "plural": "Länder",
@@ -2555,6 +2705,7 @@
     "id": 1794431665229,
     "stammdaten": {
       "wort": "der Mond",
+      "beispielsatz": "Nachts leuchtet der runde Mond hell am dunklen Sternenhimmel.",
       "artikel": "der",
       "wortart": "Substantiv",
       "plural": "Monde",
@@ -2572,6 +2723,7 @@
     "id": 1794431672524,
     "stammdaten": {
       "wort": "der Urlaub",
+      "beispielsatz": "Im Sommer fährt Momo mit seiner Familie in den Urlaub ans Meer.",
       "artikel": "der",
       "wortart": "Substantiv",
       "plural": "Urlaube",
@@ -2589,6 +2741,7 @@
     "id": 1794431679546,
     "stammdaten": {
       "wort": "der Schuss",
+      "beispielsatz": "Mit einem kräftigen Schuss landet der Fußball direkt im Netz.",
       "artikel": "der",
       "wortart": "Substantiv",
       "plural": "Schüsse",
@@ -2606,6 +2759,7 @@
     "id": 1794431685218,
     "stammdaten": {
       "wort": "jetzt ist Schluss",
+      "beispielsatz": "Der Schiedsrichter pfeift ab und ruft: Jetzt ist Schluss!",
       "artikel": "",
       "wortart": "Phrase",
       "plural": "",
@@ -2623,6 +2777,7 @@
     "id": 1794431695732,
     "stammdaten": {
       "wort": "die Brille",
+      "beispielsatz": "Zum Lesen setzt sich Opa immer seine runde Brille auf.",
       "artikel": "die",
       "wortart": "Substantiv",
       "plural": "Brillen",
@@ -2640,6 +2795,7 @@
     "id": 1794431704426,
     "stammdaten": {
       "wort": "die Rechnung",
+      "beispielsatz": "Nach dem Einkaufen legt Papa die Rechnung in die Tasche.",
       "artikel": "die",
       "wortart": "Substantiv",
       "plural": "Rechnungen",
@@ -2657,6 +2813,7 @@
     "id": 1794431711103,
     "stammdaten": {
       "wort": "brennen",
+      "beispielsatz": "Im Kamin brennen die trockenen Holzscheite mit warmem Licht.",
       "artikel": "",
       "wortart": "Verb",
       "plural": "",
@@ -2674,6 +2831,7 @@
     "id": 1794431714533,
     "stammdaten": {
       "wort": "Haare",
+      "beispielsatz": "Nach dem Schwimmen föhnt sich Momo seine nassen Haare trocken.",
       "artikel": "die",
       "wortart": "Substantiv",
       "plural": "Haare",
@@ -2691,6 +2849,7 @@
     "id": 1794431721579,
     "stammdaten": {
       "wort": "hart",
+      "beispielsatz": "Der alte Stein auf dem Weg ist steinhart und schwer.",
       "artikel": "",
       "wortart": "Adjektiv",
       "plural": "",
@@ -2708,6 +2867,7 @@
     "id": 1794431724428,
     "stammdaten": {
       "wort": "weich",
+      "beispielsatz": "Das neue Kuscheltier hat ein ganz weiches flauschiges Fell.",
       "artikel": "",
       "wortart": "Adjektiv",
       "plural": "",
@@ -2725,6 +2885,7 @@
     "id": 1794431727412,
     "stammdaten": {
       "wort": "fest",
+      "beispielsatz": "Momo drückt den Deckel der Brotdose ganz fest zu.",
       "artikel": "",
       "wortart": "Adjektiv",
       "plural": "",
@@ -2742,6 +2903,7 @@
     "id": 1794431731388,
     "stammdaten": {
       "wort": "dünn",
+      "beispielsatz": "Für die Zeichnung spitzt Momo seinen Buntstift schön dünn an.",
       "artikel": "",
       "wortart": "Adjektiv",
       "plural": "",
@@ -2759,6 +2921,7 @@
     "id": 1794431735414,
     "stammdaten": {
       "wort": "dick",
+      "beispielsatz": "Im Winter zieht Momo seine dicke warme Daunenjacke an.",
       "artikel": "",
       "wortart": "Adjektiv",
       "plural": "",
@@ -2776,6 +2939,7 @@
     "id": 1794431738573,
     "stammdaten": {
       "wort": "fett",
+      "beispielsatz": "In die Pfanne kommt nur ein kleines bisschen Fett zum Braten.",
       "artikel": "",
       "wortart": "Adjektiv",
       "plural": "",
@@ -2793,6 +2957,7 @@
     "id": 1794431743761,
     "stammdaten": {
       "wort": "Furz",
+      "beispielsatz": "Wenn ein lauter Furz entweicht, müssen alle Kinder heimlich kichern.",
       "artikel": "der",
       "wortart": "Substantiv",
       "plural": "Fürze",
@@ -2810,6 +2975,7 @@
     "id": 1794431760987,
     "stammdaten": {
       "wort": "die Krankheit",
+      "beispielsatz": "Mit viel Tee und Ruhe ist jede kleine Krankheit bald vorbei.",
       "artikel": "die",
       "wortart": "Substantiv",
       "plural": "Krankheiten",
@@ -2827,6 +2993,7 @@
     "id": 1794431767080,
     "stammdaten": {
       "wort": "das Erlebnis",
+      "beispielsatz": "Die Übernachtung im Zelt war für Momo ein tolles Erlebnis.",
       "artikel": "das",
       "wortart": "Substantiv",
       "plural": "Erlebnisse",
@@ -2844,6 +3011,7 @@
     "id": 1794431773420,
     "stammdaten": {
       "wort": "das Zeugnis",
+      "beispielsatz": "Am letzten Schultag vor den Ferien bekommen alle ihr Zeugnis.",
       "artikel": "das",
       "wortart": "Substantiv",
       "plural": "Zeugnisse",
@@ -2861,6 +3029,7 @@
     "id": 1794431783255,
     "stammdaten": {
       "wort": "das Paket",
+      "beispielsatz": "Der Postbote bringt heute ein großes schweres Paket für Momo.",
       "artikel": "das",
       "wortart": "Substantiv",
       "plural": "Pakete",
@@ -2878,6 +3047,7 @@
     "id": 1794431792221,
     "stammdaten": {
       "wort": "die Maschine",
+      "beispielsatz": "In der Werkstatt surrt die große Maschine leise vor sich hin.",
       "artikel": "die",
       "wortart": "Substantiv",
       "plural": "Maschinen",
@@ -2895,6 +3065,7 @@
     "id": 1794431816221,
     "stammdaten": {
       "wort": "das Krokodil",
+      "beispielsatz": "Im Zoo liegt ein riesiges grünes Krokodil faul in der Sonne.",
       "artikel": "das",
       "wortart": "Substantiv",
       "plural": "Krokodile",
@@ -2912,6 +3083,7 @@
     "id": 1794431833448,
     "stammdaten": {
       "wort": "die Nase",
+      "beispielsatz": "Im Winter wird Momos Nase draußen an der kalten Luft ganz rot.",
       "artikel": "die",
       "wortart": "Substantiv",
       "plural": "Nasen",
@@ -2929,6 +3101,7 @@
     "id": 1794431839107,
     "stammdaten": {
       "wort": "der Mund",
+      "beispielsatz": "Nach dem Essen wischt sich Momo den Mund mit der Serviette ab.",
       "artikel": "der",
       "wortart": "Substantiv",
       "plural": "Münder",
@@ -2946,6 +3119,7 @@
     "id": 1794431848654,
     "stammdaten": {
       "wort": "außen",
+      "beispielsatz": "Von außen sieht das alte Baumhaus richtig abenteuerlich aus.",
       "artikel": "",
       "wortart": "Adverb",
       "plural": "",
@@ -2963,6 +3137,7 @@
     "id": 1794431851713,
     "stammdaten": {
       "wort": "innen",
+      "beispielsatz": "Innen haben Momo und seine Freunde das Baumhaus gemütlich eingerichtet.",
       "artikel": "",
       "wortart": "Adverb",
       "plural": "",
@@ -2980,6 +3155,7 @@
     "id": 1794431858153,
     "stammdaten": {
       "wort": "das Nest",
+      "beispielsatz": "Hoch oben in der Astgabel baut ein Vogel sein weiches Nest.",
       "artikel": "das",
       "wortart": "Substantiv",
       "plural": "Nester",
@@ -2997,6 +3173,7 @@
     "id": 1794431866314,
     "stammdaten": {
       "wort": "die Wespe",
+      "beispielsatz": "Eine gelb-schwarze Wespe kreist neugierig um das süße Marmeladenbrot.",
       "artikel": "die",
       "wortart": "Substantiv",
       "plural": "Wespen",
@@ -3014,6 +3191,7 @@
     "id": 1794431876681,
     "stammdaten": {
       "wort": "der Kuss",
+      "beispielsatz": "Vor dem Schlafengehen bekommt Momo noch einen Gute-Nacht-Kuss.",
       "artikel": "der",
       "wortart": "Substantiv",
       "plural": "Küsse",
@@ -3031,6 +3209,7 @@
     "id": 1794431888928,
     "stammdaten": {
       "wort": "ich esse Salat",
+      "beispielsatz": "Zum Mittagessen esse ich gerne knackigen Salat mit Gurken.",
       "artikel": "",
       "wortart": "Phrase",
       "plural": "",
@@ -3048,6 +3227,7 @@
     "id": 1794431902538,
     "stammdaten": {
       "wort": "Salz",
+      "beispielsatz": "Auf das Frühstücksei streut Papa eine kleine Prise Salz.",
       "artikel": "das",
       "wortart": "Substantiv",
       "plural": "Salze",
@@ -3065,6 +3245,7 @@
     "id": 1794431907394,
     "stammdaten": {
       "wort": "Pfeffer",
+      "beispielsatz": "Vom scharfen schwarzen Pfeffer muss Momo fast niesen.",
       "artikel": "der",
       "wortart": "Substantiv",
       "plural": "Pfeffer",
@@ -3082,6 +3263,7 @@
     "id": 1794431916670,
     "stammdaten": {
       "wort": "Essig",
+      "beispielsatz": "Für das Salatdressing rührt Mama etwas Essig und Öl zusammen.",
       "artikel": "der",
       "wortart": "Substantiv",
       "plural": "Essige",
@@ -3099,6 +3281,7 @@
     "id": 1794431921227,
     "stammdaten": {
       "wort": "Öl",
+      "beispielsatz": "Damit nichts anbrennt, gibt Mama einen Tropfen Öl in die Pfanne.",
       "artikel": "das",
       "wortart": "Substantiv",
       "plural": "Öle",
@@ -3116,6 +3299,7 @@
     "id": 1794431926665,
     "stammdaten": {
       "wort": "Kissen",
+      "beispielsatz": "Abends kuschelt Momo seinen Kopf tief in das weiche Kissen.",
       "artikel": "das",
       "wortart": "Substantiv",
       "plural": "Kissen",
@@ -3133,6 +3317,7 @@
     "id": 1794431931916,
     "stammdaten": {
       "wort": "Decke",
+      "beispielsatz": "Wenn es nachts kühl wird, zieht sich Momo die warme Decke hoch.",
       "artikel": "die",
       "wortart": "Substantiv",
       "plural": "Decken",
@@ -3150,6 +3335,7 @@
     "id": 1794431937340,
     "stammdaten": {
       "wort": "die Nuss",
+      "beispielsatz": "Das fleißige Eichhörnchen knackt eine harte braune Nuss.",
       "artikel": "die",
       "wortart": "Substantiv",
       "plural": "Nüsse",
@@ -3167,6 +3353,7 @@
     "id": 1794431942654,
     "stammdaten": {
       "wort": "das Schloss",
+      "beispielsatz": "Auf dem hohen Berg steht ein altes Schloss mit vielen Türmen.",
       "artikel": "das",
       "wortart": "Substantiv",
       "plural": "Schlösser",
@@ -3184,6 +3371,7 @@
     "id": 1794431950630,
     "stammdaten": {
       "wort": "die Tasse",
+      "beispielsatz": "Morgens trinkt Mama ihren warmen Kaffee aus einer großen Tasse.",
       "artikel": "die",
       "wortart": "Substantiv",
       "plural": "Tassen",
@@ -3201,6 +3389,7 @@
     "id": 1794431955521,
     "stammdaten": {
       "wort": "das Messer",
+      "beispielsatz": "Momo schneidet den Apfel vorsichtig mit einem stumpfen Messer.",
       "artikel": "das",
       "wortart": "Substantiv",
       "plural": "Messer",
@@ -3218,6 +3407,7 @@
     "id": 1794431960400,
     "stammdaten": {
       "wort": "die Pfanne",
+      "beispielsatz": "In der heißen Pfanne brutzeln goldbraune Kartoffelpuffer.",
       "artikel": "die",
       "wortart": "Substantiv",
       "plural": "Pfannen",
@@ -3235,6 +3425,7 @@
     "id": 1794431964066,
     "stammdaten": {
       "wort": "der Topf",
+      "beispielsatz": "Auf dem Herd köchelt die leckere Gemüsesuppe im großen Topf.",
       "artikel": "der",
       "wortart": "Substantiv",
       "plural": "Töpfe",
@@ -3252,6 +3443,7 @@
     "id": 1794431971350,
     "stammdaten": {
       "wort": "die Schüssel",
+      "beispielsatz": "Momo füllt sich morgens knusprige Cornflakes in seine Schüssel.",
       "artikel": "die",
       "wortart": "Substantiv",
       "plural": "Schüsseln",
@@ -3269,6 +3461,7 @@
     "id": 1794431983040,
     "stammdaten": {
       "wort": "das Fenster",
+      "beispielsatz": "Morgens öffnet Momo weit das Fenster, um frische Luft hereinzulassen.",
       "artikel": "das",
       "wortart": "Substantiv",
       "plural": "Fenster",
@@ -3286,6 +3479,7 @@
     "id": 1794431987114,
     "stammdaten": {
       "wort": "das Glas",
+      "beispielsatz": "Beim Einschenken achtet Momo darauf, dass das Glas nicht überläuft.",
       "artikel": "das",
       "wortart": "Substantiv",
       "plural": "Gläser",
@@ -3303,6 +3497,7 @@
     "id": 1794471471437,
     "stammdaten": {
       "wort": "der Kranz",
+      "beispielsatz": "Im Advent hängt ein grüner Kranz mit roten Schleifen an der Tür.",
       "artikel": "der",
       "wortart": "Substantiv",
       "plural": "Kränze",
@@ -3320,6 +3515,7 @@
     "id": 1794471499194,
     "stammdaten": {
       "wort": "Elfmeter",
+      "beispielsatz": "Kurz vor Schluss schießt Momo den Elfmeter flach in die linke Ecke.",
       "artikel": "der",
       "wortart": "Substantiv",
       "plural": "Elfmeter",
@@ -3337,6 +3533,7 @@
     "id": 1794471504655,
     "stammdaten": {
       "wort": "Abseits",
+      "beispielsatz": "Der Stürmer stand beim Pass knapp im Abseits, deshalb pfeift der Schiedsrichter.",
       "artikel": "das",
       "wortart": "Substantiv",
       "plural": "Abseits",
@@ -3354,6 +3551,7 @@
     "id": 1794471540324,
     "stammdaten": {
       "wort": "der Freistoß",
+      "beispielsatz": "Nach dem Foul legt sich Momo den Ball für den Freistoß zurecht.",
       "artikel": "der",
       "wortart": "Substantiv",
       "plural": "Freistöße",
@@ -3371,6 +3569,7 @@
     "id": 1794588225537,
     "stammdaten": {
       "wort": "er läuft",
+      "beispielsatz": "Auf dem Sportplatz läuft er heute so schnell wie der Wind.",
       "artikel": "",
       "wortart": "Phrase",
       "plural": "",
@@ -3388,6 +3587,7 @@
     "id": 1794588255949,
     "stammdaten": {
       "wort": "Freunde",
+      "beispielsatz": "Nach der Schule treffen sich Momo und seine Freunde zum Kicken.",
       "artikel": "die",
       "wortart": "Substantiv",
       "plural": "Freunde",
@@ -3405,6 +3605,7 @@
     "id": 1794588273016,
     "stammdaten": {
       "wort": "laut",
+      "beispielsatz": "In der Pause lachen und rufen alle Kinder besonders laut.",
       "artikel": "",
       "wortart": "Adjektiv",
       "plural": "",
@@ -3422,6 +3623,7 @@
     "id": 1794588282695,
     "stammdaten": {
       "wort": "heute",
+      "beispielsatz": "Heute scheint endlich wieder die Sonne nach dem langen Regen.",
       "artikel": "",
       "wortart": "Adverb",
       "plural": "",
@@ -3439,6 +3641,7 @@
     "id": 1794588361851,
     "stammdaten": {
       "wort": "sie sagt",
+      "beispielsatz": "Sie sagt ihrem kleinen Bruder, dass er beim Überqueren aufpassen soll.",
       "artikel": "",
       "wortart": "Phrase",
       "plural": "",
@@ -3456,6 +3659,7 @@
     "id": 1794588400354,
     "stammdaten": {
       "wort": "rund",
+      "beispielsatz": "Ein Fußball muss immer schön prall und rund sein.",
       "artikel": "",
       "wortart": "Adjektiv",
       "plural": "",
@@ -3473,6 +3677,7 @@
     "id": 1794588481158,
     "stammdaten": {
       "wort": "du wäschst",
+      "beispielsatz": "Nach dem Matschen im Garten wäschst du dir gründlich die Hände.",
       "artikel": "",
       "wortart": "Phrase",
       "plural": "",
@@ -3490,6 +3695,7 @@
     "id": 1794588538870,
     "stammdaten": {
       "wort": "bisschen",
+      "beispielsatz": "Ich hätte gerne noch ein kleines bisschen Soße zu den Nudeln.",
       "artikel": "",
       "wortart": "Pronomen",
       "plural": "",
@@ -3507,6 +3713,7 @@
     "id": 1794588572928,
     "stammdaten": {
       "wort": "ihn",
+      "beispielsatz": "Momo winkt seinem Freund zu und ruft ihn laut herüber.",
       "artikel": "",
       "wortart": "Pronomen",
       "plural": "",
@@ -3524,6 +3731,7 @@
     "id": 1794588589680,
     "stammdaten": {
       "wort": "Bäcker",
+      "beispielsatz": "Früh am Morgen backt der Bäcker schon knusprige Brötchen.",
       "artikel": "der",
       "wortart": "Substantiv",
       "plural": "Bäcker",
@@ -3541,6 +3749,7 @@
     "id": 1794588604207,
     "stammdaten": {
       "wort": "ihr übt",
+      "beispielsatz": "Ihr übt heute gemeinsam die schwierigen Wörter für das Diktat.",
       "artikel": "",
       "wortart": "Phrase",
       "plural": "",
@@ -3558,6 +3767,7 @@
     "id": 1794588630940,
     "stammdaten": {
       "wort": "er bleibt",
+      "beispielsatz": "Bei roter Ampel bleibt er sofort am Bordstein stehen.",
       "artikel": "",
       "wortart": "Phrase",
       "plural": "",
@@ -3575,6 +3785,7 @@
     "id": 1794835808122,
     "stammdaten": {
       "wort": "die Straße",
+      "beispielsatz": "Am Abend leuchten die Laternen entlang der ganzen Straße.",
       "artikel": "die",
       "wortart": "Substantiv",
       "plural": "Straßen",
@@ -3592,6 +3803,7 @@
     "id": 1794835822902,
     "stammdaten": {
       "wort": "der Sommer",
+      "beispielsatz": "Im warmen Sommer essen wir am liebsten Erdbeereis im Garten.",
       "artikel": "der",
       "wortart": "Substantiv",
       "plural": "Sommer",
@@ -3609,6 +3821,7 @@
     "id": 1794835853159,
     "stammdaten": {
       "wort": "diese",
+      "beispielsatz": "Diese bunte Murmel glitzert im Sonnenlicht besonders schön.",
       "artikel": "",
       "wortart": "Pronomen",
       "plural": "",
@@ -3626,6 +3839,7 @@
     "id": 1794835963861,
     "stammdaten": {
       "wort": "kommen",
+      "beispielsatz": "Am Wochenende kommen Oma und Opa zu uns zu Besuch.",
       "artikel": "",
       "wortart": "Verb",
       "plural": "",
@@ -3643,6 +3857,7 @@
     "id": 1794835994580,
     "stammdaten": {
       "wort": "die Suppe",
+      "beispielsatz": "An kalten Wintertagen schmeckt eine heiße Suppe besonders gut.",
       "artikel": "die",
       "wortart": "Substantiv",
       "plural": "Suppen",
@@ -3660,6 +3875,7 @@
     "id": 1794836007367,
     "stammdaten": {
       "wort": "immer",
+      "beispielsatz": "Momo putzt sich morgens und abends immer gründlich die Zähne.",
       "artikel": "",
       "wortart": "Adverb",
       "plural": "",
@@ -3677,6 +3893,7 @@
     "id": 1794836018957,
     "stammdaten": {
       "wort": "das Spiel",
+      "beispielsatz": "Am Nachmittag probieren wir ein neues lustiges Brettspiel aus.",
       "artikel": "das",
       "wortart": "Substantiv",
       "plural": "Spiele",
@@ -3694,6 +3911,7 @@
     "id": 1794836030306,
     "stammdaten": {
       "wort": "das Tier",
+      "beispielsatz": "Der kleine Igel ist ein scheues Tier und versteckt sich im Laub.",
       "artikel": "das",
       "wortart": "Substantiv",
       "plural": "Tiere",
@@ -3711,6 +3929,7 @@
     "id": 1794836050977,
     "stammdaten": {
       "wort": "wollen",
+      "beispielsatz": "Am Samstag wollen wir zusammen in den Wald wandern gehen.",
       "artikel": "",
       "wortart": "Verb",
       "plural": "",
@@ -3728,6 +3947,7 @@
     "id": 1794836060121,
     "stammdaten": {
       "wort": "schnell",
+      "beispielsatz": "Der Gepard kann auf kurzen Strecken unglaublich schnell rennen.",
       "artikel": "",
       "wortart": "Adjektiv",
       "plural": "",
@@ -3745,6 +3965,7 @@
     "id": 1794853204556,
     "stammdaten": {
       "wort": "Schuh",
+      "beispielsatz": "Im Flur steht noch ein einzelner Schuh neben dem Regal.",
       "artikel": "der",
       "wortart": "Substantiv",
       "plural": "Schuhe",
@@ -3762,6 +3983,7 @@
     "id": 1794853216001,
     "stammdaten": {
       "wort": "Wand",
+      "beispielsatz": "Momo hängt sein selbst gemaltes Bild stolz an die Wand.",
       "artikel": "die",
       "wortart": "Substantiv",
       "plural": "Wände",
@@ -3779,6 +4001,7 @@
     "id": 1794853228373,
     "stammdaten": {
       "wort": "die Bank",
+      "beispielsatz": "Im Park setzen sich alle kurz zum Ausruhen auf die hölzerne Bank.",
       "artikel": "die",
       "wortart": "Substantiv",
       "plural": "Bänke",
@@ -3796,6 +4019,7 @@
     "id": 1794853610271,
     "stammdaten": {
       "wort": "der Ritter",
+      "beispielsatz": "Auf der alten Burg trug der mutige Ritter eine glänzende Rüstung.",
       "artikel": "der",
       "wortart": "Substantiv",
       "plural": "Ritter",
@@ -3813,6 +4037,7 @@
     "id": 1794853633514,
     "stammdaten": {
       "wort": "das Gespenst",
+      "beispielsatz": "In der Gruselgeschichte schwebt das Gespenst lautlos durch das Schloss.",
       "artikel": "das",
       "wortart": "Substantiv",
       "plural": "Gespenster",
@@ -3830,6 +4055,7 @@
     "id": 1794860500506,
     "stammdaten": {
       "wort": "der Clown",
+      "beispielsatz": "Im Zirkus bringt der lustige Clown alle Zuschauer zum Lachen.",
       "artikel": "",
       "wortart": "",
       "plural": "",
@@ -3847,6 +4073,7 @@
     "id": 1794947852866,
     "stammdaten": {
       "wort": "der Aal",
+      "beispielsatz": "Im tiefen Fluss schlängelt sich der glatte Aal durch das Wasser.",
       "artikel": "",
       "wortart": "",
       "plural": "",
@@ -3864,6 +4091,7 @@
     "id": 1794954499456,
     "stammdaten": {
       "wort": "das Telefon",
+      "beispielsatz": "Wenn das Telefon klingelt, hebt Momo freundlich ab.",
       "artikel": "",
       "wortart": "",
       "plural": "",
@@ -3881,6 +4109,7 @@
     "id": 1794954510106,
     "stammdaten": {
       "wort": "Licht",
+      "beispielsatz": "Im dunklen Tunnel schaltet Momo vorne am Fahrrad das Licht ein.",
       "artikel": "",
       "wortart": "",
       "plural": "",
@@ -3898,6 +4127,7 @@
     "id": 1794954522431,
     "stammdaten": {
       "wort": "der Tank",
+      "beispielsatz": "Vor der langen Urlaubsfahrt füllt Papa den Tank an der Tankstelle.",
       "artikel": "",
       "wortart": "",
       "plural": "",
@@ -3915,6 +4145,7 @@
     "id": 1794954530590,
     "stammdaten": {
       "wort": "krank",
+      "beispielsatz": "Wenn man krank ist, muss man sich im Bett gut ausruhen.",
       "artikel": "",
       "wortart": "",
       "plural": "",
@@ -3932,6 +4163,7 @@
     "id": 1794954540851,
     "stammdaten": {
       "wort": "gespannt",
+      "beispielsatz": "Momo ist schon ganz gespannt, wie das spannende Buch ausgeht.",
       "artikel": "",
       "wortart": "",
       "plural": "",
@@ -3949,6 +4181,7 @@
     "id": 1794954563059,
     "stammdaten": {
       "wort": "verwandt",
+      "beispielsatz": "Meine Cousine und ich sind miteinander verwandt.",
       "artikel": "",
       "wortart": "",
       "plural": "",
@@ -3966,6 +4199,7 @@
     "id": 1794954576295,
     "stammdaten": {
       "wort": "das Bild",
+      "beispielsatz": "Mit bunten Wasserfarben malt Momo ein fröhliches Bild vom Meer.",
       "artikel": "",
       "wortart": "",
       "plural": "",
@@ -3983,6 +4217,7 @@
     "id": 1794954585168,
     "stammdaten": {
       "wort": "die Kunst",
+      "beispielsatz": "Im Kunstunterricht basteln und malen die Kinder besonders gerne.",
       "artikel": "",
       "wortart": "",
       "plural": "",
@@ -4000,6 +4235,7 @@
     "id": 1795369098972,
     "stammdaten": {
       "wort": "Geburtstag",
+      "beispielsatz": "Zu seinem Geburtstag lädt Momo alle seine Freunde zur Feier ein.",
       "artikel": "",
       "wortart": "",
       "plural": "",
@@ -4017,6 +4253,7 @@
     "id": 1795369107160,
     "stammdaten": {
       "wort": "nämlich",
+      "beispielsatz": "Wir nehmen unsere Regenschirme mit, es fängt nämlich gleich an zu regnen.",
       "artikel": "",
       "wortart": "",
       "plural": "",
@@ -4034,6 +4271,7 @@
     "id": 1795369111945,
     "stammdaten": {
       "wort": "Party",
+      "beispielsatz": "Auf der Party tanzen und spielen alle Kinder fröhlich zusammen.",
       "artikel": "",
       "wortart": "",
       "plural": "",
@@ -4051,6 +4289,7 @@
     "id": 1795369848155,
     "stammdaten": {
       "wort": "gefahren",
+      "beispielsatz": "Gestern sind wir mit dem Fahrrad bis zum großen Spielplatz gefahren.",
       "artikel": "",
       "wortart": "",
       "plural": "",
@@ -4068,6 +4307,7 @@
     "id": 1795369859766,
     "stammdaten": {
       "wort": "Samstag",
+      "beispielsatz": "Am Samstag hat Momo endlich schulfrei und kann lange ausschlafen.",
       "artikel": "",
       "wortart": "",
       "plural": "",
@@ -4085,6 +4325,7 @@
     "id": 1795369890699,
     "stammdaten": {
       "wort": "Sonntag",
+      "beispielsatz": "Am Sonntag frühstückt die ganze Familie gemütlich zusammen.",
       "artikel": "",
       "wortart": "",
       "plural": "",
@@ -4102,6 +4343,7 @@
     "id": 1795369901477,
     "stammdaten": {
       "wort": "Montag",
+      "beispielsatz": "Am Montag beginnt wieder eine neue spannende Woche in der Schule.",
       "artikel": "",
       "wortart": "",
       "plural": "",
@@ -4119,6 +4361,7 @@
     "id": 1795369905269,
     "stammdaten": {
       "wort": "Dienstag",
+      "beispielsatz": "Am Dienstag hat Momo am Nachmittag sein Fußballtraining.",
       "artikel": "",
       "wortart": "",
       "plural": "",
@@ -4136,6 +4379,7 @@
     "id": 1795369909799,
     "stammdaten": {
       "wort": "Mittwoch",
+      "beispielsatz": "Am Mittwoch ist die Schulwoche schon zur Hälfte geschafft.",
       "artikel": "",
       "wortart": "",
       "plural": "",
@@ -4153,6 +4397,7 @@
     "id": 1795369913680,
     "stammdaten": {
       "wort": "Donnerstag",
+      "beispielsatz": "Am Donnerstag gehen wir nach der Schule gemeinsam in die Bücherei.",
       "artikel": "",
       "wortart": "",
       "plural": "",
@@ -4170,6 +4415,7 @@
     "id": 1795369916922,
     "stammdaten": {
       "wort": "Freitag",
+      "beispielsatz": "Am Freitag freuen sich alle Kinder schon auf das Wochenende.",
       "artikel": "",
       "wortart": "",
       "plural": "",
@@ -4187,6 +4433,7 @@
     "id": 1795460280922,
     "stammdaten": {
       "wort": "die Mutter",
+      "beispielsatz": "Die Mutter liest Momo abends noch eine spannende Geschichte vor.",
       "artikel": "",
       "wortart": "",
       "plural": "",
@@ -4204,6 +4451,7 @@
     "id": 1795460352991,
     "stammdaten": {
       "wort": "das Muster",
+      "beispielsatz": "Auf dem bunten Teppich ist ein lustiges Muster aus Sternen zu sehen.",
       "artikel": "",
       "wortart": "",
       "plural": "",
@@ -4221,6 +4469,7 @@
     "id": 1795460361718,
     "stammdaten": {
       "wort": "häkeln",
+      "beispielsatz": "Oma kann mit ihrer Nadel wunderschöne kleine Tiere häkeln.",
       "artikel": "",
       "wortart": "",
       "plural": "",
@@ -4238,6 +4487,7 @@
     "id": 1795460366697,
     "stammdaten": {
       "wort": "Wolle",
+      "beispielsatz": "Aus weicher bunter Wolle entsteht im Winter ein warmer Schal.",
       "artikel": "",
       "wortart": "",
       "plural": "",
@@ -4255,6 +4505,7 @@
     "id": 1795460374664,
     "stammdaten": {
       "wort": "Babydecke",
+      "beispielsatz": "Für das kleine Geschwisterchen liegt eine kuschelige Babydecke bereit.",
       "artikel": "",
       "wortart": "",
       "plural": "",
@@ -4272,6 +4523,7 @@
     "id": 1795460417371,
     "stammdaten": {
       "wort": "das Kind",
+      "beispielsatz": "Jedes Kind in der Klasse darf heute sein Lieblingsbuch vorstellen.",
       "artikel": "",
       "wortart": "",
       "plural": "",
@@ -4289,6 +4541,7 @@
     "id": 1795460430360,
     "stammdaten": {
       "wort": "die Kürbisse",
+      "beispielsatz": "Im Herbst leuchten die großen orangen Kürbisse auf dem Feld.",
       "artikel": "",
       "wortart": "",
       "plural": "",
@@ -4306,6 +4559,7 @@
     "id": 1795460434447,
     "stammdaten": {
       "wort": "zusammen",
+      "beispielsatz": "Zusammen macht das Spielen auf dem Pausenhof doppelt so viel Spaß.",
       "artikel": "",
       "wortart": "",
       "plural": "",
@@ -4323,6 +4577,7 @@
     "id": 1795460443621,
     "stammdaten": {
       "wort": "insgesamt",
+      "beispielsatz": "Insgesamt liegen zwölf bunte Murmeln in Momos kleinem Beutel.",
       "artikel": "",
       "wortart": "",
       "plural": "",
@@ -4340,6 +4595,7 @@
     "id": 1795460471540,
     "stammdaten": {
       "wort": "hundert",
+      "beispielsatz": "Im großen Glas sind mindestens hundert kleine Glasperlen.",
       "artikel": "",
       "wortart": "",
       "plural": "",
@@ -4357,6 +4613,7 @@
     "id": 1795460475982,
     "stammdaten": {
       "wort": "tausend",
+      "beispielsatz": "Am klaren Nachthimmel funkeln tausend helle Sterne.",
       "artikel": "",
       "wortart": "",
       "plural": "",
@@ -4374,6 +4631,7 @@
     "id": 1795460483100,
     "stammdaten": {
       "wort": "elf",
+      "beispielsatz": "Beim Fußball spielen immer elf Spieler in einer Mannschaft.",
       "artikel": "",
       "wortart": "",
       "plural": "",
@@ -4391,6 +4649,7 @@
     "id": 1795460490166,
     "stammdaten": {
       "wort": "zwölf",
+      "beispielsatz": "Ein Jahr hat genau zwölf Monate von Januar bis Dezember.",
       "artikel": "",
       "wortart": "",
       "plural": "",
@@ -4408,6 +4667,7 @@
     "id": 1795460495035,
     "stammdaten": {
       "wort": "Zwilling",
+      "beispielsatz": "Mein Bruder und ich sehen uns zum Verwechseln ähnlich, weil wir Zwillinge sind.",
       "artikel": "",
       "wortart": "",
       "plural": "",
@@ -4425,6 +4685,7 @@
     "id": 1795460510766,
     "stammdaten": {
       "wort": "Menge",
+      "beispielsatz": "Auf dem Herbstmarkt gibt es eine ganze Menge leckerer Äpfel.",
       "artikel": "",
       "wortart": "",
       "plural": "",
