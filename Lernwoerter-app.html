@@ -718,6 +718,8 @@ const FreschModule = (() => {
   const VERLAENGERUNG = { "Sand": "sandig", "Mehl": "mehlig", "Gold": "golden" };
   const istVokal = c => !!c && "aeiouäöüy".includes(c);
   const AUSLAUT = { g: "k", d: "t", b: "p" };
+  // Macht Sonderzeichen (< > & " ') unschädlich, bevor fremder Text (z. B. von Wiktionary) als HTML angezeigt wird
+  const esc = value => String(value).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]);
   const ex = (w, n) => ["Zahl", "Fahrt", "Bohne"].filter(x => x.toLowerCase() !== w.toLowerCase()).slice(0, n).join(", ");
 
   function diff(eingabe, ziel) {
@@ -886,7 +888,7 @@ const FreschModule = (() => {
         try { v = await verlaengerung(ziel); } catch (e) { v = null; }
         if (v && v.toLowerCase().includes(want)) {
           const k = v.toLowerCase().indexOf(want);
-          add(`<b>Verlängern:</b> ${v.slice(0, k)}<b>${v[k]}</b>${v.slice(k + 1)}`);
+          add(`<b>Verlängern:</b> ${esc(v.slice(0, k))}<b>${esc(v[k])}</b>${esc(v.slice(k + 1))}`);
         } else {
           add("<b>Verlängern</b>, dann hörst du den Buchstaben");
         }
@@ -895,7 +897,7 @@ const FreschModule = (() => {
         marks.add(i);
         let b = null;
         try { b = await ableitung(ziel); } catch (e) { b = null; }
-        add(b ? `<b>Ableiten:</b> ${b} → ${ziel.slice(offset)}` : "<b>ä</b> kommt oft von <b>a</b>");
+        add(b ? `<b>Ableiten:</b> ${esc(b)} → ${esc(ziel.slice(offset))}` : "<b>ä</b> kommt oft von <b>a</b>");
       }
       else {
         marks.add(i);
@@ -1906,7 +1908,7 @@ function revealWord() {
       // 2. Der Schüler-Tipp wird zusätzlich darunter dezent mit unterstrichenen Fehlern eingeblendet
       const inputMarks = getInputErrorMarks(userInput, compareTarget);
       const highlightedInput = [...userInput].map((c, i) =>
-        inputMarks.has(i) ? `<span style="border-bottom: 2px solid #ff3b30; color: #ff3b30;">${c}</span>` : c
+        inputMarks.has(i) ? `<span style="border-bottom: 2px solid #ff3b30; color: #ff3b30;">${escapeHtml(c)}</span>` : escapeHtml(c)
       ).join('');
 
       feedback.innerHTML = `
