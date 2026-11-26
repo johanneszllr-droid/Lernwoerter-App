@@ -5166,5 +5166,23 @@
       "fehlerZaehler": 0,
       "intensiv": false
     }
+  },
+  {
+    "id": 1795460510810,
+    "stammdaten": {
+      "wort": "willst",
+      "beispielsatz": "„Was willst du heute spielen?“, fragt Momo seinen besten Freund.",
+      "artikel": "",
+      "wortart": "Verb",
+      "plural": "",
+      "emoji": "🎲",
+      "besonderheiten": []
+    },
+    "userdaten": {
+      "box": 0,
+      "letztePruefung": null,
+      "fehlerZaehler": 0,
+      "intensiv": false
+    }
   }
 ]
