@@ -5,7 +5,7 @@
  <meta name="viewport" content="width=device-width, initial-scale=1.0">
  <title>Lernwörter-App</title>
  <!-- Manuelle Versionsnummer, wird unter „Settings“ angezeigt. -->
- <meta name="app-version" content="1.4.6">
+ <meta name="app-version" content="1.4.9">
  <meta name="theme-color" content="#f8fafc">
  <link rel="icon" type="image/png" href="./Momo_Maus.png">
  <link rel="apple-touch-icon" href="./Momo_Maus.png">
@@ -72,7 +72,8 @@
  .learning-card { display: flex; flex-direction: column; min-height: 470px; overflow: hidden; padding: 22px 24px 20px; }
  .learning-card.wrong-bg { background: #fff7f7; border-color: #fecaca; }
  .learning-card.correct-bg { background: #f0fdf4; border-color: #86efac; }
- .status-icon { position: absolute; top: 15px; right: 18px; font-size: 19px; }
+ .learning-card-controls { display: flex; flex: 0 0 auto; align-items: center; gap: 8px; }
+ .status-icon { flex: 0 0 auto; font-size: 19px; line-height: 1; }
  .learning-card-header { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding-bottom: 16px; border-bottom: 1px solid #f1f5f9; }
  .box-info-group { display: flex; align-items: center; gap: 12px; min-width: 0; }
  .box-label { display: block; margin-bottom: 5px; color: #94a3b8; font-size: 10px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; }
@@ -86,9 +87,11 @@
  .word-display { min-height: 50px; margin: 8px 0; color: #334155; font-size: clamp(2rem,6vw,3rem); font-weight: 800; letter-spacing: .02em; }
  .word-display.digital-result { font-size: clamp(2rem,7vw,3.4rem); color: #334155; letter-spacing: .04em; }
  .word-display.digital-result.richtig { color: #059669; }
+ .digital-correct-message { color: #059669; font-size: 19px; font-weight: 800; text-align: center; }
  .example-sentence { width: 100%; padding: 12px 15px; border: 1px solid #c7d2fe; border-radius: 15px; background: #eef2ff; color: #334155; text-align: left; }
  .example-sentence[hidden] { display: none; }
  .example-sentence-text { margin: 0; font-size: 15px; line-height: 1.5; }
+ .example-word-highlight { border-radius: 4px; background: #dcfce7; color: #047857; font-weight: 800; }
  .fehler { color: #ea580c; border-bottom: 4px solid #fb923c; }
  #digital-input-area { width: 100%; margin: 0 !important; }
  #user-input { width: 100%; min-height: 56px; padding: 13px 16px; border: 2px solid #e2e8f0; border-radius: 16px; outline: none; background: #f8fafc; color: #1e293b; font-size: 19px; font-weight: 700; text-align: center; }
@@ -109,7 +112,10 @@
  .action-button.primary { background: #4f46e5; color: white; box-shadow: 0 4px 12px rgba(79,70,229,.18); }
  .action-button.primary.image-action { background: linear-gradient(180deg,#fff,#f8fafc); color: #334155; box-shadow: 0 3px 10px rgba(15,23,42,.08); }
  .action-button.primary.image-action:hover { background: #eef2ff; }
- .action-button.primary.digital-next { grid-column: 3; }
+ .action-button.primary.digital-next { grid-column: 3; border-color: #bfdbfe; background: #dbeafe; color: #1e3a8a; box-shadow: 0 3px 10px rgba(30,58,138,.12); }
+ .action-button.primary.digital-next:hover { border-color: #93c5fd; background: #bfdbfe; }
+ .action-button.primary.digital-next:focus-visible { outline: 3px solid #93c5fd; outline-offset: 2px; }
+ #actionBarBefore .action-button.digital-next .action-image { width: 52px; height: 52px; }
  #actionBarBefore .action-button.image-action { min-height: 126px; gap: 3px; padding: 8px; font-size: 13px; }
  .action-button.wrong.image-action { border-color: #fecaca; background: linear-gradient(180deg,#fff,#fff1f2); color: #9f1239; }
  .action-button.wrong.image-action:hover { background: #ffe4e6; }
@@ -203,14 +209,15 @@
  .data-grid { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 14px; }
  .data-card { display: flex; flex-direction: column; justify-content: space-between; gap: 16px; padding: 20px; border: 1px solid #e2e8f0; border-radius: 24px; background: white; box-shadow: 0 4px 20px -2px rgba(15,23,42,.05); }
  .settings-card { margin-bottom: 14px; }
- .settings-controls { display: grid; width: 100%; gap: 0; }
+ .settings-controls { --setting-control-width: 64px; display: grid; width: 100%; gap: 0; }
  .setting-row { display: grid; grid-template-columns: minmax(0,1fr) minmax(120px,220px); align-items: center; gap: 12px; width: 100%; }
  .setting-copy { display: flex; grid-column: 1; flex-direction: column; gap: 4px; }
  .setting-label { color: #334155; font-size: 14px; font-weight: 800; }
  .setting-description { margin: 0; color: #64748b; font-size: 12px; line-height: 1.45; }
  .setting-row + .setting-row { padding-top: 14px; border-top: 1px solid #e2e8f0; }
- .settings-sound-toggle, .setting-number-input { grid-column: 2; justify-self: end; }
- .setting-number-input { width: 100%; min-height: 44px; padding: 9px 12px; border: 1px solid #cbd5e1; border-radius: 12px; background: #f8fafc; color: #1e293b; font-size: 16px; font-weight: 700; text-align: right; }
+ .settings-sound-toggle, .setting-number-input { grid-column: 2; justify-self: end; width: var(--setting-control-width); }
+ .settings-sound-toggle { justify-content: center; }
+ .setting-number-input { min-height: 44px; padding: 9px 8px; border: 1px solid #cbd5e1; border-radius: 12px; background: #f8fafc; color: #1e293b; font-size: 16px; font-weight: 700; text-align: center; }
  .data-card-actions { display: flex; flex-wrap: wrap; gap: 8px; }
  .data-card-actions > * { width: 100%; }
  .data-card-icon { width: 42px; height: 42px; display: grid; place-items: center; margin-bottom: 10px; border-radius: 14px; background: #eef2ff; color: #4f46e5; font-size: 20px; }
@@ -325,7 +332,6 @@
    </div>
 
    <section class="card learning-card animate-card" id="learning-card">
-    <span class="status-icon" id="status-icon"></span>
     <header class="learning-card-header">
      <div class="box-info-group">
       <div>
@@ -333,9 +339,12 @@
        <div id="box-info">Wörterspeicher</div>
       </div>
      </div>
-     <button class="card-intensiv-btn" id="card-intensiv-btn" aria-pressed="false" onclick="UIController.toggleCurrentWordIntensiv()">
-      <span id="cardStarIcon">☆</span><span>Intensiv</span>
-     </button>
+     <div class="learning-card-controls">
+      <span class="status-icon" id="status-icon" aria-hidden="true"></span>
+      <button class="card-intensiv-btn" id="card-intensiv-btn" aria-pressed="false" onclick="UIController.toggleCurrentWordIntensiv()">
+       <span id="cardStarIcon">☆</span><span>Intensiv</span>
+      </button>
+     </div>
     </header>
 
     <div class="learning-card-main">
@@ -355,7 +364,7 @@
     </div>
 
     <div id="actionBarBefore" class="action-bar before">
-     <button class="action-button speak image-action" id="speak-button" onclick="speakCurrentWord()"><img class="action-image" src="./momo-vorlesen.jpeg" alt=""><span>Vorlesen</span></button>
+     <button class="action-button speak image-action" id="speak-button" onclick="speakCurrentWord()"><img class="action-image" src="./momo-vorlesen.webp" alt=""><span>Vorlesen</span></button>
      <button class="action-button peek image-action" id="peek-button" onclick="peekWord()"><img class="action-image" src="./momo-tipp_1.png" alt=""><span>Tipp</span></button>
      <button class="action-button primary image-action" id="dock-primary-btn" onclick="UIController.handlePrimaryAction()"><span id="primary-action-icon" class="action-icon"><img class="action-image" src="./momo-ergebnis.png" alt=""></span><span id="primary-action-text">Lösung anzeigen</span></button>
     </div>
@@ -605,7 +614,7 @@ const StorageModule = (() => {
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
-    a.download = `Lernwörter-Export-${new Date().toISOString().slice(0, 10)}.json`;
+    a.download = `Lernwoerter-Export-${new Date().toISOString().slice(0, 10)}.json`;
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
@@ -891,6 +900,21 @@ const FreschModule = (() => {
     }
     return { marks, texte };
   }
+  function getDoubleConsonantMarks(ziel) {
+    const l = ziel.toLowerCase();
+    const marks = new Set();
+    const artikelMatch = l.match(/^(der|die|das|ein|eine)\s+/);
+    const offset = artikelMatch ? artikelMatch[0].length : 0;
+
+    for (let i = offset; i < l.length - 1; i++) {
+      if (l[i] === l[i + 1] && !istVokal(l[i]) && istVokal(l[i - 1])) {
+        marks.add(i);
+        marks.add(i + 1);
+      }
+    }
+    return marks;
+  }
+
 // Neu: Findet inhärente Merkstellen im Zielwort (für den Papier-Modus)
   function getInherentMarks(ziel) {
     const l = ziel.toLowerCase();
@@ -899,6 +923,9 @@ const FreschModule = (() => {
     const artikelMatch = l.match(/^(der|die|das|ein|eine)\s+/);
     const offset = artikelMatch ? artikelMatch[0].length : 0;
     const text = l.slice(offset);
+    const doubleConsonantMarks = getDoubleConsonantMarks(ziel);
+    doubleConsonantMarks.forEach(index => marks.add(index));
+    if (doubleConsonantMarks.size > 0) texte.push("<b>Doppelt</b>, weil der Vokal kurz ist");
 
     for (let i = offset; i < l.length; i++) {
       const c = l[i];
@@ -930,7 +957,7 @@ const FreschModule = (() => {
     }
     return { marks, texte };
   }
-  return { analyze, getInherentMarks };
+  return { analyze, getInherentMarks, getDoubleConsonantMarks };
 })();
 
 
@@ -1477,10 +1504,9 @@ const UIController = (() => {
     return value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
   }
 
-  function maskExampleSentence(word) {
-    const sentence = String(word.stammdaten?.beispielsatz || '').trim();
+  function getExampleWordPattern(word) {
     const wordText = String(word.stammdaten?.wort || '').trim();
-    if (!sentence || !wordText) return null;
+    if (!wordText) return null;
 
     const lemma = wordText.replace(/^(der|die|das|ein|eine)\s+/i, '');
     const forms = [...new Set([
@@ -1489,10 +1515,19 @@ const UIController = (() => {
     ].map(form => String(form || '').trim()).filter(Boolean))]
       .sort((a, b) => b.length - a.length)
       .map(escapeRegExp);
-    const wordPattern = new RegExp(
+    if (forms.length === 0) return null;
+
+    return new RegExp(
       `(^|[^\\p{L}\\p{N}])(?:${forms.join('|')})(?=$|[^\\p{L}\\p{N}])`,
       'giu'
     );
+  }
+
+  function maskExampleSentence(word) {
+    const sentence = String(word.stammdaten?.beispielsatz || '').trim();
+    const wordPattern = getExampleWordPattern(word);
+    if (!sentence || !wordPattern) return null;
+
     let wasMasked = false;
     const maskedSentence = sentence.replace(wordPattern, (_match, prefix) => {
       wasMasked = true;
@@ -1501,7 +1536,30 @@ const UIController = (() => {
     return wasMasked ? maskedSentence : null;
   }
 
-  function updateExampleSentence(word) {
+  function renderRevealedExampleSentence(text, word, sentence) {
+    const wordPattern = getExampleWordPattern(word);
+    if (!wordPattern) {
+      text.textContent = sentence;
+      return;
+    }
+
+    text.replaceChildren();
+    let lastIndex = 0;
+    for (const match of sentence.matchAll(wordPattern)) {
+      const prefixLength = match[1].length;
+      const wordStart = match.index + prefixLength;
+      const wordEnd = match.index + match[0].length;
+      text.appendChild(document.createTextNode(sentence.slice(lastIndex, wordStart)));
+      const highlightedWord = document.createElement('span');
+      highlightedWord.className = 'example-word-highlight';
+      highlightedWord.textContent = sentence.slice(wordStart, wordEnd);
+      text.appendChild(highlightedWord);
+      lastIndex = wordEnd;
+    }
+    text.appendChild(document.createTextNode(sentence.slice(lastIndex)));
+  }
+
+  function updateExampleSentence(word, revealed = false) {
     const container = document.getElementById('example-sentence');
     const text = document.getElementById('example-sentence-text');
     if (!word) {
@@ -1512,6 +1570,11 @@ const UIController = (() => {
     container.hidden = false;
     if (!String(word.stammdaten?.beispielsatz || '').trim()) {
       text.textContent = 'Für dieses Wort ist noch kein Beispielsatz hinterlegt.';
+      return;
+    }
+    const sentence = String(word.stammdaten.beispielsatz).trim();
+    if (revealed) {
+      renderRevealedExampleSentence(text, word, sentence);
       return;
     }
     text.textContent = maskExampleSentence(word) ||
@@ -1650,6 +1713,7 @@ function revealWord() {
     const current = state.words[state.currentWordIndex];
     const targetWord = current.stammdaten.wort;
 
+    updateExampleSentence(current, true);
     targetEl.style.display = 'block';
     document.getElementById('action-area').style.display = 'none';
     const evalArea = document.getElementById('eval-area');
@@ -1659,9 +1723,7 @@ function revealWord() {
     // Im Papier-Modus Merkstellen im Zielwort markieren
     if (state.learningMode === 'paper') {
       const { marks, texte } = FreschModule.getInherentMarks(targetWord);
-      targetEl.innerHTML = [...targetWord].map((c, i) =>
-        marks.has(i) ? `<span class="fehler">${c}</span>` : c
-      ).join('');
+      renderMarkedWord(targetEl, targetWord, marks);
       
       const feedback = document.getElementById('digital-feedback');
       if (texte.length > 0) {
@@ -1671,6 +1733,20 @@ function revealWord() {
     } else {
       targetEl.innerText = targetWord;
     }
+  }
+
+  function renderMarkedWord(targetEl, word, marks) {
+    targetEl.replaceChildren();
+    [...word].forEach((character, index) => {
+      if (marks.has(index)) {
+        const markedCharacter = document.createElement('span');
+        markedCharacter.className = 'fehler';
+        markedCharacter.textContent = character;
+        targetEl.appendChild(markedCharacter);
+      } else {
+        targetEl.appendChild(document.createTextNode(character));
+      }
+    });
   }
 
   function handleInputKey(event) {
@@ -1698,6 +1774,7 @@ function revealWord() {
     document.getElementById('peek-button').style.display = 'none';
 
     const targetWord = state.words[state.currentWordIndex].stammdaten.wort;
+    updateExampleSentence(state.words[state.currentWordIndex], true);
     const wordWithoutArticle = targetWord.replace(/^(der|die|das|ein|eine)\s+/i, '');
     const isCorrect = userInput === targetWord || userInput === wordWithoutArticle;
     state.pendingIsCorrect = isCorrect;
@@ -1718,8 +1795,8 @@ function revealWord() {
       cardEl.classList.add('correct-bg');
       statusIcon.textContent = '✅';
       targetEl.className = 'word-display digital-result richtig';
-      targetEl.textContent = targetWord;
-      feedback.innerHTML = '';
+      renderMarkedWord(targetEl, targetWord, FreschModule.getDoubleConsonantMarks(targetWord));
+      feedback.innerHTML = '<div class="digital-correct-message">Richtig!</div>';
     } else {
       AudioModule.playError();
       cardEl.classList.remove('wrong-bg', 'correct-bg');
@@ -1728,14 +1805,14 @@ function revealWord() {
 
       // 1. Das Hauptdisplay zeigt wie gewohnt die korrekte Lösung mit den Highlight-Markierungen
       const { marks: targetMarks, texte } = await FreschModule.analyze(targetWord, userInput);
+      const inputMarks = new Set(targetMarks);
+      FreschModule.getDoubleConsonantMarks(targetWord).forEach(index => targetMarks.add(index));
       targetEl.className = 'word-display digital-result';
-      targetEl.innerHTML = [...targetWord].map((c, i) =>
-        targetMarks.has(i) ? `<span class="fehler">${c}</span>` : c
-      ).join('');
+      renderMarkedWord(targetEl, targetWord, targetMarks);
 
       // 2. Der Schüler-Tipp wird zusätzlich darunter dezent mit unterstrichenen Fehlern eingeblendet
       const highlightedInput = [...userInput].map((c, i) =>
-        targetMarks.has(i) ? `<span style="border-bottom: 2px solid #ff3b30; color: #ff3b30;">${c}</span>` : c
+        inputMarks.has(i) ? `<span style="border-bottom: 2px solid #ff3b30; color: #ff3b30;">${c}</span>` : c
       ).join('');
 
       feedback.innerHTML = `
@@ -1745,7 +1822,7 @@ function revealWord() {
     }
 
     document.getElementById('speak-button').style.display = 'none';
-    document.getElementById('primary-action-icon').textContent = '➡️';
+    document.getElementById('primary-action-icon').innerHTML = '<img class="action-image" src="./maus_weiter_512-1.webp" alt="">';
     document.getElementById('primary-action-text').textContent = 'Weiter';
     const primaryButton = document.getElementById('dock-primary-btn');
     primaryButton.classList.remove('image-action');
@@ -1974,7 +2051,7 @@ async function importWords(event) {
     state.words = resetWords;
     updateStats();
     renderWordList();
-    nextWord();
+    nextWord(false);
   }
 
   async function clearLocalDictionary() {
@@ -2324,7 +2401,7 @@ async function importWords(event) {
           </div>
           <div class="word-list-actions">
            <button class="btn word-list-intensiv-button ${word.userdaten?.intensiv ? 'btn-warning' : 'btn-secondary'}" type="button" id="intensiv-btn-${word.id}" aria-pressed="${word.userdaten?.intensiv === true}" title="${word.userdaten?.intensiv ? 'Intensivmodus ausschalten' : 'Intensivmodus einschalten'}" aria-label="${word.userdaten?.intensiv ? 'Intensivmodus ausschalten' : 'Intensivmodus einschalten'}" onclick="UIController.toggleIntensiv(${word.id})">🔥</button>
-           ${boxNum === 1 ? `<button class="btn btn-secondary" type="button" id="dictionary-storage-${word.id}" title="In den Wörterspeicher verschieben" aria-label="„${wordText}“ in den Wörterspeicher verschieben" onclick="UIController.moveWordToStorage(${word.id})">📦→0</button>` : ''}
+           ${boxNum === 1 ? `<button class="btn btn-secondary" type="button" id="dictionary-storage-${word.id}" title="In den Wörterspeicher verschieben" aria-label="„${wordText}“ in den Wörterspeicher verschieben" onclick="UIController.moveWordToStorage(${word.id})">📥</button>` : ''}
            ${boxNum === 0 ? `<button class="btn btn-secondary" type="button" id="dictionary-storage-top-${word.id}" title="An die Spitze des Wörterspeichers verschieben" aria-label="„${wordText}“ an die Spitze des Wörterspeichers verschieben" onclick="UIController.moveWordToStorageTop(${word.id})" ${storageIndex === 0 ? 'disabled' : ''}>↑1</button>` : ''}
            <button class="btn btn-warning" type="button" id="edit-btn-${word.id}" onclick="UIController.toggleEdit(${word.id})">Edit</button>
            <button class="btn btn-secondary" type="button" id="more-btn-${word.id}" aria-expanded="false" aria-controls="word-details-${word.id}" hidden onclick="UIController.toggleWordDetails(${word.id})">＋ Mehr</button>
