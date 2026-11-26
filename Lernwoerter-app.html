@@ -796,21 +796,22 @@ const FreschModule = (() => {
     }
   }
 
+  // Liefert eine verlängerte Form des Wortes als { wort, artikel } (artikel nur beim Plural: "die") oder null
   async function verlaengerung(wort) {
     const kernwort = wort.replace(/^(der|die|das|ein|eine)\s+/i, "").trim();
-    if (VERLAENGERUNG[kernwort]) return VERLAENGERUNG[kernwort];
+    if (VERLAENGERUNG[kernwort]) return { wort: VERLAENGERUNG[kernwort], artikel: "" };
     const text = await wikitext(kernwort) || await wikitext(kernwort.toLowerCase());
     if (text) {
       let m = text.match(/\{\{Grundformverweis Dt\|([^}|]+)/);
-      if (m) return m[1].trim();
+      if (m) return { wort: m[1].trim(), artikel: "" };
       m = text.match(/Nominativ Plural(?: 1)?\s*=\s*([^\n|}]+)/);
       if (m) {
         const p = m[1].trim().replace(/\[\[|\]\]/g, "");
-        if (p && p !== "—" && p.toLowerCase() !== kernwort.toLowerCase()) return p;
+        if (p && p !== "—" && p.toLowerCase() !== kernwort.toLowerCase()) return { wort: p, artikel: "die" };
       }
     }
     const ig = kernwort.toLowerCase() + "ig";
-    if (await wikitext(ig)) return ig;
+    if (await wikitext(ig)) return { wort: ig, artikel: "" };
     return null;
   }
 
@@ -913,13 +914,19 @@ const FreschModule = (() => {
         marks.add(l[i] === l[i - 1] ? i - 1 : i); marks.add(l[i] === l[i - 1] ? i : i + 1);
         add("<b>Doppelt</b>, weil der Vokal kurz ist");
       }
-      else if (o.typ === "sub" && AUSLAUT[want] === o.got && (i === l.length - 1 || !istVokal(l[i + 1]))) {
+      // Auslautverhärtung in beide Richtungen: Berg→"Berk" (g statt k) und Schrank→"Schrang" (k statt g)
+      else if (o.typ === "sub" && (AUSLAUT[want] === o.got || AUSLAUT[o.got] === want) && (i === l.length - 1 || !istVokal(l[i + 1]))) {
         marks.add(i);
         let v = null;
         try { v = await verlaengerung(ziel); } catch (e) { v = null; }
-        if (v && v.toLowerCase().includes(want)) {
-          const k = v.toLowerCase().indexOf(want);
-          add(`<b>Verlängern:</b> ${esc(v.slice(0, k))}<b>${esc(v[k])}</b>${esc(v.slice(k + 1))}`);
+        const vWort = v?.wort || "";
+        if (vWort.toLowerCase().includes(want)) {
+          // Buchstaben ungefähr an der gleichen Stelle wie im Lernwort suchen (bei "Kalk" → "Kalke" nicht das erste K markieren)
+          const posImWort = Math.max(0, i - offset - 1);
+          const lower = vWort.toLowerCase();
+          const k = lower.indexOf(want, posImWort) !== -1 ? lower.indexOf(want, posImWort) : lower.indexOf(want);
+          const artikel = v.artikel ? `${esc(v.artikel)} ` : "";
+          add(`<b>Verlängern:</b> ${artikel}${esc(vWort.slice(0, k))}<b>${esc(vWort[k])}</b>${esc(vWort.slice(k + 1))}`);
         } else {
           add("<b>Verlängern</b>, dann hörst du den Buchstaben");
         }
