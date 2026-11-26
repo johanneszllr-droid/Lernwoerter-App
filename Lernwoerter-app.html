@@ -503,7 +503,7 @@
     <h3>Urheberrecht &amp; Entwickler:</h3>
     <p>Entwickelt von Johannes Zöllner.</p>
     <p><strong>Umgebung:</strong> <span id="app-environment">Wird ermittelt</span></p>
-    <p><strong>Version:</strong> <span id="app-version">Wird geladen</span> · <strong>Commit-Name:</strong> <span id="app-commit-name">Noch nicht veröffentlicht</span><span id="app-built-at-wrap" hidden> · <strong>Stand:</strong> <span id="app-built-at"></span></span></p>
+    <p><strong>Version:</strong> <span id="app-version">Wird geladen</span> · <strong>Commit-Name:</strong> <span id="app-commit-name">unbekannt</span><span id="app-built-at-wrap" hidden> · <strong>Stand:</strong> <span id="app-built-at"></span></span></p>
     <h3>Nutzungsbedingungen &amp; Lizenz:</h3>
     <p>Die Lernwörter-App ist ein kostenloses, nicht-kommerzielles Lernprojekt. Die Nutzung ist ausschließlich für private und bildungsbezogene Zwecke gestattet. Jegliche kommerzielle Nutzung, der gewerbliche Weiterverkauf oder die ungenehmigte Weiterverbreitung des Codes oder veränderter Versionen sind untersagt.</p>
     <h3>Haftungsausschluss (Disclaimer):</h3>
@@ -1330,7 +1330,7 @@ const UIController = (() => {
         document.getElementById('app-built-at-wrap').hidden = false;
       }
     } catch (error) {
-      commitNameElement.textContent = 'Noch nicht veröffentlicht';
+      commitNameElement.textContent = 'unbekannt';
       console.warn('Build-Informationen sind nicht verfügbar:', error);
     }
   }
