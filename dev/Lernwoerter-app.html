@@ -933,6 +933,19 @@ const LeitnerModule = (() => {
     return weightedPool[Math.floor(Math.random() * weightedPool.length)];
   }
 
+  function refillBoxOneFromStorage(wordList) {
+    const promotedWords = [];
+    let boxOneCount = wordList.filter(word => word.userdaten?.box === 1).length;
+    while (boxOneCount < MAX_BOX_ONE_WORDS) {
+      const waitingWord = wordList.find(word => word.userdaten?.box === 0);
+      if (!waitingWord) break;
+      waitingWord.userdaten.box = 1;
+      promotedWords.push(waitingWord);
+      boxOneCount++;
+    }
+    return promotedWords;
+  }
+
   // Aktualisiert Box und Zeitstempel eines Wort-Objekts nach einer Antwort
   function evaluateAnswer(wordObj, isCorrect, wordList, skipPromotion = false, preserveBox = false) {
     if (!wordObj.userdaten) {
@@ -945,13 +958,7 @@ const LeitnerModule = (() => {
       if (skipPromotion || currentBox === 0) return false;
       wordObj.userdaten.box = currentBox === 5 ? 6 : Math.min(6, currentBox + 1);
       if (currentBox === 1) {
-        let boxOneCount = wordList.filter(word => word.userdaten?.box === 1).length;
-        while (boxOneCount < MAX_BOX_ONE_WORDS) {
-          const waitingWord = wordList.find(word => word.userdaten?.box === 0);
-          if (!waitingWord) break;
-          waitingWord.userdaten.box = 1;
-          boxOneCount++;
-        }
+        refillBoxOneFromStorage(wordList);
       }
     } else if (!preserveBox) {
       wordObj.userdaten.box = currentBox > 1 ? 1 : currentBox;
@@ -968,7 +975,7 @@ const LeitnerModule = (() => {
     return { total: wordList.length, counts };
   }
 
-  return { isDue, pickNextIndex, evaluateAnswer, getBoxLabel, getStats, MAX_BOX_ONE_WORDS };
+  return { isDue, pickNextIndex, evaluateAnswer, refillBoxOneFromStorage, getBoxLabel, getStats, MAX_BOX_ONE_WORDS };
 })();
 
 // ============================================================================
@@ -1150,7 +1157,7 @@ const UIController = (() => {
     }, 280);
   }
 
-  function showTab(tab) {
+  async function showTab(tab) {
     closeNavigationMenu();
     const views = {
       learn: { id: 'learn-tab', title: 'Lernen' },
@@ -1170,6 +1177,18 @@ const UIController = (() => {
     });
     if (tab === 'manage') renderWordList();
     if (tab === 'storage') renderStorageWordList();
+    if (tab === 'learn') {
+      const promotedWords = LeitnerModule.refillBoxOneFromStorage(state.words);
+      if (promotedWords.length > 0) {
+        if (!await saveAndRefresh()) {
+          promotedWords.forEach(word => { word.userdaten.box = 0; });
+          updateStats();
+          alert('Die Wörter konnten nicht aus dem Wörterspeicher nach Box 1 verschoben werden.');
+        } else if (state.currentWordIndex === -1) {
+          nextWord();
+        }
+      }
+    }
   }
 
   function toggleSound() {
