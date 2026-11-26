@@ -1287,7 +1287,9 @@ const UIController = (() => {
     helpUsed: false,
     pendingImportData: null,
     intensiveRoundReviewedIds: new Set(),
-    lastIntensiveWordId: null
+    lastIntensiveWordId: null,
+    checkInProgress: false, // true, solange eine digitale Eingabe geprüft wird
+    cardToken: 0            // zählt bei jeder neuen Karte hoch, um verspätete Ergebnisse zu erkennen
   };
   const collapsedWordGroups = new Set();
   let serverMode = false;
@@ -1770,6 +1772,8 @@ const UIController = (() => {
   }
 
   function nextWord(autoSpeak = true) {
+    state.cardToken++;
+    state.checkInProgress = false;
     state.helpUsed = false;
     clearTimeout(peekTimeout);
     peekTimeout = null;
@@ -1995,6 +1999,11 @@ function revealWord() {
     const userInput = document.getElementById('user-input').value.trim();
     if (!userInput) return;
 
+    // Doppeltes Enter/Klicken verhindern, solange die Prüfung noch läuft
+    if (state.checkInProgress) return;
+    state.checkInProgress = true;
+    const cardToken = state.cardToken;
+
     clearTimeout(peekTimeout);
     peekTimeout = null;
     document.getElementById('peek-button').style.display = 'none';
@@ -2036,7 +2045,17 @@ function revealWord() {
       const articleOffset = targetWord.length - compareTarget.length;
 
       // 1. Das Hauptdisplay zeigt wie gewohnt die korrekte Lösung mit den Highlight-Markierungen
-      const { marks: analysisMarks, texte } = await FreschModule.analyze(compareTarget, userInput);
+      // Die Analyse kann auf Wiktionary warten; schlägt sie fehl, wird die Lösung ohne Hinweise gezeigt
+      let analysis;
+      try {
+        analysis = await FreschModule.analyze(compareTarget, userInput);
+      } catch (error) {
+        console.warn('Fehleranalyse fehlgeschlagen:', error);
+        analysis = { marks: new Set(), texte: [] };
+      }
+      // Inzwischen eine andere Karte angezeigt (z. B. Modus oder Filter gewechselt)? Dann Ergebnis verwerfen.
+      if (cardToken !== state.cardToken) return;
+      const { marks: analysisMarks, texte } = analysis;
       const targetMarks = new Set([...analysisMarks].map(index => index + articleOffset));
       FreschModule.getDoubleConsonantMarks(targetWord).forEach(index => targetMarks.add(index));
       targetEl.className = 'word-display digital-result';
@@ -2062,9 +2081,11 @@ function revealWord() {
     primaryButton.classList.add('digital-next');
     primaryButton.style.display = 'flex';
     primaryButton.focus();
+    state.checkInProgress = false; // Prüfung abgeschlossen, jetzt darf "Weiter" gedrückt werden
   }
 
   async function proceedFromDigital() {
+    if (state.checkInProgress) return; // Ergebnis wird noch berechnet
     document.getElementById('digital-next-area').style.display = 'none';
     await answer(state.pendingIsCorrect);
   }
