@@ -5,7 +5,7 @@
  <meta name="viewport" content="width=device-width, initial-scale=1.0">
  <title>Lernwörter-App</title>
  <!-- Manuelle Versionsnummer, wird unter „Settings“ angezeigt. -->
- <meta name="app-version" content="1.4.9">
+ <meta name="app-version" content="1.4.10">
  <meta name="theme-color" content="#f8fafc">
  <link rel="icon" type="image/png" href="./Momo_Maus.png">
  <link rel="apple-touch-icon" href="./Momo_Maus.png">
@@ -78,8 +78,6 @@
  .box-info-group { display: flex; align-items: center; gap: 12px; min-width: 0; }
  .box-label { display: block; margin-bottom: 5px; color: #94a3b8; font-size: 10px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; }
  #box-info { color: #334155 !important; font-size: 13px; font-weight: 800; white-space: nowrap; }
- .card-intensiv-btn { display: inline-flex; align-items: center; gap: 6px; min-height: 36px; padding: 7px 11px; border: 1px solid #e2e8f0; border-radius: 12px; background: #f8fafc; color: #64748b; font-size: 12px; font-weight: 800; cursor: pointer; }
- .card-intensiv-btn.active { border-color: #fcd34d; background: #fef3c7; color: #92400e; }
  .learning-card-main { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 16px; padding: 28px 0; text-align: center; }
  .emoji-badge { width: 160px; height: 160px; display: grid; place-items: center; border: 1px solid #e2e8f0; border-radius: 28px; background: linear-gradient(180deg,#f8fafc,#f1f5f9); box-shadow: inset 0 2px 8px rgba(15,23,42,.03); }
  .word-icon { font-size: 121px; line-height: 1; user-select: none; }
@@ -88,7 +86,11 @@
  .word-display.digital-result { font-size: clamp(2rem,7vw,3.4rem); color: #334155; letter-spacing: .04em; }
  .word-display.digital-result.richtig { color: #059669; }
  .digital-correct-message { color: #059669; font-size: 19px; font-weight: 800; text-align: center; }
- .example-sentence { width: 100%; padding: 12px 15px; border: 1px solid #c7d2fe; border-radius: 15px; background: #eef2ff; color: #334155; text-align: left; }
+ .example-sentence { position: relative; width: 100%; padding: 12px 42px 12px 15px; border: 1px solid #c7d2fe; border-radius: 15px; background: #eef2ff; color: #334155; text-align: left; }
+ .example-sentence[role="button"] { cursor: pointer; }
+ .example-sentence[role="button"]::after { content: "🔊"; position: absolute; top: 12px; right: 14px; }
+ .example-sentence[role="button"]:hover { border-color: #a5b4fc; background: #e0e7ff; }
+ .example-sentence[role="button"]:focus-visible { outline: 3px solid #a5b4fc; outline-offset: 2px; }
  .example-sentence[hidden] { display: none; }
  .example-sentence-text { margin: 0; font-size: 15px; line-height: 1.5; }
  .example-word-highlight { border-radius: 4px; background: #dcfce7; color: #047857; font-weight: 800; }
@@ -120,7 +122,9 @@
  .action-button.wrong.image-action { border-color: #fecaca; background: linear-gradient(180deg,#fff,#fff1f2); color: #9f1239; }
  .action-button.wrong.image-action:hover { background: #ffe4e6; }
  .action-button.correct.image-action { border-color: #a7f3d0; background: linear-gradient(180deg,#fff,#ecfdf5); color: #065f46; }
- .celebration-overlay { position: fixed; inset: 0; z-index: 1200; display: grid; place-items: center; padding: 20px; overflow: hidden; background: rgba(224,231,255,.58); backdrop-filter: blur(3px); pointer-events: none; }
+ .celebration-overlay { position: fixed; inset: 0; z-index: 1200; display: grid; place-items: center; padding: 20px; overflow: hidden; background: rgba(224,231,255,.58); backdrop-filter: blur(3px); }
+ .celebration-actions { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-top: 18px; }
+ .celebration-actions .btn { min-width: 150px; }
  .celebration-overlay[hidden] { display: none; }
  .celebration-confetti { position: absolute; inset: 0; overflow: hidden; }
  .celebration-confetti-piece { position: absolute; top: -18px; width: 10px; height: 15px; border-radius: 2px; opacity: 0; animation: confetti-fall 3.8s ease-in forwards; }
@@ -144,6 +148,8 @@
  .stats { align-self: center; padding: 8px 14px; border: 1px solid #e2e8f0; border-radius: 999px; background: rgba(255,255,255,.75); color: #64748b; font-size: 11px; font-weight: 700; text-align: center; }
  .storage-note { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 12px 15px; border: 1px solid #fde68a; border-radius: 18px; background: #fffbeb; color: #78350f; font-size: 12px; }
  .storage-note p { margin: 0; line-height: 1.5; }
+ .storage-note.storage-note-error { border-color: #fca5a5; background: #fef2f2; color: #991b1b; }
+ .storage-note.storage-note-error button { color: #b91c1c; }
  .storage-note button { flex: 0 0 auto; border: 0; background: transparent; color: #92400e; font-size: 12px; font-weight: 800; text-decoration: underline; cursor: pointer; }
  .bento-panel { padding: 20px; }
  .panel-heading { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 16px; padding-bottom: 14px; border-bottom: 1px solid #f1f5f9; }
@@ -210,7 +216,7 @@
  .data-card { display: flex; flex-direction: column; justify-content: space-between; gap: 16px; padding: 20px; border: 1px solid #e2e8f0; border-radius: 24px; background: white; box-shadow: 0 4px 20px -2px rgba(15,23,42,.05); }
  .settings-card { margin-bottom: 14px; }
  .settings-controls { --setting-control-width: 64px; display: grid; width: 100%; gap: 0; }
- .setting-row { display: grid; grid-template-columns: minmax(0,1fr) minmax(120px,220px); align-items: center; gap: 12px; width: 100%; }
+ .setting-row { display: grid; grid-template-columns: minmax(0,1fr) auto; align-items: center; gap: 12px; width: 100%; }
  .setting-copy { display: flex; grid-column: 1; flex-direction: column; gap: 4px; }
  .setting-label { color: #334155; font-size: 14px; font-weight: 800; }
  .setting-description { margin: 0; color: #64748b; font-size: 12px; line-height: 1.45; }
@@ -248,7 +254,6 @@
   .learning-card { min-height: 420px; padding: 16px 14px; border-radius: 23px; }
   .learning-card-header { padding-bottom: 12px; }
   .box-info-group { gap: 7px; }
-  .card-intensiv-btn { padding: 6px 8px; font-size: 11px; }
   .learning-card-main { padding: 22px 0; }
   .emoji-badge { width: 136px; height: 136px; border-radius: 23px; }
   .word-icon { font-size: 106px; }
@@ -316,6 +321,7 @@
    <button class="nav-tab" id="nav-manage" data-tab="manage" onclick="showTab('manage')">📖 <span>Wörterbuch</span></button>
    <button class="nav-tab" id="nav-storage" data-tab="storage" onclick="showTab('storage')">📦 <span>Wörterspeicher</span></button>
    <button class="nav-tab" id="nav-data" data-tab="data" onclick="showTab('data')">⚙️ <span>Settings</span></button>
+   <button class="nav-tab" id="nav-guide" type="button" onclick="UIController.openGuide()">📘 <span>Anleitung</span></button>
   </nav>
   <button class="menu-backdrop" id="menu-backdrop" type="button" aria-label="Navigation schließen" onclick="UIController.closeNavigationMenu()" hidden></button>
   <main id="learn-tab" class="app-view">
@@ -341,9 +347,6 @@
      </div>
      <div class="learning-card-controls">
       <span class="status-icon" id="status-icon" aria-hidden="true"></span>
-      <button class="card-intensiv-btn" id="card-intensiv-btn" aria-pressed="false" onclick="UIController.toggleCurrentWordIntensiv()">
-       <span id="cardStarIcon">☆</span><span>Intensiv</span>
-      </button>
      </div>
     </header>
 
@@ -351,7 +354,7 @@
      <div class="emoji-badge"><span id="word-emoji" class="word-icon">📝</span></div>
      <div class="learning-content">
       <div id="word-target" class="word-display" style="display: none;"></div>
-      <div id="example-sentence" class="example-sentence" hidden>
+      <div id="example-sentence" class="example-sentence" hidden onclick="speakExampleSentence()" onkeydown="handleExampleSentenceKey(event)">
        <p id="example-sentence-text" class="example-sentence-text"></p>
       </div>
       <div id="digital-input-area" style="display: none;">
@@ -377,17 +380,21 @@
    </section>
 
    <div id="stats" class="stats"></div>
-   <div id="daily-goal-celebration" class="celebration-overlay" role="status" aria-live="polite" hidden>
+   <div id="daily-goal-celebration" class="celebration-overlay" role="dialog" aria-modal="true" aria-labelledby="celebration-title" hidden>
     <div id="celebration-confetti" class="celebration-confetti" aria-hidden="true"></div>
     <div class="celebration-message">
      <div class="celebration-balloons" aria-hidden="true"><span>🎈</span><span>🎈</span><span>🎈</span></div>
-     <h2>Geschafft!</h2>
-     <p>Herzlichen Glückwunsch, du hast deine tägliche Lerneinheit absolviert</p>
+     <h2 id="celebration-title">Geschafft!</h2>
+     <p id="celebration-text">Herzlichen Glückwunsch, du hast deine tägliche Lerneinheit absolviert</p>
      <div class="celebration-sparkles" aria-hidden="true">🎉 ⭐ 🎉</div>
+     <div class="celebration-actions">
+      <button class="btn btn-secondary" type="button" id="celebration-finish-btn" onclick="UIController.finishForToday()">Für heute fertig</button>
+      <button class="btn btn-success" type="button" id="celebration-continue-btn" onclick="UIController.continueLearning()">Weiterlernen</button>
+     </div>
     </div>
    </div>
-   <aside class="storage-note">
-    <p><strong>💾 Lernstand:</strong> <span id="storage-note-text">Deine Lernstände können beim Leeren des Browsercaches verloren gehen.</span></p>
+   <aside class="storage-note" id="storage-note">
+    <p><strong>💾 Lernstand:</strong> <span id="storage-note-text" aria-live="polite">Deine Lernstände können beim Leeren des Browsercaches verloren gehen.</span></p>
     <button onclick="showTab('data')">Sichern</button>
    </aside>
   </main>
@@ -495,7 +502,8 @@
    <article class="data-status legal-notice" id="legal-notice">
     <h3>Urheberrecht &amp; Entwickler:</h3>
     <p>Entwickelt von Johannes Zöllner.</p>
-    <p><strong>Version:</strong> <span id="app-version">Wird geladen</span> · <strong>Commit-Name:</strong> <span id="app-commit-name">Noch nicht veröffentlicht</span></p>
+    <p><strong>Umgebung:</strong> <span id="app-environment">Wird ermittelt</span></p>
+    <p><strong>Version:</strong> <span id="app-version">Wird geladen</span> · <strong>Commit-Name:</strong> <span id="app-commit-name">unbekannt</span><span id="app-built-at-wrap" hidden> · <strong>Stand:</strong> <span id="app-built-at"></span></span></p>
     <h3>Nutzungsbedingungen &amp; Lizenz:</h3>
     <p>Die Lernwörter-App ist ein kostenloses, nicht-kommerzielles Lernprojekt. Die Nutzung ist ausschließlich für private und bildungsbezogene Zwecke gestattet. Jegliche kommerzielle Nutzung, der gewerbliche Weiterverkauf oder die ungenehmigte Weiterverbreitung des Codes oder veränderter Versionen sind untersagt.</p>
     <h3>Haftungsausschluss (Disclaimer):</h3>
@@ -714,6 +722,8 @@ const FreschModule = (() => {
   const VERLAENGERUNG = { "Sand": "sandig", "Mehl": "mehlig", "Gold": "golden" };
   const istVokal = c => !!c && "aeiouäöüy".includes(c);
   const AUSLAUT = { g: "k", d: "t", b: "p" };
+  // Macht Sonderzeichen (< > & " ') unschädlich, bevor fremder Text (z. B. von Wiktionary) als HTML angezeigt wird
+  const esc = value => String(value).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]);
   const ex = (w, n) => ["Zahl", "Fahrt", "Bohne"].filter(x => x.toLowerCase() !== w.toLowerCase()).slice(0, n).join(", ");
 
   function diff(eingabe, ziel) {
@@ -742,38 +752,62 @@ const FreschModule = (() => {
     return ops.reverse();
   }
 
+  // Zwischenspeicher für Wiktionary-Abfragen. Es werden nur die wenigen benötigten Zeilen gespeichert,
+  // nicht die ganze Seite – sonst läuft der Browser-Speicher (ca. 5 MB) voll und der Lernstand kann nicht mehr gespeichert werden.
+  const WIKT_CACHE_PREFIX = "wikt_v2_";
+  try {
+    // Alte Einträge (komplette Wiktionary-Seiten) einmalig entfernen, um Platz freizugeben
+    Object.keys(localStorage)
+      .filter(key => key.startsWith("wikt_raw_"))
+      .forEach(key => localStorage.removeItem(key));
+  } catch (e) {}
+
+  // Behält nur die Zeilen, die verlaengerung() auswertet (Grundform-Verweis und Plural)
+  function compactWikitext(text) {
+    const relevantLines = String(text || "")
+      .split("\n")
+      .filter(line => line.includes("Grundformverweis Dt") || line.includes("Nominativ Plural"));
+    return relevantLines.join("\n") || "EXISTS"; // "EXISTS" = Seite gibt es, aber ohne passende Angaben
+  }
+
   async function wikitext(seite) {
-    const cacheKey = "wikt_raw_" + seite.toLowerCase();
-    const cached = localStorage.getItem(cacheKey);
-    if (cached !== null) return cached === "NONE" ? null : cached;
+    const cacheKey = WIKT_CACHE_PREFIX + seite;
+    try {
+      const cached = localStorage.getItem(cacheKey);
+      if (cached !== null) return cached === "NONE" ? null : cached;
+    } catch (e) {}
 
     try {
       const url = "https://de.wiktionary.org/w/api.php?action=parse&prop=wikitext&format=json&origin=*&page=" + encodeURIComponent(seite);
       const r = await fetch(url);
+      if (!r.ok) return null; // Netzwerk-/Serverfehler nicht zwischenspeichern
       const j = await r.json();
-      const res = j.parse ? j.parse.wikitext["*"] : null;
-      localStorage.setItem(cacheKey, res || "NONE");
+      const res = j.parse ? compactWikitext(j.parse.wikitext["*"]) : null;
+      try {
+        localStorage.setItem(cacheKey, res || "NONE");
+      } catch (e) {} // Zwischenspeicher ist optional; Ergebnis trotzdem verwenden
       return res;
     } catch (e) {
       return null;
     }
   }
 
+  // Liefert eine verlängerte Form des Wortes als { wort, artikel } (artikel nur beim Plural: "die") oder null
   async function verlaengerung(wort) {
     const kernwort = wort.replace(/^(der|die|das|ein|eine)\s+/i, "").trim();
-    if (VERLAENGERUNG[kernwort]) return VERLAENGERUNG[kernwort];
+    if (VERLAENGERUNG[kernwort]) return { wort: VERLAENGERUNG[kernwort], artikel: "" };
     const text = await wikitext(kernwort) || await wikitext(kernwort.toLowerCase());
     if (text) {
       let m = text.match(/\{\{Grundformverweis Dt\|([^}|]+)/);
-      if (m) return m[1].trim();
+      if (m) return { wort: m[1].trim(), artikel: "" };
       m = text.match(/Nominativ Plural(?: 1)?\s*=\s*([^\n|}]+)/);
       if (m) {
         const p = m[1].trim().replace(/\[\[|\]\]/g, "");
-        if (p && p !== "—" && p.toLowerCase() !== kernwort.toLowerCase()) return p;
+        if (p && p !== "—" && p.toLowerCase() !== kernwort.toLowerCase()) return { wort: p, artikel: "die" };
       }
     }
     const ig = kernwort.toLowerCase() + "ig";
-    if (await wikitext(ig)) return ig;
+    if (await wikitext(ig)) return { wort: ig, artikel: "" };
     return null;
   }
 
@@ -828,6 +862,8 @@ const FreschModule = (() => {
         if (eingabe[i] !== ziel[i] && eingabe[i].toLowerCase() === ziel[i].toLowerCase()) {
           marks.add(i);
           if (i === 0) add(ziel[0] === ziel[0].toUpperCase() ? "<b>Großschreiben</b> (Nomen)" : "<b>Kleinschreiben</b>");
+          // Großbuchstabe am Wortanfang (z. B. nach einem Leerzeichen) ist derselbe Nomen-Hinweis – nicht doppelt melden
+          else if (ziel[i - 1] === " " && ziel[i] !== ziel[i].toLowerCase()) add("<b>Großschreiben</b> (Nomen)");
           else add(ziel[i] === ziel[i].toLowerCase() ? "Mitten im Wort <b>klein</b>" : "Hier <b>groß</b>");
         }
       }
@@ -876,13 +912,19 @@ const FreschModule = (() => {
         marks.add(l[i] === l[i - 1] ? i - 1 : i); marks.add(l[i] === l[i - 1] ? i : i + 1);
         add("<b>Doppelt</b>, weil der Vokal kurz ist");
       }
-      else if (o.typ === "sub" && AUSLAUT[want] === o.got && (i === l.length - 1 || !istVokal(l[i + 1]))) {
+      // Auslautverhärtung in beide Richtungen: Berg→"Berk" (g statt k) und Schrank→"Schrang" (k statt g)
+      else if (o.typ === "sub" && (AUSLAUT[want] === o.got || AUSLAUT[o.got] === want) && (i === l.length - 1 || !istVokal(l[i + 1]))) {
         marks.add(i);
         let v = null;
         try { v = await verlaengerung(ziel); } catch (e) { v = null; }
-        if (v && v.toLowerCase().includes(want)) {
-          const k = v.toLowerCase().indexOf(want);
-          add(`<b>Verlängern:</b> ${v.slice(0, k)}<b>${v[k]}</b>${v.slice(k + 1)}`);
+        const vWort = v?.wort || "";
+        if (vWort.toLowerCase().includes(want)) {
+          // Buchstaben ungefähr an der gleichen Stelle wie im Lernwort suchen (bei "Kalk" → "Kalke" nicht das erste K markieren)
+          const posImWort = Math.max(0, i - offset - 1);
+          const lower = vWort.toLowerCase();
+          const k = lower.indexOf(want, posImWort) !== -1 ? lower.indexOf(want, posImWort) : lower.indexOf(want);
+          const artikel = v.artikel ? `${esc(v.artikel)} ` : "";
+          add(`<b>Verlängern:</b> ${artikel}${esc(vWort.slice(0, k))}<b>${esc(vWort[k])}</b>${esc(vWort.slice(k + 1))}`);
         } else {
           add("<b>Verlängern</b>, dann hörst du den Buchstaben");
         }
@@ -891,7 +933,7 @@ const FreschModule = (() => {
         marks.add(i);
         let b = null;
         try { b = await ableitung(ziel); } catch (e) { b = null; }
-        add(b ? `<b>Ableiten:</b> ${b} → ${ziel.slice(offset)}` : "<b>ä</b> kommt oft von <b>a</b>");
+        add(b ? `<b>Ableiten:</b> ${esc(b)} → ${esc(ziel.slice(offset))}` : "<b>ä</b> kommt oft von <b>a</b>");
       }
       else {
         marks.add(i);
@@ -1000,10 +1042,13 @@ const LeitnerModule = (() => {
 
     const weightedPool = [];
     eligible.forEach(({ w, idx }) => {
-      const weight = 6 - (w.userdaten?.box ?? 0);
+      // Gewichtung: Wörter aus niedrigen Boxen kommen häufiger dran (Box 1 = 5x, Box 5 = 1x).
+      // Jedes Wort zählt mindestens 1x, damit auch Schatztruhen-Wörter (Box 6) ausgewählt werden können.
+      const weight = Math.max(1, 6 - (Number(w.userdaten?.box) || 0));
       for (let i = 0; i < weight; i++) weightedPool.push(idx);
     });
 
+    if (weightedPool.length === 0) return -1;
     return weightedPool[Math.floor(Math.random() * weightedPool.length)];
   }
 
@@ -1239,7 +1284,9 @@ const UIController = (() => {
     helpUsed: false,
     pendingImportData: null,
     intensiveRoundReviewedIds: new Set(),
-    lastIntensiveWordId: null
+    lastIntensiveWordId: null,
+    checkInProgress: false, // true, solange eine digitale Eingabe geprüft wird
+    cardToken: 0            // zählt bei jeder neuen Karte hoch, um verspätete Ergebnisse zu erkennen
   };
   const collapsedWordGroups = new Set();
   let serverMode = false;
@@ -1248,9 +1295,24 @@ const UIController = (() => {
   let menuCloseTimer;
   let celebrationTimeout;
 
+  // Erkennt an der eigenen Adresse, welche Fassung der App gerade läuft.
+  function detectEnvironment() {
+    const { protocol, hostname, pathname } = window.location;
+    if (protocol === 'file:' || hostname === 'localhost' || hostname === '127.0.0.1' || hostname === '') {
+      return '💻 Lokal auf diesem Rechner';
+    }
+    if (hostname.endsWith('github.io')) {
+      return /\/Lernwoerter-App\/dev\//.test(pathname)
+        ? '🧪 Testversion (dev)'
+        : '✅ Veröffentlichte Version (main)';
+    }
+    return '🏠 Eigener Server';
+  }
+
   async function loadBuildInfo() {
     const versionElement = document.getElementById('app-version');
     const commitNameElement = document.getElementById('app-commit-name');
+    document.getElementById('app-environment').textContent = detectEnvironment();
     versionElement.textContent = document.querySelector('meta[name="app-version"]')?.content || 'Nicht festgelegt';
     try {
       const response = await fetch('./build-info.json', { cache: 'no-store' });
@@ -1262,10 +1324,48 @@ const UIController = (() => {
         throw new Error('Die Build-Informationen haben ein ungültiges Format.');
       }
       commitNameElement.textContent = buildInfo.commitName;
+      const builtAt = new Date(buildInfo.builtAt);
+      if (!Number.isNaN(builtAt.getTime())) {
+        document.getElementById('app-built-at').textContent = builtAt.toLocaleString('de-DE', { dateStyle: 'medium', timeStyle: 'short' });
+        document.getElementById('app-built-at-wrap').hidden = false;
+      }
     } catch (error) {
-      commitNameElement.textContent = 'Noch nicht veröffentlicht';
+      commitNameElement.textContent = 'unbekannt';
       console.warn('Build-Informationen sind nicht verfügbar:', error);
     }
+  }
+
+  // Sorgt dafür, dass jedes Wort eine eindeutige Zahl als ID hat und die Box eine gültige Zahl (0–6) ist.
+  // Fehlende, doppelte oder ungültige IDs (z. B. aus importierten Dateien) werden durch neue ersetzt.
+  // Gibt true zurück, wenn etwas repariert wurde.
+  function normalizeWords(words) {
+    let changed = false;
+    const usedIds = new Set();
+    const numericIds = words.map(word => Number(word?.id)).filter(Number.isSafeInteger);
+    let nextId = Math.max(Date.now(), ...numericIds) + 1;
+
+    words.forEach(word => {
+      let id = word.id;
+      if (typeof id === 'string' && /^\d+$/.test(id.trim())) id = Number(id.trim());
+      if (!Number.isSafeInteger(id) || usedIds.has(id)) id = nextId++;
+      if (id !== word.id) {
+        word.id = id;
+        changed = true;
+      }
+      usedIds.add(id);
+
+      if (!word.userdaten || typeof word.userdaten !== 'object') {
+        word.userdaten = { box: 0, letztePruefung: null, fehlerZaehler: 0, intensiv: false };
+        changed = true;
+      }
+      const box = Number(word.userdaten.box);
+      const validBox = Number.isInteger(box) && box >= 0 && box <= 6 ? box : 0;
+      if (validBox !== word.userdaten.box) {
+        word.userdaten.box = validBox;
+        changed = true;
+      }
+    });
+    return changed;
   }
 
   // Initialisierung beim Start
@@ -1278,6 +1378,8 @@ const UIController = (() => {
     state.words.forEach(word => {
       if (word.stammdaten) word.stammdaten.beispielsatz ??= '';
     });
+    // Bereits gespeicherte, fehlerhafte Daten (z. B. doppelte IDs aus früheren Importen) einmalig reparieren
+    if (normalizeWords(state.words)) await StorageModule.save(state.words);
     serverMode = result.isServer;
     document.getElementById('clear-local-dictionary-button').disabled = serverMode;
     statusEl.innerText = result.isServer 
@@ -1298,7 +1400,28 @@ const UIController = (() => {
   async function saveAndRefresh() {
     const saved = await StorageModule.save(state.words);
     updateStats();
+    updateSaveWarning(saved);
     return saved;
+  }
+
+  // Zeigt dauerhaft sichtbar an, wenn der Lernstand nicht gespeichert werden konnte
+  // (im Server-Modus meldet das StorageModule den Fehler bereits selbst)
+  const DEFAULT_STORAGE_NOTE = 'Deine Lernstände können beim Leeren des Browsercaches verloren gehen.';
+  let saveWarningAlertShown = false;
+  function updateSaveWarning(saved) {
+    const note = document.getElementById('storage-note');
+    const noteText = document.getElementById('storage-note-text');
+    if (saved || serverMode) {
+      note.classList.remove('storage-note-error');
+      noteText.textContent = DEFAULT_STORAGE_NOTE;
+      return;
+    }
+    note.classList.add('storage-note-error');
+    noteText.textContent = 'Achtung: Dein Lernstand konnte nicht gespeichert werden! Bitte jetzt ein Backup erstellen.';
+    if (!saveWarningAlertShown) {
+      saveWarningAlertShown = true;
+      alert('Achtung: Dein Lernstand konnte nicht im Browser gespeichert werden.\n\nBitte unter „Settings“ → „JSON herunterladen“ ein Backup erstellen, damit nichts verloren geht.');
+    }
   }
 
   function updateStats() {
@@ -1331,12 +1454,46 @@ const UIController = (() => {
       piece.style.animationDuration = `${3 + Math.random() * 1.2}s`;
       confetti.appendChild(piece);
     }
+    // Meldung auf den Ausgangszustand setzen (falls vorher "Für heute fertig" gewählt wurde)
+    document.getElementById('celebration-title').textContent = 'Geschafft!';
+    document.getElementById('celebration-text').textContent = 'Herzlichen Glückwunsch, du hast deine tägliche Lerneinheit absolviert';
+    document.getElementById('celebration-finish-btn').hidden = false;
+    const continueButton = document.getElementById('celebration-continue-btn');
+    continueButton.textContent = 'Weiterlernen';
+
+    // Nichts im Hintergrund vorlesen, solange die Meldung offen ist
+    clearTimeout(speakTimeout);
+    speakTimeout = null;
+    if ('speechSynthesis' in window) window.speechSynthesis.cancel();
+
     celebration.hidden = false;
+    continueButton.focus();
+    // Die Meldung bleibt offen, bis das Kind sich entscheidet; nur das Konfetti verschwindet
     clearTimeout(celebrationTimeout);
-    celebrationTimeout = setTimeout(() => {
-      celebration.hidden = true;
-      confetti.replaceChildren();
-    }, 5000);
+    celebrationTimeout = setTimeout(() => confetti.replaceChildren(), 5000);
+  }
+
+  // "Weiterlernen": Meldung schließen und das aktuelle Wort (mit Beispielsatz) vorlesen
+  function continueLearning() {
+    clearTimeout(celebrationTimeout);
+    document.getElementById('daily-goal-celebration').hidden = true;
+    document.getElementById('celebration-confetti').replaceChildren();
+    const learnTabVisible = document.getElementById('learn-tab').style.display !== 'none';
+    if (learnTabVisible && state.currentWordIndex !== -1) {
+      if (state.learningMode === 'digital') document.getElementById('user-input').focus();
+      speakTimeout = setTimeout(speakCurrentWordWithSentence, 300);
+    }
+  }
+
+  // "Für heute fertig": Abschiedsmeldung zeigen; über "Doch weiterlernen" geht es jederzeit weiter
+  function finishForToday() {
+    if ('speechSynthesis' in window) window.speechSynthesis.cancel();
+    document.getElementById('celebration-title').textContent = 'Bis morgen! 👋';
+    document.getElementById('celebration-text').textContent = 'Super gemacht! Du kannst die App jetzt schließen.';
+    document.getElementById('celebration-finish-btn').hidden = true;
+    const continueButton = document.getElementById('celebration-continue-btn');
+    continueButton.textContent = 'Doch weiterlernen';
+    continueButton.focus();
   }
 
   function toggleNavigationMenu() {
@@ -1409,6 +1566,14 @@ const UIController = (() => {
     }
   }
 
+  // Öffnet die Anleitung (README auf GitHub) in einem neuen Tab.
+  // Die Testversion unter /dev/ zeigt die README aus dem dev-Branch, die veröffentlichte Version die aus main.
+  function openGuide() {
+    closeNavigationMenu();
+    const branch = window.location.pathname.includes('/dev/') ? 'dev' : 'main';
+    window.open(`https://github.com/johanneszllr-droid/Lernwoerter-App/blob/${branch}/README.md`, '_blank', 'noopener');
+  }
+
   function updateSoundControls(enabled) {
     document.querySelectorAll('[data-sound-button]').forEach(button => {
       button.setAttribute('aria-pressed', String(enabled));
@@ -1453,13 +1618,19 @@ const UIController = (() => {
     nextWord();
   }
 
-  function speakWord(text) {
+  // Liest einen oder mehrere Texte nacheinander vor (z. B. erst das Wort, dann den Beispielsatz)
+  function speakWord(...texts) {
     if ('speechSynthesis' in window) {
       window.speechSynthesis.cancel();
-      const utterance = new SpeechSynthesisUtterance(text);
-      utterance.lang = 'de-DE';
-      utterance.rate = 0.85;
-      window.speechSynthesis.speak(utterance);
+      texts
+        .map(text => String(text || '').trim())
+        .filter(Boolean)
+        .forEach(text => {
+          const utterance = new SpeechSynthesisUtterance(text);
+          utterance.lang = 'de-DE';
+          utterance.rate = 0.85;
+          window.speechSynthesis.speak(utterance);
+        });
     }
   }
 
@@ -1469,14 +1640,11 @@ const UIController = (() => {
     }
   }
 
-  function updateCardMeta(word) {
-    const currentBox = word ? (word.userdaten?.box ?? 0) : 0;
-    const intensiveButton = document.getElementById('card-intensiv-btn');
-    const isIntensive = word?.userdaten?.intensiv === true;
-    intensiveButton.classList.toggle('active', isIntensive);
-    intensiveButton.setAttribute('aria-pressed', String(isIntensive));
-    document.getElementById('cardStarIcon').textContent = isIntensive ? '⭐' : '☆';
-    intensiveButton.disabled = !word;
+  // Beim ersten Anzeigen einer Karte: erst das Wort, danach den vollständigen Beispielsatz vorlesen
+  function speakCurrentWordWithSentence() {
+    const current = state.words[state.currentWordIndex];
+    if (state.currentWordIndex === -1 || !current) return;
+    speakWord(current.stammdaten.wort, current.stammdaten.beispielsatz);
   }
 
   function pickNextWordIndex() {
@@ -1562,6 +1730,9 @@ const UIController = (() => {
   function updateExampleSentence(word, revealed = false) {
     const container = document.getElementById('example-sentence');
     const text = document.getElementById('example-sentence-text');
+    container.removeAttribute('role');
+    container.removeAttribute('tabindex');
+    container.removeAttribute('aria-label');
     if (!word) {
       container.hidden = true;
       text.textContent = '';
@@ -1575,13 +1746,41 @@ const UIController = (() => {
     const sentence = String(word.stammdaten.beispielsatz).trim();
     if (revealed) {
       renderRevealedExampleSentence(text, word, sentence);
+      container.setAttribute('role', 'button');
+      container.tabIndex = 0;
+      container.setAttribute('aria-label', 'Beispielsatz vorlesen');
       return;
     }
-    text.textContent = maskExampleSentence(word) ||
-      'Dieser Satz wird ausgeblendet, weil das Lernwort darin nicht sicher erkannt wurde.';
+    const maskedSentence = maskExampleSentence(word);
+    if (!maskedSentence) {
+      text.textContent = 'Dieser Satz wird ausgeblendet, weil das Lernwort darin nicht sicher erkannt wurde.';
+      return;
+    }
+    text.textContent = maskedSentence;
+    container.setAttribute('role', 'button');
+    container.tabIndex = 0;
+    container.setAttribute('aria-label', 'Beispielsatz vorlesen');
+  }
+
+  function speakExampleSentence() {
+    const container = document.getElementById('example-sentence');
+    if (container.getAttribute('role') !== 'button') return;
+    // Immer den vollständigen Satz vorlesen, auch wenn das Lernwort im Text ausgeblendet ist
+    const current = state.words[state.currentWordIndex];
+    const fullSentence = String(current?.stammdaten?.beispielsatz || '').trim();
+    if (!fullSentence) return;
+    speakWord(fullSentence);
+  }
+
+  function handleExampleSentenceKey(event) {
+    if (event.key !== 'Enter' && event.key !== ' ') return;
+    event.preventDefault();
+    speakExampleSentence();
   }
 
   function nextWord(autoSpeak = true) {
+    state.cardToken++;
+    state.checkInProgress = false;
     state.helpUsed = false;
     clearTimeout(peekTimeout);
     peekTimeout = null;
@@ -1623,7 +1822,6 @@ const UIController = (() => {
       document.getElementById('action-area').style.display = 'none';
       document.getElementById('digital-feedback').style.display = 'none';
       beforeBar.style.display = 'none';
-      updateCardMeta(null);
       return;
     }
 
@@ -1650,7 +1848,6 @@ const UIController = (() => {
       document.getElementById('action-area').style.display = 'none';
       document.getElementById('digital-feedback').style.display = 'none';
       beforeBar.style.display = 'none';
-      updateCardMeta(null);
       return;
     }
 
@@ -1664,7 +1861,6 @@ const UIController = (() => {
     document.getElementById('primary-action-text').textContent = state.learningMode === 'paper' ? 'Lösung anzeigen' : 'Prüfen';
     const primaryActionIcon = document.getElementById('primary-action-icon');
     primaryActionIcon.innerHTML = '<img class="action-image" src="./momo-ergebnis.png" alt="">';
-    updateCardMeta(current);
 
     targetEl.className = 'word-display';
     targetEl.style.display = 'none';
@@ -1681,7 +1877,7 @@ const UIController = (() => {
       inputField.focus();
     }
 
-    if (autoSpeak) speakTimeout = setTimeout(speakCurrentWord, 300);
+    if (autoSpeak) speakTimeout = setTimeout(speakCurrentWordWithSentence, 300);
   }
 
 function peekWord() {
@@ -1763,11 +1959,54 @@ function revealWord() {
     }
   }
 
+  // Vergleicht Eingabe und Zielwort Buchstabe für Buchstabe (mit Groß-/Kleinschreibung)
+  // und liefert die Positionen in der EINGABE, die falsch, überflüssig oder an einer Lücke sind.
+  function getInputErrorMarks(eingabe, ziel) {
+    const a = [...eingabe];
+    const b = [...ziel];
+    const n = a.length;
+    const m = b.length;
+    const d = Array.from({ length: n + 1 }, () => new Array(m + 1).fill(0));
+    for (let i = 0; i <= n; i++) d[i][0] = i;
+    for (let j = 0; j <= m; j++) d[0][j] = j;
+    for (let i = 1; i <= n; i++) {
+      for (let j = 1; j <= m; j++) {
+        d[i][j] = Math.min(
+          d[i - 1][j - 1] + (a[i - 1] === b[j - 1] ? 0 : 1),
+          d[i - 1][j] + 1,
+          d[i][j - 1] + 1
+        );
+      }
+    }
+
+    const marks = new Set();
+    let i = n;
+    let j = m;
+    while (i > 0 || j > 0) {
+      if (i > 0 && j > 0 && a[i - 1] === b[j - 1] && d[i][j] === d[i - 1][j - 1]) {
+        i--; j--; // Buchstabe stimmt
+      } else if (i > 0 && j > 0 && d[i][j] === d[i - 1][j - 1] + 1) {
+        marks.add(i - 1); i--; j--; // falscher Buchstabe
+      } else if (i > 0 && d[i][j] === d[i - 1][j] + 1) {
+        marks.add(i - 1); i--; // Buchstabe zu viel
+      } else {
+        if (n > 0) marks.add(Math.min(i, n - 1)); // Buchstabe fehlt: Nachbarn markieren
+        j--;
+      }
+    }
+    return marks;
+  }
+
   async function checkDigitalAnswer() {
     if (state.currentWordIndex === -1) return;
     
     const userInput = document.getElementById('user-input').value.trim();
     if (!userInput) return;
+
+    // Doppeltes Enter/Klicken verhindern, solange die Prüfung noch läuft
+    if (state.checkInProgress) return;
+    state.checkInProgress = true;
+    const cardToken = state.cardToken;
 
     clearTimeout(peekTimeout);
     peekTimeout = null;
@@ -1775,8 +2014,21 @@ function revealWord() {
 
     const targetWord = state.words[state.currentWordIndex].stammdaten.wort;
     updateExampleSentence(state.words[state.currentWordIndex], true);
-    const wordWithoutArticle = targetWord.replace(/^(der|die|das|ein|eine)\s+/i, '');
-    const isCorrect = userInput === targetWord || userInput === wordWithoutArticle;
+    // Artikel und Wort werden getrennt geprüft:
+    // - Der Artikel darf weggelassen werden. Wird er geschrieben, muss er stimmen.
+    // - Am Anfang großgeschrieben ("Das Geld") zählt er als richtig, wie am Satzanfang.
+    const articlePattern = /^(der|die|das|ein|eine)\s+/i;
+    const targetArticleMatch = targetWord.match(articlePattern);
+    const inputArticleMatch = userInput.match(articlePattern);
+    const targetArticle = targetArticleMatch ? targetArticleMatch[1] : '';
+    const inputArticle = inputArticleMatch ? inputArticleMatch[1] : '';
+    const wordWithoutArticle = targetArticleMatch ? targetWord.slice(targetArticleMatch[0].length) : targetWord;
+    const inputWithoutArticle = inputArticleMatch ? userInput.slice(inputArticleMatch[0].length) : userInput;
+    const capitalizedTargetArticle = targetArticle ? targetArticle[0].toUpperCase() + targetArticle.slice(1) : '';
+    const articleWrong = inputArticle !== '' &&
+      inputArticle !== targetArticle && inputArticle !== capitalizedTargetArticle;
+    const wordWrong = inputWithoutArticle !== wordWithoutArticle;
+    const isCorrect = !articleWrong && !wordWrong;
     state.pendingIsCorrect = isCorrect;
 
     const cardEl = document.getElementById('learning-card');
@@ -1803,21 +2055,51 @@ function revealWord() {
       cardEl.classList.add('wrong-bg');
       statusIcon.textContent = '❌';
 
-      // 1. Das Hauptdisplay zeigt wie gewohnt die korrekte Lösung mit den Highlight-Markierungen
-      const { marks: targetMarks, texte } = await FreschModule.analyze(targetWord, userInput);
-      const inputMarks = new Set(targetMarks);
+      const targetOffset = targetWord.length - wordWithoutArticle.length; // Länge von "das " in der Lösung
+      const inputOffset = userInput.length - inputWithoutArticle.length;  // Länge des getippten Artikels
+      const targetMarks = new Set();
+      const inputMarks = new Set();
+      const texte = [];
+
+      // a) Falscher Artikel: als Ganzes markieren und den richtigen Artikel nennen
+      if (articleWrong) {
+        for (let i = 0; i < targetArticle.length; i++) targetMarks.add(i);
+        for (let i = 0; i < inputArticle.length; i++) inputMarks.add(i);
+        texte.push(targetArticle
+          ? `Der Artikel heißt: <b>${escapeHtml(targetArticle)}</b> ${escapeHtml(wordWithoutArticle)}`
+          : 'Hier gehört <b>kein Artikel</b> davor');
+      }
+
+      // b) Das Wort selbst prüfen (ohne Artikel).
+      // Die Analyse kann auf Wiktionary warten; schlägt sie fehl, wird die Lösung ohne Hinweise gezeigt.
+      if (wordWrong) {
+        let analysis;
+        try {
+          analysis = await FreschModule.analyze(wordWithoutArticle, inputWithoutArticle);
+        } catch (error) {
+          console.warn('Fehleranalyse fehlgeschlagen:', error);
+          analysis = { marks: new Set(), texte: [] };
+        }
+        // Inzwischen eine andere Karte angezeigt (z. B. Modus oder Filter gewechselt)? Dann Ergebnis verwerfen.
+        if (cardToken !== state.cardToken) return;
+        analysis.marks.forEach(index => targetMarks.add(index + targetOffset));
+        getInputErrorMarks(inputWithoutArticle, wordWithoutArticle).forEach(index => inputMarks.add(index + inputOffset));
+        analysis.texte.slice(0, 2).forEach(text => texte.push(text));
+      }
+
+      // 1. Das Hauptdisplay zeigt die korrekte Lösung mit den Highlight-Markierungen
       FreschModule.getDoubleConsonantMarks(targetWord).forEach(index => targetMarks.add(index));
       targetEl.className = 'word-display digital-result';
       renderMarkedWord(targetEl, targetWord, targetMarks);
 
-      // 2. Der Schüler-Tipp wird zusätzlich darunter dezent mit unterstrichenen Fehlern eingeblendet
+      // 2. Die Eingabe des Kindes wird darunter mit unterstrichenen Fehlern eingeblendet
       const highlightedInput = [...userInput].map((c, i) =>
-        inputMarks.has(i) ? `<span style="border-bottom: 2px solid #ff3b30; color: #ff3b30;">${c}</span>` : c
+        inputMarks.has(i) ? `<span style="border-bottom: 2px solid #ff3b30; color: #ff3b30;">${escapeHtml(c)}</span>` : escapeHtml(c)
       ).join('');
 
       feedback.innerHTML = `
         <div style="font-size: 0.95rem; color: #86868b; margin-bottom: 8px;">deine Eingabe: <span style="font-family: monospace; letter-spacing: 1px;">${highlightedInput}</span></div>
-        ${texte.slice(0, 2).map(t => `<div>${t}</div>`).join('')}
+        ${texte.map(t => `<div>${t}</div>`).join('')}
       `;
     }
 
@@ -1829,9 +2111,11 @@ function revealWord() {
     primaryButton.classList.add('digital-next');
     primaryButton.style.display = 'flex';
     primaryButton.focus();
+    state.checkInProgress = false; // Prüfung abgeschlossen, jetzt darf "Weiter" gedrückt werden
   }
 
   async function proceedFromDigital() {
+    if (state.checkInProgress) return; // Ergebnis wird noch berechnet
     document.getElementById('digital-next-area').style.display = 'none';
     await answer(state.pendingIsCorrect);
   }
@@ -1861,10 +2145,6 @@ function revealWord() {
       if (state.learningMode === 'paper') {
         isCorrect ? AudioModule.playSuccess() : AudioModule.playError();
       }
-      if (dailyProgress.completedNow) {
-        AudioModule.playDailyGoalSuccess();
-        showDailyGoalCelebration();
-      }
       const inIntensiveFilter = state.selectedBoxFilter === 'intensiv';
       const skipPromotion = (inIntensiveFilter || state.helpUsed);
       const answeredWord = state.words[state.currentWordIndex];
@@ -1874,7 +2154,12 @@ function revealWord() {
       }
       LeitnerModule.evaluateAnswer(answeredWord, isCorrect, state.words, skipPromotion, inIntensiveFilter);
       await saveAndRefresh();
-      nextWord();
+      // Tagesziel erreicht: nächste Karte still vorbereiten, Erfolgsmeldung zeigen und auf die Entscheidung warten
+      nextWord(!dailyProgress.completedNow);
+      if (dailyProgress.completedNow) {
+        AudioModule.playDailyGoalSuccess();
+        showDailyGoalCelebration();
+      }
     } finally {
       state.answerInProgress = false;
     }
@@ -2013,13 +2298,28 @@ async function importWords(event) {
     }
   }
 
+  // Erst die Liste neben der App suchen; fehlt sie (z. B. auf einem eigenen Server),
+  // die veröffentlichte Liste von GitHub Pages (Branch main) verwenden.
+  const ONLINE_WORDLIST_URL = 'https://johanneszllr-droid.github.io/Lernwoerter-App/lernwoerter-blank.json';
+
+  async function fetchBlankWordList() {
+    const sources = ['./lernwoerter-blank.json', ONLINE_WORDLIST_URL];
+    const errors = [];
+    for (const url of sources) {
+      try {
+        const response = await fetch(url, { cache: 'no-cache' });
+        if (response.ok) return await response.text();
+        errors.push(`${url}: HTTP ${response.status}`);
+      } catch (err) {
+        errors.push(`${url}: ${err.message}`);
+      }
+    }
+    throw new Error('Wörterliste konnte weder lokal noch online geladen werden.\n' + errors.join('\n'));
+  }
+
   async function importBlankWordsFromWeb() {
     try {
-      const response = await fetch('./lernwoerter-blank.json');
-      if (!response.ok) {
-        throw new Error(`Datei konnte nicht geladen werden (HTTP ${response.status}).`);
-      }
-      const parsed = StorageModule.parseJsonText(await response.text());
+      const parsed = StorageModule.parseJsonText(await fetchBlankWordList());
       showImportDialog(parsed, 'lernwoerter-blank.json');
     } catch (err) {
       alert('Fehler beim Web-Import: ' + err.message);
@@ -2162,6 +2462,7 @@ async function importWords(event) {
         });
       }
 
+      normalizeWords(state.words);
       closeImportModal();
       await saveAndRefresh();
       renderWordList();
@@ -2179,13 +2480,6 @@ async function importWords(event) {
     word.userdaten.intensiv = !word.userdaten.intensiv;
     await saveAndRefresh();
     renderWordList();
-    if (state.words[state.currentWordIndex]?.id === id) updateCardMeta(word);
-  }
-
-  async function toggleCurrentWordIntensiv() {
-    const current = state.words[state.currentWordIndex];
-    if (!current) return;
-    await toggleIntensiv(current.id);
   }
 
   function setWordGroupsCollapsed(collapsed) {
@@ -2452,6 +2746,8 @@ async function importWords(event) {
     toggleBoxFilter,
     setDailyGoal,
     speakCurrentWord,
+    speakExampleSentence,
+    handleExampleSentenceKey,
     peekWord,
     revealWord,
     handleInputKey,
@@ -2460,7 +2756,9 @@ async function importWords(event) {
     handlePrimaryAction,
     toggleNavigationMenu,
     closeNavigationMenu,
-    toggleCurrentWordIntensiv,
+    continueLearning,
+    finishForToday,
+    openGuide,
     toggleSound,
     answer,
     addWord,
@@ -2490,6 +2788,8 @@ window.showTab = (t) => UIController.showTab(t);
 window.setMode = (m) => UIController.setMode(m);
 window.toggleBoxFilter = (b, e) => UIController.toggleBoxFilter(b, e);
 window.speakCurrentWord = () => UIController.speakCurrentWord();
+window.speakExampleSentence = () => UIController.speakExampleSentence();
+window.handleExampleSentenceKey = (e) => UIController.handleExampleSentenceKey(e);
 window.peekWord = () => UIController.peekWord();
 window.revealWord = () => UIController.revealWord();
 window.handleInputKey = (e) => UIController.handleInputKey(e);
