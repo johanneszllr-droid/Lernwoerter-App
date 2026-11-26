@@ -25,7 +25,7 @@
       "artikel": "",
       "wortart": "Präposition",
       "plural": "",
-      "emoji": "📝",
+      "emoji": "💌",
       "besonderheiten": []
     },
     "userdaten": {
@@ -43,7 +43,7 @@
       "artikel": "",
       "wortart": "Präposition",
       "plural": "",
-      "emoji": "📝",
+      "emoji": "✉️",
       "besonderheiten": []
     },
     "userdaten": {
@@ -99,7 +99,7 @@
       "artikel": "",
       "wortart": "Konjunktion",
       "plural": "",
-      "emoji": "📝",
+      "emoji": "➕",
       "besonderheiten": []
     },
     "userdaten": {
@@ -113,11 +113,11 @@
     "id": 1794428457099,
     "stammdaten": {
       "wort": "viel",
-      "beispielsatz": "Im Sommer scheinen die Sonne und das Licht besonders viel.",
+      "beispielsatz": "Im Sommer scheint die Sonne besonders viel, deshalb spielen wir oft draußen.",
       "artikel": "",
       "wortart": "Pronomen",
       "plural": "",
-      "emoji": "📝",
+      "emoji": "☀️",
       "besonderheiten": []
     },
     "userdaten": {
@@ -135,7 +135,7 @@
       "artikel": "",
       "wortart": "Adverb",
       "plural": "",
-      "emoji": "📝",
+      "emoji": "🐶",
       "besonderheiten": []
     },
     "userdaten": {
@@ -153,7 +153,7 @@
       "artikel": "",
       "wortart": "Verb",
       "plural": "",
-      "emoji": "🚗",
+      "emoji": "🚆",
       "besonderheiten": []
     },
     "userdaten": {
@@ -243,7 +243,7 @@
       "artikel": "der",
       "wortart": "Substantiv",
       "plural": "Sande",
-      "emoji": "⏳",
+      "emoji": "🏖️",
       "besonderheiten": []
     },
     "userdaten": {
@@ -261,7 +261,7 @@
       "artikel": "",
       "wortart": "Verb",
       "plural": "",
-      "emoji": "🎣",
+      "emoji": "🤾",
       "besonderheiten": []
     },
     "userdaten": {
@@ -387,7 +387,7 @@
       "artikel": "der",
       "wortart": "Substantiv",
       "plural": "Willen",
-      "emoji": "🧠",
+      "emoji": "💪",
       "besonderheiten": []
     },
     "userdaten": {
@@ -419,11 +419,11 @@
     "id": 1794430049461,
     "stammdaten": {
       "wort": "verlieren",
-      "beispielsatz": "Momo passt gut auf, damit er seinen Schlüssel nicht verlieren kann.",
+      "beispielsatz": "Momo will seinen Schlüssel auf keinen Fall verlieren, deshalb hängt er ihn an den Ranzen.",
       "artikel": "",
       "wortart": "Verb",
       "plural": "",
-      "emoji": "📉",
+      "emoji": "🔑",
       "besonderheiten": []
     },
     "userdaten": {
@@ -441,7 +441,7 @@
       "artikel": "",
       "wortart": "Verb",
       "plural": "",
-      "emoji": "🎯",
+      "emoji": "🧩",
       "besonderheiten": []
     },
     "userdaten": {
@@ -508,12 +508,12 @@
   {
     "id": 1794430078404,
     "stammdaten": {
-      "wort": "wir sind",
+      "wort": "sind",
       "beispielsatz": "Nach dem langen Spaziergang sind wir alle ganz schön müde.",
       "artikel": "",
       "wortart": "Phrase",
       "plural": "",
-      "emoji": "👥",
+      "emoji": "😴",
       "besonderheiten": []
     },
     "userdaten": {
@@ -524,12 +524,30 @@
     }
   },
   {
-    "id": 1794430083433,
+    "id": 1795460510767,
     "stammdaten": {
-      "wort": "seit gestern",
+      "wort": "seit",
       "beispielsatz": "Seit gestern scheint die Sonne wieder warm vom blauen Himmel.",
       "artikel": "",
-      "wortart": "Phrase",
+      "wortart": "Präposition",
+      "plural": "",
+      "emoji": "⏳",
+      "besonderheiten": []
+    },
+    "userdaten": {
+      "box": 0,
+      "letztePruefung": null,
+      "fehlerZaehler": 0,
+      "intensiv": false
+    }
+  },
+  {
+    "id": 1795460510768,
+    "stammdaten": {
+      "wort": "gestern",
+      "beispielsatz": "Seit gestern scheint die Sonne wieder warm vom blauen Himmel.",
+      "artikel": "",
+      "wortart": "Adverb",
       "plural": "",
       "emoji": "📅",
       "besonderheiten": []
@@ -542,12 +560,30 @@
     }
   },
   {
-    "id": 1794430092173,
+    "id": 1795460510769,
     "stammdaten": {
-      "wort": "ihr seid nett",
+      "wort": "seid",
       "beispielsatz": "Ihr seid nett, weil ihr beim Aufräumen sofort mitgeholfen habt.",
       "artikel": "",
-      "wortart": "Phrase",
+      "wortart": "Verb",
+      "plural": "",
+      "emoji": "👥",
+      "besonderheiten": []
+    },
+    "userdaten": {
+      "box": 0,
+      "letztePruefung": null,
+      "fehlerZaehler": 0,
+      "intensiv": false
+    }
+  },
+  {
+    "id": 1795460510770,
+    "stammdaten": {
+      "wort": "nett",
+      "beispielsatz": "Ihr seid nett, weil ihr beim Aufräumen sofort mitgeholfen habt.",
+      "artikel": "",
+      "wortart": "Adjektiv",
       "plural": "",
       "emoji": "😊",
       "besonderheiten": []
@@ -585,7 +621,7 @@
       "artikel": "",
       "wortart": "Adjektiv",
       "plural": "",
-      "emoji": "📈",
+      "emoji": "🐘",
       "besonderheiten": []
     },
     "userdaten": {
@@ -617,11 +653,11 @@
     "id": 1794430108980,
     "stammdaten": {
       "wort": "klein",
-      "beispielsatz": "Die kleine Maus huscht blitzschnell in ihr verstecktes Loch.",
+      "beispielsatz": "Die Maus ist so klein, dass sie in jedes Loch passt.",
       "artikel": "",
       "wortart": "Adjektiv",
       "plural": "",
-      "emoji": "📉",
+      "emoji": "🐭",
       "besonderheiten": []
     },
     "userdaten": {
@@ -638,8 +674,8 @@
       "beispielsatz": "Aus der offenen Biotonne steigt an heißen Tagen ein starker Gestank.",
       "artikel": "der",
       "wortart": "Substantiv",
-      "plural": "Gestate",
-      "emoji": "🗑️",
+      "plural": "",
+      "emoji": "🤢",
       "besonderheiten": []
     },
     "userdaten": {
@@ -706,12 +742,12 @@
   {
     "id": 1794430141082,
     "stammdaten": {
-      "wort": "wir müssen",
+      "wort": "müssen",
       "beispielsatz": "Vor dem Essen müssen wir uns alle gründlich die Hände waschen.",
       "artikel": "",
       "wortart": "Phrase",
       "plural": "",
-      "emoji": "⚠️",
+      "emoji": "🧼",
       "besonderheiten": []
     },
     "userdaten": {
@@ -724,7 +760,7 @@
   {
     "id": 1794430145231,
     "stammdaten": {
-      "wort": "er sagte",
+      "wort": "sagte",
       "beispielsatz": "Momo nickte und sagte, dass er die Geschichte schon kennt.",
       "artikel": "",
       "wortart": "Phrase",
@@ -742,7 +778,7 @@
   {
     "id": 1794430151683,
     "stammdaten": {
-      "wort": "ich will",
+      "wort": "will",
       "beispielsatz": "Nach dem Training will ich sofort ein großes Glas Wasser trinken.",
       "artikel": "",
       "wortart": "Phrase",
@@ -760,12 +796,12 @@
   {
     "id": 1794430157232,
     "stammdaten": {
-      "wort": "sie wollen",
+      "wort": "wollen",
       "beispielsatz": "In den Ferien wollen sie zusammen ans Meer fahren.",
       "artikel": "",
       "wortart": "Phrase",
       "plural": "",
-      "emoji": "👥",
+      "emoji": "🏖️",
       "besonderheiten": []
     },
     "userdaten": {
@@ -855,7 +891,7 @@
       "artikel": "",
       "wortart": "Adjektiv",
       "plural": "",
-      "emoji": "🤪",
+      "emoji": "😒",
       "besonderheiten": []
     },
     "userdaten": {
@@ -1154,14 +1190,32 @@
     }
   },
   {
-    "id": 1794430526906,
+    "id": 1795460510771,
     "stammdaten": {
-      "wort": "ich kam nach Hause",
+      "wort": "kam",
       "beispielsatz": "Gestern kam ich nach dem Fußballtraining müde nach Hause.",
       "artikel": "",
-      "wortart": "Phrase",
+      "wortart": "Verb",
       "plural": "",
-      "emoji": "🏠",
+      "emoji": "🏃",
+      "besonderheiten": []
+    },
+    "userdaten": {
+      "box": 0,
+      "letztePruefung": null,
+      "fehlerZaehler": 0,
+      "intensiv": false
+    }
+  },
+  {
+    "id": 1795460510772,
+    "stammdaten": {
+      "wort": "nach",
+      "beispielsatz": "Gestern kam ich nach dem Fußballtraining müde nach Hause.",
+      "artikel": "",
+      "wortart": "Präposition",
+      "plural": "",
+      "emoji": "➡️",
       "besonderheiten": []
     },
     "userdaten": {
@@ -1193,7 +1247,7 @@
     "id": 1794430535390,
     "stammdaten": {
       "wort": "spät",
-      "beispielsatz": "Abends wird es im Winter schon sehr spät hell und früh dunkel.",
+      "beispielsatz": "Im Winter wird es morgens spät hell und abends früh dunkel.",
       "artikel": "",
       "wortart": "Adjektiv",
       "plural": "",
@@ -1269,7 +1323,7 @@
       "artikel": "",
       "wortart": "Verb",
       "plural": "",
-      "emoji": "😋",
+      "emoji": "🥞",
       "besonderheiten": []
     },
     "userdaten": {
@@ -1287,7 +1341,7 @@
       "artikel": "",
       "wortart": "Verb",
       "plural": "",
-      "emoji": "😱",
+      "emoji": "🦌",
       "besonderheiten": []
     },
     "userdaten": {
@@ -1359,7 +1413,7 @@
       "artikel": "",
       "wortart": "Verb",
       "plural": "",
-      "emoji": "✈️",
+      "emoji": "🐦",
       "besonderheiten": []
     },
     "userdaten": {
@@ -1496,14 +1550,32 @@
     }
   },
   {
-    "id": 1794430689989,
+    "id": 1795460510774,
     "stammdaten": {
-      "wort": "sie geht heute früher",
+      "wort": "geht",
       "beispielsatz": "Heute hat sie keinen Sportunterricht, deshalb geht sie heute früher heim.",
       "artikel": "",
-      "wortart": "Phrase",
+      "wortart": "Verb",
       "plural": "",
-      "emoji": "🏃‍♀️",
+      "emoji": "🚶",
+      "besonderheiten": []
+    },
+    "userdaten": {
+      "box": 0,
+      "letztePruefung": null,
+      "fehlerZaehler": 0,
+      "intensiv": false
+    }
+  },
+  {
+    "id": 1795460510775,
+    "stammdaten": {
+      "wort": "früher",
+      "beispielsatz": "Heute hat sie keinen Sportunterricht, deshalb geht sie heute früher heim.",
+      "artikel": "",
+      "wortart": "Adverb",
+      "plural": "",
+      "emoji": "⏰",
       "besonderheiten": []
     },
     "userdaten": {
@@ -1607,7 +1679,7 @@
     "id": 1794430734671,
     "stammdaten": {
       "wort": "das Geld",
-      "beispielsatz": "Momo spart sein Taschengeld in einer bunten Spardose.",
+      "beispielsatz": "Momo spart sein Geld in einer bunten Spardose.",
       "artikel": "das",
       "wortart": "Substantiv",
       "plural": "Gelder",
@@ -1622,14 +1694,32 @@
     }
   },
   {
-    "id": 1794430873219,
+    "id": 1795460510776,
     "stammdaten": {
-      "wort": "wir lassen das",
+      "wort": "lassen",
       "beispielsatz": "Das ist viel zu gefährlich, wir lassen das lieber bleiben.",
       "artikel": "",
-      "wortart": "Phrase",
+      "wortart": "Verb",
       "plural": "",
-      "emoji": "🛑",
+      "emoji": "✋",
+      "besonderheiten": []
+    },
+    "userdaten": {
+      "box": 0,
+      "letztePruefung": null,
+      "fehlerZaehler": 0,
+      "intensiv": false
+    }
+  },
+  {
+    "id": 1795460510777,
+    "stammdaten": {
+      "wort": "das",
+      "beispielsatz": "Das ist viel zu gefährlich, wir lassen das lieber bleiben.",
+      "artikel": "",
+      "wortart": "Pronomen",
+      "plural": "",
+      "emoji": "👉",
       "besonderheiten": []
     },
     "userdaten": {
@@ -1658,12 +1748,12 @@
     }
   },
   {
-    "id": 1794430888824,
+    "id": 1795460510778,
     "stammdaten": {
-      "wort": "wie heißt du?",
+      "wort": "wie",
       "beispielsatz": "Momo geht auf den neuen Mitschüler zu und fragt freundlich: Wie heißt du?",
       "artikel": "",
-      "wortart": "Phrase",
+      "wortart": "Adverb",
       "plural": "",
       "emoji": "❓",
       "besonderheiten": []
@@ -1676,14 +1766,50 @@
     }
   },
   {
-    "id": 1794430904379,
+    "id": 1795460510779,
     "stammdaten": {
-      "wort": "ich heiße Otto",
+      "wort": "heißt",
+      "beispielsatz": "Momo geht auf den neuen Mitschüler zu und fragt freundlich: Wie heißt du?",
+      "artikel": "",
+      "wortart": "Verb",
+      "plural": "",
+      "emoji": "🏷️",
+      "besonderheiten": []
+    },
+    "userdaten": {
+      "box": 0,
+      "letztePruefung": null,
+      "fehlerZaehler": 0,
+      "intensiv": false
+    }
+  },
+  {
+    "id": 1795460510780,
+    "stammdaten": {
+      "wort": "du",
+      "beispielsatz": "Momo geht auf den neuen Mitschüler zu und fragt freundlich: Wie heißt du?",
+      "artikel": "",
+      "wortart": "Pronomen",
+      "plural": "",
+      "emoji": "🫵",
+      "besonderheiten": []
+    },
+    "userdaten": {
+      "box": 0,
+      "letztePruefung": null,
+      "fehlerZaehler": 0,
+      "intensiv": false
+    }
+  },
+  {
+    "id": 1795460510781,
+    "stammdaten": {
+      "wort": "heiße",
       "beispielsatz": "Der Junge lächelt zurück und antwortet: Hallo, ich heiße Otto!",
       "artikel": "",
-      "wortart": "Phrase",
+      "wortart": "Verb",
       "plural": "",
-      "emoji": "🗣️",
+      "emoji": "👋",
       "besonderheiten": []
     },
     "userdaten": {
@@ -1773,7 +1899,7 @@
       "artikel": "",
       "wortart": "Adjektiv",
       "plural": "",
-      "emoji": "🍀",
+      "emoji": "🥰",
       "besonderheiten": []
     },
     "userdaten": {
@@ -1802,14 +1928,50 @@
     }
   },
   {
-    "id": 1794430967687,
+    "id": 1795460510783,
     "stammdaten": {
-      "wort": "der Vogel ist tot",
-      "beispielsatz": "Momo findet am Wegesrand eine Feder, aber der kleine Vogel ist tot.",
+      "wort": "der Vogel",
+      "beispielsatz": "Unter dem Baum liegt ein kleiner Spatz. Momo ist traurig, denn der Vogel ist tot.",
+      "artikel": "der",
+      "wortart": "Substantiv",
+      "plural": "Vögel",
+      "emoji": "🐦",
+      "besonderheiten": []
+    },
+    "userdaten": {
+      "box": 0,
+      "letztePruefung": null,
+      "fehlerZaehler": 0,
+      "intensiv": false
+    }
+  },
+  {
+    "id": 1795460510784,
+    "stammdaten": {
+      "wort": "ist",
+      "beispielsatz": "Unter dem Baum liegt ein kleiner Spatz. Momo ist traurig, denn der Vogel ist tot.",
       "artikel": "",
-      "wortart": "Phrase",
+      "wortart": "Verb",
       "plural": "",
-      "emoji": "🕊️",
+      "emoji": "🟰",
+      "besonderheiten": []
+    },
+    "userdaten": {
+      "box": 0,
+      "letztePruefung": null,
+      "fehlerZaehler": 0,
+      "intensiv": false
+    }
+  },
+  {
+    "id": 1795460510785,
+    "stammdaten": {
+      "wort": "tot",
+      "beispielsatz": "Unter dem Baum liegt ein kleiner Spatz. Momo ist traurig, denn der Vogel ist tot.",
+      "artikel": "",
+      "wortart": "Adjektiv",
+      "plural": "",
+      "emoji": "🪦",
       "besonderheiten": []
     },
     "userdaten": {
@@ -1863,7 +2025,7 @@
       "artikel": "der",
       "wortart": "Substantiv",
       "plural": "Advente",
-      "emoji": "📅",
+      "emoji": "🍪",
       "besonderheiten": []
     },
     "userdaten": {
@@ -1953,7 +2115,7 @@
       "artikel": "",
       "wortart": "Adjektiv",
       "plural": "",
-      "emoji": "🍽️",
+      "emoji": "🍕",
       "besonderheiten": []
     },
     "userdaten": {
@@ -2165,7 +2327,7 @@
     "id": 1794431395481,
     "stammdaten": {
       "wort": "witzig",
-      "beispielsatz": "Momo erzählt beim Abendessen eine besonders witzige Geschichte.",
+      "beispielsatz": "Die Geschichte, die Momo beim Abendessen erzählt, ist richtig witzig.",
       "artikel": "",
       "wortart": "Adjektiv",
       "plural": "",
@@ -2205,7 +2367,7 @@
       "artikel": "die",
       "wortart": "Substantiv",
       "plural": "Bänder",
-      "emoji": "🎗️",
+      "emoji": "🎁",
       "besonderheiten": []
     },
     "userdaten": {
@@ -2237,7 +2399,7 @@
     "id": 1794431460355,
     "stammdaten": {
       "wort": "blind",
-      "beispielsatz": "Beim Topfschlagen verbindet man dem Sucher mit einem Tuch die Augen, bis er blind ist.",
+      "beispielsatz": "Beim Topfschlagen sucht man mit verbundenen Augen ganz blind nach dem Topf.",
       "artikel": "",
       "wortart": "Adjektiv",
       "plural": "",
@@ -2277,7 +2439,7 @@
       "artikel": "",
       "wortart": "Adjektiv",
       "plural": "",
-      "emoji": "💡",
+      "emoji": "🦉",
       "besonderheiten": []
     },
     "userdaten": {
@@ -2291,11 +2453,11 @@
     "id": 1794431474536,
     "stammdaten": {
       "wort": "wild",
-      "beispielsatz": "Auf der Wiese toben die Kinder wie eine wilde Räuberbande.",
+      "beispielsatz": "Auf der Wiese toben die Kinder laut und wild herum.",
       "artikel": "",
       "wortart": "Adjektiv",
       "plural": "",
-      "emoji": "🦁",
+      "emoji": "🤸",
       "besonderheiten": []
     },
     "userdaten": {
@@ -2398,7 +2560,7 @@
   {
     "id": 1794431526902,
     "stammdaten": {
-      "wort": "es blitzt",
+      "wort": "blitzt",
       "beispielsatz": "Schau mal aus dem Fenster, es blitzt schon wieder am Horizont!",
       "artikel": "",
       "wortart": "Phrase",
@@ -2414,12 +2576,12 @@
     }
   },
   {
-    "id": 1794431540726,
+    "id": 1795460510786,
     "stammdaten": {
-      "wort": "er putzt die Zähne",
+      "wort": "putzt",
       "beispielsatz": "Nach dem Frühstück geht Momo ins Bad und putzt die Zähne.",
       "artikel": "",
-      "wortart": "Phrase",
+      "wortart": "Verb",
       "plural": "",
       "emoji": "🪥",
       "besonderheiten": []
@@ -2457,7 +2619,7 @@
       "artikel": "das",
       "wortart": "Substantiv",
       "plural": "Boote",
-      "emoji": "⛵",
+      "emoji": "🛶",
       "besonderheiten": []
     },
     "userdaten": {
@@ -2506,11 +2668,11 @@
   {
     "id": 1794431577560,
     "stammdaten": {
-      "wort": "Pfefferminz",
-      "beispielsatz": "Im Kräuterbeet duftet der frische Pfefferminz besonders kräftig.",
-      "artikel": "der",
+      "wort": "die Pfefferminze",
+      "beispielsatz": "Im Kräuterbeet duftet die Pfefferminze besonders kräftig.",
+      "artikel": "die",
       "wortart": "Substantiv",
-      "plural": "Pfefferminze",
+      "plural": "Pfefferminzen",
       "emoji": "🌿",
       "besonderheiten": []
     },
@@ -2529,7 +2691,7 @@
       "artikel": "die",
       "wortart": "Substantiv",
       "plural": "Beeren",
-      "emoji": "🫐",
+      "emoji": "🍓",
       "besonderheiten": []
     },
     "userdaten": {
@@ -2547,7 +2709,7 @@
       "artikel": "",
       "wortart": "Verb",
       "plural": "",
-      "emoji": "💡",
+      "emoji": "👂",
       "besonderheiten": []
     },
     "userdaten": {
@@ -2727,7 +2889,7 @@
       "artikel": "der",
       "wortart": "Substantiv",
       "plural": "Urlaube",
-      "emoji": "✈️",
+      "emoji": "🏖️",
       "besonderheiten": []
     },
     "userdaten": {
@@ -2745,7 +2907,7 @@
       "artikel": "der",
       "wortart": "Substantiv",
       "plural": "Schüsse",
-      "emoji": "💥",
+      "emoji": "🥅",
       "besonderheiten": []
     },
     "userdaten": {
@@ -2756,14 +2918,14 @@
     }
   },
   {
-    "id": 1794431685218,
+    "id": 1795460510788,
     "stammdaten": {
-      "wort": "jetzt ist Schluss",
+      "wort": "der Schluss",
       "beispielsatz": "Der Schiedsrichter pfeift ab und ruft: Jetzt ist Schluss!",
-      "artikel": "",
-      "wortart": "Phrase",
-      "plural": "",
-      "emoji": "🛑",
+      "artikel": "der",
+      "wortart": "Substantiv",
+      "plural": "Schlüsse",
+      "emoji": "🏁",
       "besonderheiten": []
     },
     "userdaten": {
@@ -2849,11 +3011,11 @@
     "id": 1794431721579,
     "stammdaten": {
       "wort": "hart",
-      "beispielsatz": "Der alte Stein auf dem Weg ist steinhart und schwer.",
+      "beispielsatz": "Der alte Stein auf dem Weg ist hart und schwer.",
       "artikel": "",
       "wortart": "Adjektiv",
       "plural": "",
-      "emoji": "🧱",
+      "emoji": "🪨",
       "besonderheiten": []
     },
     "userdaten": {
@@ -2867,7 +3029,7 @@
     "id": 1794431724428,
     "stammdaten": {
       "wort": "weich",
-      "beispielsatz": "Das neue Kuscheltier hat ein ganz weiches flauschiges Fell.",
+      "beispielsatz": "Das Fell des neuen Kuscheltiers ist ganz weich und flauschig.",
       "artikel": "",
       "wortart": "Adjektiv",
       "plural": "",
@@ -2889,7 +3051,7 @@
       "artikel": "",
       "wortart": "Adjektiv",
       "plural": "",
-      "emoji": "🔒",
+      "emoji": "🍱",
       "besonderheiten": []
     },
     "userdaten": {
@@ -2903,11 +3065,11 @@
     "id": 1794431731388,
     "stammdaten": {
       "wort": "dünn",
-      "beispielsatz": "Für die Zeichnung spitzt Momo seinen Buntstift schön dünn an.",
+      "beispielsatz": "Die Eisschicht auf dem Teich ist noch viel zu dünn zum Betreten.",
       "artikel": "",
       "wortart": "Adjektiv",
       "plural": "",
-      "emoji": "📏",
+      "emoji": "🧊",
       "besonderheiten": []
     },
     "userdaten": {
@@ -2921,11 +3083,11 @@
     "id": 1794431735414,
     "stammdaten": {
       "wort": "dick",
-      "beispielsatz": "Im Winter zieht Momo seine dicke warme Daunenjacke an.",
+      "beispielsatz": "Im Winter ist Momos Daunenjacke schön warm und dick.",
       "artikel": "",
       "wortart": "Adjektiv",
       "plural": "",
-      "emoji": "🎈",
+      "emoji": "🧥",
       "besonderheiten": []
     },
     "userdaten": {
@@ -2939,11 +3101,11 @@
     "id": 1794431738573,
     "stammdaten": {
       "wort": "fett",
-      "beispielsatz": "In die Pfanne kommt nur ein kleines bisschen Fett zum Braten.",
+      "beispielsatz": "Die kleine Raupe frisst so viele Blätter, bis sie ganz dick und fett ist.",
       "artikel": "",
       "wortart": "Adjektiv",
       "plural": "",
-      "emoji": "🧈",
+      "emoji": "🐛",
       "besonderheiten": []
     },
     "userdaten": {
@@ -2997,7 +3159,7 @@
       "artikel": "das",
       "wortart": "Substantiv",
       "plural": "Erlebnisse",
-      "emoji": "🌟",
+      "emoji": "⛺",
       "besonderheiten": []
     },
     "userdaten": {
@@ -3195,7 +3357,7 @@
       "artikel": "der",
       "wortart": "Substantiv",
       "plural": "Küsse",
-      "emoji": "💋",
+      "emoji": "😘",
       "besonderheiten": []
     },
     "userdaten": {
@@ -3206,13 +3368,31 @@
     }
   },
   {
-    "id": 1794431888928,
+    "id": 1795460510789,
     "stammdaten": {
-      "wort": "ich esse Salat",
+      "wort": "esse",
       "beispielsatz": "Zum Mittagessen esse ich gerne knackigen Salat mit Gurken.",
       "artikel": "",
-      "wortart": "Phrase",
+      "wortart": "Verb",
       "plural": "",
+      "emoji": "🍽️",
+      "besonderheiten": []
+    },
+    "userdaten": {
+      "box": 0,
+      "letztePruefung": null,
+      "fehlerZaehler": 0,
+      "intensiv": false
+    }
+  },
+  {
+    "id": 1795460510790,
+    "stammdaten": {
+      "wort": "der Salat",
+      "beispielsatz": "Zum Mittagessen esse ich gerne knackigen Salat mit Gurken.",
+      "artikel": "der",
+      "wortart": "Substantiv",
+      "plural": "Salate",
       "emoji": "🥗",
       "besonderheiten": []
     },
@@ -3285,7 +3465,7 @@
       "artikel": "das",
       "wortart": "Substantiv",
       "plural": "Öle",
-      "emoji": "🛢️",
+      "emoji": "🫒",
       "besonderheiten": []
     },
     "userdaten": {
@@ -3303,7 +3483,7 @@
       "artikel": "das",
       "wortart": "Substantiv",
       "plural": "Kissen",
-      "emoji": "🛋️",
+      "emoji": "🛏️",
       "besonderheiten": []
     },
     "userdaten": {
@@ -3321,7 +3501,7 @@
       "artikel": "die",
       "wortart": "Substantiv",
       "plural": "Decken",
-      "emoji": "🛋️",
+      "emoji": "🛌",
       "besonderheiten": []
     },
     "userdaten": {
@@ -3339,7 +3519,7 @@
       "artikel": "die",
       "wortart": "Substantiv",
       "plural": "Nüsse",
-      "emoji": "🥜",
+      "emoji": "🌰",
       "besonderheiten": []
     },
     "userdaten": {
@@ -3357,7 +3537,7 @@
       "artikel": "das",
       "wortart": "Substantiv",
       "plural": "Schlösser",
-      "emoji": "🔒",
+      "emoji": "🏰",
       "besonderheiten": []
     },
     "userdaten": {
@@ -3465,7 +3645,7 @@
       "artikel": "das",
       "wortart": "Substantiv",
       "plural": "Fenster",
-      "emoji": "واف",
+      "emoji": "🪟",
       "besonderheiten": []
     },
     "userdaten": {
@@ -3568,7 +3748,7 @@
   {
     "id": 1794588225537,
     "stammdaten": {
-      "wort": "er läuft",
+      "wort": "läuft",
       "beispielsatz": "Auf dem Sportplatz läuft er heute so schnell wie der Wind.",
       "artikel": "",
       "wortart": "Phrase",
@@ -3640,7 +3820,7 @@
   {
     "id": 1794588361851,
     "stammdaten": {
-      "wort": "sie sagt",
+      "wort": "sagt",
       "beispielsatz": "Sie sagt ihrem kleinen Bruder, dass er beim Überqueren aufpassen soll.",
       "artikel": "",
       "wortart": "Phrase",
@@ -3676,7 +3856,7 @@
   {
     "id": 1794588481158,
     "stammdaten": {
-      "wort": "du wäschst",
+      "wort": "wäschst",
       "beispielsatz": "Nach dem Matschen im Garten wäschst du dir gründlich die Hände.",
       "artikel": "",
       "wortart": "Phrase",
@@ -3713,11 +3893,11 @@
     "id": 1794588572928,
     "stammdaten": {
       "wort": "ihn",
-      "beispielsatz": "Momo winkt seinem Freund zu und ruft ihn laut herüber.",
+      "beispielsatz": "Momo sieht seinen Freund auf dem Schulhof und ruft ihn laut zu sich herüber.",
       "artikel": "",
       "wortart": "Pronomen",
       "plural": "",
-      "emoji": "👉",
+      "emoji": "👋",
       "besonderheiten": []
     },
     "userdaten": {
@@ -3748,7 +3928,7 @@
   {
     "id": 1794588604207,
     "stammdaten": {
-      "wort": "ihr übt",
+      "wort": "übt",
       "beispielsatz": "Ihr übt heute gemeinsam die schwierigen Wörter für das Diktat.",
       "artikel": "",
       "wortart": "Phrase",
@@ -3766,30 +3946,12 @@
   {
     "id": 1794588630940,
     "stammdaten": {
-      "wort": "er bleibt",
+      "wort": "bleibt",
       "beispielsatz": "Bei roter Ampel bleibt er sofort am Bordstein stehen.",
       "artikel": "",
       "wortart": "Phrase",
       "plural": "",
-      "emoji": "🧍‍♂️",
-      "besonderheiten": []
-    },
-    "userdaten": {
-      "box": 0,
-      "letztePruefung": null,
-      "fehlerZaehler": 0,
-      "intensiv": false
-    }
-  },
-  {
-    "id": 1794835808122,
-    "stammdaten": {
-      "wort": "die Straße",
-      "beispielsatz": "Am Abend leuchten die Laternen entlang der ganzen Straße.",
-      "artikel": "die",
-      "wortart": "Substantiv",
-      "plural": "Straßen",
-      "emoji": "🛣️",
+      "emoji": "🚦",
       "besonderheiten": []
     },
     "userdaten": {
@@ -3893,11 +4055,11 @@
     "id": 1794836018957,
     "stammdaten": {
       "wort": "das Spiel",
-      "beispielsatz": "Am Nachmittag probieren wir ein neues lustiges Brettspiel aus.",
+      "beispielsatz": "Am Nachmittag probieren wir ein neues lustiges Spiel aus.",
       "artikel": "das",
       "wortart": "Substantiv",
       "plural": "Spiele",
-      "emoji": "🎮",
+      "emoji": "🎲",
       "besonderheiten": []
     },
     "userdaten": {
@@ -3915,25 +4077,7 @@
       "artikel": "das",
       "wortart": "Substantiv",
       "plural": "Tiere",
-      "emoji": "🦒",
-      "besonderheiten": []
-    },
-    "userdaten": {
-      "box": 0,
-      "letztePruefung": null,
-      "fehlerZaehler": 0,
-      "intensiv": false
-    }
-  },
-  {
-    "id": 1794836050977,
-    "stammdaten": {
-      "wort": "wollen",
-      "beispielsatz": "Am Samstag wollen wir zusammen in den Wald wandern gehen.",
-      "artikel": "",
-      "wortart": "Verb",
-      "plural": "",
-      "emoji": "💭",
+      "emoji": "🦔",
       "besonderheiten": []
     },
     "userdaten": {
@@ -3951,25 +4095,7 @@
       "artikel": "",
       "wortart": "Adjektiv",
       "plural": "",
-      "emoji": "⚡",
-      "besonderheiten": []
-    },
-    "userdaten": {
-      "box": 0,
-      "letztePruefung": null,
-      "fehlerZaehler": 0,
-      "intensiv": false
-    }
-  },
-  {
-    "id": 1794853204556,
-    "stammdaten": {
-      "wort": "Schuh",
-      "beispielsatz": "Im Flur steht noch ein einzelner Schuh neben dem Regal.",
-      "artikel": "der",
-      "wortart": "Substantiv",
-      "plural": "Schuhe",
-      "emoji": "👟",
+      "emoji": "🐆",
       "besonderheiten": []
     },
     "userdaten": {
@@ -4005,7 +4131,7 @@
       "artikel": "die",
       "wortart": "Substantiv",
       "plural": "Bänke",
-      "emoji": "🏦",
+      "emoji": "🪑",
       "besonderheiten": []
     },
     "userdaten": {
@@ -4056,9 +4182,9 @@
     "stammdaten": {
       "wort": "der Clown",
       "beispielsatz": "Im Zirkus bringt der lustige Clown alle Zuschauer zum Lachen.",
-      "artikel": "",
-      "wortart": "",
-      "plural": "",
+      "artikel": "der",
+      "wortart": "Substantiv",
+      "plural": "Clowns",
       "emoji": "🤡",
       "besonderheiten": []
     },
@@ -4074,10 +4200,10 @@
     "stammdaten": {
       "wort": "der Aal",
       "beispielsatz": "Im tiefen Fluss schlängelt sich der glatte Aal durch das Wasser.",
-      "artikel": "",
-      "wortart": "",
-      "plural": "",
-      "emoji": "🐍",
+      "artikel": "der",
+      "wortart": "Substantiv",
+      "plural": "Aale",
+      "emoji": "🐟",
       "besonderheiten": []
     },
     "userdaten": {
@@ -4092,9 +4218,9 @@
     "stammdaten": {
       "wort": "das Telefon",
       "beispielsatz": "Wenn das Telefon klingelt, hebt Momo freundlich ab.",
-      "artikel": "",
-      "wortart": "",
-      "plural": "",
+      "artikel": "das",
+      "wortart": "Substantiv",
+      "plural": "Telefone",
       "emoji": "☎️",
       "besonderheiten": []
     },
@@ -4110,9 +4236,9 @@
     "stammdaten": {
       "wort": "Licht",
       "beispielsatz": "Im dunklen Tunnel schaltet Momo vorne am Fahrrad das Licht ein.",
-      "artikel": "",
-      "wortart": "",
-      "plural": "",
+      "artikel": "das",
+      "wortart": "Substantiv",
+      "plural": "Lichter",
       "emoji": "🔦",
       "besonderheiten": []
     },
@@ -4128,9 +4254,9 @@
     "stammdaten": {
       "wort": "der Tank",
       "beispielsatz": "Vor der langen Urlaubsfahrt füllt Papa den Tank an der Tankstelle.",
-      "artikel": "",
-      "wortart": "",
-      "plural": "",
+      "artikel": "der",
+      "wortart": "Substantiv",
+      "plural": "Tanks",
       "emoji": "⛽",
       "besonderheiten": []
     },
@@ -4147,9 +4273,9 @@
       "wort": "krank",
       "beispielsatz": "Wenn man krank ist, muss man sich im Bett gut ausruhen.",
       "artikel": "",
-      "wortart": "",
+      "wortart": "Adjektiv",
       "plural": "",
-      "emoji": "🥵",
+      "emoji": "🛌",
       "besonderheiten": []
     },
     "userdaten": {
@@ -4165,9 +4291,9 @@
       "wort": "gespannt",
       "beispielsatz": "Momo ist schon ganz gespannt, wie das spannende Buch ausgeht.",
       "artikel": "",
-      "wortart": "",
+      "wortart": "Adjektiv",
       "plural": "",
-      "emoji": "📝",
+      "emoji": "🤩",
       "besonderheiten": []
     },
     "userdaten": {
@@ -4183,9 +4309,9 @@
       "wort": "verwandt",
       "beispielsatz": "Meine Cousine und ich sind miteinander verwandt.",
       "artikel": "",
-      "wortart": "",
+      "wortart": "Adjektiv",
       "plural": "",
-      "emoji": "📝",
+      "emoji": "👨‍👩‍👧",
       "besonderheiten": []
     },
     "userdaten": {
@@ -4200,9 +4326,9 @@
     "stammdaten": {
       "wort": "das Bild",
       "beispielsatz": "Mit bunten Wasserfarben malt Momo ein fröhliches Bild vom Meer.",
-      "artikel": "",
-      "wortart": "",
-      "plural": "",
+      "artikel": "das",
+      "wortart": "Substantiv",
+      "plural": "Bilder",
       "emoji": "🖼️",
       "besonderheiten": []
     },
@@ -4217,10 +4343,10 @@
     "id": 1794954585168,
     "stammdaten": {
       "wort": "die Kunst",
-      "beispielsatz": "Im Kunstunterricht basteln und malen die Kinder besonders gerne.",
-      "artikel": "",
-      "wortart": "",
-      "plural": "",
+      "beispielsatz": "Malen und Basteln ist eine Kunst, die Momo großen Spaß macht.",
+      "artikel": "die",
+      "wortart": "Substantiv",
+      "plural": "Künste",
       "emoji": "🖌️",
       "besonderheiten": []
     },
@@ -4236,10 +4362,10 @@
     "stammdaten": {
       "wort": "Geburtstag",
       "beispielsatz": "Zu seinem Geburtstag lädt Momo alle seine Freunde zur Feier ein.",
-      "artikel": "",
-      "wortart": "",
-      "plural": "",
-      "emoji": "📝",
+      "artikel": "der",
+      "wortart": "Substantiv",
+      "plural": "Geburtstage",
+      "emoji": "🥳",
       "besonderheiten": []
     },
     "userdaten": {
@@ -4255,9 +4381,9 @@
       "wort": "nämlich",
       "beispielsatz": "Wir nehmen unsere Regenschirme mit, es fängt nämlich gleich an zu regnen.",
       "artikel": "",
-      "wortart": "",
+      "wortart": "Adverb",
       "plural": "",
-      "emoji": "📝",
+      "emoji": "☂️",
       "besonderheiten": []
     },
     "userdaten": {
@@ -4272,10 +4398,10 @@
     "stammdaten": {
       "wort": "Party",
       "beispielsatz": "Auf der Party tanzen und spielen alle Kinder fröhlich zusammen.",
-      "artikel": "",
-      "wortart": "",
-      "plural": "",
-      "emoji": "📝",
+      "artikel": "die",
+      "wortart": "Substantiv",
+      "plural": "Partys",
+      "emoji": "🎉",
       "besonderheiten": []
     },
     "userdaten": {
@@ -4291,9 +4417,9 @@
       "wort": "gefahren",
       "beispielsatz": "Gestern sind wir mit dem Fahrrad bis zum großen Spielplatz gefahren.",
       "artikel": "",
-      "wortart": "",
+      "wortart": "Verb",
       "plural": "",
-      "emoji": "📝",
+      "emoji": "🚲",
       "besonderheiten": []
     },
     "userdaten": {
@@ -4308,10 +4434,10 @@
     "stammdaten": {
       "wort": "Samstag",
       "beispielsatz": "Am Samstag hat Momo endlich schulfrei und kann lange ausschlafen.",
-      "artikel": "",
-      "wortart": "",
-      "plural": "",
-      "emoji": "📝",
+      "artikel": "der",
+      "wortart": "Substantiv",
+      "plural": "Samstage",
+      "emoji": "😴",
       "besonderheiten": []
     },
     "userdaten": {
@@ -4326,10 +4452,10 @@
     "stammdaten": {
       "wort": "Sonntag",
       "beispielsatz": "Am Sonntag frühstückt die ganze Familie gemütlich zusammen.",
-      "artikel": "",
-      "wortart": "",
-      "plural": "",
-      "emoji": "📝",
+      "artikel": "der",
+      "wortart": "Substantiv",
+      "plural": "Sonntage",
+      "emoji": "🥐",
       "besonderheiten": []
     },
     "userdaten": {
@@ -4344,10 +4470,10 @@
     "stammdaten": {
       "wort": "Montag",
       "beispielsatz": "Am Montag beginnt wieder eine neue spannende Woche in der Schule.",
-      "artikel": "",
-      "wortart": "",
-      "plural": "",
-      "emoji": "📝",
+      "artikel": "der",
+      "wortart": "Substantiv",
+      "plural": "Montage",
+      "emoji": "🎒",
       "besonderheiten": []
     },
     "userdaten": {
@@ -4362,10 +4488,10 @@
     "stammdaten": {
       "wort": "Dienstag",
       "beispielsatz": "Am Dienstag hat Momo am Nachmittag sein Fußballtraining.",
-      "artikel": "",
-      "wortart": "",
-      "plural": "",
-      "emoji": "📝",
+      "artikel": "der",
+      "wortart": "Substantiv",
+      "plural": "Dienstage",
+      "emoji": "⚽",
       "besonderheiten": []
     },
     "userdaten": {
@@ -4380,10 +4506,10 @@
     "stammdaten": {
       "wort": "Mittwoch",
       "beispielsatz": "Am Mittwoch ist die Schulwoche schon zur Hälfte geschafft.",
-      "artikel": "",
-      "wortart": "",
-      "plural": "",
-      "emoji": "📝",
+      "artikel": "der",
+      "wortart": "Substantiv",
+      "plural": "Mittwoche",
+      "emoji": "🗓️",
       "besonderheiten": []
     },
     "userdaten": {
@@ -4398,10 +4524,10 @@
     "stammdaten": {
       "wort": "Donnerstag",
       "beispielsatz": "Am Donnerstag gehen wir nach der Schule gemeinsam in die Bücherei.",
-      "artikel": "",
-      "wortart": "",
-      "plural": "",
-      "emoji": "📝",
+      "artikel": "der",
+      "wortart": "Substantiv",
+      "plural": "Donnerstage",
+      "emoji": "📚",
       "besonderheiten": []
     },
     "userdaten": {
@@ -4416,10 +4542,10 @@
     "stammdaten": {
       "wort": "Freitag",
       "beispielsatz": "Am Freitag freuen sich alle Kinder schon auf das Wochenende.",
-      "artikel": "",
-      "wortart": "",
-      "plural": "",
-      "emoji": "📝",
+      "artikel": "der",
+      "wortart": "Substantiv",
+      "plural": "Freitage",
+      "emoji": "🎉",
       "besonderheiten": []
     },
     "userdaten": {
@@ -4434,10 +4560,10 @@
     "stammdaten": {
       "wort": "die Mutter",
       "beispielsatz": "Die Mutter liest Momo abends noch eine spannende Geschichte vor.",
-      "artikel": "",
-      "wortart": "",
-      "plural": "",
-      "emoji": "📝",
+      "artikel": "die",
+      "wortart": "Substantiv",
+      "plural": "Mütter",
+      "emoji": "👩‍👦",
       "besonderheiten": []
     },
     "userdaten": {
@@ -4452,10 +4578,10 @@
     "stammdaten": {
       "wort": "das Muster",
       "beispielsatz": "Auf dem bunten Teppich ist ein lustiges Muster aus Sternen zu sehen.",
-      "artikel": "",
-      "wortart": "",
-      "plural": "",
-      "emoji": "📝",
+      "artikel": "das",
+      "wortart": "Substantiv",
+      "plural": "Muster",
+      "emoji": "⭐",
       "besonderheiten": []
     },
     "userdaten": {
@@ -4471,9 +4597,9 @@
       "wort": "häkeln",
       "beispielsatz": "Oma kann mit ihrer Nadel wunderschöne kleine Tiere häkeln.",
       "artikel": "",
-      "wortart": "",
+      "wortart": "Verb",
       "plural": "",
-      "emoji": "📝",
+      "emoji": "🧶",
       "besonderheiten": []
     },
     "userdaten": {
@@ -4488,10 +4614,10 @@
     "stammdaten": {
       "wort": "Wolle",
       "beispielsatz": "Aus weicher bunter Wolle entsteht im Winter ein warmer Schal.",
-      "artikel": "",
-      "wortart": "",
-      "plural": "",
-      "emoji": "📝",
+      "artikel": "die",
+      "wortart": "Substantiv",
+      "plural": "Wollen",
+      "emoji": "🧶",
       "besonderheiten": []
     },
     "userdaten": {
@@ -4506,10 +4632,10 @@
     "stammdaten": {
       "wort": "Babydecke",
       "beispielsatz": "Für das kleine Geschwisterchen liegt eine kuschelige Babydecke bereit.",
-      "artikel": "",
-      "wortart": "",
-      "plural": "",
-      "emoji": "📝",
+      "artikel": "die",
+      "wortart": "Substantiv",
+      "plural": "Babydecken",
+      "emoji": "👶",
       "besonderheiten": []
     },
     "userdaten": {
@@ -4524,10 +4650,10 @@
     "stammdaten": {
       "wort": "das Kind",
       "beispielsatz": "Jedes Kind in der Klasse darf heute sein Lieblingsbuch vorstellen.",
-      "artikel": "",
-      "wortart": "",
-      "plural": "",
-      "emoji": "📝",
+      "artikel": "das",
+      "wortart": "Substantiv",
+      "plural": "Kinder",
+      "emoji": "🧒",
       "besonderheiten": []
     },
     "userdaten": {
@@ -4542,10 +4668,10 @@
     "stammdaten": {
       "wort": "die Kürbisse",
       "beispielsatz": "Im Herbst leuchten die großen orangen Kürbisse auf dem Feld.",
-      "artikel": "",
-      "wortart": "",
-      "plural": "",
-      "emoji": "📝",
+      "artikel": "die",
+      "wortart": "Substantiv",
+      "plural": "Kürbisse",
+      "emoji": "🎃",
       "besonderheiten": []
     },
     "userdaten": {
@@ -4561,9 +4687,9 @@
       "wort": "zusammen",
       "beispielsatz": "Zusammen macht das Spielen auf dem Pausenhof doppelt so viel Spaß.",
       "artikel": "",
-      "wortart": "",
+      "wortart": "Adverb",
       "plural": "",
-      "emoji": "📝",
+      "emoji": "🤝",
       "besonderheiten": []
     },
     "userdaten": {
@@ -4579,9 +4705,9 @@
       "wort": "insgesamt",
       "beispielsatz": "Insgesamt liegen zwölf bunte Murmeln in Momos kleinem Beutel.",
       "artikel": "",
-      "wortart": "",
+      "wortart": "Adverb",
       "plural": "",
-      "emoji": "📝",
+      "emoji": "🔢",
       "besonderheiten": []
     },
     "userdaten": {
@@ -4597,9 +4723,9 @@
       "wort": "hundert",
       "beispielsatz": "Im großen Glas sind mindestens hundert kleine Glasperlen.",
       "artikel": "",
-      "wortart": "",
+      "wortart": "Zahlwort",
       "plural": "",
-      "emoji": "🐕",
+      "emoji": "💯",
       "besonderheiten": []
     },
     "userdaten": {
@@ -4615,9 +4741,9 @@
       "wort": "tausend",
       "beispielsatz": "Am klaren Nachthimmel funkeln tausend helle Sterne.",
       "artikel": "",
-      "wortart": "",
+      "wortart": "Zahlwort",
       "plural": "",
-      "emoji": "📝",
+      "emoji": "🌌",
       "besonderheiten": []
     },
     "userdaten": {
@@ -4633,7 +4759,7 @@
       "wort": "elf",
       "beispielsatz": "Beim Fußball spielen immer elf Spieler in einer Mannschaft.",
       "artikel": "",
-      "wortart": "",
+      "wortart": "Zahlwort",
       "plural": "",
       "emoji": "1️⃣1️⃣",
       "besonderheiten": []
@@ -4651,9 +4777,9 @@
       "wort": "zwölf",
       "beispielsatz": "Ein Jahr hat genau zwölf Monate von Januar bis Dezember.",
       "artikel": "",
-      "wortart": "",
+      "wortart": "Zahlwort",
       "plural": "",
-      "emoji": "📝",
+      "emoji": "📅",
       "besonderheiten": []
     },
     "userdaten": {
@@ -4667,11 +4793,11 @@
     "id": 1795460495035,
     "stammdaten": {
       "wort": "Zwilling",
-      "beispielsatz": "Mein Bruder und ich sehen uns zum Verwechseln ähnlich, weil wir Zwillinge sind.",
-      "artikel": "",
-      "wortart": "",
-      "plural": "",
-      "emoji": "📝",
+      "beispielsatz": "Mein Bruder sieht genauso aus wie ich, denn er ist mein Zwilling.",
+      "artikel": "der",
+      "wortart": "Substantiv",
+      "plural": "Zwillinge",
+      "emoji": "👯",
       "besonderheiten": []
     },
     "userdaten": {
@@ -4686,10 +4812,10 @@
     "stammdaten": {
       "wort": "Menge",
       "beispielsatz": "Auf dem Herbstmarkt gibt es eine ganze Menge leckerer Äpfel.",
-      "artikel": "",
-      "wortart": "",
-      "plural": "",
-      "emoji": "📝",
+      "artikel": "die",
+      "wortart": "Substantiv",
+      "plural": "Mengen",
+      "emoji": "🍎",
       "besonderheiten": []
     },
     "userdaten": {
