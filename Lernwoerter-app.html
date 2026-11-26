@@ -124,7 +124,9 @@
  .action-button.wrong.image-action { border-color: #fecaca; background: linear-gradient(180deg,#fff,#fff1f2); color: #9f1239; }
  .action-button.wrong.image-action:hover { background: #ffe4e6; }
  .action-button.correct.image-action { border-color: #a7f3d0; background: linear-gradient(180deg,#fff,#ecfdf5); color: #065f46; }
- .celebration-overlay { position: fixed; inset: 0; z-index: 1200; display: grid; place-items: center; padding: 20px; overflow: hidden; background: rgba(224,231,255,.58); backdrop-filter: blur(3px); pointer-events: none; }
+ .celebration-overlay { position: fixed; inset: 0; z-index: 1200; display: grid; place-items: center; padding: 20px; overflow: hidden; background: rgba(224,231,255,.58); backdrop-filter: blur(3px); }
+ .celebration-actions { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-top: 18px; }
+ .celebration-actions .btn { min-width: 150px; }
  .celebration-overlay[hidden] { display: none; }
  .celebration-confetti { position: absolute; inset: 0; overflow: hidden; }
  .celebration-confetti-piece { position: absolute; top: -18px; width: 10px; height: 15px; border-radius: 2px; opacity: 0; animation: confetti-fall 3.8s ease-in forwards; }
@@ -381,13 +383,17 @@
    </section>
 
    <div id="stats" class="stats"></div>
-   <div id="daily-goal-celebration" class="celebration-overlay" role="status" aria-live="polite" hidden>
+   <div id="daily-goal-celebration" class="celebration-overlay" role="dialog" aria-modal="true" aria-labelledby="celebration-title" hidden>
     <div id="celebration-confetti" class="celebration-confetti" aria-hidden="true"></div>
     <div class="celebration-message">
      <div class="celebration-balloons" aria-hidden="true"><span>🎈</span><span>🎈</span><span>🎈</span></div>
-     <h2>Geschafft!</h2>
-     <p>Herzlichen Glückwunsch, du hast deine tägliche Lerneinheit absolviert</p>
+     <h2 id="celebration-title">Geschafft!</h2>
+     <p id="celebration-text">Herzlichen Glückwunsch, du hast deine tägliche Lerneinheit absolviert</p>
      <div class="celebration-sparkles" aria-hidden="true">🎉 ⭐ 🎉</div>
+     <div class="celebration-actions">
+      <button class="btn btn-secondary" type="button" id="celebration-finish-btn" onclick="UIController.finishForToday()">Für heute fertig</button>
+      <button class="btn btn-success" type="button" id="celebration-continue-btn" onclick="UIController.continueLearning()">Weiterlernen</button>
+     </div>
     </div>
    </div>
    <aside class="storage-note">
@@ -1340,12 +1346,46 @@ const UIController = (() => {
       piece.style.animationDuration = `${3 + Math.random() * 1.2}s`;
       confetti.appendChild(piece);
     }
+    // Meldung auf den Ausgangszustand setzen (falls vorher "Für heute fertig" gewählt wurde)
+    document.getElementById('celebration-title').textContent = 'Geschafft!';
+    document.getElementById('celebration-text').textContent = 'Herzlichen Glückwunsch, du hast deine tägliche Lerneinheit absolviert';
+    document.getElementById('celebration-finish-btn').hidden = false;
+    const continueButton = document.getElementById('celebration-continue-btn');
+    continueButton.textContent = 'Weiterlernen';
+
+    // Nichts im Hintergrund vorlesen, solange die Meldung offen ist
+    clearTimeout(speakTimeout);
+    speakTimeout = null;
+    if ('speechSynthesis' in window) window.speechSynthesis.cancel();
+
     celebration.hidden = false;
+    continueButton.focus();
+    // Die Meldung bleibt offen, bis das Kind sich entscheidet; nur das Konfetti verschwindet
     clearTimeout(celebrationTimeout);
-    celebrationTimeout = setTimeout(() => {
-      celebration.hidden = true;
-      confetti.replaceChildren();
-    }, 5000);
+    celebrationTimeout = setTimeout(() => confetti.replaceChildren(), 5000);
+  }
+
+  // "Weiterlernen": Meldung schließen und das aktuelle Wort (mit Beispielsatz) vorlesen
+  function continueLearning() {
+    clearTimeout(celebrationTimeout);
+    document.getElementById('daily-goal-celebration').hidden = true;
+    document.getElementById('celebration-confetti').replaceChildren();
+    const learnTabVisible = document.getElementById('learn-tab').style.display !== 'none';
+    if (learnTabVisible && state.currentWordIndex !== -1) {
+      if (state.learningMode === 'digital') document.getElementById('user-input').focus();
+      speakTimeout = setTimeout(speakCurrentWordWithSentence, 300);
+    }
+  }
+
+  // "Für heute fertig": Abschiedsmeldung zeigen; über "Doch weiterlernen" geht es jederzeit weiter
+  function finishForToday() {
+    if ('speechSynthesis' in window) window.speechSynthesis.cancel();
+    document.getElementById('celebration-title').textContent = 'Bis morgen! 👋';
+    document.getElementById('celebration-text').textContent = 'Super gemacht! Du kannst die App jetzt schließen.';
+    document.getElementById('celebration-finish-btn').hidden = true;
+    const continueButton = document.getElementById('celebration-continue-btn');
+    continueButton.textContent = 'Doch weiterlernen';
+    continueButton.focus();
   }
 
   function toggleNavigationMenu() {
@@ -1957,10 +1997,6 @@ function revealWord() {
       if (state.learningMode === 'paper') {
         isCorrect ? AudioModule.playSuccess() : AudioModule.playError();
       }
-      if (dailyProgress.completedNow) {
-        AudioModule.playDailyGoalSuccess();
-        showDailyGoalCelebration();
-      }
       const inIntensiveFilter = state.selectedBoxFilter === 'intensiv';
       const skipPromotion = (inIntensiveFilter || state.helpUsed);
       const answeredWord = state.words[state.currentWordIndex];
@@ -1970,7 +2006,12 @@ function revealWord() {
       }
       LeitnerModule.evaluateAnswer(answeredWord, isCorrect, state.words, skipPromotion, inIntensiveFilter);
       await saveAndRefresh();
-      nextWord();
+      // Tagesziel erreicht: nächste Karte still vorbereiten, Erfolgsmeldung zeigen und auf die Entscheidung warten
+      nextWord(!dailyProgress.completedNow);
+      if (dailyProgress.completedNow) {
+        AudioModule.playDailyGoalSuccess();
+        showDailyGoalCelebration();
+      }
     } finally {
       state.answerInProgress = false;
     }
@@ -2559,6 +2600,8 @@ async function importWords(event) {
     toggleNavigationMenu,
     closeNavigationMenu,
     toggleCurrentWordIntensiv,
+    continueLearning,
+    finishForToday,
     toggleSound,
     answer,
     addWord,
