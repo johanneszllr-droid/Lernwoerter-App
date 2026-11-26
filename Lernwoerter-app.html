@@ -4,8 +4,8 @@
  <meta charset="UTF-8">
  <meta name="viewport" content="width=device-width, initial-scale=1.0">
  <title>Lernwörter-App</title>
- <!-- Manuelle Versionsnummer, wird unter „Daten & Info“ angezeigt. -->
- <meta name="app-version" content="1.3.0">
+ <!-- Manuelle Versionsnummer, wird unter „Settings“ angezeigt. -->
+ <meta name="app-version" content="1.4.6">
  <meta name="theme-color" content="#f8fafc">
  <link rel="icon" type="image/png" href="./Momo_Maus.png">
  <link rel="apple-touch-icon" href="./Momo_Maus.png">
@@ -49,10 +49,6 @@
  .drawer-title { color: #1e293b; font-size: 15px; font-weight: 800; }
  .drawer-close { width: 38px; height: 38px; display: grid; place-items: center; border: 0; border-radius: 50%; background: transparent; color: #64748b; font-size: 22px; cursor: pointer; }
  .drawer-close:hover { background: #f1f5f9; color: #334155; }
- .main-nav .audio-toggle { width: 100%; justify-content: space-between; margin-top: 4px; padding: 10px 12px; border-radius: 13px; background: transparent; font-size: 14px; text-align: left; }
- .main-nav .audio-toggle:hover { background: #f8fafc; }
- .main-nav .audio-toggle:focus-visible { outline: 3px solid #a5b4fc; outline-offset: 2px; }
- .sound-control-label { display: flex; align-items: center; gap: 10px; }
  .sound-switch-indicator { position: relative; flex: 0 0 auto; width: 38px; height: 22px; border-radius: 999px; background: #cbd5e1; transition: background .18s ease; }
  .sound-switch-indicator::after { position: absolute; top: 3px; left: 3px; width: 16px; height: 16px; border-radius: 50%; background: white; box-shadow: 0 1px 3px rgba(15,23,42,.2); content: ""; transition: transform .18s ease; }
  .audio-toggle[aria-pressed="true"] .sound-switch-indicator { background: #4f46e5; }
@@ -92,7 +88,6 @@
  .word-display.digital-result.richtig { color: #059669; }
  .example-sentence { width: 100%; padding: 12px 15px; border: 1px solid #c7d2fe; border-radius: 15px; background: #eef2ff; color: #334155; text-align: left; }
  .example-sentence[hidden] { display: none; }
- .example-sentence-label { display: block; margin-bottom: 4px; color: #4f46e5; font-size: 11px; font-weight: 800; letter-spacing: .04em; text-transform: uppercase; }
  .example-sentence-text { margin: 0; font-size: 15px; line-height: 1.5; }
  .fehler { color: #ea580c; border-bottom: 4px solid #fb923c; }
  #digital-input-area { width: 100%; margin: 0 !important; }
@@ -119,6 +114,22 @@
  .action-button.wrong.image-action { border-color: #fecaca; background: linear-gradient(180deg,#fff,#fff1f2); color: #9f1239; }
  .action-button.wrong.image-action:hover { background: #ffe4e6; }
  .action-button.correct.image-action { border-color: #a7f3d0; background: linear-gradient(180deg,#fff,#ecfdf5); color: #065f46; }
+ .celebration-overlay { position: fixed; inset: 0; z-index: 1200; display: grid; place-items: center; padding: 20px; overflow: hidden; background: rgba(224,231,255,.58); backdrop-filter: blur(3px); pointer-events: none; }
+ .celebration-overlay[hidden] { display: none; }
+ .celebration-confetti { position: absolute; inset: 0; overflow: hidden; }
+ .celebration-confetti-piece { position: absolute; top: -18px; width: 10px; height: 15px; border-radius: 2px; opacity: 0; animation: confetti-fall 3.8s ease-in forwards; }
+ .celebration-message { position: relative; z-index: 1; width: min(460px,100%); padding: 24px; border: 2px solid #fbbf24; border-radius: 26px; background: #fff; box-shadow: 0 18px 55px rgba(79,70,229,.24); color: #334155; text-align: center; animation: celebration-pop .5s cubic-bezier(.2,1.4,.4,1) both; }
+ .celebration-message h2 { margin: 4px 0 8px; color: #4f46e5; font-size: clamp(26px,7vw,36px); }
+ .celebration-message p { margin: 0; font-size: 17px; font-weight: 700; line-height: 1.5; }
+ .celebration-balloons { display: flex; justify-content: center; gap: 18px; margin-bottom: 4px; font-size: 46px; }
+ .celebration-balloons span { display: inline-block; animation: balloon-float 1.4s ease-in-out infinite alternate; }
+ .celebration-balloons span:nth-child(2) { animation-delay: .25s; }
+ .celebration-balloons span:nth-child(3) { animation-delay: .5s; }
+ .celebration-sparkles { margin-top: 12px; font-size: 28px; letter-spacing: 8px; }
+ @keyframes confetti-fall { 0% { transform: translateY(0) rotate(0); opacity: 1; } 100% { transform: translateY(110vh) rotate(720deg); opacity: 0; } }
+ @keyframes balloon-float { from { transform: translateY(4px) rotate(-5deg); } to { transform: translateY(-9px) rotate(5deg); } }
+ @keyframes celebration-pop { from { transform: scale(.65); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+ @media (prefers-reduced-motion: reduce) { .celebration-message, .celebration-balloons span, .celebration-confetti-piece { animation: none; opacity: 1; } }
  .action-button.correct.image-action:hover { background: #d1fae5; }
  .eval-grid { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 10px; }
  .eval-grid.paper-mode { display: flex; flex: 1; width: 100%; justify-content: space-between; gap: 14px; }
@@ -171,7 +182,7 @@
  .word-list-details .word-list-input { width: 100%; flex: none; padding: 2px 4px; line-height: 1.2; text-overflow: ellipsis; }
  .word-list-box { padding-left: 4px; color: #64748b; font-size: 10px; line-height: 1.2; white-space: nowrap; }
  .word-list-actions { display: flex; flex: 0 0 auto; align-items: center; justify-content: flex-end; gap: 6px; flex-wrap: wrap; max-width: 340px; }
- .word-list-actions .btn { min-width: 38px; min-height: 38px; padding: 7px 9px; border-radius: 10px; font-size: 12px; white-space: nowrap; }
+ .word-list-actions .btn { min-width: 44px; min-height: 44px; padding: 9px 12px; border-radius: 11px; font-size: 14px; white-space: nowrap; }
  .word-list-actions .word-list-intensiv-button { margin-right: 14px; }
  .word-list-input { width: auto; min-width: 0; flex: 1; padding: 6px; border: 1px solid transparent; border-radius: 8px; background: transparent; color: #1e293b; font-size: 16px; font-weight: 700; text-align: left; outline: none; }
  .word-list-input:not([readonly]) { border-color: #a5b4fc; background: #f8fafc; }
@@ -191,6 +202,15 @@
  .data-warning p { margin: 0; font-size: 12px; line-height: 1.6; }
  .data-grid { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 14px; }
  .data-card { display: flex; flex-direction: column; justify-content: space-between; gap: 16px; padding: 20px; border: 1px solid #e2e8f0; border-radius: 24px; background: white; box-shadow: 0 4px 20px -2px rgba(15,23,42,.05); }
+ .settings-card { margin-bottom: 14px; }
+ .settings-controls { display: grid; width: 100%; gap: 0; }
+ .setting-row { display: grid; grid-template-columns: minmax(0,1fr) minmax(120px,220px); align-items: center; gap: 12px; width: 100%; }
+ .setting-copy { display: flex; grid-column: 1; flex-direction: column; gap: 4px; }
+ .setting-label { color: #334155; font-size: 14px; font-weight: 800; }
+ .setting-description { margin: 0; color: #64748b; font-size: 12px; line-height: 1.45; }
+ .setting-row + .setting-row { padding-top: 14px; border-top: 1px solid #e2e8f0; }
+ .settings-sound-toggle, .setting-number-input { grid-column: 2; justify-self: end; }
+ .setting-number-input { width: 100%; min-height: 44px; padding: 9px 12px; border: 1px solid #cbd5e1; border-radius: 12px; background: #f8fafc; color: #1e293b; font-size: 16px; font-weight: 700; text-align: right; }
  .data-card-actions { display: flex; flex-wrap: wrap; gap: 8px; }
  .data-card-actions > * { width: 100%; }
  .data-card-icon { width: 42px; height: 42px; display: grid; place-items: center; margin-bottom: 10px; border-radius: 14px; background: #eef2ff; color: #4f46e5; font-size: 20px; }
@@ -246,7 +266,7 @@
   .storage-order-actions .btn { min-width: 34px; min-height: 32px; padding: 4px 7px; }
   .word-list-emoji { flex-basis: 32px; width: 32px; font-size: 1.1rem; }
   .word-list-actions { gap: 3px; }
-  .word-list-actions .btn { min-height: 36px; padding: 7px 8px; font-size: 11px; }
+  .word-list-actions .btn { min-height: 44px; padding: 8px 10px; font-size: 12px; }
   .word-list-actions .word-list-intensiv-button { margin-right: 14px; }
   .word-group-actions { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .word-details-grid { grid-template-columns: 1fr; }
@@ -288,11 +308,7 @@
    <button class="nav-tab active" id="nav-learn" data-tab="learn" aria-current="page" onclick="showTab('learn')">🎯 <span>Lernen</span></button>
    <button class="nav-tab" id="nav-manage" data-tab="manage" onclick="showTab('manage')">📖 <span>Wörterbuch</span></button>
    <button class="nav-tab" id="nav-storage" data-tab="storage" onclick="showTab('storage')">📦 <span>Wörterspeicher</span></button>
-   <button class="nav-tab" id="nav-data" data-tab="data" onclick="showTab('data')">⚙️ <span>Daten &amp; Info</span></button>
-   <button class="audio-toggle" data-sound-button aria-pressed="true" title="Soundeffekte umschalten" onclick="UIController.toggleSound()">
-    <span class="sound-control-label"><span data-sound-icon aria-hidden="true">🔊</span><span data-sound-label>Ton an</span></span>
-    <span class="sound-switch-indicator" aria-hidden="true"></span>
-   </button>
+   <button class="nav-tab" id="nav-data" data-tab="data" onclick="showTab('data')">⚙️ <span>Settings</span></button>
   </nav>
   <button class="menu-backdrop" id="menu-backdrop" type="button" aria-label="Navigation schließen" onclick="UIController.closeNavigationMenu()" hidden></button>
   <main id="learn-tab" class="app-view">
@@ -327,7 +343,6 @@
      <div class="learning-content">
       <div id="word-target" class="word-display" style="display: none;"></div>
       <div id="example-sentence" class="example-sentence" hidden>
-       <span class="example-sentence-label">Beispielsatz</span>
        <p id="example-sentence-text" class="example-sentence-text"></p>
       </div>
       <div id="digital-input-area" style="display: none;">
@@ -353,6 +368,15 @@
    </section>
 
    <div id="stats" class="stats"></div>
+   <div id="daily-goal-celebration" class="celebration-overlay" role="status" aria-live="polite" hidden>
+    <div id="celebration-confetti" class="celebration-confetti" aria-hidden="true"></div>
+    <div class="celebration-message">
+     <div class="celebration-balloons" aria-hidden="true"><span>🎈</span><span>🎈</span><span>🎈</span></div>
+     <h2>Geschafft!</h2>
+     <p>Herzlichen Glückwunsch, du hast deine tägliche Lerneinheit absolviert</p>
+     <div class="celebration-sparkles" aria-hidden="true">🎉 ⭐ 🎉</div>
+    </div>
+   </div>
    <aside class="storage-note">
     <p><strong>💾 Lernstand:</strong> <span id="storage-note-text">Deine Lernstände können beim Leeren des Browsercaches verloren gehen.</span></p>
     <button onclick="showTab('data')">Sichern</button>
@@ -409,6 +433,27 @@
     <div class="data-warning-icon">🛡️</div>
     <div><h2>Dein Lernstand ist wichtig</h2><p id="storage-description">Die App speichert deine Wörter und Lernfortschritte in dem aktuell verwendeten Speicher.</p></div>
    </div>
+   <article class="data-card settings-card">
+    <div><div class="data-card-icon">⚙️</div><h3>Settings</h3><p>Lege fest, wie du lernen möchtest.</p></div>
+    <div class="settings-controls">
+     <div class="setting-row">
+      <div class="setting-copy">
+       <span class="setting-label">Ton an/aus</span>
+       <span class="setting-description">Schaltet alle Audio-Rückmeldungen um.</span>
+      </div>
+      <button class="audio-toggle settings-sound-toggle" data-sound-button aria-label="Ton ausschalten" aria-pressed="true" title="Ton ausschalten" onclick="UIController.toggleSound()">
+       <span class="sound-switch-indicator" aria-hidden="true"></span>
+      </button>
+     </div>
+     <div class="setting-row">
+      <div class="setting-copy">
+       <label class="setting-label" for="daily-goal-input">Tägliche Lerneinheit (Karten)</label>
+       <p id="daily-goal-progress" class="setting-description" aria-live="polite"></p>
+      </div>
+      <input class="setting-number-input" id="daily-goal-input" type="number" min="1" step="1" value="5" onchange="UIController.setDailyGoal(this.value)">
+     </div>
+    </div>
+   </article>
    <div class="data-grid">
     <article class="data-card">
      <div><div class="data-card-icon">📤</div><h3>Backup erstellen</h3><p>Exportiert dein Wörterbuch mit Lernboxen und Intensiv-Markierungen als JSON-Datei.</p></div>
@@ -935,6 +980,19 @@ const LeitnerModule = (() => {
     return weightedPool[Math.floor(Math.random() * weightedPool.length)];
   }
 
+  function refillBoxOneFromStorage(wordList) {
+    const promotedWords = [];
+    let boxOneCount = wordList.filter(word => word.userdaten?.box === 1).length;
+    while (boxOneCount < MAX_BOX_ONE_WORDS) {
+      const waitingWord = wordList.find(word => word.userdaten?.box === 0);
+      if (!waitingWord) break;
+      waitingWord.userdaten.box = 1;
+      promotedWords.push(waitingWord);
+      boxOneCount++;
+    }
+    return promotedWords;
+  }
+
   // Aktualisiert Box und Zeitstempel eines Wort-Objekts nach einer Antwort
   function evaluateAnswer(wordObj, isCorrect, wordList, skipPromotion = false, preserveBox = false) {
     if (!wordObj.userdaten) {
@@ -947,13 +1005,7 @@ const LeitnerModule = (() => {
       if (skipPromotion || currentBox === 0) return false;
       wordObj.userdaten.box = currentBox === 5 ? 6 : Math.min(6, currentBox + 1);
       if (currentBox === 1) {
-        let boxOneCount = wordList.filter(word => word.userdaten?.box === 1).length;
-        while (boxOneCount < MAX_BOX_ONE_WORDS) {
-          const waitingWord = wordList.find(word => word.userdaten?.box === 0);
-          if (!waitingWord) break;
-          waitingWord.userdaten.box = 1;
-          boxOneCount++;
-        }
+        refillBoxOneFromStorage(wordList);
       }
     } else if (!preserveBox) {
       wordObj.userdaten.box = currentBox > 1 ? 1 : currentBox;
@@ -970,7 +1022,7 @@ const LeitnerModule = (() => {
     return { total: wordList.length, counts };
   }
 
-  return { isDue, pickNextIndex, evaluateAnswer, getBoxLabel, getStats, MAX_BOX_ONE_WORDS };
+  return { isDue, pickNextIndex, evaluateAnswer, refillBoxOneFromStorage, getBoxLabel, getStats, MAX_BOX_ONE_WORDS };
 })();
 
 // ============================================================================
@@ -980,8 +1032,18 @@ const LeitnerModule = (() => {
 // MODUL 6: AUDIO-FEEDBACK-MODUL (Web Audio API ohne externe Dateien)
 // ============================================================================
 const AudioModule = (() => {
+  const STORAGE_KEY = 'leitner_sound_enabled';
   let ctx = null;
-  let enabled = true;
+  let enabled = readEnabled();
+
+  function readEnabled() {
+    try {
+      return localStorage.getItem(STORAGE_KEY) !== 'false';
+    } catch (error) {
+      console.warn('Die Ton-Einstellung konnte nicht geladen werden:', error);
+      return true;
+    }
+  }
 
   function getContext() {
     if (!ctx) {
@@ -1023,6 +1085,17 @@ const AudioModule = (() => {
     playTone(783.99, 'sine', now + 0.16, 0.35, 0.09);
   }
 
+  function playDailyGoalSuccess() {
+    if (!enabled) return;
+    const audioCtx = getContext();
+    if (!audioCtx) return;
+    const now = audioCtx.currentTime;
+    playTone(523.25, 'sine', now, 0.18, 0.08);
+    playTone(659.25, 'sine', now + 0.12, 0.18, 0.08);
+    playTone(783.99, 'sine', now + 0.24, 0.18, 0.08);
+    playTone(1046.5, 'sine', now + 0.36, 0.4, 0.09);
+  }
+
   function playError() {
     if (!enabled) return;
     const audioCtx = getContext();
@@ -1033,11 +1106,98 @@ const AudioModule = (() => {
   }
 
   function toggle() {
-    enabled = !enabled;
-    return enabled;
+    const nextEnabled = !enabled;
+    try {
+      localStorage.setItem(STORAGE_KEY, String(nextEnabled));
+      enabled = nextEnabled;
+      return { enabled, saved: true };
+    } catch (error) {
+      console.warn('Die Ton-Einstellung konnte nicht gespeichert werden:', error);
+      return { enabled, saved: false };
+    }
   }
 
-  return { playSuccess, playError, toggle };
+  return { playSuccess, playDailyGoalSuccess, playError, toggle, isEnabled: () => enabled };
+})();
+
+const DailyLearningModule = (() => {
+  const STORAGE_KEY = 'leitner_daily_learning';
+  const DEFAULT_GOAL = 5;
+
+  function getLocalDate() {
+    const now = new Date();
+    const month = String(now.getMonth() + 1).padStart(2, '0');
+    const day = String(now.getDate()).padStart(2, '0');
+    return `${now.getFullYear()}-${month}-${day}`;
+  }
+
+  let goal = DEFAULT_GOAL;
+  let progress = { date: getLocalDate(), count: 0, celebrated: false };
+
+  function persist() {
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify({ goal, ...progress }));
+      return true;
+    } catch (error) {
+      console.warn('Der tägliche Lernfortschritt konnte nicht gespeichert werden:', error);
+      return false;
+    }
+  }
+
+  function load() {
+    try {
+      const saved = localStorage.getItem(STORAGE_KEY);
+      if (!saved) return;
+      const data = JSON.parse(saved);
+      if (!data || typeof data !== 'object') throw new Error('Ungültige Settings-Daten.');
+      if (Number.isSafeInteger(data.goal) && data.goal > 0) goal = data.goal;
+      if (typeof data.date === 'string' && Number.isSafeInteger(data.count) && data.count >= 0) {
+        progress = {
+          date: data.date,
+          count: data.count,
+          celebrated: typeof data.celebrated === 'boolean'
+            ? data.celebrated
+            : Number.isSafeInteger(data.celebratedGoal) && data.count >= data.celebratedGoal
+        };
+      }
+    } catch (error) {
+      console.warn('Die täglichen Lern-Settings konnten nicht geladen werden:', error);
+    }
+  }
+
+  function ensureToday() {
+    if (progress.date === getLocalDate()) return false;
+    progress = { date: getLocalDate(), count: 0, celebrated: false };
+    return true;
+  }
+
+  function getStatus() {
+    if (ensureToday()) persist();
+    return {
+      goal,
+      count: progress.count
+    };
+  }
+
+  function setGoal(value) {
+    if (!Number.isSafeInteger(value) || value < 1) return { valid: false, saved: false, completedNow: false };
+    ensureToday();
+    goal = value;
+    const completedNow = progress.count >= goal && !progress.celebrated;
+    if (completedNow) progress.celebrated = true;
+    return { valid: true, saved: persist(), completedNow };
+  }
+
+  function recordCard() {
+    ensureToday();
+    progress.count++;
+    const completedNow = progress.count >= goal && !progress.celebrated;
+    if (completedNow) progress.celebrated = true;
+    return { saved: persist(), completedNow };
+  }
+
+  load();
+  return { getStatus, setGoal, recordCard };
 })();
 
 const UIController = (() => {
@@ -1045,6 +1205,7 @@ const UIController = (() => {
   const state = {
     words: [],
     currentWordIndex: -1,
+    answerInProgress: false,
     selectedBoxFilter: 'all',
     learningMode: 'paper',
     pendingIsCorrect: false,
@@ -1056,7 +1217,9 @@ const UIController = (() => {
   const collapsedWordGroups = new Set();
   let serverMode = false;
   let peekTimeout;
+  let speakTimeout;
   let menuCloseTimer;
+  let celebrationTimeout;
 
   async function loadBuildInfo() {
     const versionElement = document.getElementById('app-version');
@@ -1100,6 +1263,7 @@ const UIController = (() => {
       ? 'Deine Wörter und Lernfortschritte werden auf dem Server gespeichert.'
       : 'Deine Wörter und Lernfortschritte werden lokal in diesem Browser gespeichert.';
 
+    updateSoundControls(AudioModule.isEnabled());
     updateStats();
     nextWord();
   }
@@ -1115,6 +1279,37 @@ const UIController = (() => {
     const statsText = `Gesamt: ${total} | Wörterspeicher: ${counts[0]} | B1: ${counts[1]} | B2: ${counts[2]} | B3: ${counts[3]} | B4: ${counts[4]} | B5: ${counts[5]} | Schatztruhe: ${counts[6]}`;
     document.getElementById('stats').innerText = statsText;
     document.getElementById('data-stats').innerText = `${statsText} | Intensiv: ${state.words.filter(w => w.userdaten?.intensiv).length}`;
+    updateDailyGoalUI();
+  }
+
+  function updateDailyGoalUI() {
+    const status = DailyLearningModule.getStatus();
+    const goalInput = document.getElementById('daily-goal-input');
+    if (goalInput && document.activeElement !== goalInput) goalInput.value = String(status.goal);
+    const progressText = document.getElementById('daily-goal-progress');
+    if (progressText) progressText.textContent = `Heute: ${status.count} von ${status.goal} beantworteten Karten`;
+  }
+
+  function showDailyGoalCelebration() {
+    const celebration = document.getElementById('daily-goal-celebration');
+    const confetti = document.getElementById('celebration-confetti');
+    const colors = ['#f43f5e', '#f59e0b', '#10b981', '#3b82f6', '#8b5cf6'];
+    confetti.replaceChildren();
+    for (let i = 0; i < 36; i++) {
+      const piece = document.createElement('span');
+      piece.className = 'celebration-confetti-piece';
+      piece.style.left = `${Math.random() * 100}%`;
+      piece.style.backgroundColor = colors[i % colors.length];
+      piece.style.animationDelay = `${Math.random() * 0.7}s`;
+      piece.style.animationDuration = `${3 + Math.random() * 1.2}s`;
+      confetti.appendChild(piece);
+    }
+    celebration.hidden = false;
+    clearTimeout(celebrationTimeout);
+    celebrationTimeout = setTimeout(() => {
+      celebration.hidden = true;
+      confetti.replaceChildren();
+    }, 5000);
   }
 
   function toggleNavigationMenu() {
@@ -1152,13 +1347,13 @@ const UIController = (() => {
     }, 280);
   }
 
-  function showTab(tab) {
+  async function showTab(tab) {
     closeNavigationMenu();
     const views = {
       learn: { id: 'learn-tab', title: 'Lernen' },
       manage: { id: 'manage-tab', title: 'Wörterbuch' },
       storage: { id: 'storage-tab', title: 'Wörterspeicher' },
-      data: { id: 'data-tab', title: 'Daten & Info' }
+      data: { id: 'data-tab', title: 'Settings' }
     };
     Object.entries(views).forEach(([name, view]) => {
       document.getElementById(view.id).style.display = name === tab ? 'flex' : 'none';
@@ -1172,19 +1367,49 @@ const UIController = (() => {
     });
     if (tab === 'manage') renderWordList();
     if (tab === 'storage') renderStorageWordList();
+    if (tab === 'data') updateDailyGoalUI();
+    if (tab === 'learn') {
+      const promotedWords = LeitnerModule.refillBoxOneFromStorage(state.words);
+      if (promotedWords.length > 0) {
+        if (!await saveAndRefresh()) {
+          promotedWords.forEach(word => { word.userdaten.box = 0; });
+          updateStats();
+          alert('Die Wörter konnten nicht aus dem Wörterspeicher nach Box 1 verschoben werden.');
+        } else if (state.currentWordIndex === -1) {
+          nextWord();
+        }
+      }
+    }
+  }
+
+  function updateSoundControls(enabled) {
+    document.querySelectorAll('[data-sound-button]').forEach(button => {
+      button.setAttribute('aria-pressed', String(enabled));
+      const label = enabled ? 'Ton ausschalten' : 'Ton einschalten';
+      button.setAttribute('aria-label', label);
+      button.title = label;
+    });
   }
 
   function toggleSound() {
-    const enabled = AudioModule.toggle();
-    document.querySelectorAll('[data-sound-button]').forEach(button => {
-      button.setAttribute('aria-pressed', String(enabled));
-    });
-    document.querySelectorAll('[data-sound-icon]').forEach(icon => {
-      icon.textContent = enabled ? '🔊' : '🔇';
-    });
-    document.querySelectorAll('[data-sound-label]').forEach(label => {
-      label.textContent = enabled ? 'Ton an' : 'Ton aus';
-    });
+    const result = AudioModule.toggle();
+    updateSoundControls(result.enabled);
+    if (!result.saved) alert('Die Ton-Einstellung konnte nicht gespeichert werden.');
+  }
+
+  function setDailyGoal(value) {
+    const result = DailyLearningModule.setGoal(Number(value));
+    if (!result.valid) {
+      alert('Bitte gib eine positive ganze Zahl als Tagesziel ein.');
+      updateDailyGoalUI();
+      return;
+    }
+    updateDailyGoalUI();
+    if (!result.saved) alert('Das Tagesziel konnte nicht gespeichert werden.');
+    if (result.completedNow) {
+      AudioModule.playDailyGoalSuccess();
+      showDailyGoalCelebration();
+    }
   }
 
   function setMode(mode) {
@@ -1258,10 +1483,7 @@ const UIController = (() => {
     if (!sentence || !wordText) return null;
 
     const lemma = wordText.replace(/^(der|die|das|ein|eine)\s+/i, '');
-    const article = String(word.stammdaten?.artikel || '').trim();
     const forms = [...new Set([
-      article && lemma ? `${article} ${lemma}` : '',
-      wordText,
       lemma,
       word.stammdaten?.plural
     ].map(form => String(form || '').trim()).filter(Boolean))]
@@ -1296,10 +1518,12 @@ const UIController = (() => {
       'Dieser Satz wird ausgeblendet, weil das Lernwort darin nicht sicher erkannt wurde.';
   }
 
-  function nextWord() {
+  function nextWord(autoSpeak = true) {
     state.helpUsed = false;
     clearTimeout(peekTimeout);
     peekTimeout = null;
+    clearTimeout(speakTimeout);
+    speakTimeout = null;
     updateExampleSentence(null);
 
     const cardEl = document.getElementById('learning-card');
@@ -1394,7 +1618,7 @@ const UIController = (() => {
       inputField.focus();
     }
 
-    setTimeout(speakCurrentWord, 300);
+    if (autoSpeak) speakTimeout = setTimeout(speakCurrentWord, 300);
   }
 
 function peekWord() {
@@ -1551,20 +1775,32 @@ function revealWord() {
   }
 
   async function answer(isCorrect) {
-    if (state.currentWordIndex === -1) return;
-    if (state.learningMode === 'paper') {
-      isCorrect ? AudioModule.playSuccess() : AudioModule.playError();
+    if (state.currentWordIndex === -1 || state.answerInProgress) return;
+    state.answerInProgress = true;
+    try {
+      const dailyProgress = DailyLearningModule.recordCard();
+      updateDailyGoalUI();
+      if (!dailyProgress.saved) alert('Der tägliche Lernfortschritt konnte nicht gespeichert werden.');
+      if (state.learningMode === 'paper') {
+        isCorrect ? AudioModule.playSuccess() : AudioModule.playError();
+      }
+      if (dailyProgress.completedNow) {
+        AudioModule.playDailyGoalSuccess();
+        showDailyGoalCelebration();
+      }
+      const inIntensiveFilter = state.selectedBoxFilter === 'intensiv';
+      const skipPromotion = (inIntensiveFilter || state.helpUsed);
+      const answeredWord = state.words[state.currentWordIndex];
+      if (inIntensiveFilter) {
+        state.intensiveRoundReviewedIds.add(answeredWord.id);
+        state.lastIntensiveWordId = answeredWord.id;
+      }
+      LeitnerModule.evaluateAnswer(answeredWord, isCorrect, state.words, skipPromotion, inIntensiveFilter);
+      await saveAndRefresh();
+      nextWord();
+    } finally {
+      state.answerInProgress = false;
     }
-    const inIntensiveFilter = state.selectedBoxFilter === 'intensiv';
-    const skipPromotion = (inIntensiveFilter || state.helpUsed);
-    const answeredWord = state.words[state.currentWordIndex];
-    if (inIntensiveFilter) {
-      state.intensiveRoundReviewedIds.add(answeredWord.id);
-      state.lastIntensiveWordId = answeredWord.id;
-    }
-    LeitnerModule.evaluateAnswer(answeredWord, isCorrect, state.words, skipPromotion, inIntensiveFilter);
-    await saveAndRefresh();
-    nextWord();
   }
 
   async function addWord() {
@@ -1593,10 +1829,14 @@ function revealWord() {
   }
 
   async function deleteWord(id) {
+    const word = state.words.find(w => w.id === id);
+    if (!word) return;
+    if (!confirm(`Möchtest du das Wort „${word.stammdaten.wort}“ wirklich löschen?`)) return;
+
     state.words = state.words.filter(w => w.id !== id);
     await saveAndRefresh();
     renderWordList();
-    nextWord();
+    nextWord(false);
   }
 
   async function toggleEdit(id) {
@@ -1604,6 +1844,8 @@ function revealWord() {
     const emojiInput = document.getElementById(`edit-emoji-${id}`);
     const btn = document.getElementById(`edit-btn-${id}`);
     const moreBtn = document.getElementById(`more-btn-${id}`);
+    const intensivBtn = document.getElementById(`intensiv-btn-${id}`);
+    const deleteBtn = document.getElementById(`delete-btn-${id}`);
     const detailFields = document.querySelectorAll(`#word-details-${id} input, #word-details-${id} textarea`);
 
     if (input.hasAttribute('readonly')) {
@@ -1611,6 +1853,14 @@ function revealWord() {
       emojiInput.removeAttribute('readonly');
       detailFields.forEach(field => { field.disabled = false; });
       moreBtn.hidden = false;
+      intensivBtn.hidden = true;
+      deleteBtn.hidden = true;
+      const currentEntry = input.closest('.word-list-entry');
+      document.querySelectorAll('#word-list .word-list-entry').forEach(entry => {
+        if (entry !== currentEntry) {
+          entry.querySelectorAll('button').forEach(otherButton => { otherButton.disabled = true; });
+        }
+      });
       input.focus();
       input.setSelectionRange(input.value.length, input.value.length);
       btn.textContent = 'Speichern';
@@ -1838,7 +2088,7 @@ async function importWords(event) {
       closeImportModal();
       await saveAndRefresh();
       renderWordList();
-      nextWord();
+      nextWord(false);
     } catch (err) {
       alert('Fehler beim Importieren der JSON-Datei: ' + err.message);
     }
@@ -2073,12 +2323,12 @@ async function importWords(event) {
            <span class="word-list-box">${escapeHtml(boxLabel)}</span>
           </div>
           <div class="word-list-actions">
-           <button class="btn word-list-intensiv-button ${word.userdaten?.intensiv ? 'btn-warning' : 'btn-secondary'}" type="button" aria-pressed="${word.userdaten?.intensiv === true}" title="${word.userdaten?.intensiv ? 'Intensivmodus ausschalten' : 'Intensivmodus einschalten'}" aria-label="${word.userdaten?.intensiv ? 'Intensivmodus ausschalten' : 'Intensivmodus einschalten'}" onclick="UIController.toggleIntensiv(${word.id})">🔥</button>
+           <button class="btn word-list-intensiv-button ${word.userdaten?.intensiv ? 'btn-warning' : 'btn-secondary'}" type="button" id="intensiv-btn-${word.id}" aria-pressed="${word.userdaten?.intensiv === true}" title="${word.userdaten?.intensiv ? 'Intensivmodus ausschalten' : 'Intensivmodus einschalten'}" aria-label="${word.userdaten?.intensiv ? 'Intensivmodus ausschalten' : 'Intensivmodus einschalten'}" onclick="UIController.toggleIntensiv(${word.id})">🔥</button>
            ${boxNum === 1 ? `<button class="btn btn-secondary" type="button" id="dictionary-storage-${word.id}" title="In den Wörterspeicher verschieben" aria-label="„${wordText}“ in den Wörterspeicher verschieben" onclick="UIController.moveWordToStorage(${word.id})">📦→0</button>` : ''}
            ${boxNum === 0 ? `<button class="btn btn-secondary" type="button" id="dictionary-storage-top-${word.id}" title="An die Spitze des Wörterspeichers verschieben" aria-label="„${wordText}“ an die Spitze des Wörterspeichers verschieben" onclick="UIController.moveWordToStorageTop(${word.id})" ${storageIndex === 0 ? 'disabled' : ''}>↑1</button>` : ''}
            <button class="btn btn-warning" type="button" id="edit-btn-${word.id}" onclick="UIController.toggleEdit(${word.id})">Edit</button>
            <button class="btn btn-secondary" type="button" id="more-btn-${word.id}" aria-expanded="false" aria-controls="word-details-${word.id}" hidden onclick="UIController.toggleWordDetails(${word.id})">＋ Mehr</button>
-           <button class="btn btn-danger" type="button" onclick="UIController.deleteWord(${word.id})">Löschen</button>
+           <button class="btn btn-danger" type="button" id="delete-btn-${word.id}" onclick="UIController.deleteWord(${word.id})">Löschen</button>
           </div>
          </div>
          <div class="word-details-editor" id="word-details-${word.id}" hidden>
@@ -2123,6 +2373,7 @@ async function importWords(event) {
     showTab,
     setMode,
     toggleBoxFilter,
+    setDailyGoal,
     speakCurrentWord,
     peekWord,
     revealWord,
