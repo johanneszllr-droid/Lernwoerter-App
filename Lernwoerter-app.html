@@ -49,10 +49,6 @@
  .drawer-title { color: #1e293b; font-size: 15px; font-weight: 800; }
  .drawer-close { width: 38px; height: 38px; display: grid; place-items: center; border: 0; border-radius: 50%; background: transparent; color: #64748b; font-size: 22px; cursor: pointer; }
  .drawer-close:hover { background: #f1f5f9; color: #334155; }
- .main-nav .audio-toggle { width: 100%; justify-content: space-between; margin-top: 4px; padding: 10px 12px; border-radius: 13px; background: transparent; font-size: 14px; text-align: left; }
- .main-nav .audio-toggle:hover { background: #f8fafc; }
- .main-nav .audio-toggle:focus-visible { outline: 3px solid #a5b4fc; outline-offset: 2px; }
- .sound-control-label { display: flex; align-items: center; gap: 10px; }
  .sound-switch-indicator { position: relative; flex: 0 0 auto; width: 38px; height: 22px; border-radius: 999px; background: #cbd5e1; transition: background .18s ease; }
  .sound-switch-indicator::after { position: absolute; top: 3px; left: 3px; width: 16px; height: 16px; border-radius: 50%; background: white; box-shadow: 0 1px 3px rgba(15,23,42,.2); content: ""; transition: transform .18s ease; }
  .audio-toggle[aria-pressed="true"] .sound-switch-indicator { background: #4f46e5; }
@@ -120,6 +116,22 @@
  .action-button.correct.image-action { border-color: #a7f3d0; background: linear-gradient(180deg,#fff,#ecfdf5); color: #065f46; }
  .daily-goal-complete { padding: 12px 16px; border: 1px solid #86efac; border-radius: 16px; background: #f0fdf4; color: #166534; font-size: 14px; font-weight: 800; text-align: center; }
  .daily-goal-complete[hidden] { display: none; }
+ .celebration-overlay { position: fixed; inset: 0; z-index: 1200; display: grid; place-items: center; padding: 20px; overflow: hidden; background: rgba(224,231,255,.58); backdrop-filter: blur(3px); pointer-events: none; }
+ .celebration-overlay[hidden] { display: none; }
+ .celebration-confetti { position: absolute; inset: 0; overflow: hidden; }
+ .celebration-confetti-piece { position: absolute; top: -18px; width: 10px; height: 15px; border-radius: 2px; opacity: 0; animation: confetti-fall 3.8s ease-in forwards; }
+ .celebration-message { position: relative; z-index: 1; width: min(460px,100%); padding: 24px; border: 2px solid #fbbf24; border-radius: 26px; background: #fff; box-shadow: 0 18px 55px rgba(79,70,229,.24); color: #334155; text-align: center; animation: celebration-pop .5s cubic-bezier(.2,1.4,.4,1) both; }
+ .celebration-message h2 { margin: 4px 0 8px; color: #4f46e5; font-size: clamp(26px,7vw,36px); }
+ .celebration-message p { margin: 0; font-size: 17px; font-weight: 700; line-height: 1.5; }
+ .celebration-balloons { display: flex; justify-content: center; gap: 18px; margin-bottom: 4px; font-size: 46px; }
+ .celebration-balloons span { display: inline-block; animation: balloon-float 1.4s ease-in-out infinite alternate; }
+ .celebration-balloons span:nth-child(2) { animation-delay: .25s; }
+ .celebration-balloons span:nth-child(3) { animation-delay: .5s; }
+ .celebration-sparkles { margin-top: 12px; font-size: 28px; letter-spacing: 8px; }
+ @keyframes confetti-fall { 0% { transform: translateY(0) rotate(0); opacity: 1; } 100% { transform: translateY(110vh) rotate(720deg); opacity: 0; } }
+ @keyframes balloon-float { from { transform: translateY(4px) rotate(-5deg); } to { transform: translateY(-9px) rotate(5deg); } }
+ @keyframes celebration-pop { from { transform: scale(.65); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+ @media (prefers-reduced-motion: reduce) { .celebration-message, .celebration-balloons span, .celebration-confetti-piece { animation: none; opacity: 1; } }
  .action-button.correct.image-action:hover { background: #d1fae5; }
  .eval-grid { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 10px; }
  .eval-grid.paper-mode { display: flex; flex: 1; width: 100%; justify-content: space-between; gap: 14px; }
@@ -193,13 +205,14 @@
  .data-grid { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 14px; }
  .data-card { display: flex; flex-direction: column; justify-content: space-between; gap: 16px; padding: 20px; border: 1px solid #e2e8f0; border-radius: 24px; background: white; box-shadow: 0 4px 20px -2px rgba(15,23,42,.05); }
  .settings-card { margin-bottom: 14px; }
- .settings-controls { display: flex; align-items: flex-end; justify-content: space-between; gap: 18px; flex-wrap: wrap; }
- .setting-row { display: flex; flex: 1 1 250px; align-items: center; justify-content: space-between; gap: 12px; }
+ .settings-controls { display: grid; gap: 14px; }
+ .setting-row { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
  .setting-copy { display: flex; flex-direction: column; gap: 4px; }
  .setting-label { color: #334155; font-size: 14px; font-weight: 800; }
  .setting-description { margin: 0; color: #64748b; font-size: 12px; line-height: 1.45; }
- .setting-field { display: flex; flex: 0 1 220px; flex-direction: column; gap: 6px; color: #334155; font-size: 13px; font-weight: 800; }
+ .setting-field { display: grid; grid-template-columns: minmax(0,1fr) minmax(120px,220px); align-items: center; gap: 12px; width: 100%; color: #334155; font-size: 13px; font-weight: 800; }
  .setting-field input { width: 100%; min-height: 44px; padding: 9px 12px; border: 1px solid #cbd5e1; border-radius: 12px; background: #f8fafc; color: #1e293b; font-size: 16px; font-weight: 700; }
+ .settings-controls > .setting-description { grid-column: 2; text-align: right; }
  .data-card-actions { display: flex; flex-wrap: wrap; gap: 8px; }
  .data-card-actions > * { width: 100%; }
  .data-card-icon { width: 42px; height: 42px; display: grid; place-items: center; margin-bottom: 10px; border-radius: 14px; background: #eef2ff; color: #4f46e5; font-size: 20px; }
@@ -298,10 +311,6 @@
    <button class="nav-tab" id="nav-manage" data-tab="manage" onclick="showTab('manage')">📖 <span>Wörterbuch</span></button>
    <button class="nav-tab" id="nav-storage" data-tab="storage" onclick="showTab('storage')">📦 <span>Wörterspeicher</span></button>
    <button class="nav-tab" id="nav-data" data-tab="data" onclick="showTab('data')">⚙️ <span>Settings</span></button>
-   <button class="audio-toggle" data-sound-button aria-pressed="true" title="Soundeffekte umschalten" onclick="UIController.toggleSound()">
-    <span class="sound-control-label"><span data-sound-icon aria-hidden="true">🔊</span><span data-sound-label>Ton an</span></span>
-    <span class="sound-switch-indicator" aria-hidden="true"></span>
-   </button>
   </nav>
   <button class="menu-backdrop" id="menu-backdrop" type="button" aria-label="Navigation schließen" onclick="UIController.closeNavigationMenu()" hidden></button>
   <main id="learn-tab" class="app-view">
@@ -361,7 +370,16 @@
    </section>
 
    <div id="stats" class="stats"></div>
-   <div id="daily-goal-complete" class="daily-goal-complete" role="status" aria-live="polite" hidden>Herzlichen Glückwunsch, du hast deine tägliche Lerneinheit absolviert</div>
+   <div id="daily-goal-complete" class="daily-goal-complete" hidden>Herzlichen Glückwunsch, du hast deine tägliche Lerneinheit absolviert</div>
+   <div id="daily-goal-celebration" class="celebration-overlay" role="status" aria-live="polite" hidden>
+    <div id="celebration-confetti" class="celebration-confetti" aria-hidden="true"></div>
+    <div class="celebration-message">
+     <div class="celebration-balloons" aria-hidden="true"><span>🎈</span><span>🎈</span><span>🎈</span></div>
+     <h2>Geschafft!</h2>
+     <p>Herzlichen Glückwunsch, du hast deine tägliche Lerneinheit absolviert</p>
+     <div class="celebration-sparkles" aria-hidden="true">🎉 ⭐ 🎉</div>
+    </div>
+   </div>
    <aside class="storage-note">
     <p><strong>💾 Lernstand:</strong> <span id="storage-note-text">Deine Lernstände können beim Leeren des Browsercaches verloren gehen.</span></p>
     <button onclick="showTab('data')">Sichern</button>
@@ -426,12 +444,12 @@
        <span class="setting-label">Ton an/aus</span>
        <span class="setting-description">Schaltet alle Audio-Rückmeldungen um.</span>
       </div>
-      <button class="audio-toggle settings-sound-toggle" data-sound-button aria-pressed="true" title="Soundeffekte umschalten" onclick="UIController.toggleSound()">
-       <span class="sound-control-label"><span data-sound-icon aria-hidden="true">🔊</span><span data-sound-label>Ton an</span></span>
+      <button class="audio-toggle settings-sound-toggle" data-sound-button aria-label="Ton ausschalten" aria-pressed="true" title="Ton ausschalten" onclick="UIController.toggleSound()">
        <span class="sound-switch-indicator" aria-hidden="true"></span>
       </button>
      </div>
-     <label class="setting-field" for="daily-goal-input">Tägliche Lerneinheit (Karten)
+     <label class="setting-field" for="daily-goal-input">
+      <span>Tägliche Lerneinheit (Karten)</span>
       <input id="daily-goal-input" type="number" min="1" step="1" value="5" onchange="UIController.setDailyGoal(this.value)">
      </label>
      <p id="daily-goal-progress" class="setting-description" aria-live="polite"></p>
@@ -1202,6 +1220,7 @@ const UIController = (() => {
   let serverMode = false;
   let peekTimeout;
   let menuCloseTimer;
+  let celebrationTimeout;
 
   async function loadBuildInfo() {
     const versionElement = document.getElementById('app-version');
@@ -1272,6 +1291,28 @@ const UIController = (() => {
     if (progressText) progressText.textContent = `Heute: ${status.count} von ${status.goal} beantworteten Karten`;
     const completionMessage = document.getElementById('daily-goal-complete');
     if (completionMessage) completionMessage.hidden = !status.completed;
+  }
+
+  function showDailyGoalCelebration() {
+    const celebration = document.getElementById('daily-goal-celebration');
+    const confetti = document.getElementById('celebration-confetti');
+    const colors = ['#f43f5e', '#f59e0b', '#10b981', '#3b82f6', '#8b5cf6'];
+    confetti.replaceChildren();
+    for (let i = 0; i < 36; i++) {
+      const piece = document.createElement('span');
+      piece.className = 'celebration-confetti-piece';
+      piece.style.left = `${Math.random() * 100}%`;
+      piece.style.backgroundColor = colors[i % colors.length];
+      piece.style.animationDelay = `${Math.random() * 0.7}s`;
+      piece.style.animationDuration = `${3 + Math.random() * 1.2}s`;
+      confetti.appendChild(piece);
+    }
+    celebration.hidden = false;
+    clearTimeout(celebrationTimeout);
+    celebrationTimeout = setTimeout(() => {
+      celebration.hidden = true;
+      confetti.replaceChildren();
+    }, 5000);
   }
 
   function toggleNavigationMenu() {
@@ -1347,12 +1388,9 @@ const UIController = (() => {
   function updateSoundControls(enabled) {
     document.querySelectorAll('[data-sound-button]').forEach(button => {
       button.setAttribute('aria-pressed', String(enabled));
-    });
-    document.querySelectorAll('[data-sound-icon]').forEach(icon => {
-      icon.textContent = enabled ? '🔊' : '🔇';
-    });
-    document.querySelectorAll('[data-sound-label]').forEach(label => {
-      label.textContent = enabled ? 'Ton an' : 'Ton aus';
+      const label = enabled ? 'Ton ausschalten' : 'Ton einschalten';
+      button.setAttribute('aria-label', label);
+      button.title = label;
     });
   }
 
@@ -1371,7 +1409,10 @@ const UIController = (() => {
     }
     updateDailyGoalUI();
     if (!result.saved) alert('Das Tagesziel konnte nicht gespeichert werden.');
-    if (result.completedNow) AudioModule.playDailyGoalSuccess();
+    if (result.completedNow) {
+      AudioModule.playDailyGoalSuccess();
+      showDailyGoalCelebration();
+    }
   }
 
   function setMode(mode) {
@@ -1747,7 +1788,10 @@ function revealWord() {
       if (state.learningMode === 'paper') {
         isCorrect ? AudioModule.playSuccess() : AudioModule.playError();
       }
-      if (dailyProgress.completedNow) AudioModule.playDailyGoalSuccess();
+      if (dailyProgress.completedNow) {
+        AudioModule.playDailyGoalSuccess();
+        showDailyGoalCelebration();
+      }
       const inIntensiveFilter = state.selectedBoxFilter === 'intensiv';
       const skipPromotion = (inIntensiveFilter || state.helpUsed);
       const answeredWord = state.words[state.currentWordIndex];
