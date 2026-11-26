@@ -1797,6 +1797,44 @@ function revealWord() {
     }
   }
 
+  // Vergleicht Eingabe und Zielwort Buchstabe für Buchstabe (mit Groß-/Kleinschreibung)
+  // und liefert die Positionen in der EINGABE, die falsch, überflüssig oder an einer Lücke sind.
+  function getInputErrorMarks(eingabe, ziel) {
+    const a = [...eingabe];
+    const b = [...ziel];
+    const n = a.length;
+    const m = b.length;
+    const d = Array.from({ length: n + 1 }, () => new Array(m + 1).fill(0));
+    for (let i = 0; i <= n; i++) d[i][0] = i;
+    for (let j = 0; j <= m; j++) d[0][j] = j;
+    for (let i = 1; i <= n; i++) {
+      for (let j = 1; j <= m; j++) {
+        d[i][j] = Math.min(
+          d[i - 1][j - 1] + (a[i - 1] === b[j - 1] ? 0 : 1),
+          d[i - 1][j] + 1,
+          d[i][j - 1] + 1
+        );
+      }
+    }
+
+    const marks = new Set();
+    let i = n;
+    let j = m;
+    while (i > 0 || j > 0) {
+      if (i > 0 && j > 0 && a[i - 1] === b[j - 1] && d[i][j] === d[i - 1][j - 1]) {
+        i--; j--; // Buchstabe stimmt
+      } else if (i > 0 && j > 0 && d[i][j] === d[i - 1][j - 1] + 1) {
+        marks.add(i - 1); i--; j--; // falscher Buchstabe
+      } else if (i > 0 && d[i][j] === d[i - 1][j] + 1) {
+        marks.add(i - 1); i--; // Buchstabe zu viel
+      } else {
+        if (n > 0) marks.add(Math.min(i, n - 1)); // Buchstabe fehlt: Nachbarn markieren
+        j--;
+      }
+    }
+    return marks;
+  }
+
   async function checkDigitalAnswer() {
     if (state.currentWordIndex === -1) return;
     
@@ -1837,14 +1875,21 @@ function revealWord() {
       cardEl.classList.add('wrong-bg');
       statusIcon.textContent = '❌';
 
+      // Hat das Kind ohne Artikel getippt, wird nur gegen das Wort ohne Artikel verglichen,
+      // damit der fehlende Artikel nicht als Fehler gewertet wird.
+      const articlePattern = /^(der|die|das|ein|eine)\s+/i;
+      const compareTarget = articlePattern.test(userInput) ? targetWord : wordWithoutArticle;
+      const articleOffset = targetWord.length - compareTarget.length;
+
       // 1. Das Hauptdisplay zeigt wie gewohnt die korrekte Lösung mit den Highlight-Markierungen
-      const { marks: targetMarks, texte } = await FreschModule.analyze(targetWord, userInput);
-      const inputMarks = new Set(targetMarks);
+      const { marks: analysisMarks, texte } = await FreschModule.analyze(compareTarget, userInput);
+      const targetMarks = new Set([...analysisMarks].map(index => index + articleOffset));
       FreschModule.getDoubleConsonantMarks(targetWord).forEach(index => targetMarks.add(index));
       targetEl.className = 'word-display digital-result';
       renderMarkedWord(targetEl, targetWord, targetMarks);
 
       // 2. Der Schüler-Tipp wird zusätzlich darunter dezent mit unterstrichenen Fehlern eingeblendet
+      const inputMarks = getInputErrorMarks(userInput, compareTarget);
       const highlightedInput = [...userInput].map((c, i) =>
         inputMarks.has(i) ? `<span style="border-bottom: 2px solid #ff3b30; color: #ff3b30;">${c}</span>` : c
       ).join('');
