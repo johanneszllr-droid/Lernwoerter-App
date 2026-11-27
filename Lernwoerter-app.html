@@ -389,6 +389,7 @@
      <div class="celebration-sparkles" aria-hidden="true">🎉 ⭐ 🎉</div>
      <div class="celebration-actions">
       <button class="btn btn-secondary" type="button" id="celebration-finish-btn" onclick="UIController.finishForToday()">Für heute fertig</button>
+      <button class="btn btn-secondary" type="button" id="celebration-close-btn" onclick="UIController.closeCelebration()" hidden>Schließen</button>
       <button class="btn btn-success" type="button" id="celebration-continue-btn" onclick="UIController.continueLearning()">Weiterlernen</button>
      </div>
     </div>
@@ -1503,6 +1504,7 @@ const UIController = (() => {
     document.getElementById('celebration-title').textContent = 'Geschafft!';
     document.getElementById('celebration-text').textContent = 'Herzlichen Glückwunsch, du hast deine tägliche Lerneinheit absolviert';
     document.getElementById('celebration-finish-btn').hidden = false;
+    document.getElementById('celebration-close-btn').hidden = true;
     const continueButton = document.getElementById('celebration-continue-btn');
     continueButton.textContent = 'Weiterlernen';
 
@@ -1536,9 +1538,20 @@ const UIController = (() => {
     document.getElementById('celebration-title').textContent = 'Bis morgen! 👋';
     document.getElementById('celebration-text').textContent = 'Super gemacht! Du kannst die App jetzt schließen.';
     document.getElementById('celebration-finish-btn').hidden = true;
+    document.getElementById('celebration-close-btn').hidden = false;
     const continueButton = document.getElementById('celebration-continue-btn');
     continueButton.textContent = 'Doch weiterlernen';
     continueButton.focus();
+  }
+
+  // "Schließen": Meldung zumachen, ohne ein Wort vorzulesen (z. B. um ins Menü zu gehen)
+  function closeCelebration() {
+    clearTimeout(celebrationTimeout);
+    clearTimeout(speakTimeout);
+    speakTimeout = null;
+    if ('speechSynthesis' in window) window.speechSynthesis.cancel();
+    document.getElementById('daily-goal-celebration').hidden = true;
+    document.getElementById('celebration-confetti').replaceChildren();
   }
 
   function toggleNavigationMenu() {
@@ -2784,6 +2797,7 @@ async function importWords(event) {
     closeNavigationMenu,
     continueLearning,
     finishForToday,
+    closeCelebration,
     openGuide,
     toggleSound,
     answer,
