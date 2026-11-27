@@ -293,6 +293,18 @@
   .storage-note button { padding: 0; }
  }
  </style>
+<script>
+ // Besucherzähler (GoatCounter, ohne Cookies): zählt nur die veröffentlichte Version auf GitHub Pages,
+ // nicht die Testversion (/dev/), nicht lokal und nicht auf einem eigenen Server.
+ if (location.hostname === 'johanneszllr-droid.github.io' && !location.pathname.includes('/Lernwoerter-App/dev/')) {
+  window.goatcounter = { endpoint: 'https://joez86.goatcounter.com/count' };
+  const counterScript = document.createElement('script');
+  counterScript.async = true;
+  counterScript.src = 'https://gc.zgo.at/count.js';
+  counterScript.dataset.goatcounter = 'https://joez86.goatcounter.com/count';
+  document.head.appendChild(counterScript);
+ }
+</script>
 </head>
 <body>
  <div class="app-shell">
