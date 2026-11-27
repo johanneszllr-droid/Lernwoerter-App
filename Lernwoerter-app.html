@@ -1056,7 +1056,11 @@ const LeitnerModule = (() => {
     if (box === 6) return false;
     if (!wordObj.userdaten?.letztePruefung) return true;
 
-    const daysPassed = (Date.now() - new Date(wordObj.userdaten.letztePruefung)) / (1000 * 60 * 60 * 24);
+    // Ein Wort, das heute schon abgefragt wurde, kommt heute nicht noch einmal dran
+    const lastCheck = new Date(wordObj.userdaten.letztePruefung);
+    if (lastCheck.toDateString() === new Date().toDateString()) return false;
+
+    const daysPassed = (Date.now() - lastCheck) / (1000 * 60 * 60 * 24);
     return daysPassed >= (INTERVALS[box] || 0);
   }
 
