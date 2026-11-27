@@ -417,7 +417,7 @@
      <label for="sort-select" style="color: #64748b; font-size: 12px; font-weight: 700; margin-right: 5px;">Sortierung</label>
      <select id="sort-select" onchange="renderWordList()">
       <option value="alpha">Alphabetisch</option>
-      <option value="box">Nach Box</option>
+      <option value="box" selected>Nach Box</option>
      </select>
     </div>
    </div>
@@ -1607,7 +1607,7 @@ const UIController = (() => {
       if (active) button.setAttribute('aria-current', 'page');
       else button.removeAttribute('aria-current');
     });
-    if (tab === 'manage') renderWordList();
+    if (tab === 'manage') resetWordListView();
     if (tab === 'storage') renderStorageWordList();
     if (tab === 'data') updateDailyGoalUI();
     if (tab === 'learn') {
@@ -2518,6 +2518,14 @@ async function importWords(event) {
     word.userdaten ??= { box: 0, letztePruefung: null, fehlerZaehler: 0, intensiv: false };
     word.userdaten.intensiv = !word.userdaten.intensiv;
     await saveAndRefresh();
+    renderWordList();
+  }
+
+  // Grundansicht beim Öffnen des Wörterbuchs: nach Box sortiert, Wörterspeicher eingeklappt, Boxen ausgeklappt
+  function resetWordListView() {
+    document.getElementById('sort-select').value = 'box';
+    collapsedWordGroups.clear();
+    collapsedWordGroups.add('box:0');
     renderWordList();
   }
 
