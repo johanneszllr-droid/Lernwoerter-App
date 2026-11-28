@@ -561,9 +561,9 @@ const StorageModule = (() => {
   let serverAvailable = false;
 
   const DEFAULT_WORDS = [
-    { id: 1, stammdaten: { wort: 'der Apfel', artikel: 'der', wortart: 'Substantiv', plural: 'Äpfel', emoji: '🍎', besonderheiten: [] }, userdaten: { box: 1, letztePruefung: null, fehlerZaehler: 0 } },
-    { id: 2, stammdaten: { wort: 'die Hand', artikel: 'die', wortart: 'Substantiv', plural: 'Hände', emoji: '✋', besonderheiten: [] }, userdaten: { box: 1, letztePruefung: null, fehlerZaehler: 0 } },
-    { id: 3, stammdaten: { wort: 'das Buch', artikel: 'das', wortart: 'Substantiv', plural: 'Bücher', emoji: '📖', besonderheiten: [] }, userdaten: { box: 1, letztePruefung: null, fehlerZaehler: 0 } }
+    { id: 1, stammdaten: { wort: 'der Apfel', artikel: 'der', wortart: 'Substantiv', plural: 'Äpfel', emoji: '🍎', strategie: [] }, userdaten: { box: 1, letztePruefung: null, fehlerZaehler: 0 } },
+    { id: 2, stammdaten: { wort: 'die Hand', artikel: 'die', wortart: 'Substantiv', plural: 'Hände', emoji: '✋', strategie: [] }, userdaten: { box: 1, letztePruefung: null, fehlerZaehler: 0 } },
+    { id: 3, stammdaten: { wort: 'das Buch', artikel: 'das', wortart: 'Substantiv', plural: 'Bücher', emoji: '📖', strategie: [] }, userdaten: { box: 1, letztePruefung: null, fehlerZaehler: 0 } }
   ];
   //Ergänzt fehlende Felder bei bestehenden Speicherständen
   
@@ -1437,6 +1437,15 @@ const UIController = (() => {
       }
       usedIds.add(id);
 
+      // Früheres Feld "besonderheiten" heißt jetzt "strategie"
+      if (word.stammdaten && 'besonderheiten' in word.stammdaten) {
+        if (!Array.isArray(word.stammdaten.strategie) || word.stammdaten.strategie.length === 0) {
+          word.stammdaten.strategie = Array.isArray(word.stammdaten.besonderheiten) ? word.stammdaten.besonderheiten : [];
+        }
+        delete word.stammdaten.besonderheiten;
+        changed = true;
+      }
+
       if (!word.userdaten || typeof word.userdaten !== 'object') {
         word.userdaten = { box: 0, letztePruefung: null, fehlerZaehler: 0, intensiv: false };
         changed = true;
@@ -2280,7 +2289,7 @@ function revealWord() {
     } else {
       state.words.push({
         id: Date.now(),
-        stammdaten: { wort: val, artikel: '', wortart: '', plural: '', emoji: EmojiModule.getForWord(val), beispielsatz: '', besonderheiten: [] },
+        stammdaten: { wort: val, artikel: '', wortart: '', plural: '', emoji: EmojiModule.getForWord(val), beispielsatz: '', strategie: [] },
         userdaten: { box: 0, letztePruefung: null, fehlerZaehler: 0 }
       });
     }
@@ -2340,7 +2349,8 @@ function revealWord() {
         w.stammdaten.wortart = document.getElementById(`edit-wortart-${id}`).value.trim();
         w.stammdaten.plural = document.getElementById(`edit-plural-${id}`).value.trim();
         w.stammdaten.beispielsatz = document.getElementById(`edit-beispielsatz-${id}`).value.trim();
-        w.stammdaten.besonderheiten = document.getElementById(`edit-besonderheiten-${id}`).value
+        delete w.stammdaten.besonderheiten;
+        w.stammdaten.strategie = document.getElementById(`edit-strategie-${id}`).value
           .split('\n')
           .map(value => value.trim())
           .filter(Boolean);
@@ -2473,7 +2483,7 @@ async function importWords(event) {
           if (typeof item === 'string') {
             return {
               id: Date.now() + idx,
-              stammdaten: { wort: item.trim(), artikel: '', wortart: '', plural: '', emoji: EmojiModule.getForWord(item), beispielsatz: '', besonderheiten: [] },
+              stammdaten: { wort: item.trim(), artikel: '', wortart: '', plural: '', emoji: EmojiModule.getForWord(item), beispielsatz: '', strategie: [] },
               userdaten: { box: 0, letztePruefung: null, fehlerZaehler: 0, intensiv: false }
             };
           }
@@ -2487,7 +2497,7 @@ async function importWords(event) {
               plural: item.stammdaten?.plural || '',
               emoji: item.stammdaten?.emoji || EmojiModule.getForWord(item.stammdaten?.wort || item.word || ''),
               beispielsatz: item.stammdaten?.beispielsatz || '',
-              besonderheiten: item.stammdaten?.besonderheiten || []
+              strategie: item.stammdaten?.strategie || item.stammdaten?.besonderheiten || []
             },
             userdaten: importUserdata ? {
               box: Number(item.userdaten?.box ?? item.box ?? 0) || 0,
@@ -2530,7 +2540,7 @@ async function importWords(event) {
                   }
                 : {
                     id: Date.now() + idx + Math.floor(Math.random() * 1000),
-                    stammdaten: { wort: wordText, artikel: '', wortart: '', plural: '', emoji: EmojiModule.getForWord(wordText), beispielsatz: '', besonderheiten: [] },
+                    stammdaten: { wort: wordText, artikel: '', wortart: '', plural: '', emoji: EmojiModule.getForWord(wordText), beispielsatz: '', strategie: [] },
                     userdaten: {
                       box: Number(item?.userdaten?.box ?? item?.box ?? 0) || 0,
                       letztePruefung: item?.userdaten?.letztePruefung || item?.last_reviewed || null,
@@ -2771,9 +2781,9 @@ async function importWords(event) {
         const wordText = escapeHtml(word.stammdaten.wort);
         const boxLabel = boxNum === 0 ? 'Wörterspeicher' : boxNum === 6 ? 'Schatztruhe' : `Box ${boxNum}`;
         const storageIndex = storageWords.indexOf(word);
-        const specialFeatures = Array.isArray(stammdaten.besonderheiten)
-          ? stammdaten.besonderheiten.join('\n')
-          : String(stammdaten.besonderheiten || '');
+        const specialFeatures = Array.isArray(stammdaten.strategie)
+          ? stammdaten.strategie.join('\n')
+          : String(stammdaten.strategie || '');
         return `
         <li class="word-entry-wrapper">
          <div class="word-list-entry">
@@ -2806,8 +2816,8 @@ async function importWords(event) {
           <label class="word-details-field">Beispielsatz
            <textarea id="edit-beispielsatz-${word.id}" rows="2" disabled>${escapeHtml(stammdaten.beispielsatz || '')}</textarea>
           </label>
-          <label class="word-details-field">Besonderheiten (eine pro Zeile)
-           <textarea id="edit-besonderheiten-${word.id}" rows="2" disabled>${escapeHtml(specialFeatures)}</textarea>
+          <label class="word-details-field">Rechtschreib-Strategie (eine pro Zeile, z. B. „Verlängern: die Hunde“)
+           <textarea id="edit-strategie-${word.id}" rows="2" disabled>${escapeHtml(specialFeatures)}</textarea>
           </label>
          </div>
         </li>`;

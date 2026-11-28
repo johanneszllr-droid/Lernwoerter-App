@@ -102,7 +102,7 @@ Hier sehen Sie alle Wörter, alphabetisch oder nach Box sortiert, mit Suchfeld.
 | Aktion | Bedeutung |
 | --- | --- |
 | **＋ Hinzufügen** | Neues Wort anlegen. Es landet zuerst im **Wörterspeicher** (siehe unten) und rückt von dort in die Lernboxen nach. Für viele Wörter schlägt die App automatisch ein Emoji vor. |
-| **Edit** | Wort und Emoji ändern. Über **＋ Mehr** lassen sich Artikel, Wortart, Plural, **Beispielsatz** und Besonderheiten eintragen. Mit **Speichern** übernehmen. |
+| **Edit** | Wort und Emoji ändern. Über **＋ Mehr** lassen sich Artikel, Wortart, Plural, **Beispielsatz** und **Rechtschreib-Strategie** eintragen (eine pro Zeile, z. B. „Verlängern: die Hunde“). Mit **Speichern** übernehmen. |
 | **🔥** | Wort für das Intensivtraining markieren bzw. die Markierung entfernen. |
 | **📥** | Ein Wort aus Box 1 zurück in den Wörterspeicher schieben (z. B. wenn gerade zu viele neue Wörter geübt werden). |
 | **↑1** | Ein Wort aus dem Wörterspeicher an die erste Stelle setzen – es kommt dann als nächstes dran. |
@@ -257,7 +257,7 @@ Die Datei ist ein JSON-Array (alternativ ein Objekt mit `words`-Array). Ein Eint
     "plural": "Schränke",
     "emoji": "🗄️",
     "beispielsatz": "Die Jacke hängt im Schrank.",
-    "besonderheiten": []
+    "strategie": ["Verlängern: die Schränke"]
   },
   "userdaten": {
     "box": 1,
@@ -270,6 +270,7 @@ Die Datei ist ein JSON-Array (alternativ ein Objekt mit `words`-Array). Ein Eint
 
 - `id` muss eindeutig sein. Fehlende, doppelte oder ungültige IDs sowie ungültige Box-Werte werden beim Import und beim Start automatisch repariert.
 - `fehlerZaehler` wird mitgeführt und beim Zurücksetzen geleert, aktuell aber nicht hochgezählt.
+- `strategie` enthält 1–2 Rechtschreib-Hilfen nach FRESCH im Format `Regel: Text`. Erlaubte Regeln: `Schwingen`, `Verlängern`, `Ableiten`, `Zerlegen`, `Merkwort` (z. B. `Ableiten: backen` bei „Bäcker“). Ältere Dateien mit dem früheren Feld `besonderheiten` werden beim Import automatisch umgestellt.
 - Ein Import darf auch eine einfache Liste von Wörtern als Text enthalten (`["Haus", "Baum"]`).
 
 Die Start-Wörterliste für den **Web-Import** liegt als `lernwoerter-blank.json` im selben Verzeichnis wie die App (Groß-/Kleinschreibung des Dateinamens beachten).
