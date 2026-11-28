@@ -1,5 +1,5 @@
 {
-  "commitName": "Fix: \"Großschreiben\" nur melden, wenn der erste Buchstabe klein statt groß ist",
-  "commitHash": "e793add13797",
-  "builtAt": "2026-11-28T20:29:53Z"
+  "commitName": "Fix: Fehlende Klammer bei \"ie (langes i)\"",
+  "commitHash": "2efc9adea2a6",
+  "builtAt": "2026-11-28T20:40:11Z"
 }
