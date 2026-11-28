@@ -841,10 +841,45 @@ const FreschModule = (() => {
     }
   }
 
-  // Liefert eine verlängerte Form des Wortes als { wort, artikel } (artikel nur beim Plural: "die") oder null
-  async function verlaengerung(wort) {
+  // Wortarten, die man nicht verlängern kann (z. B. "und", "tausend", "sind")
+  const OHNE_VERLAENGERUNG = ["Konjunktion", "Präposition", "Adverb", "Pronomen", "Zahlwort", "Verb", "Artikel"];
+
+  // Verlängerte Form aus dem Wörterbuch-Eintrag (ohne Internet):
+  //   "keine"     → Verlängern ergibt keinen Sinn (Wortart, oder Endung -ng)
+  //   { wort, artikel } → Nomen: Mehrzahl, Adjektiv: Wort + "e"
+  //   null        → unbekannt (z. B. Wort ohne Wortart)
+  function lokaleVerlaengerung(wort, info = {}) {
     const kernwort = wort.replace(/^(der|die|das|ein|eine)\s+/i, "").trim();
     if (VERLAENGERUNG[kernwort]) return { wort: VERLAENGERUNG[kernwort], artikel: "" };
+    if (/ng$/i.test(kernwort)) return "keine";
+    const wortart = String(info.wortart || "").trim();
+    if (OHNE_VERLAENGERUNG.includes(wortart)) return "keine";
+    if (wortart === "Adjektiv") return { wort: kernwort + "e", artikel: "" };
+    const p = String(info.plural || "").replace(/^die\s+/i, "").trim();
+    if (p && p.toLowerCase() !== kernwort.toLowerCase()) return { wort: p, artikel: "die" };
+    return null;
+  }
+
+  // Baut den Hinweis "Verlängern: die Hän<b>d</b>e"; null, wenn der Buchstabe in der Verlängerung fehlt
+  function verlaengerungsHinweis(v, want, suchStart) {
+    const vWort = v?.wort || "";
+    const lower = vWort.toLowerCase();
+    if (!lower.includes(want)) return null;
+    // Buchstaben ungefähr an der gleichen Stelle wie im Lernwort suchen (bei "Kalk" → "Kalke" nicht das erste K markieren)
+    const start = Math.max(0, suchStart);
+    const k = lower.indexOf(want, start) !== -1 ? lower.indexOf(want, start) : lower.indexOf(want);
+    const artikel = v.artikel ? `${esc(v.artikel)} ` : "";
+    return `<b>Verlängern:</b> ${artikel}${esc(vWort.slice(0, k))}<b>${esc(vWort[k])}</b>${esc(vWort.slice(k + 1))}`;
+  }
+
+  // Liefert eine verlängerte Form des Wortes als { wort, artikel } (artikel nur beim Plural: "die") oder null.
+  // Steht im Wörterbuch eine Mehrzahl, wird nur diese verwendet und Wiktionary nicht gefragt.
+  async function verlaengerung(wort, info = {}) {
+    const kernwort = wort.replace(/^(der|die|das|ein|eine)\s+/i, "").trim();
+    if (VERLAENGERUNG[kernwort]) return { wort: VERLAENGERUNG[kernwort], artikel: "" };
+    const lokal = lokaleVerlaengerung(wort, info);
+    if (lokal) return lokal === "keine" ? null : lokal;
+    if (String(info.plural || "").trim()) return null;
     const text = await wikitext(kernwort) || await wikitext(kernwort.toLowerCase());
     if (text) {
       let m = text.match(/\{\{Grundformverweis Dt\|([^}|]+)/);
@@ -872,7 +907,7 @@ const FreschModule = (() => {
     return null;
   }
 
- async function analyze(ziel, eingabe) {
+ async function analyze(ziel, eingabe, info = {}) {
     const l = ziel.toLowerCase();
     const marks = new Set();
     const texte = [];
@@ -962,21 +997,12 @@ const FreschModule = (() => {
         add("<b>Doppelt</b>, weil der Vokal kurz ist");
       }
       // Auslautverhärtung in beide Richtungen: Berg→"Berk" (g statt k) und Schrank→"Schrang" (k statt g)
-      else if (o.typ === "sub" && (AUSLAUT[want] === o.got || AUSLAUT[o.got] === want) && (i === l.length - 1 || !istVokal(l[i + 1]))) {
+      else if (o.typ === "sub" && (AUSLAUT[want] === o.got || AUSLAUT[o.got] === want) && (i === l.length - 1 || !istVokal(l[i + 1]))
+               && lokaleVerlaengerung(ziel, info) !== "keine") {
         marks.add(i);
         let v = null;
-        try { v = await verlaengerung(ziel); } catch (e) { v = null; }
-        const vWort = v?.wort || "";
-        if (vWort.toLowerCase().includes(want)) {
-          // Buchstaben ungefähr an der gleichen Stelle wie im Lernwort suchen (bei "Kalk" → "Kalke" nicht das erste K markieren)
-          const posImWort = Math.max(0, i - offset - 1);
-          const lower = vWort.toLowerCase();
-          const k = lower.indexOf(want, posImWort) !== -1 ? lower.indexOf(want, posImWort) : lower.indexOf(want);
-          const artikel = v.artikel ? `${esc(v.artikel)} ` : "";
-          add(`<b>Verlängern:</b> ${artikel}${esc(vWort.slice(0, k))}<b>${esc(vWort[k])}</b>${esc(vWort.slice(k + 1))}`);
-        } else {
-          add("<b>Verlängern</b>, dann hörst du den Buchstaben");
-        }
+        try { v = await verlaengerung(ziel, info); } catch (e) { v = null; }
+        add(verlaengerungsHinweis(v, want, i - offset - 1) || "<b>Verlängern</b>, dann hörst du den Buchstaben");
       }
       else if (o.typ === "sub" && want === "ä" && o.got === "e") {
         marks.add(i);
@@ -1007,7 +1033,7 @@ const FreschModule = (() => {
   }
 
 // Neu: Findet inhärente Merkstellen im Zielwort (für den Papier-Modus)
-  function getInherentMarks(ziel) {
+  function getInherentMarks(ziel, info = {}) {
     const l = ziel.toLowerCase();
     const marks = new Set();
     const texte = [];
@@ -1041,9 +1067,13 @@ const FreschModule = (() => {
         if (!texte.some(t => t.includes("Dehnungs-h"))) texte.push("<b>Dehnungs-h</b>");
       }
       // Auslautverhärtung am Wortende (d->t, g->k, b->p)
-      if (i === l.length - 1 && "gbd".includes(c)) {
+      const lokal = (i === l.length - 1 && "gbd".includes(c)) ? lokaleVerlaengerung(ziel, info) : "keine";
+      if (lokal !== "keine") {
         marks.add(i);
-        if (!texte.some(t => t.includes("Verlängern"))) texte.push("<b>Verlängern</b>, um den Laut zu prüfen");
+        if (!texte.some(t => t.includes("Verlängern"))) {
+          texte.push(verlaengerungsHinweis(lokal, c, i - offset - 1)
+            || "<b>Verlängern</b>, um den Laut zu prüfen");
+        }
       }
     }
     return { marks, texte };
@@ -1988,7 +2018,7 @@ function revealWord() {
 
     // Im Papier-Modus Merkstellen im Zielwort markieren
     if (state.learningMode === 'paper') {
-      const { marks, texte } = FreschModule.getInherentMarks(targetWord);
+      const { marks, texte } = FreschModule.getInherentMarks(targetWord, current.stammdaten);
       renderMarkedWord(targetEl, targetWord, marks);
       
       const feedback = document.getElementById('digital-feedback');
@@ -2145,7 +2175,7 @@ function revealWord() {
       if (wordWrong) {
         let analysis;
         try {
-          analysis = await FreschModule.analyze(wordWithoutArticle, inputWithoutArticle);
+          analysis = await FreschModule.analyze(wordWithoutArticle, inputWithoutArticle, state.words[state.currentWordIndex].stammdaten);
         } catch (error) {
           console.warn('Fehleranalyse fehlgeschlagen:', error);
           analysis = { marks: new Set(), texte: [] };
