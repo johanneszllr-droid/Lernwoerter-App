@@ -561,9 +561,9 @@ const StorageModule = (() => {
   let serverAvailable = false;
 
   const DEFAULT_WORDS = [
-    { id: 1, stammdaten: { wort: 'der Apfel', artikel: 'der', wortart: 'Substantiv', plural: 'Äpfel', emoji: '🍎', besonderheiten: [] }, userdaten: { box: 1, letztePruefung: null, fehlerZaehler: 0 } },
-    { id: 2, stammdaten: { wort: 'die Hand', artikel: 'die', wortart: 'Substantiv', plural: 'Hände', emoji: '✋', besonderheiten: [] }, userdaten: { box: 1, letztePruefung: null, fehlerZaehler: 0 } },
-    { id: 3, stammdaten: { wort: 'das Buch', artikel: 'das', wortart: 'Substantiv', plural: 'Bücher', emoji: '📖', besonderheiten: [] }, userdaten: { box: 1, letztePruefung: null, fehlerZaehler: 0 } }
+    { id: 1, stammdaten: { wort: 'der Apfel', artikel: 'der', wortart: 'Substantiv', plural: 'Äpfel', emoji: '🍎', strategie: [] }, userdaten: { box: 1, letztePruefung: null, fehlerZaehler: 0 } },
+    { id: 2, stammdaten: { wort: 'die Hand', artikel: 'die', wortart: 'Substantiv', plural: 'Hände', emoji: '✋', strategie: [] }, userdaten: { box: 1, letztePruefung: null, fehlerZaehler: 0 } },
+    { id: 3, stammdaten: { wort: 'das Buch', artikel: 'das', wortart: 'Substantiv', plural: 'Bücher', emoji: '📖', strategie: [] }, userdaten: { box: 1, letztePruefung: null, fehlerZaehler: 0 } }
   ];
   //Ergänzt fehlende Felder bei bestehenden Speicherständen
   
@@ -841,10 +841,120 @@ const FreschModule = (() => {
     }
   }
 
-  // Liefert eine verlängerte Form des Wortes als { wort, artikel } (artikel nur beim Plural: "die") oder null
-  async function verlaengerung(wort) {
+  // Wortarten, die man nicht verlängern kann (z. B. "und", "tausend", "sind")
+  const OHNE_VERLAENGERUNG = ["Konjunktion", "Präposition", "Adverb", "Pronomen", "Zahlwort", "Verb", "Artikel"];
+
+  // Verlängerte Form aus dem Wörterbuch-Eintrag (ohne Internet):
+  //   "keine"     → Verlängern ergibt keinen Sinn (Wortart, oder Endung -ng)
+  //   { wort, artikel } → Nomen: Mehrzahl, Adjektiv: Wort + "e"
+  //   null        → unbekannt (z. B. Wort ohne Wortart)
+  function lokaleVerlaengerung(wort, info = {}) {
     const kernwort = wort.replace(/^(der|die|das|ein|eine)\s+/i, "").trim();
     if (VERLAENGERUNG[kernwort]) return { wort: VERLAENGERUNG[kernwort], artikel: "" };
+    if (/ng$/i.test(kernwort)) return "keine";
+    const wortart = String(info.wortart || "").trim();
+    if (OHNE_VERLAENGERUNG.includes(wortart)) return "keine";
+    if (wortart === "Adjektiv") return { wort: kernwort + "e", artikel: "" };
+    const p = String(info.plural || "").replace(/^die\s+/i, "").trim();
+    if (p && p.toLowerCase() !== kernwort.toLowerCase()) return { wort: p, artikel: "die" };
+    return null;
+  }
+
+  // ---------------------------------------------------------------------------
+  // Strategien aus dem Wörterbuch (stammdaten.strategie), z. B. "Verlängern: die Hunde"
+  // ---------------------------------------------------------------------------
+  const STRATEGIE_REGELN = ["Schwingen", "Verlängern", "Ableiten", "Zerlegen", "Merkwort"];
+  const ohneUmlaut = t => t.toLowerCase().replace(/ä/g, "a").replace(/ö/g, "o").replace(/ü/g, "u");
+
+  function strategieZeilen(info = {}) {
+    const liste = Array.isArray(info.strategie) ? info.strategie : [];
+    return liste
+      .map(zeile => String(zeile || "").match(/^\s*([^:]+):\s*(.+)$/))
+      .filter(m => m && STRATEGIE_REGELN.includes(m[1].trim()))
+      .map(m => ({ regel: m[1].trim(), text: m[2].trim() }));
+  }
+
+  function hatStrategie(info, regel) {
+    return strategieZeilen(info).some(z => z.regel === regel);
+  }
+
+  // Stelle im Hilfswort, die hervorgehoben wird (Start, Länge) oder null
+  function strategieMarke(regel, kernwort, text) {
+    const hilfe = text.split(/\s+/).pop() || "";
+    const start = text.length - hilfe.length;
+    const h = ohneUmlaut(hilfe);
+    const w = ohneUmlaut(kernwort);
+    if (regel === "Verlängern") {
+      // Längstes Stück vom Ende des Lernworts, mit dem das Hilfswort beginnt ("Fahrrad" → "Räder": "rad")
+      let best = 0;
+      for (let i = 0; i < w.length; i++) {
+        let n = 0;
+        while (n < h.length && i + n < w.length && h[n] === w[i + n]) n++;
+        if (i + n === w.length && n > best) best = n;
+      }
+      if (best < 2) {
+        // Gebeugte Formen ("sagte" → "sagen"): gemeinsamer Anfang
+        let n = 0;
+        while (n < h.length && n < w.length && h[n] === w[n]) n++;
+        best = n >= 2 ? n : 0;
+      }
+      return best >= 2 ? { start: start + best - 1, len: 1 } : null;
+    }
+    if (regel === "Ableiten") {
+      // ä/äu im Lernwort → a/au im Hilfswort hervorheben ("Bäcker" → "backen")
+      const lw = kernwort.toLowerCase();
+      const pos = lw.search(/äu|ä/);
+      if (pos === -1) return null;
+      const lang = lw.startsWith("äu", pos) ? 2 : 1;
+      const ziel = lang === 2 ? "au" : "a";
+      const k = h.indexOf(ziel);
+      return k === -1 ? null : { start: start + k, len: lang };
+    }
+    return null;
+  }
+
+  // Liefert die Strategien als HTML-Hinweise, z. B. "<b>Verlängern:</b> die Hun<b>d</b>e"
+  function strategieHinweise(ziel, info = {}) {
+    const kernwort = ziel.replace(/^(der|die|das|ein|eine)\s+/i, "").trim();
+    return strategieZeilen(info).map(({ regel, text }) => {
+      const m = strategieMarke(regel, kernwort, text);
+      const inhalt = m
+        ? `${esc(text.slice(0, m.start))}<b>${esc(text.slice(m.start, m.start + m.len))}</b>${esc(text.slice(m.start + m.len))}`
+        : esc(text);
+      return `<b>${esc(regel)}:</b> ${inhalt}`;
+    });
+  }
+
+  // Strategien zuerst; automatische Hinweise zur gleichen Regel entfallen
+  function mitStrategien(texte, ziel, info) {
+    const eigene = strategieHinweise(ziel, info);
+    if (eigene.length === 0) return texte;
+    const regeln = strategieZeilen(info).map(z => z.regel);
+    // "Merkstelle" ist nur ein allgemeiner Hinweis und entfällt, wenn eine Strategie da ist
+    const rest = texte.filter(t => t !== "<b>Merkstelle</b>" && !regeln.some(r => t.startsWith(`<b>${r}`)));
+    return [...eigene, ...rest];
+  }
+
+  // Baut den Hinweis "Verlängern: die Hän<b>d</b>e"; null, wenn der Buchstabe in der Verlängerung fehlt
+  function verlaengerungsHinweis(v, want, suchStart) {
+    const vWort = v?.wort || "";
+    const lower = vWort.toLowerCase();
+    if (!lower.includes(want)) return null;
+    // Buchstaben ungefähr an der gleichen Stelle wie im Lernwort suchen (bei "Kalk" → "Kalke" nicht das erste K markieren)
+    const start = Math.max(0, suchStart);
+    const k = lower.indexOf(want, start) !== -1 ? lower.indexOf(want, start) : lower.indexOf(want);
+    const artikel = v.artikel ? `${esc(v.artikel)} ` : "";
+    return `<b>Verlängern:</b> ${artikel}${esc(vWort.slice(0, k))}<b>${esc(vWort[k])}</b>${esc(vWort.slice(k + 1))}`;
+  }
+
+  // Liefert eine verlängerte Form des Wortes als { wort, artikel } (artikel nur beim Plural: "die") oder null.
+  // Steht im Wörterbuch eine Mehrzahl, wird nur diese verwendet und Wiktionary nicht gefragt.
+  async function verlaengerung(wort, info = {}) {
+    const kernwort = wort.replace(/^(der|die|das|ein|eine)\s+/i, "").trim();
+    if (VERLAENGERUNG[kernwort]) return { wort: VERLAENGERUNG[kernwort], artikel: "" };
+    const lokal = lokaleVerlaengerung(wort, info);
+    if (lokal) return lokal === "keine" ? null : lokal;
+    if (String(info.plural || "").trim()) return null;
     const text = await wikitext(kernwort) || await wikitext(kernwort.toLowerCase());
     if (text) {
       let m = text.match(/\{\{Grundformverweis Dt\|([^}|]+)/);
@@ -872,7 +982,7 @@ const FreschModule = (() => {
     return null;
   }
 
- async function analyze(ziel, eingabe) {
+ async function analyze(ziel, eingabe, info = {}) {
     const l = ziel.toLowerCase();
     const marks = new Set();
     const texte = [];
@@ -899,7 +1009,7 @@ const FreschModule = (() => {
     if (eingabe.length > 0 && ziel.length > 0) {
       const zielErster = ziel[0];
       const eingabeErster = eingabe[0];
-      if (zielErster === zielErster.toUpperCase() && zielErster !== zielErster.toLowerCase() && eingabeErster !== zielErster) {
+      if (zielErster === zielErster.toUpperCase() && zielErster !== zielErster.toLowerCase() && eingabeErster === zielErster.toLowerCase()) {
         marks.add(0);
         add("<b>Großschreiben</b> (Nomen)");
       }
@@ -962,34 +1072,29 @@ const FreschModule = (() => {
         add("<b>Doppelt</b>, weil der Vokal kurz ist");
       }
       // Auslautverhärtung in beide Richtungen: Berg→"Berk" (g statt k) und Schrank→"Schrang" (k statt g)
-      else if (o.typ === "sub" && (AUSLAUT[want] === o.got || AUSLAUT[o.got] === want) && (i === l.length - 1 || !istVokal(l[i + 1]))) {
+      else if (o.typ === "sub" && (AUSLAUT[want] === o.got || AUSLAUT[o.got] === want) && (i === l.length - 1 || !istVokal(l[i + 1]))
+               && lokaleVerlaengerung(ziel, info) !== "keine") {
         marks.add(i);
-        let v = null;
-        try { v = await verlaengerung(ziel); } catch (e) { v = null; }
-        const vWort = v?.wort || "";
-        if (vWort.toLowerCase().includes(want)) {
-          // Buchstaben ungefähr an der gleichen Stelle wie im Lernwort suchen (bei "Kalk" → "Kalke" nicht das erste K markieren)
-          const posImWort = Math.max(0, i - offset - 1);
-          const lower = vWort.toLowerCase();
-          const k = lower.indexOf(want, posImWort) !== -1 ? lower.indexOf(want, posImWort) : lower.indexOf(want);
-          const artikel = v.artikel ? `${esc(v.artikel)} ` : "";
-          add(`<b>Verlängern:</b> ${artikel}${esc(vWort.slice(0, k))}<b>${esc(vWort[k])}</b>${esc(vWort.slice(k + 1))}`);
-        } else {
-          add("<b>Verlängern</b>, dann hörst du den Buchstaben");
+        if (!hatStrategie(info, "Verlängern")) {
+          let v = null;
+          try { v = await verlaengerung(ziel, info); } catch (e) { v = null; }
+          add(verlaengerungsHinweis(v, want, i - offset - 1) || "<b>Verlängern</b>, dann hörst du den Buchstaben");
         }
       }
       else if (o.typ === "sub" && want === "ä" && o.got === "e") {
         marks.add(i);
-        let b = null;
-        try { b = await ableitung(ziel); } catch (e) { b = null; }
-        add(b ? `<b>Ableiten:</b> ${esc(b)} → ${esc(ziel.slice(offset))}` : "<b>ä</b> kommt oft von <b>a</b>");
+        if (!hatStrategie(info, "Ableiten")) {
+          let b = null;
+          try { b = await ableitung(ziel); } catch (e) { b = null; }
+          add(b ? `<b>Ableiten:</b> ${esc(b)} → ${esc(ziel.slice(offset))}` : "<b>ä</b> kommt oft von <b>a</b>");
+        }
       }
       else {
         marks.add(i);
         add("<b>Merkstelle</b>");
       }
     }
-    return { marks, texte };
+    return { marks, texte: mitStrategien(texte, ziel, info) };
   }
   function getDoubleConsonantMarks(ziel) {
     const l = ziel.toLowerCase();
@@ -1007,7 +1112,7 @@ const FreschModule = (() => {
   }
 
 // Neu: Findet inhärente Merkstellen im Zielwort (für den Papier-Modus)
-  function getInherentMarks(ziel) {
+  function getInherentMarks(ziel, info = {}) {
     const l = ziel.toLowerCase();
     const marks = new Set();
     const texte = [];
@@ -1041,14 +1146,18 @@ const FreschModule = (() => {
         if (!texte.some(t => t.includes("Dehnungs-h"))) texte.push("<b>Dehnungs-h</b>");
       }
       // Auslautverhärtung am Wortende (d->t, g->k, b->p)
-      if (i === l.length - 1 && "gbd".includes(c)) {
+      const lokal = (i === l.length - 1 && "gbd".includes(c)) ? lokaleVerlaengerung(ziel, info) : "keine";
+      if (lokal !== "keine") {
         marks.add(i);
-        if (!texte.some(t => t.includes("Verlängern"))) texte.push("<b>Verlängern</b>, um den Laut zu prüfen");
+        if (!texte.some(t => t.includes("Verlängern"))) {
+          texte.push(verlaengerungsHinweis(lokal, c, i - offset - 1)
+            || "<b>Verlängern</b>, um den Laut zu prüfen");
+        }
       }
     }
-    return { marks, texte };
+    return { marks, texte: mitStrategien(texte, ziel, info) };
   }
-  return { analyze, getInherentMarks, getDoubleConsonantMarks };
+  return { analyze, getInherentMarks, getDoubleConsonantMarks, strategieHinweise };
 })();
 
 
@@ -1406,6 +1515,15 @@ const UIController = (() => {
         changed = true;
       }
       usedIds.add(id);
+
+      // Früheres Feld "besonderheiten" heißt jetzt "strategie"
+      if (word.stammdaten && 'besonderheiten' in word.stammdaten) {
+        if (!Array.isArray(word.stammdaten.strategie) || word.stammdaten.strategie.length === 0) {
+          word.stammdaten.strategie = Array.isArray(word.stammdaten.besonderheiten) ? word.stammdaten.besonderheiten : [];
+        }
+        delete word.stammdaten.besonderheiten;
+        changed = true;
+      }
 
       if (!word.userdaten || typeof word.userdaten !== 'object') {
         word.userdaten = { box: 0, letztePruefung: null, fehlerZaehler: 0, intensiv: false };
@@ -1988,7 +2106,7 @@ function revealWord() {
 
     // Im Papier-Modus Merkstellen im Zielwort markieren
     if (state.learningMode === 'paper') {
-      const { marks, texte } = FreschModule.getInherentMarks(targetWord);
+      const { marks, texte } = FreschModule.getInherentMarks(targetWord, current.stammdaten);
       renderMarkedWord(targetEl, targetWord, marks);
       
       const feedback = document.getElementById('digital-feedback');
@@ -2144,8 +2262,10 @@ function revealWord() {
       // Die Analyse kann auf Wiktionary warten; schlägt sie fehl, wird die Lösung ohne Hinweise gezeigt.
       if (wordWrong) {
         let analysis;
+        let strategieAnzahl = 0;
         try {
-          analysis = await FreschModule.analyze(wordWithoutArticle, inputWithoutArticle);
+          analysis = await FreschModule.analyze(wordWithoutArticle, inputWithoutArticle, state.words[state.currentWordIndex].stammdaten);
+          strategieAnzahl = FreschModule.strategieHinweise(wordWithoutArticle, state.words[state.currentWordIndex].stammdaten).length;
         } catch (error) {
           console.warn('Fehleranalyse fehlgeschlagen:', error);
           analysis = { marks: new Set(), texte: [] };
@@ -2154,7 +2274,7 @@ function revealWord() {
         if (cardToken !== state.cardToken) return;
         analysis.marks.forEach(index => targetMarks.add(index + targetOffset));
         getInputErrorMarks(inputWithoutArticle, wordWithoutArticle).forEach(index => inputMarks.add(index + inputOffset));
-        analysis.texte.slice(0, 2).forEach(text => texte.push(text));
+        analysis.texte.slice(0, strategieAnzahl + 2).forEach(text => texte.push(text));
       }
 
       // 1. Das Hauptdisplay zeigt die korrekte Lösung mit den Highlight-Markierungen
@@ -2250,7 +2370,7 @@ function revealWord() {
     } else {
       state.words.push({
         id: Date.now(),
-        stammdaten: { wort: val, artikel: '', wortart: '', plural: '', emoji: EmojiModule.getForWord(val), beispielsatz: '', besonderheiten: [] },
+        stammdaten: { wort: val, artikel: '', wortart: '', plural: '', emoji: EmojiModule.getForWord(val), beispielsatz: '', strategie: [] },
         userdaten: { box: 0, letztePruefung: null, fehlerZaehler: 0 }
       });
     }
@@ -2310,7 +2430,8 @@ function revealWord() {
         w.stammdaten.wortart = document.getElementById(`edit-wortart-${id}`).value.trim();
         w.stammdaten.plural = document.getElementById(`edit-plural-${id}`).value.trim();
         w.stammdaten.beispielsatz = document.getElementById(`edit-beispielsatz-${id}`).value.trim();
-        w.stammdaten.besonderheiten = document.getElementById(`edit-besonderheiten-${id}`).value
+        delete w.stammdaten.besonderheiten;
+        w.stammdaten.strategie = document.getElementById(`edit-strategie-${id}`).value
           .split('\n')
           .map(value => value.trim())
           .filter(Boolean);
@@ -2443,7 +2564,7 @@ async function importWords(event) {
           if (typeof item === 'string') {
             return {
               id: Date.now() + idx,
-              stammdaten: { wort: item.trim(), artikel: '', wortart: '', plural: '', emoji: EmojiModule.getForWord(item), beispielsatz: '', besonderheiten: [] },
+              stammdaten: { wort: item.trim(), artikel: '', wortart: '', plural: '', emoji: EmojiModule.getForWord(item), beispielsatz: '', strategie: [] },
               userdaten: { box: 0, letztePruefung: null, fehlerZaehler: 0, intensiv: false }
             };
           }
@@ -2457,7 +2578,7 @@ async function importWords(event) {
               plural: item.stammdaten?.plural || '',
               emoji: item.stammdaten?.emoji || EmojiModule.getForWord(item.stammdaten?.wort || item.word || ''),
               beispielsatz: item.stammdaten?.beispielsatz || '',
-              besonderheiten: item.stammdaten?.besonderheiten || []
+              strategie: item.stammdaten?.strategie || item.stammdaten?.besonderheiten || []
             },
             userdaten: importUserdata ? {
               box: Number(item.userdaten?.box ?? item.box ?? 0) || 0,
@@ -2500,7 +2621,7 @@ async function importWords(event) {
                   }
                 : {
                     id: Date.now() + idx + Math.floor(Math.random() * 1000),
-                    stammdaten: { wort: wordText, artikel: '', wortart: '', plural: '', emoji: EmojiModule.getForWord(wordText), beispielsatz: '', besonderheiten: [] },
+                    stammdaten: { wort: wordText, artikel: '', wortart: '', plural: '', emoji: EmojiModule.getForWord(wordText), beispielsatz: '', strategie: [] },
                     userdaten: {
                       box: Number(item?.userdaten?.box ?? item?.box ?? 0) || 0,
                       letztePruefung: item?.userdaten?.letztePruefung || item?.last_reviewed || null,
@@ -2741,9 +2862,9 @@ async function importWords(event) {
         const wordText = escapeHtml(word.stammdaten.wort);
         const boxLabel = boxNum === 0 ? 'Wörterspeicher' : boxNum === 6 ? 'Schatztruhe' : `Box ${boxNum}`;
         const storageIndex = storageWords.indexOf(word);
-        const specialFeatures = Array.isArray(stammdaten.besonderheiten)
-          ? stammdaten.besonderheiten.join('\n')
-          : String(stammdaten.besonderheiten || '');
+        const specialFeatures = Array.isArray(stammdaten.strategie)
+          ? stammdaten.strategie.join('\n')
+          : String(stammdaten.strategie || '');
         return `
         <li class="word-entry-wrapper">
          <div class="word-list-entry">
@@ -2776,8 +2897,8 @@ async function importWords(event) {
           <label class="word-details-field">Beispielsatz
            <textarea id="edit-beispielsatz-${word.id}" rows="2" disabled>${escapeHtml(stammdaten.beispielsatz || '')}</textarea>
           </label>
-          <label class="word-details-field">Besonderheiten (eine pro Zeile)
-           <textarea id="edit-besonderheiten-${word.id}" rows="2" disabled>${escapeHtml(specialFeatures)}</textarea>
+          <label class="word-details-field">Rechtschreib-Strategie (eine pro Zeile, z. B. „Verlängern: die Hunde“)
+           <textarea id="edit-strategie-${word.id}" rows="2" disabled>${escapeHtml(specialFeatures)}</textarea>
           </label>
          </div>
         </li>`;

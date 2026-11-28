@@ -13,6 +13,9 @@ Geprüft wird:
 - das Lernwort (oder sein Plural) steht genau so im Beispielsatz,
   damit die App es ausblenden kann (gleiche Regel wie in der App)
 - Groß-/Kleinschreibung des Lernworts stimmt im Satz (z. B. "fett" nicht als "Fett")
+- Wortart ist einer der erlaubten Werte
+- "strategie" ist eine Liste von Zeilen der Form "Regel: Text"
+  (Regel = Schwingen, Verlängern, Ableiten, Zerlegen oder Merkwort)
 """
 import json
 import re
@@ -21,6 +24,9 @@ from pathlib import Path
 
 PATH = Path(__file__).resolve().parents[2] / "lernwoerter-blank.json"
 ARTIKEL = re.compile(r"^(der|die|das|ein|eine)\s+", re.I)
+WORTARTEN = {"Substantiv", "Verb", "Adjektiv", "Adverb", "Pronomen", "Präposition", "Konjunktion", "Zahlwort"}
+STRATEGIEN = ("Schwingen", "Verlängern", "Ableiten", "Zerlegen", "Merkwort")
+STRATEGIE_ZEILE = re.compile(r"^(" + "|".join(STRATEGIEN) + r"): \S.*$")
 
 
 def lemma(wort: str) -> str:
@@ -61,6 +67,20 @@ def main():
         satz = (s.get("beispielsatz") or "").strip()
         if not s.get("wortart"):
             problems.append(f"{label}: Wortart fehlt")
+        elif s.get("wortart") not in WORTARTEN:
+            problems.append(f"{label}: Wortart „{s.get('wortart')}“ ist nicht erlaubt")
+        if "besonderheiten" in s:
+            problems.append(f"{label}: altes Feld „besonderheiten“ – heißt jetzt „strategie“")
+        strategie = s.get("strategie")
+        if not isinstance(strategie, list):
+            problems.append(f"{label}: „strategie“ fehlt oder ist keine Liste")
+        else:
+            if not strategie:
+                hints.append(f"{label}: keine Strategie eingetragen")
+            for zeile in strategie:
+                if not isinstance(zeile, str) or not STRATEGIE_ZEILE.match(zeile):
+                    problems.append(f"{label}: Strategie-Zeile hat falsches Format → {zeile!r} "
+                                    f"(erwartet z. B. „Verlängern: die Hunde“)")
         if not s.get("emoji"):
             problems.append(f"{label}: Emoji fehlt")
         elif s.get("emoji") == "📝":
