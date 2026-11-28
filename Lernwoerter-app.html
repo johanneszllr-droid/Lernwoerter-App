@@ -1009,7 +1009,7 @@ const FreschModule = (() => {
     if (eingabe.length > 0 && ziel.length > 0) {
       const zielErster = ziel[0];
       const eingabeErster = eingabe[0];
-      if (zielErster === zielErster.toUpperCase() && zielErster !== zielErster.toLowerCase() && eingabeErster !== zielErster) {
+      if (zielErster === zielErster.toUpperCase() && zielErster !== zielErster.toLowerCase() && eingabeErster === zielErster.toLowerCase()) {
         marks.add(0);
         add("<b>Großschreiben</b> (Nomen)");
       }
