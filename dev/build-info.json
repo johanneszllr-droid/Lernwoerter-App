@@ -1,5 +1,5 @@
 {
-  "commitName": "Wörterliste: FRESCH-Strategie für alle 288 Wörter eingetragen",
-  "commitHash": "1b38f921cf25",
-  "builtAt": "2026-11-28T20:06:26Z"
+  "commitName": "Fix: \"Großschreiben\" nur melden, wenn der erste Buchstabe klein statt groß ist",
+  "commitHash": "e793add13797",
+  "builtAt": "2026-11-28T20:29:53Z"
 }

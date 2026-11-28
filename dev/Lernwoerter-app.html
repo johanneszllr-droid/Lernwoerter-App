@@ -860,6 +860,81 @@ const FreschModule = (() => {
     return null;
   }
 
+  // ---------------------------------------------------------------------------
+  // Strategien aus dem Wörterbuch (stammdaten.strategie), z. B. "Verlängern: die Hunde"
+  // ---------------------------------------------------------------------------
+  const STRATEGIE_REGELN = ["Schwingen", "Verlängern", "Ableiten", "Zerlegen", "Merkwort"];
+  const ohneUmlaut = t => t.toLowerCase().replace(/ä/g, "a").replace(/ö/g, "o").replace(/ü/g, "u");
+
+  function strategieZeilen(info = {}) {
+    const liste = Array.isArray(info.strategie) ? info.strategie : [];
+    return liste
+      .map(zeile => String(zeile || "").match(/^\s*([^:]+):\s*(.+)$/))
+      .filter(m => m && STRATEGIE_REGELN.includes(m[1].trim()))
+      .map(m => ({ regel: m[1].trim(), text: m[2].trim() }));
+  }
+
+  function hatStrategie(info, regel) {
+    return strategieZeilen(info).some(z => z.regel === regel);
+  }
+
+  // Stelle im Hilfswort, die hervorgehoben wird (Start, Länge) oder null
+  function strategieMarke(regel, kernwort, text) {
+    const hilfe = text.split(/\s+/).pop() || "";
+    const start = text.length - hilfe.length;
+    const h = ohneUmlaut(hilfe);
+    const w = ohneUmlaut(kernwort);
+    if (regel === "Verlängern") {
+      // Längstes Stück vom Ende des Lernworts, mit dem das Hilfswort beginnt ("Fahrrad" → "Räder": "rad")
+      let best = 0;
+      for (let i = 0; i < w.length; i++) {
+        let n = 0;
+        while (n < h.length && i + n < w.length && h[n] === w[i + n]) n++;
+        if (i + n === w.length && n > best) best = n;
+      }
+      if (best < 2) {
+        // Gebeugte Formen ("sagte" → "sagen"): gemeinsamer Anfang
+        let n = 0;
+        while (n < h.length && n < w.length && h[n] === w[n]) n++;
+        best = n >= 2 ? n : 0;
+      }
+      return best >= 2 ? { start: start + best - 1, len: 1 } : null;
+    }
+    if (regel === "Ableiten") {
+      // ä/äu im Lernwort → a/au im Hilfswort hervorheben ("Bäcker" → "backen")
+      const lw = kernwort.toLowerCase();
+      const pos = lw.search(/äu|ä/);
+      if (pos === -1) return null;
+      const lang = lw.startsWith("äu", pos) ? 2 : 1;
+      const ziel = lang === 2 ? "au" : "a";
+      const k = h.indexOf(ziel);
+      return k === -1 ? null : { start: start + k, len: lang };
+    }
+    return null;
+  }
+
+  // Liefert die Strategien als HTML-Hinweise, z. B. "<b>Verlängern:</b> die Hun<b>d</b>e"
+  function strategieHinweise(ziel, info = {}) {
+    const kernwort = ziel.replace(/^(der|die|das|ein|eine)\s+/i, "").trim();
+    return strategieZeilen(info).map(({ regel, text }) => {
+      const m = strategieMarke(regel, kernwort, text);
+      const inhalt = m
+        ? `${esc(text.slice(0, m.start))}<b>${esc(text.slice(m.start, m.start + m.len))}</b>${esc(text.slice(m.start + m.len))}`
+        : esc(text);
+      return `<b>${esc(regel)}:</b> ${inhalt}`;
+    });
+  }
+
+  // Strategien zuerst; automatische Hinweise zur gleichen Regel entfallen
+  function mitStrategien(texte, ziel, info) {
+    const eigene = strategieHinweise(ziel, info);
+    if (eigene.length === 0) return texte;
+    const regeln = strategieZeilen(info).map(z => z.regel);
+    // "Merkstelle" ist nur ein allgemeiner Hinweis und entfällt, wenn eine Strategie da ist
+    const rest = texte.filter(t => t !== "<b>Merkstelle</b>" && !regeln.some(r => t.startsWith(`<b>${r}`)));
+    return [...eigene, ...rest];
+  }
+
   // Baut den Hinweis "Verlängern: die Hän<b>d</b>e"; null, wenn der Buchstabe in der Verlängerung fehlt
   function verlaengerungsHinweis(v, want, suchStart) {
     const vWort = v?.wort || "";
@@ -934,7 +1009,7 @@ const FreschModule = (() => {
     if (eingabe.length > 0 && ziel.length > 0) {
       const zielErster = ziel[0];
       const eingabeErster = eingabe[0];
-      if (zielErster === zielErster.toUpperCase() && zielErster !== zielErster.toLowerCase() && eingabeErster !== zielErster) {
+      if (zielErster === zielErster.toUpperCase() && zielErster !== zielErster.toLowerCase() && eingabeErster === zielErster.toLowerCase()) {
         marks.add(0);
         add("<b>Großschreiben</b> (Nomen)");
       }
@@ -1000,22 +1075,26 @@ const FreschModule = (() => {
       else if (o.typ === "sub" && (AUSLAUT[want] === o.got || AUSLAUT[o.got] === want) && (i === l.length - 1 || !istVokal(l[i + 1]))
                && lokaleVerlaengerung(ziel, info) !== "keine") {
         marks.add(i);
-        let v = null;
-        try { v = await verlaengerung(ziel, info); } catch (e) { v = null; }
-        add(verlaengerungsHinweis(v, want, i - offset - 1) || "<b>Verlängern</b>, dann hörst du den Buchstaben");
+        if (!hatStrategie(info, "Verlängern")) {
+          let v = null;
+          try { v = await verlaengerung(ziel, info); } catch (e) { v = null; }
+          add(verlaengerungsHinweis(v, want, i - offset - 1) || "<b>Verlängern</b>, dann hörst du den Buchstaben");
+        }
       }
       else if (o.typ === "sub" && want === "ä" && o.got === "e") {
         marks.add(i);
-        let b = null;
-        try { b = await ableitung(ziel); } catch (e) { b = null; }
-        add(b ? `<b>Ableiten:</b> ${esc(b)} → ${esc(ziel.slice(offset))}` : "<b>ä</b> kommt oft von <b>a</b>");
+        if (!hatStrategie(info, "Ableiten")) {
+          let b = null;
+          try { b = await ableitung(ziel); } catch (e) { b = null; }
+          add(b ? `<b>Ableiten:</b> ${esc(b)} → ${esc(ziel.slice(offset))}` : "<b>ä</b> kommt oft von <b>a</b>");
+        }
       }
       else {
         marks.add(i);
         add("<b>Merkstelle</b>");
       }
     }
-    return { marks, texte };
+    return { marks, texte: mitStrategien(texte, ziel, info) };
   }
   function getDoubleConsonantMarks(ziel) {
     const l = ziel.toLowerCase();
@@ -1076,9 +1155,9 @@ const FreschModule = (() => {
         }
       }
     }
-    return { marks, texte };
+    return { marks, texte: mitStrategien(texte, ziel, info) };
   }
-  return { analyze, getInherentMarks, getDoubleConsonantMarks };
+  return { analyze, getInherentMarks, getDoubleConsonantMarks, strategieHinweise };
 })();
 
 
@@ -2183,8 +2262,10 @@ function revealWord() {
       // Die Analyse kann auf Wiktionary warten; schlägt sie fehl, wird die Lösung ohne Hinweise gezeigt.
       if (wordWrong) {
         let analysis;
+        let strategieAnzahl = 0;
         try {
           analysis = await FreschModule.analyze(wordWithoutArticle, inputWithoutArticle, state.words[state.currentWordIndex].stammdaten);
+          strategieAnzahl = FreschModule.strategieHinweise(wordWithoutArticle, state.words[state.currentWordIndex].stammdaten).length;
         } catch (error) {
           console.warn('Fehleranalyse fehlgeschlagen:', error);
           analysis = { marks: new Set(), texte: [] };
@@ -2193,7 +2274,7 @@ function revealWord() {
         if (cardToken !== state.cardToken) return;
         analysis.marks.forEach(index => targetMarks.add(index + targetOffset));
         getInputErrorMarks(inputWithoutArticle, wordWithoutArticle).forEach(index => inputMarks.add(index + inputOffset));
-        analysis.texte.slice(0, 2).forEach(text => texte.push(text));
+        analysis.texte.slice(0, strategieAnzahl + 2).forEach(text => texte.push(text));
       }
 
       // 1. Das Hauptdisplay zeigt die korrekte Lösung mit den Highlight-Markierungen
