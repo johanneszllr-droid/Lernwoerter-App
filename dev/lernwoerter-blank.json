@@ -8,7 +8,10 @@
       "wortart": "Substantiv",
       "plural": "Fahrräder",
       "emoji": "🚲",
-      "besonderheiten": []
+      "strategie": [
+        "Zerlegen: fahren + Rad",
+        "Verlängern: die Räder"
+      ]
     },
     "userdaten": {
       "box": 1,
@@ -26,7 +29,9 @@
       "wortart": "Präposition",
       "plural": "",
       "emoji": "💌",
-      "besonderheiten": []
+      "strategie": [
+        "Merkwort: für schreibt man mit ü und ohne h"
+      ]
     },
     "userdaten": {
       "box": 1,
@@ -44,7 +49,9 @@
       "wortart": "Präposition",
       "plural": "",
       "emoji": "✉️",
-      "besonderheiten": []
+      "strategie": [
+        "Merkwort: von schreibt man mit v"
+      ]
     },
     "userdaten": {
       "box": 1,
@@ -62,7 +69,9 @@
       "wortart": "Substantiv",
       "plural": "Tische",
       "emoji": "🪵",
-      "besonderheiten": []
+      "strategie": [
+        "Schwingen: Tisch"
+      ]
     },
     "userdaten": {
       "box": 1,
@@ -80,8 +89,9 @@
       "wortart": "Substantiv",
       "plural": "Straßen",
       "emoji": "🛣️",
-      "besonderheiten": [
-        "ß-Schreibung"
+      "strategie": [
+        "Merkwort: Straße schreibt man mit ß, weil das a lang ist",
+        "Schwingen: Stra-ße"
       ]
     },
     "userdaten": {
@@ -100,7 +110,9 @@
       "wortart": "Konjunktion",
       "plural": "",
       "emoji": "➕",
-      "besonderheiten": []
+      "strategie": [
+        "Merkwort: und endet mit d"
+      ]
     },
     "userdaten": {
       "box": 1,
@@ -118,7 +130,9 @@
       "wortart": "Pronomen",
       "plural": "",
       "emoji": "☀️",
-      "besonderheiten": []
+      "strategie": [
+        "Merkwort: viel schreibt man mit v und ie"
+      ]
     },
     "userdaten": {
       "box": 1,
@@ -136,7 +150,9 @@
       "wortart": "Adverb",
       "plural": "",
       "emoji": "🐶",
-      "besonderheiten": []
+      "strategie": [
+        "Merkwort: sehr schreibt man mit h"
+      ]
     },
     "userdaten": {
       "box": 1,
@@ -154,7 +170,9 @@
       "wortart": "Verb",
       "plural": "",
       "emoji": "🚆",
-      "besonderheiten": []
+      "strategie": [
+        "Merkwort: fahren schreibt man mit h"
+      ]
     },
     "userdaten": {
       "box": 1,
@@ -172,7 +190,9 @@
       "wortart": "Substantiv",
       "plural": "Ecken",
       "emoji": "📐",
-      "besonderheiten": []
+      "strategie": [
+        "Schwingen: E-cke"
+      ]
     },
     "userdaten": {
       "box": 1,
@@ -190,7 +210,9 @@
       "wortart": "Verb",
       "plural": "",
       "emoji": "🌱",
-      "besonderheiten": []
+      "strategie": [
+        "Merkwort: wachsen schreibt man mit chs"
+      ]
     },
     "userdaten": {
       "box": 1,
@@ -208,7 +230,9 @@
       "wortart": "Verb",
       "plural": "",
       "emoji": "🐝",
-      "besonderheiten": []
+      "strategie": [
+        "Schwingen: ste-chen"
+      ]
     },
     "userdaten": {
       "box": 1,
@@ -226,7 +250,9 @@
       "wortart": "Substantiv",
       "plural": "Bretter",
       "emoji": "🪵",
-      "besonderheiten": []
+      "strategie": [
+        "Verlängern: die Bretter"
+      ]
     },
     "userdaten": {
       "box": 1,
@@ -244,7 +270,9 @@
       "wortart": "Substantiv",
       "plural": "Sande",
       "emoji": "🏖️",
-      "besonderheiten": []
+      "strategie": [
+        "Verlängern: sandig"
+      ]
     },
     "userdaten": {
       "box": 1,
@@ -262,7 +290,9 @@
       "wortart": "Verb",
       "plural": "",
       "emoji": "🤾",
-      "besonderheiten": []
+      "strategie": [
+        "Schwingen: fan-gen"
+      ]
     },
     "userdaten": {
       "box": 1,
@@ -280,7 +310,9 @@
       "wortart": "Substantiv",
       "plural": "Schränke",
       "emoji": "🚪",
-      "besonderheiten": []
+      "strategie": [
+        "Verlängern: die Schränke"
+      ]
     },
     "userdaten": {
       "box": 0,
@@ -298,7 +330,9 @@
       "wortart": "Substantiv",
       "plural": "Lieben",
       "emoji": "❤️",
-      "besonderheiten": []
+      "strategie": [
+        "Schwingen: Lie-be"
+      ]
     },
     "userdaten": {
       "box": 0,
@@ -316,7 +350,9 @@
       "wortart": "Substantiv",
       "plural": "Schritte",
       "emoji": "👣",
-      "besonderheiten": []
+      "strategie": [
+        "Schwingen: Schrit-te"
+      ]
     },
     "userdaten": {
       "box": 0,
@@ -334,7 +370,9 @@
       "wortart": "Substantiv",
       "plural": "Treppen",
       "emoji": "🪜",
-      "besonderheiten": []
+      "strategie": [
+        "Schwingen: Trep-pe"
+      ]
     },
     "userdaten": {
       "box": 0,
@@ -352,7 +390,9 @@
       "wortart": "Substantiv",
       "plural": "Klassen",
       "emoji": "🏫",
-      "besonderheiten": []
+      "strategie": [
+        "Schwingen: Klas-se"
+      ]
     },
     "userdaten": {
       "box": 0,
@@ -370,7 +410,9 @@
       "wortart": "Substantiv",
       "plural": "Schulen",
       "emoji": "🏫",
-      "besonderheiten": []
+      "strategie": [
+        "Schwingen: Schu-le"
+      ]
     },
     "userdaten": {
       "box": 0,
@@ -388,7 +430,9 @@
       "wortart": "Substantiv",
       "plural": "Willen",
       "emoji": "💪",
-      "besonderheiten": []
+      "strategie": [
+        "Schwingen: Wil-le"
+      ]
     },
     "userdaten": {
       "box": 0,
@@ -406,7 +450,9 @@
       "wortart": "Substantiv",
       "plural": "Wünsche",
       "emoji": "✨",
-      "besonderheiten": []
+      "strategie": [
+        "Schwingen: Wunsch"
+      ]
     },
     "userdaten": {
       "box": 0,
@@ -424,7 +470,10 @@
       "wortart": "Verb",
       "plural": "",
       "emoji": "🔑",
-      "besonderheiten": []
+      "strategie": [
+        "Merkwort: ver- schreibt man mit v",
+        "Schwingen: ver-lie-ren"
+      ]
     },
     "userdaten": {
       "box": 0,
@@ -442,7 +491,10 @@
       "wortart": "Verb",
       "plural": "",
       "emoji": "🧩",
-      "besonderheiten": []
+      "strategie": [
+        "Merkwort: ver- schreibt man mit v",
+        "Schwingen: ver-su-chen"
+      ]
     },
     "userdaten": {
       "box": 0,
@@ -460,7 +512,9 @@
       "wortart": "Substantiv",
       "plural": "Bälle",
       "emoji": "⚽",
-      "besonderheiten": []
+      "strategie": [
+        "Verlängern: die Bälle"
+      ]
     },
     "userdaten": {
       "box": 0,
@@ -478,7 +532,9 @@
       "wortart": "Substantiv",
       "plural": "Herbste",
       "emoji": "🍂",
-      "besonderheiten": []
+      "strategie": [
+        "Merkwort: Herbst schreibt man mit bst"
+      ]
     },
     "userdaten": {
       "box": 0,
@@ -496,7 +552,9 @@
       "wortart": "Substantiv",
       "plural": "Blätter",
       "emoji": "🍃",
-      "besonderheiten": []
+      "strategie": [
+        "Verlängern: die Blätter"
+      ]
     },
     "userdaten": {
       "box": 0,
@@ -514,7 +572,9 @@
       "wortart": "Verb",
       "plural": "",
       "emoji": "😴",
-      "besonderheiten": []
+      "strategie": [
+        "Merkwort: sind endet mit d"
+      ]
     },
     "userdaten": {
       "box": 0,
@@ -532,7 +592,9 @@
       "wortart": "Präposition",
       "plural": "",
       "emoji": "⏳",
-      "besonderheiten": []
+      "strategie": [
+        "Merkwort: seit mit t wie bei der Zeit"
+      ]
     },
     "userdaten": {
       "box": 0,
@@ -550,7 +612,9 @@
       "wortart": "Adverb",
       "plural": "",
       "emoji": "📅",
-      "besonderheiten": []
+      "strategie": [
+        "Schwingen: ges-tern"
+      ]
     },
     "userdaten": {
       "box": 0,
@@ -568,7 +632,9 @@
       "wortart": "Verb",
       "plural": "",
       "emoji": "👥",
-      "besonderheiten": []
+      "strategie": [
+        "Merkwort: ihr seid schreibt man mit d"
+      ]
     },
     "userdaten": {
       "box": 0,
@@ -586,7 +652,9 @@
       "wortart": "Adjektiv",
       "plural": "",
       "emoji": "😊",
-      "besonderheiten": []
+      "strategie": [
+        "Verlängern: nette"
+      ]
     },
     "userdaten": {
       "box": 0,
@@ -604,7 +672,9 @@
       "wortart": "Verb",
       "plural": "",
       "emoji": "👀",
-      "besonderheiten": []
+      "strategie": [
+        "Schwingen: gu-cken"
+      ]
     },
     "userdaten": {
       "box": 0,
@@ -622,7 +692,10 @@
       "wortart": "Adjektiv",
       "plural": "",
       "emoji": "🐘",
-      "besonderheiten": []
+      "strategie": [
+        "Verlängern: große",
+        "Merkwort: groß schreibt man mit ß, weil das o lang ist"
+      ]
     },
     "userdaten": {
       "box": 0,
@@ -640,7 +713,9 @@
       "wortart": "Substantiv",
       "plural": "Keller",
       "emoji": "🏠",
-      "besonderheiten": []
+      "strategie": [
+        "Schwingen: Kel-ler"
+      ]
     },
     "userdaten": {
       "box": 0,
@@ -658,7 +733,9 @@
       "wortart": "Adjektiv",
       "plural": "",
       "emoji": "🐭",
-      "besonderheiten": []
+      "strategie": [
+        "Schwingen: klein"
+      ]
     },
     "userdaten": {
       "box": 0,
@@ -676,7 +753,9 @@
       "wortart": "Substantiv",
       "plural": "",
       "emoji": "🤢",
-      "besonderheiten": []
+      "strategie": [
+        "Ableiten: stinken"
+      ]
     },
     "userdaten": {
       "box": 0,
@@ -694,7 +773,9 @@
       "wortart": "Substantiv",
       "plural": "Männer",
       "emoji": "👨",
-      "besonderheiten": []
+      "strategie": [
+        "Verlängern: die Männer"
+      ]
     },
     "userdaten": {
       "box": 0,
@@ -712,7 +793,9 @@
       "wortart": "Substantiv",
       "plural": "Frauen",
       "emoji": "👩",
-      "besonderheiten": []
+      "strategie": [
+        "Schwingen: Frau"
+      ]
     },
     "userdaten": {
       "box": 0,
@@ -730,7 +813,9 @@
       "wortart": "Substantiv",
       "plural": "Herren",
       "emoji": "🎩",
-      "besonderheiten": []
+      "strategie": [
+        "Verlängern: die Herren"
+      ]
     },
     "userdaten": {
       "box": 0,
@@ -748,7 +833,9 @@
       "wortart": "Verb",
       "plural": "",
       "emoji": "🧼",
-      "besonderheiten": []
+      "strategie": [
+        "Schwingen: müs-sen"
+      ]
     },
     "userdaten": {
       "box": 0,
@@ -766,7 +853,9 @@
       "wortart": "Verb",
       "plural": "",
       "emoji": "🗣️",
-      "besonderheiten": []
+      "strategie": [
+        "Verlängern: wir sagen"
+      ]
     },
     "userdaten": {
       "box": 0,
@@ -784,7 +873,9 @@
       "wortart": "Verb",
       "plural": "",
       "emoji": "🙋‍♂️",
-      "besonderheiten": []
+      "strategie": [
+        "Verlängern: wir wollen"
+      ]
     },
     "userdaten": {
       "box": 0,
@@ -802,7 +893,9 @@
       "wortart": "Verb",
       "plural": "",
       "emoji": "🏖️",
-      "besonderheiten": []
+      "strategie": [
+        "Schwingen: wol-len"
+      ]
     },
     "userdaten": {
       "box": 0,
@@ -820,7 +913,10 @@
       "wortart": "Adverb",
       "plural": "",
       "emoji": "🤔",
-      "besonderheiten": []
+      "strategie": [
+        "Zerlegen: viel + leicht",
+        "Merkwort: vielleicht schreibt man mit v und ll"
+      ]
     },
     "userdaten": {
       "box": 0,
@@ -838,7 +934,9 @@
       "wortart": "Substantiv",
       "plural": "Zimmer",
       "emoji": "🚪",
-      "besonderheiten": []
+      "strategie": [
+        "Schwingen: Zim-mer"
+      ]
     },
     "userdaten": {
       "box": 0,
@@ -856,7 +954,9 @@
       "wortart": "Substantiv",
       "plural": "Lampen",
       "emoji": "💡",
-      "besonderheiten": []
+      "strategie": [
+        "Schwingen: Lam-pe"
+      ]
     },
     "userdaten": {
       "box": 0,
@@ -874,7 +974,9 @@
       "wortart": "Substantiv",
       "plural": "Stühle",
       "emoji": "🪑",
-      "besonderheiten": []
+      "strategie": [
+        "Merkwort: Stuhl schreibt man mit h"
+      ]
     },
     "userdaten": {
       "box": 0,
@@ -892,7 +994,9 @@
       "wortart": "Adjektiv",
       "plural": "",
       "emoji": "😒",
-      "besonderheiten": []
+      "strategie": [
+        "Merkwort: doof schreibt man mit oo"
+      ]
     },
     "userdaten": {
       "box": 0,
@@ -910,7 +1014,9 @@
       "wortart": "Substantiv",
       "plural": "Hände",
       "emoji": "✋",
-      "besonderheiten": []
+      "strategie": [
+        "Verlängern: die Hände"
+      ]
     },
     "userdaten": {
       "box": 0,
@@ -928,7 +1034,9 @@
       "wortart": "Substantiv",
       "plural": "Füße",
       "emoji": "🦶",
-      "besonderheiten": []
+      "strategie": [
+        "Verlängern: die Füße"
+      ]
     },
     "userdaten": {
       "box": 0,
@@ -946,7 +1054,9 @@
       "wortart": "Substantiv",
       "plural": "Schnecken",
       "emoji": "🐌",
-      "besonderheiten": []
+      "strategie": [
+        "Schwingen: Schne-cke"
+      ]
     },
     "userdaten": {
       "box": 0,
@@ -964,7 +1074,9 @@
       "wortart": "Substantiv",
       "plural": "Tiger",
       "emoji": "🐅",
-      "besonderheiten": []
+      "strategie": [
+        "Merkwort: Tiger schreibt man nur mit i, ohne e"
+      ]
     },
     "userdaten": {
       "box": 0,
@@ -982,7 +1094,9 @@
       "wortart": "Verb",
       "plural": "",
       "emoji": "📦",
-      "besonderheiten": []
+      "strategie": [
+        "Schwingen: brin-gen"
+      ]
     },
     "userdaten": {
       "box": 0,
@@ -1000,7 +1114,9 @@
       "wortart": "Substantiv",
       "plural": "Bienen",
       "emoji": "🐝",
-      "besonderheiten": []
+      "strategie": [
+        "Schwingen: Bie-ne"
+      ]
     },
     "userdaten": {
       "box": 0,
@@ -1018,7 +1134,9 @@
       "wortart": "Adverb",
       "plural": "",
       "emoji": "🔄",
-      "besonderheiten": []
+      "strategie": [
+        "Merkwort: wieder (noch einmal) schreibt man mit ie"
+      ]
     },
     "userdaten": {
       "box": 0,
@@ -1036,7 +1154,9 @@
       "wortart": "Verb",
       "plural": "",
       "emoji": "👀",
-      "besonderheiten": []
+      "strategie": [
+        "Schwingen: se-hen"
+      ]
     },
     "userdaten": {
       "box": 0,
@@ -1054,7 +1174,10 @@
       "wortart": "Verb",
       "plural": "",
       "emoji": "🗳️",
-      "besonderheiten": []
+      "strategie": [
+        "Ableiten: die Wahl",
+        "Merkwort: wählen schreibt man mit h"
+      ]
     },
     "userdaten": {
       "box": 0,
@@ -1072,7 +1195,9 @@
       "wortart": "Substantiv",
       "plural": "Wässer",
       "emoji": "💧",
-      "besonderheiten": []
+      "strategie": [
+        "Schwingen: Was-ser"
+      ]
     },
     "userdaten": {
       "box": 0,
@@ -1090,7 +1215,9 @@
       "wortart": "Substantiv",
       "plural": "Sonnen",
       "emoji": "☀️",
-      "besonderheiten": []
+      "strategie": [
+        "Schwingen: Son-ne"
+      ]
     },
     "userdaten": {
       "box": 0,
@@ -1108,7 +1235,9 @@
       "wortart": "Substantiv",
       "plural": "Teller",
       "emoji": "🍽️",
-      "besonderheiten": []
+      "strategie": [
+        "Schwingen: Tel-ler"
+      ]
     },
     "userdaten": {
       "box": 0,
@@ -1126,7 +1255,9 @@
       "wortart": "Verb",
       "plural": "",
       "emoji": "🏃",
-      "besonderheiten": []
+      "strategie": [
+        "Schwingen: ren-nen"
+      ]
     },
     "userdaten": {
       "box": 0,
@@ -1144,7 +1275,9 @@
       "wortart": "Verb",
       "plural": "",
       "emoji": "🏊",
-      "besonderheiten": []
+      "strategie": [
+        "Schwingen: schwim-men"
+      ]
     },
     "userdaten": {
       "box": 0,
@@ -1162,7 +1295,9 @@
       "wortart": "Verb",
       "plural": "",
       "emoji": "🍂",
-      "besonderheiten": []
+      "strategie": [
+        "Schwingen: fal-len"
+      ]
     },
     "userdaten": {
       "box": 0,
@@ -1180,7 +1315,9 @@
       "wortart": "Verb",
       "plural": "",
       "emoji": "💪",
-      "besonderheiten": []
+      "strategie": [
+        "Schwingen: kön-nen"
+      ]
     },
     "userdaten": {
       "box": 0,
@@ -1198,7 +1335,9 @@
       "wortart": "Verb",
       "plural": "",
       "emoji": "🏃",
-      "besonderheiten": []
+      "strategie": [
+        "Schwingen: kam"
+      ]
     },
     "userdaten": {
       "box": 0,
@@ -1216,7 +1355,9 @@
       "wortart": "Präposition",
       "plural": "",
       "emoji": "➡️",
-      "besonderheiten": []
+      "strategie": [
+        "Merkwort: nach schreibt man mit ch"
+      ]
     },
     "userdaten": {
       "box": 0,
@@ -1234,7 +1375,9 @@
       "wortart": "Adjektiv",
       "plural": "",
       "emoji": "🌅",
-      "besonderheiten": []
+      "strategie": [
+        "Merkwort: früh schreibt man mit h"
+      ]
     },
     "userdaten": {
       "box": 0,
@@ -1252,7 +1395,9 @@
       "wortart": "Adjektiv",
       "plural": "",
       "emoji": "🌙",
-      "besonderheiten": []
+      "strategie": [
+        "Merkwort: spät schreibt man mit ä"
+      ]
     },
     "userdaten": {
       "box": 0,
@@ -1270,7 +1415,9 @@
       "wortart": "Substantiv",
       "plural": "Brücken",
       "emoji": "🌉",
-      "besonderheiten": []
+      "strategie": [
+        "Schwingen: Brü-cke"
+      ]
     },
     "userdaten": {
       "box": 0,
@@ -1288,7 +1435,10 @@
       "wortart": "Substantiv",
       "plural": "Rucksäcke",
       "emoji": "🎒",
-      "besonderheiten": []
+      "strategie": [
+        "Zerlegen: Ruck + Sack",
+        "Verlängern: die Säcke"
+      ]
     },
     "userdaten": {
       "box": 0,
@@ -1306,7 +1456,9 @@
       "wortart": "Substantiv",
       "plural": "Jacken",
       "emoji": "🧥",
-      "besonderheiten": []
+      "strategie": [
+        "Schwingen: Ja-cke"
+      ]
     },
     "userdaten": {
       "box": 0,
@@ -1324,7 +1476,9 @@
       "wortart": "Verb",
       "plural": "",
       "emoji": "🥞",
-      "besonderheiten": []
+      "strategie": [
+        "Schwingen: schme-cken"
+      ]
     },
     "userdaten": {
       "box": 0,
@@ -1342,7 +1496,9 @@
       "wortart": "Verb",
       "plural": "",
       "emoji": "🦌",
-      "besonderheiten": []
+      "strategie": [
+        "Schwingen: er-schre-cken"
+      ]
     },
     "userdaten": {
       "box": 0,
@@ -1360,7 +1516,9 @@
       "wortart": "Substantiv",
       "plural": "Katzen",
       "emoji": "🐱",
-      "besonderheiten": []
+      "strategie": [
+        "Schwingen: Kat-ze"
+      ]
     },
     "userdaten": {
       "box": 0,
@@ -1378,7 +1536,9 @@
       "wortart": "Adverb",
       "plural": "",
       "emoji": "⏱️",
-      "besonderheiten": []
+      "strategie": [
+        "Merkwort: jetzt schreibt man mit tz"
+      ]
     },
     "userdaten": {
       "box": 0,
@@ -1396,7 +1556,9 @@
       "wortart": "Substantiv",
       "plural": "Briefe",
       "emoji": "✉️",
-      "besonderheiten": []
+      "strategie": [
+        "Verlängern: die Briefe"
+      ]
     },
     "userdaten": {
       "box": 0,
@@ -1414,7 +1576,9 @@
       "wortart": "Verb",
       "plural": "",
       "emoji": "🐦",
-      "besonderheiten": []
+      "strategie": [
+        "Schwingen: flie-gen"
+      ]
     },
     "userdaten": {
       "box": 0,
@@ -1432,7 +1596,9 @@
       "wortart": "Verb",
       "plural": "",
       "emoji": "👃",
-      "besonderheiten": []
+      "strategie": [
+        "Schwingen: rie-chen"
+      ]
     },
     "userdaten": {
       "box": 0,
@@ -1450,7 +1616,9 @@
       "wortart": "Verb",
       "plural": "",
       "emoji": "🤥",
-      "besonderheiten": []
+      "strategie": [
+        "Schwingen: lü-gen"
+      ]
     },
     "userdaten": {
       "box": 0,
@@ -1468,7 +1636,9 @@
       "wortart": "Adverb",
       "plural": "",
       "emoji": "❌",
-      "besonderheiten": []
+      "strategie": [
+        "Merkwort: nie schreibt man mit ie"
+      ]
     },
     "userdaten": {
       "box": 0,
@@ -1486,7 +1656,9 @@
       "wortart": "Adverb",
       "plural": "",
       "emoji": "🚫",
-      "besonderheiten": []
+      "strategie": [
+        "Merkwort: nicht schreibt man mit ch"
+      ]
     },
     "userdaten": {
       "box": 0,
@@ -1504,7 +1676,9 @@
       "wortart": "Substantiv",
       "plural": "Zähne",
       "emoji": "🦷",
-      "besonderheiten": []
+      "strategie": [
+        "Merkwort: Zahn schreibt man mit h"
+      ]
     },
     "userdaten": {
       "box": 0,
@@ -1522,7 +1696,10 @@
       "wortart": "Substantiv",
       "plural": "Lehrer",
       "emoji": "👨‍🏫",
-      "besonderheiten": []
+      "strategie": [
+        "Ableiten: lehren",
+        "Merkwort: Lehrer schreibt man mit h"
+      ]
     },
     "userdaten": {
       "box": 0,
@@ -1540,7 +1717,9 @@
       "wortart": "Verb",
       "plural": "",
       "emoji": "🚶",
-      "besonderheiten": []
+      "strategie": [
+        "Schwingen: ge-hen"
+      ]
     },
     "userdaten": {
       "box": 0,
@@ -1558,7 +1737,9 @@
       "wortart": "Verb",
       "plural": "",
       "emoji": "🚶",
-      "besonderheiten": []
+      "strategie": [
+        "Verlängern: wir gehen"
+      ]
     },
     "userdaten": {
       "box": 0,
@@ -1576,7 +1757,10 @@
       "wortart": "Adverb",
       "plural": "",
       "emoji": "⏰",
-      "besonderheiten": []
+      "strategie": [
+        "Ableiten: früh",
+        "Merkwort: früher schreibt man mit h"
+      ]
     },
     "userdaten": {
       "box": 0,
@@ -1594,7 +1778,10 @@
       "wortart": "Adjektiv",
       "plural": "",
       "emoji": "😁",
-      "besonderheiten": []
+      "strategie": [
+        "Ableiten: froh",
+        "Merkwort: fröhlich schreibt man mit h"
+      ]
     },
     "userdaten": {
       "box": 0,
@@ -1612,7 +1799,9 @@
       "wortart": "Verb",
       "plural": "",
       "emoji": "🔢",
-      "besonderheiten": []
+      "strategie": [
+        "Ableiten: die Zahl"
+      ]
     },
     "userdaten": {
       "box": 0,
@@ -1630,7 +1819,9 @@
       "wortart": "Substantiv",
       "plural": "Hunde",
       "emoji": "🐕",
-      "besonderheiten": []
+      "strategie": [
+        "Verlängern: die Hunde"
+      ]
     },
     "userdaten": {
       "box": 0,
@@ -1648,7 +1839,9 @@
       "wortart": "Substantiv",
       "plural": "Pferde",
       "emoji": "🐎",
-      "besonderheiten": []
+      "strategie": [
+        "Verlängern: die Pferde"
+      ]
     },
     "userdaten": {
       "box": 0,
@@ -1666,7 +1859,9 @@
       "wortart": "Substantiv",
       "plural": "Berge",
       "emoji": "⛰️",
-      "besonderheiten": []
+      "strategie": [
+        "Verlängern: die Berge"
+      ]
     },
     "userdaten": {
       "box": 0,
@@ -1684,7 +1879,9 @@
       "wortart": "Substantiv",
       "plural": "Gelder",
       "emoji": "💶",
-      "besonderheiten": []
+      "strategie": [
+        "Verlängern: die Gelder"
+      ]
     },
     "userdaten": {
       "box": 0,
@@ -1702,7 +1899,9 @@
       "wortart": "Verb",
       "plural": "",
       "emoji": "✋",
-      "besonderheiten": []
+      "strategie": [
+        "Schwingen: las-sen"
+      ]
     },
     "userdaten": {
       "box": 0,
@@ -1720,7 +1919,9 @@
       "wortart": "Pronomen",
       "plural": "",
       "emoji": "👉",
-      "besonderheiten": []
+      "strategie": [
+        "Merkwort: das (der, die, das) schreibt man mit einem s"
+      ]
     },
     "userdaten": {
       "box": 0,
@@ -1738,7 +1939,9 @@
       "wortart": "Adjektiv",
       "plural": "",
       "emoji": "⚡",
-      "besonderheiten": []
+      "strategie": [
+        "Merkwort: plötzlich schreibt man mit tz"
+      ]
     },
     "userdaten": {
       "box": 0,
@@ -1756,7 +1959,9 @@
       "wortart": "Adverb",
       "plural": "",
       "emoji": "❓",
-      "besonderheiten": []
+      "strategie": [
+        "Merkwort: wie schreibt man mit ie"
+      ]
     },
     "userdaten": {
       "box": 0,
@@ -1774,7 +1979,9 @@
       "wortart": "Verb",
       "plural": "",
       "emoji": "🏷️",
-      "besonderheiten": []
+      "strategie": [
+        "Verlängern: wir heißen"
+      ]
     },
     "userdaten": {
       "box": 0,
@@ -1792,7 +1999,9 @@
       "wortart": "Pronomen",
       "plural": "",
       "emoji": "🫵",
-      "besonderheiten": []
+      "strategie": [
+        "Schwingen: du"
+      ]
     },
     "userdaten": {
       "box": 0,
@@ -1810,7 +2019,10 @@
       "wortart": "Verb",
       "plural": "",
       "emoji": "👋",
-      "besonderheiten": []
+      "strategie": [
+        "Merkwort: heiße schreibt man mit ß, weil ei ein langer Laut ist",
+        "Schwingen: hei-ße"
+      ]
     },
     "userdaten": {
       "box": 0,
@@ -1828,7 +2040,10 @@
       "wortart": "Adverb",
       "plural": "",
       "emoji": "🌳",
-      "besonderheiten": []
+      "strategie": [
+        "Merkwort: draußen schreibt man mit ß, weil au ein langer Laut ist",
+        "Schwingen: drau-ßen"
+      ]
     },
     "userdaten": {
       "box": 0,
@@ -1846,7 +2061,9 @@
       "wortart": "Substantiv",
       "plural": "Ängste",
       "emoji": "😨",
-      "besonderheiten": []
+      "strategie": [
+        "Merkwort: Angst schreibt man mit ngst"
+      ]
     },
     "userdaten": {
       "box": 0,
@@ -1864,7 +2081,9 @@
       "wortart": "Substantiv",
       "plural": "Hefte",
       "emoji": "📓",
-      "besonderheiten": []
+      "strategie": [
+        "Schwingen: Heft"
+      ]
     },
     "userdaten": {
       "box": 0,
@@ -1882,7 +2101,9 @@
       "wortart": "Substantiv",
       "plural": "Familien",
       "emoji": "👨‍👩‍👧‍👦",
-      "besonderheiten": []
+      "strategie": [
+        "Schwingen: Fa-mi-li-e"
+      ]
     },
     "userdaten": {
       "box": 0,
@@ -1900,7 +2121,9 @@
       "wortart": "Adjektiv",
       "plural": "",
       "emoji": "🥰",
-      "besonderheiten": []
+      "strategie": [
+        "Ableiten: das Glück"
+      ]
     },
     "userdaten": {
       "box": 0,
@@ -1918,7 +2141,10 @@
       "wortart": "Substantiv",
       "plural": "Tode",
       "emoji": "⚰️",
-      "besonderheiten": []
+      "strategie": [
+        "Merkwort: der Tod mit d, aber tot mit t",
+        "Verlängern: die Tode"
+      ]
     },
     "userdaten": {
       "box": 0,
@@ -1936,7 +2162,9 @@
       "wortart": "Substantiv",
       "plural": "Vögel",
       "emoji": "🐦",
-      "besonderheiten": []
+      "strategie": [
+        "Merkwort: Vogel schreibt man mit V"
+      ]
     },
     "userdaten": {
       "box": 0,
@@ -1954,7 +2182,9 @@
       "wortart": "Verb",
       "plural": "",
       "emoji": "🟰",
-      "besonderheiten": []
+      "strategie": [
+        "Merkwort: ist endet mit t"
+      ]
     },
     "userdaten": {
       "box": 0,
@@ -1972,7 +2202,10 @@
       "wortart": "Adjektiv",
       "plural": "",
       "emoji": "🪦",
-      "besonderheiten": []
+      "strategie": [
+        "Verlängern: tote",
+        "Merkwort: tot mit t, aber der Tod mit d"
+      ]
     },
     "userdaten": {
       "box": 0,
@@ -1990,7 +2223,10 @@
       "wortart": "Substantiv",
       "plural": "Weihnachten",
       "emoji": "🎄",
-      "besonderheiten": []
+      "strategie": [
+        "Ableiten: die Nacht",
+        "Merkwort: Weihnachten schreibt man mit h nach ei"
+      ]
     },
     "userdaten": {
       "box": 0,
@@ -2008,7 +2244,9 @@
       "wortart": "Substantiv",
       "plural": "Kerzen",
       "emoji": "🕯️",
-      "besonderheiten": []
+      "strategie": [
+        "Schwingen: Ker-ze"
+      ]
     },
     "userdaten": {
       "box": 0,
@@ -2026,7 +2264,9 @@
       "wortart": "Substantiv",
       "plural": "Advente",
       "emoji": "🍪",
-      "besonderheiten": []
+      "strategie": [
+        "Merkwort: Advent schreibt man mit v"
+      ]
     },
     "userdaten": {
       "box": 0,
@@ -2044,7 +2284,9 @@
       "wortart": "Substantiv",
       "plural": "Dinge",
       "emoji": "📦",
-      "besonderheiten": []
+      "strategie": [
+        "Schwingen: Ding"
+      ]
     },
     "userdaten": {
       "box": 0,
@@ -2062,7 +2304,9 @@
       "wortart": "Substantiv",
       "plural": "Dächer",
       "emoji": "🏠",
-      "besonderheiten": []
+      "strategie": [
+        "Schwingen: Dach"
+      ]
     },
     "userdaten": {
       "box": 0,
@@ -2080,7 +2324,9 @@
       "wortart": "Substantiv",
       "plural": "Löcher",
       "emoji": "🕳️",
-      "besonderheiten": []
+      "strategie": [
+        "Schwingen: Loch"
+      ]
     },
     "userdaten": {
       "box": 0,
@@ -2098,7 +2344,9 @@
       "wortart": "Substantiv",
       "plural": "Hunger",
       "emoji": "😋",
-      "besonderheiten": []
+      "strategie": [
+        "Schwingen: Hun-ger"
+      ]
     },
     "userdaten": {
       "box": 0,
@@ -2116,7 +2364,9 @@
       "wortart": "Adjektiv",
       "plural": "",
       "emoji": "🍕",
-      "besonderheiten": []
+      "strategie": [
+        "Schwingen: le-cker"
+      ]
     },
     "userdaten": {
       "box": 0,
@@ -2134,7 +2384,9 @@
       "wortart": "Substantiv",
       "plural": "Kuchen",
       "emoji": "🎂",
-      "besonderheiten": []
+      "strategie": [
+        "Schwingen: Ku-chen"
+      ]
     },
     "userdaten": {
       "box": 0,
@@ -2152,7 +2404,9 @@
       "wortart": "Substantiv",
       "plural": "Schuhe",
       "emoji": "👟",
-      "besonderheiten": []
+      "strategie": [
+        "Verlängern: die Schuhe"
+      ]
     },
     "userdaten": {
       "box": 0,
@@ -2170,7 +2424,10 @@
       "wortart": "Adjektiv",
       "plural": "",
       "emoji": "⏰",
-      "besonderheiten": []
+      "strategie": [
+        "Verlängern: rechtzeitige",
+        "Zerlegen: recht + Zeit + ig"
+      ]
     },
     "userdaten": {
       "box": 0,
@@ -2188,7 +2445,9 @@
       "wortart": "Adverb",
       "plural": "",
       "emoji": "⏱️",
-      "besonderheiten": []
+      "strategie": [
+        "Schwingen: gleich"
+      ]
     },
     "userdaten": {
       "box": 0,
@@ -2206,7 +2465,9 @@
       "wortart": "Adjektiv",
       "plural": "",
       "emoji": "🚨",
-      "besonderheiten": []
+      "strategie": [
+        "Verlängern: dringende"
+      ]
     },
     "userdaten": {
       "box": 0,
@@ -2224,7 +2485,9 @@
       "wortart": "Substantiv",
       "plural": "Bücher",
       "emoji": "📖",
-      "besonderheiten": []
+      "strategie": [
+        "Schwingen: Buch"
+      ]
     },
     "userdaten": {
       "box": 0,
@@ -2242,7 +2505,9 @@
       "wortart": "Substantiv",
       "plural": "Pfützen",
       "emoji": "💦",
-      "besonderheiten": []
+      "strategie": [
+        "Schwingen: Pfüt-ze"
+      ]
     },
     "userdaten": {
       "box": 0,
@@ -2260,7 +2525,9 @@
       "wortart": "Verb",
       "plural": "",
       "emoji": "💦",
-      "besonderheiten": []
+      "strategie": [
+        "Schwingen: sprit-zen"
+      ]
     },
     "userdaten": {
       "box": 0,
@@ -2278,7 +2545,9 @@
       "wortart": "Substantiv",
       "plural": "Mützen",
       "emoji": "🧢",
-      "besonderheiten": []
+      "strategie": [
+        "Schwingen: Müt-ze"
+      ]
     },
     "userdaten": {
       "box": 0,
@@ -2296,7 +2565,9 @@
       "wortart": "Substantiv",
       "plural": "Plätze",
       "emoji": "🪑",
-      "besonderheiten": []
+      "strategie": [
+        "Verlängern: die Plätze"
+      ]
     },
     "userdaten": {
       "box": 0,
@@ -2314,7 +2585,9 @@
       "wortart": "Substantiv",
       "plural": "Sätze",
       "emoji": "📝",
-      "besonderheiten": []
+      "strategie": [
+        "Verlängern: die Sätze"
+      ]
     },
     "userdaten": {
       "box": 0,
@@ -2332,7 +2605,9 @@
       "wortart": "Adjektiv",
       "plural": "",
       "emoji": "😂",
-      "besonderheiten": []
+      "strategie": [
+        "Verlängern: witzige"
+      ]
     },
     "userdaten": {
       "box": 0,
@@ -2350,7 +2625,9 @@
       "wortart": "Substantiv",
       "plural": "Witze",
       "emoji": "🤡",
-      "besonderheiten": []
+      "strategie": [
+        "Verlängern: die Witze"
+      ]
     },
     "userdaten": {
       "box": 0,
@@ -2368,7 +2645,9 @@
       "wortart": "Substantiv",
       "plural": "Bänder",
       "emoji": "🎁",
-      "besonderheiten": []
+      "strategie": [
+        "Ableiten: das Band"
+      ]
     },
     "userdaten": {
       "box": 0,
@@ -2386,7 +2665,9 @@
       "wortart": "Substantiv",
       "plural": "Zwerge",
       "emoji": "🧙‍♂️",
-      "besonderheiten": []
+      "strategie": [
+        "Verlängern: die Zwerge"
+      ]
     },
     "userdaten": {
       "box": 0,
@@ -2404,7 +2685,9 @@
       "wortart": "Adjektiv",
       "plural": "",
       "emoji": "🙈",
-      "besonderheiten": []
+      "strategie": [
+        "Verlängern: blinde"
+      ]
     },
     "userdaten": {
       "box": 0,
@@ -2422,7 +2705,9 @@
       "wortart": "Adjektiv",
       "plural": "",
       "emoji": "🍏",
-      "besonderheiten": []
+      "strategie": [
+        "Verlängern: gesunde"
+      ]
     },
     "userdaten": {
       "box": 0,
@@ -2440,7 +2725,9 @@
       "wortart": "Adjektiv",
       "plural": "",
       "emoji": "🦉",
-      "besonderheiten": []
+      "strategie": [
+        "Verlängern: kluge"
+      ]
     },
     "userdaten": {
       "box": 0,
@@ -2458,7 +2745,9 @@
       "wortart": "Adjektiv",
       "plural": "",
       "emoji": "🤸",
-      "besonderheiten": []
+      "strategie": [
+        "Verlängern: wilde"
+      ]
     },
     "userdaten": {
       "box": 0,
@@ -2476,7 +2765,9 @@
       "wortart": "Substantiv",
       "plural": "Tage",
       "emoji": "☀️",
-      "besonderheiten": []
+      "strategie": [
+        "Verlängern: die Tage"
+      ]
     },
     "userdaten": {
       "box": 0,
@@ -2494,7 +2785,10 @@
       "wortart": "Verb",
       "plural": "",
       "emoji": "🧹",
-      "besonderheiten": []
+      "strategie": [
+        "Ableiten: der Raum",
+        "Zerlegen: auf + räumen"
+      ]
     },
     "userdaten": {
       "box": 0,
@@ -2512,7 +2806,9 @@
       "wortart": "Verb",
       "plural": "",
       "emoji": "💭",
-      "besonderheiten": []
+      "strategie": [
+        "Ableiten: der Traum"
+      ]
     },
     "userdaten": {
       "box": 0,
@@ -2530,7 +2826,9 @@
       "wortart": "Substantiv",
       "plural": "Gefahren",
       "emoji": "⚠️",
-      "besonderheiten": []
+      "strategie": [
+        "Merkwort: Gefahr schreibt man mit h"
+      ]
     },
     "userdaten": {
       "box": 0,
@@ -2548,7 +2846,9 @@
       "wortart": "Substantiv",
       "plural": "Blitze",
       "emoji": "⚡",
-      "besonderheiten": []
+      "strategie": [
+        "Verlängern: die Blitze"
+      ]
     },
     "userdaten": {
       "box": 0,
@@ -2566,7 +2866,9 @@
       "wortart": "Verb",
       "plural": "",
       "emoji": "⚡",
-      "besonderheiten": []
+      "strategie": [
+        "Verlängern: blitzen"
+      ]
     },
     "userdaten": {
       "box": 0,
@@ -2584,7 +2886,9 @@
       "wortart": "Verb",
       "plural": "",
       "emoji": "🪥",
-      "besonderheiten": []
+      "strategie": [
+        "Verlängern: wir putzen"
+      ]
     },
     "userdaten": {
       "box": 0,
@@ -2602,7 +2906,9 @@
       "wortart": "Substantiv",
       "plural": "Fehler",
       "emoji": "❌",
-      "besonderheiten": []
+      "strategie": [
+        "Merkwort: Fehler schreibt man mit h"
+      ]
     },
     "userdaten": {
       "box": 0,
@@ -2620,7 +2926,9 @@
       "wortart": "Substantiv",
       "plural": "Boote",
       "emoji": "🛶",
-      "besonderheiten": []
+      "strategie": [
+        "Merkwort: Boot schreibt man mit oo"
+      ]
     },
     "userdaten": {
       "box": 0,
@@ -2638,7 +2946,9 @@
       "wortart": "Substantiv",
       "plural": "Seen",
       "emoji": "🌊",
-      "besonderheiten": []
+      "strategie": [
+        "Merkwort: See schreibt man mit ee"
+      ]
     },
     "userdaten": {
       "box": 0,
@@ -2656,7 +2966,9 @@
       "wortart": "Substantiv",
       "plural": "Tees",
       "emoji": "🍵",
-      "besonderheiten": []
+      "strategie": [
+        "Merkwort: Tee schreibt man mit ee"
+      ]
     },
     "userdaten": {
       "box": 0,
@@ -2674,7 +2986,9 @@
       "wortart": "Substantiv",
       "plural": "Pfefferminzen",
       "emoji": "🌿",
-      "besonderheiten": []
+      "strategie": [
+        "Zerlegen: Pfeffer + Minze"
+      ]
     },
     "userdaten": {
       "box": 0,
@@ -2692,7 +3006,9 @@
       "wortart": "Substantiv",
       "plural": "Beeren",
       "emoji": "🍓",
-      "besonderheiten": []
+      "strategie": [
+        "Merkwort: Beere schreibt man mit ee"
+      ]
     },
     "userdaten": {
       "box": 0,
@@ -2710,7 +3026,10 @@
       "wortart": "Verb",
       "plural": "",
       "emoji": "👂",
-      "besonderheiten": []
+      "strategie": [
+        "Merkwort: ver- schreibt man mit v",
+        "Schwingen: ver-ste-hen"
+      ]
     },
     "userdaten": {
       "box": 0,
@@ -2728,7 +3047,10 @@
       "wortart": "Adverb",
       "plural": "",
       "emoji": "⏮️",
-      "besonderheiten": []
+      "strategie": [
+        "Zerlegen: vor + her",
+        "Merkwort: vor schreibt man mit v"
+      ]
     },
     "userdaten": {
       "box": 0,
@@ -2746,7 +3068,10 @@
       "wortart": "Substantiv",
       "plural": "Quallen",
       "emoji": "🪼",
-      "besonderheiten": []
+      "strategie": [
+        "Merkwort: Qualle schreibt man mit Qu",
+        "Schwingen: Qual-le"
+      ]
     },
     "userdaten": {
       "box": 0,
@@ -2764,7 +3089,9 @@
       "wortart": "Verb",
       "plural": "",
       "emoji": "🐸",
-      "besonderheiten": []
+      "strategie": [
+        "Merkwort: quaken schreibt man mit qu"
+      ]
     },
     "userdaten": {
       "box": 0,
@@ -2782,7 +3109,10 @@
       "wortart": "Substantiv",
       "plural": "Quellen",
       "emoji": "⛲",
-      "besonderheiten": []
+      "strategie": [
+        "Merkwort: Quelle schreibt man mit Qu",
+        "Schwingen: Quel-le"
+      ]
     },
     "userdaten": {
       "box": 0,
@@ -2800,7 +3130,9 @@
       "wortart": "Adjektiv",
       "plural": "",
       "emoji": "↔️",
-      "besonderheiten": []
+      "strategie": [
+        "Merkwort: quer schreibt man mit qu"
+      ]
     },
     "userdaten": {
       "box": 0,
@@ -2818,7 +3150,9 @@
       "wortart": "Substantiv",
       "plural": "Hexen",
       "emoji": "🧙‍♀️",
-      "besonderheiten": []
+      "strategie": [
+        "Merkwort: Hexe schreibt man mit x"
+      ]
     },
     "userdaten": {
       "box": 0,
@@ -2836,7 +3170,10 @@
       "wortart": "Substantiv",
       "plural": "Quadrate",
       "emoji": "⬛",
-      "besonderheiten": []
+      "strategie": [
+        "Merkwort: Quadrat schreibt man mit Qu",
+        "Schwingen: Qua-drat"
+      ]
     },
     "userdaten": {
       "box": 0,
@@ -2854,7 +3191,9 @@
       "wortart": "Substantiv",
       "plural": "Länder",
       "emoji": "🗺️",
-      "besonderheiten": []
+      "strategie": [
+        "Verlängern: die Länder"
+      ]
     },
     "userdaten": {
       "box": 0,
@@ -2872,7 +3211,9 @@
       "wortart": "Substantiv",
       "plural": "Monde",
       "emoji": "🌕",
-      "besonderheiten": []
+      "strategie": [
+        "Verlängern: die Monde"
+      ]
     },
     "userdaten": {
       "box": 0,
@@ -2890,7 +3231,9 @@
       "wortart": "Substantiv",
       "plural": "Urlaube",
       "emoji": "🏖️",
-      "besonderheiten": []
+      "strategie": [
+        "Verlängern: die Urlaube"
+      ]
     },
     "userdaten": {
       "box": 0,
@@ -2908,7 +3251,9 @@
       "wortart": "Substantiv",
       "plural": "Schüsse",
       "emoji": "🥅",
-      "besonderheiten": []
+      "strategie": [
+        "Verlängern: die Schüsse"
+      ]
     },
     "userdaten": {
       "box": 0,
@@ -2926,7 +3271,9 @@
       "wortart": "Substantiv",
       "plural": "Schlüsse",
       "emoji": "🏁",
-      "besonderheiten": []
+      "strategie": [
+        "Verlängern: die Schlüsse"
+      ]
     },
     "userdaten": {
       "box": 0,
@@ -2944,7 +3291,9 @@
       "wortart": "Substantiv",
       "plural": "Brillen",
       "emoji": "👓",
-      "besonderheiten": []
+      "strategie": [
+        "Schwingen: Bril-le"
+      ]
     },
     "userdaten": {
       "box": 0,
@@ -2962,7 +3311,10 @@
       "wortart": "Substantiv",
       "plural": "Rechnungen",
       "emoji": "🧾",
-      "besonderheiten": []
+      "strategie": [
+        "Schwingen: Rech-nung",
+        "Ableiten: rechnen"
+      ]
     },
     "userdaten": {
       "box": 0,
@@ -2980,7 +3332,9 @@
       "wortart": "Verb",
       "plural": "",
       "emoji": "🔥",
-      "besonderheiten": []
+      "strategie": [
+        "Schwingen: bren-nen"
+      ]
     },
     "userdaten": {
       "box": 0,
@@ -2998,7 +3352,9 @@
       "wortart": "Substantiv",
       "plural": "Haare",
       "emoji": "💇",
-      "besonderheiten": []
+      "strategie": [
+        "Merkwort: Haare schreibt man mit aa"
+      ]
     },
     "userdaten": {
       "box": 0,
@@ -3016,7 +3372,9 @@
       "wortart": "Adjektiv",
       "plural": "",
       "emoji": "🪨",
-      "besonderheiten": []
+      "strategie": [
+        "Verlängern: harte"
+      ]
     },
     "userdaten": {
       "box": 0,
@@ -3034,7 +3392,9 @@
       "wortart": "Adjektiv",
       "plural": "",
       "emoji": "🧸",
-      "besonderheiten": []
+      "strategie": [
+        "Schwingen: weich"
+      ]
     },
     "userdaten": {
       "box": 0,
@@ -3052,7 +3412,9 @@
       "wortart": "Adjektiv",
       "plural": "",
       "emoji": "🍱",
-      "besonderheiten": []
+      "strategie": [
+        "Schwingen: fest"
+      ]
     },
     "userdaten": {
       "box": 0,
@@ -3070,7 +3432,9 @@
       "wortart": "Adjektiv",
       "plural": "",
       "emoji": "🧊",
-      "besonderheiten": []
+      "strategie": [
+        "Verlängern: dünne"
+      ]
     },
     "userdaten": {
       "box": 0,
@@ -3088,7 +3452,9 @@
       "wortart": "Adjektiv",
       "plural": "",
       "emoji": "🧥",
-      "besonderheiten": []
+      "strategie": [
+        "Verlängern: dicke"
+      ]
     },
     "userdaten": {
       "box": 0,
@@ -3106,7 +3472,9 @@
       "wortart": "Adjektiv",
       "plural": "",
       "emoji": "🐛",
-      "besonderheiten": []
+      "strategie": [
+        "Verlängern: fette"
+      ]
     },
     "userdaten": {
       "box": 0,
@@ -3124,7 +3492,9 @@
       "wortart": "Substantiv",
       "plural": "Fürze",
       "emoji": "💨",
-      "besonderheiten": []
+      "strategie": [
+        "Verlängern: die Fürze"
+      ]
     },
     "userdaten": {
       "box": 0,
@@ -3142,7 +3512,9 @@
       "wortart": "Substantiv",
       "plural": "Krankheiten",
       "emoji": "🤒",
-      "besonderheiten": []
+      "strategie": [
+        "Zerlegen: krank + heit"
+      ]
     },
     "userdaten": {
       "box": 0,
@@ -3160,7 +3532,10 @@
       "wortart": "Substantiv",
       "plural": "Erlebnisse",
       "emoji": "⛺",
-      "besonderheiten": []
+      "strategie": [
+        "Verlängern: die Erlebnisse",
+        "Ableiten: erleben"
+      ]
     },
     "userdaten": {
       "box": 0,
@@ -3178,7 +3553,9 @@
       "wortart": "Substantiv",
       "plural": "Zeugnisse",
       "emoji": "📜",
-      "besonderheiten": []
+      "strategie": [
+        "Verlängern: die Zeugnisse"
+      ]
     },
     "userdaten": {
       "box": 0,
@@ -3196,7 +3573,9 @@
       "wortart": "Substantiv",
       "plural": "Pakete",
       "emoji": "📦",
-      "besonderheiten": []
+      "strategie": [
+        "Schwingen: Pa-ket"
+      ]
     },
     "userdaten": {
       "box": 0,
@@ -3214,7 +3593,9 @@
       "wortart": "Substantiv",
       "plural": "Maschinen",
       "emoji": "⚙️",
-      "besonderheiten": []
+      "strategie": [
+        "Schwingen: Ma-schi-ne"
+      ]
     },
     "userdaten": {
       "box": 0,
@@ -3232,7 +3613,10 @@
       "wortart": "Substantiv",
       "plural": "Krokodile",
       "emoji": "🐊",
-      "besonderheiten": []
+      "strategie": [
+        "Merkwort: Krokodil schreibt man nur mit i, ohne e",
+        "Schwingen: Kro-ko-dil"
+      ]
     },
     "userdaten": {
       "box": 0,
@@ -3250,7 +3634,9 @@
       "wortart": "Substantiv",
       "plural": "Nasen",
       "emoji": "👃",
-      "besonderheiten": []
+      "strategie": [
+        "Schwingen: Na-se"
+      ]
     },
     "userdaten": {
       "box": 0,
@@ -3268,7 +3654,9 @@
       "wortart": "Substantiv",
       "plural": "Münder",
       "emoji": "👄",
-      "besonderheiten": []
+      "strategie": [
+        "Verlängern: die Münder"
+      ]
     },
     "userdaten": {
       "box": 0,
@@ -3286,7 +3674,9 @@
       "wortart": "Adverb",
       "plural": "",
       "emoji": "🌳",
-      "besonderheiten": []
+      "strategie": [
+        "Merkwort: außen schreibt man mit ß, weil au ein langer Laut ist"
+      ]
     },
     "userdaten": {
       "box": 0,
@@ -3304,7 +3694,9 @@
       "wortart": "Adverb",
       "plural": "",
       "emoji": "🏠",
-      "besonderheiten": []
+      "strategie": [
+        "Schwingen: in-nen"
+      ]
     },
     "userdaten": {
       "box": 0,
@@ -3322,7 +3714,9 @@
       "wortart": "Substantiv",
       "plural": "Nester",
       "emoji": "🪺",
-      "besonderheiten": []
+      "strategie": [
+        "Schwingen: Nest"
+      ]
     },
     "userdaten": {
       "box": 0,
@@ -3340,7 +3734,9 @@
       "wortart": "Substantiv",
       "plural": "Wespen",
       "emoji": "🐝",
-      "besonderheiten": []
+      "strategie": [
+        "Schwingen: Wes-pe"
+      ]
     },
     "userdaten": {
       "box": 0,
@@ -3358,7 +3754,9 @@
       "wortart": "Substantiv",
       "plural": "Küsse",
       "emoji": "😘",
-      "besonderheiten": []
+      "strategie": [
+        "Verlängern: die Küsse"
+      ]
     },
     "userdaten": {
       "box": 0,
@@ -3376,7 +3774,9 @@
       "wortart": "Verb",
       "plural": "",
       "emoji": "🍽️",
-      "besonderheiten": []
+      "strategie": [
+        "Schwingen: es-se"
+      ]
     },
     "userdaten": {
       "box": 0,
@@ -3394,7 +3794,9 @@
       "wortart": "Substantiv",
       "plural": "Salate",
       "emoji": "🥗",
-      "besonderheiten": []
+      "strategie": [
+        "Schwingen: Sa-lat"
+      ]
     },
     "userdaten": {
       "box": 0,
@@ -3412,7 +3814,9 @@
       "wortart": "Substantiv",
       "plural": "Salze",
       "emoji": "🧂",
-      "besonderheiten": []
+      "strategie": [
+        "Schwingen: Salz"
+      ]
     },
     "userdaten": {
       "box": 0,
@@ -3430,7 +3834,9 @@
       "wortart": "Substantiv",
       "plural": "Pfeffer",
       "emoji": "🌶️",
-      "besonderheiten": []
+      "strategie": [
+        "Schwingen: Pfef-fer"
+      ]
     },
     "userdaten": {
       "box": 0,
@@ -3448,7 +3854,9 @@
       "wortart": "Substantiv",
       "plural": "Essige",
       "emoji": "🍶",
-      "besonderheiten": []
+      "strategie": [
+        "Verlängern: die Essige"
+      ]
     },
     "userdaten": {
       "box": 0,
@@ -3466,7 +3874,9 @@
       "wortart": "Substantiv",
       "plural": "Öle",
       "emoji": "🫒",
-      "besonderheiten": []
+      "strategie": [
+        "Schwingen: Öl"
+      ]
     },
     "userdaten": {
       "box": 0,
@@ -3484,7 +3894,9 @@
       "wortart": "Substantiv",
       "plural": "Kissen",
       "emoji": "🛏️",
-      "besonderheiten": []
+      "strategie": [
+        "Schwingen: Kis-sen"
+      ]
     },
     "userdaten": {
       "box": 0,
@@ -3502,7 +3914,9 @@
       "wortart": "Substantiv",
       "plural": "Decken",
       "emoji": "🛌",
-      "besonderheiten": []
+      "strategie": [
+        "Schwingen: De-cke"
+      ]
     },
     "userdaten": {
       "box": 0,
@@ -3520,7 +3934,9 @@
       "wortart": "Substantiv",
       "plural": "Nüsse",
       "emoji": "🌰",
-      "besonderheiten": []
+      "strategie": [
+        "Verlängern: die Nüsse"
+      ]
     },
     "userdaten": {
       "box": 0,
@@ -3538,7 +3954,9 @@
       "wortart": "Substantiv",
       "plural": "Schlösser",
       "emoji": "🏰",
-      "besonderheiten": []
+      "strategie": [
+        "Verlängern: die Schlösser"
+      ]
     },
     "userdaten": {
       "box": 0,
@@ -3556,7 +3974,9 @@
       "wortart": "Substantiv",
       "plural": "Tassen",
       "emoji": "☕",
-      "besonderheiten": []
+      "strategie": [
+        "Schwingen: Tas-se"
+      ]
     },
     "userdaten": {
       "box": 0,
@@ -3574,7 +3994,9 @@
       "wortart": "Substantiv",
       "plural": "Messer",
       "emoji": "🔪",
-      "besonderheiten": []
+      "strategie": [
+        "Schwingen: Mes-ser"
+      ]
     },
     "userdaten": {
       "box": 0,
@@ -3592,7 +4014,9 @@
       "wortart": "Substantiv",
       "plural": "Pfannen",
       "emoji": "🍳",
-      "besonderheiten": []
+      "strategie": [
+        "Schwingen: Pfan-ne"
+      ]
     },
     "userdaten": {
       "box": 0,
@@ -3610,7 +4034,9 @@
       "wortart": "Substantiv",
       "plural": "Töpfe",
       "emoji": "🍲",
-      "besonderheiten": []
+      "strategie": [
+        "Schwingen: Topf"
+      ]
     },
     "userdaten": {
       "box": 0,
@@ -3628,7 +4054,9 @@
       "wortart": "Substantiv",
       "plural": "Schüsseln",
       "emoji": "🥣",
-      "besonderheiten": []
+      "strategie": [
+        "Schwingen: Schüs-sel"
+      ]
     },
     "userdaten": {
       "box": 0,
@@ -3646,7 +4074,9 @@
       "wortart": "Substantiv",
       "plural": "Fenster",
       "emoji": "🪟",
-      "besonderheiten": []
+      "strategie": [
+        "Schwingen: Fens-ter"
+      ]
     },
     "userdaten": {
       "box": 0,
@@ -3664,7 +4094,9 @@
       "wortart": "Substantiv",
       "plural": "Gläser",
       "emoji": "🥛",
-      "besonderheiten": []
+      "strategie": [
+        "Verlängern: die Gläser"
+      ]
     },
     "userdaten": {
       "box": 0,
@@ -3682,7 +4114,9 @@
       "wortart": "Substantiv",
       "plural": "Kränze",
       "emoji": "🌿",
-      "besonderheiten": []
+      "strategie": [
+        "Schwingen: Kranz"
+      ]
     },
     "userdaten": {
       "box": 0,
@@ -3700,7 +4134,9 @@
       "wortart": "Substantiv",
       "plural": "Elfmeter",
       "emoji": "⚽",
-      "besonderheiten": []
+      "strategie": [
+        "Zerlegen: elf + Meter"
+      ]
     },
     "userdaten": {
       "box": 0,
@@ -3718,7 +4154,9 @@
       "wortart": "Substantiv",
       "plural": "Abseits",
       "emoji": "🚩",
-      "besonderheiten": []
+      "strategie": [
+        "Zerlegen: ab + seits"
+      ]
     },
     "userdaten": {
       "box": 0,
@@ -3736,7 +4174,10 @@
       "wortart": "Substantiv",
       "plural": "Freistöße",
       "emoji": "⚽",
-      "besonderheiten": []
+      "strategie": [
+        "Zerlegen: frei + Stoß",
+        "Verlängern: die Stöße"
+      ]
     },
     "userdaten": {
       "box": 0,
@@ -3754,7 +4195,9 @@
       "wortart": "Verb",
       "plural": "",
       "emoji": "🏃‍♂️",
-      "besonderheiten": []
+      "strategie": [
+        "Ableiten: laufen"
+      ]
     },
     "userdaten": {
       "box": 0,
@@ -3772,7 +4215,9 @@
       "wortart": "Substantiv",
       "plural": "Freunde",
       "emoji": "🧑‍🤝‍🧑",
-      "besonderheiten": []
+      "strategie": [
+        "Schwingen: Freun-de"
+      ]
     },
     "userdaten": {
       "box": 0,
@@ -3790,7 +4235,9 @@
       "wortart": "Adjektiv",
       "plural": "",
       "emoji": "🔊",
-      "besonderheiten": []
+      "strategie": [
+        "Verlängern: laute"
+      ]
     },
     "userdaten": {
       "box": 0,
@@ -3808,7 +4255,9 @@
       "wortart": "Adverb",
       "plural": "",
       "emoji": "📅",
-      "besonderheiten": []
+      "strategie": [
+        "Schwingen: heu-te"
+      ]
     },
     "userdaten": {
       "box": 0,
@@ -3826,7 +4275,9 @@
       "wortart": "Verb",
       "plural": "",
       "emoji": "🗣️",
-      "besonderheiten": []
+      "strategie": [
+        "Verlängern: wir sagen"
+      ]
     },
     "userdaten": {
       "box": 0,
@@ -3844,7 +4295,9 @@
       "wortart": "Adjektiv",
       "plural": "",
       "emoji": "⭕",
-      "besonderheiten": []
+      "strategie": [
+        "Verlängern: runde"
+      ]
     },
     "userdaten": {
       "box": 0,
@@ -3862,7 +4315,9 @@
       "wortart": "Verb",
       "plural": "",
       "emoji": "🫧",
-      "besonderheiten": []
+      "strategie": [
+        "Ableiten: waschen"
+      ]
     },
     "userdaten": {
       "box": 0,
@@ -3880,7 +4335,10 @@
       "wortart": "Pronomen",
       "plural": "",
       "emoji": "🤏",
-      "besonderheiten": []
+      "strategie": [
+        "Schwingen: biss-chen",
+        "Merkwort: bisschen schreibt man mit ss"
+      ]
     },
     "userdaten": {
       "box": 0,
@@ -3898,7 +4356,9 @@
       "wortart": "Pronomen",
       "plural": "",
       "emoji": "👋",
-      "besonderheiten": []
+      "strategie": [
+        "Merkwort: ihn schreibt man mit ih"
+      ]
     },
     "userdaten": {
       "box": 0,
@@ -3916,7 +4376,9 @@
       "wortart": "Substantiv",
       "plural": "Bäcker",
       "emoji": "🥖",
-      "besonderheiten": []
+      "strategie": [
+        "Ableiten: backen"
+      ]
     },
     "userdaten": {
       "box": 0,
@@ -3934,7 +4396,9 @@
       "wortart": "Verb",
       "plural": "",
       "emoji": "✍️",
-      "besonderheiten": []
+      "strategie": [
+        "Verlängern: wir üben"
+      ]
     },
     "userdaten": {
       "box": 0,
@@ -3952,7 +4416,9 @@
       "wortart": "Verb",
       "plural": "",
       "emoji": "🚦",
-      "besonderheiten": []
+      "strategie": [
+        "Verlängern: wir bleiben"
+      ]
     },
     "userdaten": {
       "box": 0,
@@ -3970,7 +4436,9 @@
       "wortart": "Substantiv",
       "plural": "Sommer",
       "emoji": "☀️",
-      "besonderheiten": []
+      "strategie": [
+        "Schwingen: Som-mer"
+      ]
     },
     "userdaten": {
       "box": 0,
@@ -3988,7 +4456,9 @@
       "wortart": "Pronomen",
       "plural": "",
       "emoji": "👉",
-      "besonderheiten": []
+      "strategie": [
+        "Schwingen: die-se"
+      ]
     },
     "userdaten": {
       "box": 0,
@@ -4006,7 +4476,9 @@
       "wortart": "Verb",
       "plural": "",
       "emoji": "🚶‍♂️",
-      "besonderheiten": []
+      "strategie": [
+        "Schwingen: kom-men"
+      ]
     },
     "userdaten": {
       "box": 0,
@@ -4024,7 +4496,9 @@
       "wortart": "Substantiv",
       "plural": "Suppen",
       "emoji": "🍲",
-      "besonderheiten": []
+      "strategie": [
+        "Schwingen: Sup-pe"
+      ]
     },
     "userdaten": {
       "box": 0,
@@ -4042,7 +4516,9 @@
       "wortart": "Adverb",
       "plural": "",
       "emoji": "♾️",
-      "besonderheiten": []
+      "strategie": [
+        "Schwingen: im-mer"
+      ]
     },
     "userdaten": {
       "box": 0,
@@ -4060,7 +4536,9 @@
       "wortart": "Substantiv",
       "plural": "Spiele",
       "emoji": "🎲",
-      "besonderheiten": []
+      "strategie": [
+        "Schwingen: Spiel"
+      ]
     },
     "userdaten": {
       "box": 0,
@@ -4078,7 +4556,9 @@
       "wortart": "Substantiv",
       "plural": "Tiere",
       "emoji": "🦔",
-      "besonderheiten": []
+      "strategie": [
+        "Schwingen: Tier"
+      ]
     },
     "userdaten": {
       "box": 0,
@@ -4096,7 +4576,9 @@
       "wortart": "Adjektiv",
       "plural": "",
       "emoji": "🐆",
-      "besonderheiten": []
+      "strategie": [
+        "Verlängern: schnelle"
+      ]
     },
     "userdaten": {
       "box": 0,
@@ -4114,7 +4596,9 @@
       "wortart": "Substantiv",
       "plural": "Wände",
       "emoji": "🧱",
-      "besonderheiten": []
+      "strategie": [
+        "Verlängern: die Wände"
+      ]
     },
     "userdaten": {
       "box": 0,
@@ -4132,7 +4616,9 @@
       "wortart": "Substantiv",
       "plural": "Bänke",
       "emoji": "🪑",
-      "besonderheiten": []
+      "strategie": [
+        "Verlängern: die Bänke"
+      ]
     },
     "userdaten": {
       "box": 0,
@@ -4150,7 +4636,9 @@
       "wortart": "Substantiv",
       "plural": "Ritter",
       "emoji": "🛡️",
-      "besonderheiten": []
+      "strategie": [
+        "Schwingen: Rit-ter"
+      ]
     },
     "userdaten": {
       "box": 0,
@@ -4168,7 +4656,9 @@
       "wortart": "Substantiv",
       "plural": "Gespenster",
       "emoji": "👻",
-      "besonderheiten": []
+      "strategie": [
+        "Schwingen: Ge-spenst"
+      ]
     },
     "userdaten": {
       "box": 0,
@@ -4186,7 +4676,9 @@
       "wortart": "Substantiv",
       "plural": "Clowns",
       "emoji": "🤡",
-      "besonderheiten": []
+      "strategie": [
+        "Merkwort: Clown kommt aus dem Englischen, man spricht es „Klaun“"
+      ]
     },
     "userdaten": {
       "box": 0,
@@ -4204,7 +4696,9 @@
       "wortart": "Substantiv",
       "plural": "Aale",
       "emoji": "🐟",
-      "besonderheiten": []
+      "strategie": [
+        "Merkwort: Aal schreibt man mit aa"
+      ]
     },
     "userdaten": {
       "box": 0,
@@ -4222,7 +4716,9 @@
       "wortart": "Substantiv",
       "plural": "Telefone",
       "emoji": "☎️",
-      "besonderheiten": []
+      "strategie": [
+        "Schwingen: Te-le-fon"
+      ]
     },
     "userdaten": {
       "box": 0,
@@ -4240,7 +4736,9 @@
       "wortart": "Substantiv",
       "plural": "Lichter",
       "emoji": "🔦",
-      "besonderheiten": []
+      "strategie": [
+        "Schwingen: Licht"
+      ]
     },
     "userdaten": {
       "box": 0,
@@ -4258,7 +4756,9 @@
       "wortart": "Substantiv",
       "plural": "Tanks",
       "emoji": "⛽",
-      "besonderheiten": []
+      "strategie": [
+        "Schwingen: Tank"
+      ]
     },
     "userdaten": {
       "box": 0,
@@ -4276,7 +4776,9 @@
       "wortart": "Adjektiv",
       "plural": "",
       "emoji": "🛌",
-      "besonderheiten": []
+      "strategie": [
+        "Verlängern: kranke"
+      ]
     },
     "userdaten": {
       "box": 0,
@@ -4294,7 +4796,9 @@
       "wortart": "Adjektiv",
       "plural": "",
       "emoji": "🤩",
-      "besonderheiten": []
+      "strategie": [
+        "Ableiten: spannen"
+      ]
     },
     "userdaten": {
       "box": 0,
@@ -4312,7 +4816,10 @@
       "wortart": "Adjektiv",
       "plural": "",
       "emoji": "👨‍👩‍👧",
-      "besonderheiten": []
+      "strategie": [
+        "Merkwort: verwandt endet mit dt",
+        "Merkwort: ver- schreibt man mit v"
+      ]
     },
     "userdaten": {
       "box": 0,
@@ -4330,7 +4837,9 @@
       "wortart": "Substantiv",
       "plural": "Bilder",
       "emoji": "🖼️",
-      "besonderheiten": []
+      "strategie": [
+        "Verlängern: die Bilder"
+      ]
     },
     "userdaten": {
       "box": 0,
@@ -4348,7 +4857,9 @@
       "wortart": "Substantiv",
       "plural": "Künste",
       "emoji": "🖌️",
-      "besonderheiten": []
+      "strategie": [
+        "Schwingen: Kunst"
+      ]
     },
     "userdaten": {
       "box": 0,
@@ -4366,7 +4877,10 @@
       "wortart": "Substantiv",
       "plural": "Geburtstage",
       "emoji": "🥳",
-      "besonderheiten": []
+      "strategie": [
+        "Zerlegen: Geburt + s + Tag",
+        "Verlängern: die Tage"
+      ]
     },
     "userdaten": {
       "box": 0,
@@ -4384,7 +4898,10 @@
       "wortart": "Adverb",
       "plural": "",
       "emoji": "☂️",
-      "besonderheiten": []
+      "strategie": [
+        "Ableiten: der Name",
+        "Merkwort: nämlich schreibt man ohne h"
+      ]
     },
     "userdaten": {
       "box": 0,
@@ -4402,7 +4919,9 @@
       "wortart": "Substantiv",
       "plural": "Partys",
       "emoji": "🎉",
-      "besonderheiten": []
+      "strategie": [
+        "Merkwort: Party kommt aus dem Englischen und endet mit y"
+      ]
     },
     "userdaten": {
       "box": 0,
@@ -4420,7 +4939,10 @@
       "wortart": "Verb",
       "plural": "",
       "emoji": "🚲",
-      "besonderheiten": []
+      "strategie": [
+        "Ableiten: fahren",
+        "Merkwort: gefahren schreibt man mit h"
+      ]
     },
     "userdaten": {
       "box": 0,
@@ -4438,7 +4960,10 @@
       "wortart": "Substantiv",
       "plural": "Samstage",
       "emoji": "😴",
-      "besonderheiten": []
+      "strategie": [
+        "Zerlegen: Sams + Tag",
+        "Verlängern: die Tage"
+      ]
     },
     "userdaten": {
       "box": 0,
@@ -4456,7 +4981,10 @@
       "wortart": "Substantiv",
       "plural": "Sonntage",
       "emoji": "🥐",
-      "besonderheiten": []
+      "strategie": [
+        "Zerlegen: Sonn + Tag",
+        "Verlängern: die Tage"
+      ]
     },
     "userdaten": {
       "box": 0,
@@ -4474,7 +5002,10 @@
       "wortart": "Substantiv",
       "plural": "Montage",
       "emoji": "🎒",
-      "besonderheiten": []
+      "strategie": [
+        "Zerlegen: Mon + Tag",
+        "Verlängern: die Tage"
+      ]
     },
     "userdaten": {
       "box": 0,
@@ -4492,7 +5023,10 @@
       "wortart": "Substantiv",
       "plural": "Dienstage",
       "emoji": "⚽",
-      "besonderheiten": []
+      "strategie": [
+        "Zerlegen: Diens + Tag",
+        "Verlängern: die Tage"
+      ]
     },
     "userdaten": {
       "box": 0,
@@ -4510,7 +5044,9 @@
       "wortart": "Substantiv",
       "plural": "Mittwoche",
       "emoji": "🗓️",
-      "besonderheiten": []
+      "strategie": [
+        "Zerlegen: Mitte + Woche"
+      ]
     },
     "userdaten": {
       "box": 0,
@@ -4528,7 +5064,10 @@
       "wortart": "Substantiv",
       "plural": "Donnerstage",
       "emoji": "📚",
-      "besonderheiten": []
+      "strategie": [
+        "Zerlegen: Donners + Tag",
+        "Verlängern: die Tage"
+      ]
     },
     "userdaten": {
       "box": 0,
@@ -4546,7 +5085,10 @@
       "wortart": "Substantiv",
       "plural": "Freitage",
       "emoji": "🎉",
-      "besonderheiten": []
+      "strategie": [
+        "Zerlegen: Frei + Tag",
+        "Verlängern: die Tage"
+      ]
     },
     "userdaten": {
       "box": 0,
@@ -4564,7 +5106,9 @@
       "wortart": "Substantiv",
       "plural": "Mütter",
       "emoji": "👩‍👦",
-      "besonderheiten": []
+      "strategie": [
+        "Schwingen: Mut-ter"
+      ]
     },
     "userdaten": {
       "box": 0,
@@ -4582,7 +5126,9 @@
       "wortart": "Substantiv",
       "plural": "Muster",
       "emoji": "⭐",
-      "besonderheiten": []
+      "strategie": [
+        "Schwingen: Mus-ter"
+      ]
     },
     "userdaten": {
       "box": 0,
@@ -4600,7 +5146,9 @@
       "wortart": "Verb",
       "plural": "",
       "emoji": "🧶",
-      "besonderheiten": []
+      "strategie": [
+        "Ableiten: der Haken"
+      ]
     },
     "userdaten": {
       "box": 0,
@@ -4618,7 +5166,9 @@
       "wortart": "Substantiv",
       "plural": "Wollen",
       "emoji": "🧶",
-      "besonderheiten": []
+      "strategie": [
+        "Schwingen: Wol-le"
+      ]
     },
     "userdaten": {
       "box": 0,
@@ -4636,7 +5186,10 @@
       "wortart": "Substantiv",
       "plural": "Babydecken",
       "emoji": "👶",
-      "besonderheiten": []
+      "strategie": [
+        "Zerlegen: Baby + Decke",
+        "Merkwort: Baby schreibt man mit y"
+      ]
     },
     "userdaten": {
       "box": 0,
@@ -4654,7 +5207,9 @@
       "wortart": "Substantiv",
       "plural": "Kinder",
       "emoji": "🧒",
-      "besonderheiten": []
+      "strategie": [
+        "Verlängern: die Kinder"
+      ]
     },
     "userdaten": {
       "box": 0,
@@ -4672,7 +5227,9 @@
       "wortart": "Substantiv",
       "plural": "Kürbisse",
       "emoji": "🎃",
-      "besonderheiten": []
+      "strategie": [
+        "Schwingen: Kür-bis-se"
+      ]
     },
     "userdaten": {
       "box": 0,
@@ -4690,7 +5247,9 @@
       "wortart": "Adverb",
       "plural": "",
       "emoji": "🤝",
-      "besonderheiten": []
+      "strategie": [
+        "Schwingen: zu-sam-men"
+      ]
     },
     "userdaten": {
       "box": 0,
@@ -4708,7 +5267,9 @@
       "wortart": "Adverb",
       "plural": "",
       "emoji": "🔢",
-      "besonderheiten": []
+      "strategie": [
+        "Zerlegen: ins + gesamt"
+      ]
     },
     "userdaten": {
       "box": 0,
@@ -4726,7 +5287,10 @@
       "wortart": "Zahlwort",
       "plural": "",
       "emoji": "💯",
-      "besonderheiten": []
+      "strategie": [
+        "Merkwort: hundert endet mit t",
+        "Schwingen: hun-dert"
+      ]
     },
     "userdaten": {
       "box": 0,
@@ -4744,7 +5308,9 @@
       "wortart": "Zahlwort",
       "plural": "",
       "emoji": "🌌",
-      "besonderheiten": []
+      "strategie": [
+        "Verlängern: tausende"
+      ]
     },
     "userdaten": {
       "box": 0,
@@ -4762,7 +5328,9 @@
       "wortart": "Zahlwort",
       "plural": "",
       "emoji": "1️⃣1️⃣",
-      "besonderheiten": []
+      "strategie": [
+        "Schwingen: elf"
+      ]
     },
     "userdaten": {
       "box": 0,
@@ -4780,7 +5348,9 @@
       "wortart": "Zahlwort",
       "plural": "",
       "emoji": "📅",
-      "besonderheiten": []
+      "strategie": [
+        "Schwingen: zwölf"
+      ]
     },
     "userdaten": {
       "box": 0,
@@ -4798,7 +5368,9 @@
       "wortart": "Substantiv",
       "plural": "Zwillinge",
       "emoji": "👯",
-      "besonderheiten": []
+      "strategie": [
+        "Schwingen: Zwil-ling"
+      ]
     },
     "userdaten": {
       "box": 0,
@@ -4816,7 +5388,9 @@
       "wortart": "Substantiv",
       "plural": "Mengen",
       "emoji": "🍎",
-      "besonderheiten": []
+      "strategie": [
+        "Schwingen: Men-ge"
+      ]
     },
     "userdaten": {
       "box": 0,
@@ -4834,7 +5408,9 @@
       "wortart": "Substantiv",
       "plural": "Igel",
       "emoji": "🦔",
-      "besonderheiten": []
+      "strategie": [
+        "Merkwort: Igel schreibt man nur mit I, ohne e"
+      ]
     },
     "userdaten": {
       "box": 0,
@@ -4852,7 +5428,9 @@
       "wortart": "Substantiv",
       "plural": "Wolken",
       "emoji": "☁️",
-      "besonderheiten": []
+      "strategie": [
+        "Schwingen: Wol-ke"
+      ]
     },
     "userdaten": {
       "box": 0,
@@ -4870,7 +5448,9 @@
       "wortart": "Verb",
       "plural": "",
       "emoji": "🐸",
-      "besonderheiten": []
+      "strategie": [
+        "Schwingen: sprin-gen"
+      ]
     },
     "userdaten": {
       "box": 0,
@@ -4888,7 +5468,10 @@
       "wortart": "Substantiv",
       "plural": "Katastrophen",
       "emoji": "☕",
-      "besonderheiten": []
+      "strategie": [
+        "Merkwort: Katastrophe schreibt man mit ph",
+        "Schwingen: Ka-tas-tro-phe"
+      ]
     },
     "userdaten": {
       "box": 0,
@@ -4906,7 +5489,9 @@
       "wortart": "Adverb",
       "plural": "",
       "emoji": "☔",
-      "besonderheiten": []
+      "strategie": [
+        "Zerlegen: des + wegen"
+      ]
     },
     "userdaten": {
       "box": 0,
@@ -4924,7 +5509,9 @@
       "wortart": "Substantiv",
       "plural": "Sportwagen",
       "emoji": "🏎️",
-      "besonderheiten": []
+      "strategie": [
+        "Zerlegen: Sport + Wagen"
+      ]
     },
     "userdaten": {
       "box": 0,
@@ -4942,7 +5529,9 @@
       "wortart": "Substantiv",
       "plural": "Schultern",
       "emoji": "🐦",
-      "besonderheiten": []
+      "strategie": [
+        "Schwingen: Schul-ter"
+      ]
     },
     "userdaten": {
       "box": 0,
@@ -4960,7 +5549,9 @@
       "wortart": "Verb",
       "plural": "",
       "emoji": "✏️",
-      "besonderheiten": []
+      "strategie": [
+        "Ableiten: machen"
+      ]
     },
     "userdaten": {
       "box": 0,
@@ -4978,7 +5569,9 @@
       "wortart": "Adverb",
       "plural": "",
       "emoji": "🌷",
-      "besonderheiten": []
+      "strategie": [
+        "Merkwort: hier schreibt man mit ie"
+      ]
     },
     "userdaten": {
       "box": 0,
@@ -4996,7 +5589,9 @@
       "wortart": "Verb",
       "plural": "",
       "emoji": "🌳",
-      "besonderheiten": []
+      "strategie": [
+        "Schwingen: spa-zie-ren"
+      ]
     },
     "userdaten": {
       "box": 0,
@@ -5014,7 +5609,9 @@
       "wortart": "Adjektiv",
       "plural": "",
       "emoji": "👍",
-      "besonderheiten": []
+      "strategie": [
+        "Merkwort: okay kommt aus dem Englischen und endet mit ay"
+      ]
     },
     "userdaten": {
       "box": 0,
@@ -5032,7 +5629,9 @@
       "wortart": "Verb",
       "plural": "",
       "emoji": "🎁",
-      "besonderheiten": []
+      "strategie": [
+        "Merkwort: schrie schreibt man mit ie"
+      ]
     },
     "userdaten": {
       "box": 0,
@@ -5050,7 +5649,9 @@
       "wortart": "Verb",
       "plural": "",
       "emoji": "🍰",
-      "besonderheiten": []
+      "strategie": [
+        "Verlängern: wir kriegen"
+      ]
     },
     "userdaten": {
       "box": 0,
@@ -5068,7 +5669,10 @@
       "wortart": "Substantiv",
       "plural": "Adventskalender",
       "emoji": "🎄",
-      "besonderheiten": []
+      "strategie": [
+        "Zerlegen: Advents + Kalender",
+        "Merkwort: Advent schreibt man mit v"
+      ]
     },
     "userdaten": {
       "box": 0,
@@ -5086,7 +5690,9 @@
       "wortart": "Adjektiv",
       "plural": "",
       "emoji": "📏",
-      "besonderheiten": []
+      "strategie": [
+        "Ableiten: groß"
+      ]
     },
     "userdaten": {
       "box": 0,
@@ -5104,7 +5710,9 @@
       "wortart": "Substantiv",
       "plural": "Kalender",
       "emoji": "📅",
-      "besonderheiten": []
+      "strategie": [
+        "Schwingen: Ka-len-der"
+      ]
     },
     "userdaten": {
       "box": 0,
@@ -5122,7 +5730,10 @@
       "wortart": "Adjektiv",
       "plural": "",
       "emoji": "🧺",
-      "besonderheiten": []
+      "strategie": [
+        "Merkwort: voll schreibt man mit v",
+        "Verlängern: volle"
+      ]
     },
     "userdaten": {
       "box": 0,
@@ -5140,7 +5751,9 @@
       "wortart": "Substantiv",
       "plural": "",
       "emoji": "✨",
-      "besonderheiten": []
+      "strategie": [
+        "Schwingen: Glit-zer"
+      ]
     },
     "userdaten": {
       "box": 0,
@@ -5158,7 +5771,10 @@
       "wortart": "Adjektiv",
       "plural": "",
       "emoji": "✨",
-      "besonderheiten": []
+      "strategie": [
+        "Merkwort: voller schreibt man mit v",
+        "Ableiten: voll"
+      ]
     },
     "userdaten": {
       "box": 0,
@@ -5176,7 +5792,9 @@
       "wortart": "Verb",
       "plural": "",
       "emoji": "🎲",
-      "besonderheiten": []
+      "strategie": [
+        "Ableiten: ich will"
+      ]
     },
     "userdaten": {
       "box": 0,
